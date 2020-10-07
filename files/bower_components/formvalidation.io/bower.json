@@ -1,0 +1,22 @@
+{
+  "name": "formvalidation.io",
+  "homepage": "https://github.com/cyclone/formvalidation.io",
+  "authors": [
+    "Hung Nguyen<hunguyenv@gmail.com>"
+  ],
+  "description": "",
+  "main": [
+	"dist/css/formValidation.min.css",
+	"dist/js/formValidation.min.js",
+	"dist/js/framework/bootstrap4.min.js"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

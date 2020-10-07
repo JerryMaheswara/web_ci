@@ -1,0 +1,16 @@
+.navbar { 
+    min-height: 56px; 
+}
+.site-logo { 
+    padding-top: 0px;
+    padding-left: 10px;
+    padding-bottom: 0px;
+    min-height: 56px;
+    /*width: 110px;*/
+}
+.site-logo img{ 
+}
+
+.site-menu>ul>li>a:hover {
+    border-top: 1px solid #0da9ef; 
+}
