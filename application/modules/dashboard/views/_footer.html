@@ -1,0 +1,32 @@
+<footer class="main-footer">
+    <!-- To the right -->
+    <div class="pull-right hidden-xs">
+        Page rendered in {elapsed_time} Ver {CI_VERSION}
+    </div>
+    <!-- Default to the left -->
+    <strong>
+        Copyright © 2017 -
+    </strong>
+    All rights reserved.
+</footer>
+<script type="text/javascript">
+    // $(document).ready(function() {
+    $('a[href="{base}' + location.pathname + '"]').parents('li,ul').addClass('active');
+    
+    // var x = $('a[href="{base}' + location.pathname + '"]').parents('ul li');
+    // console.log(x);
+    // $('a[href="{base}' + location.pathname + '"]').parents().addClass('active');
+    // $('a[href="{base}' + location.pathname + '"]').parents().parents().parents('li').addClass('active');
+
+    $('.destroy').remove();
+
+    $('textarea').each(function(){
+        $(this).val($(this).val().trim());
+    });
+  // });
+</script>
+<style type="text/css">
+    .vertical{
+        resize: vertical;
+    }
+</style>

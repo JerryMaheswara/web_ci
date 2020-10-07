@@ -1,0 +1,83 @@
+<ul class="sidebar-menu">
+    {module_left}
+    <li class="treeview " id="{module_slug}_menu">
+        <a href="{base}/{module_url}">
+            <i class="fa fa-{module_icon} text-{module_color}">
+            </i>
+            <span>
+                {module_name}
+            </span>
+            <span class="{is_has_no_children} {is_admin} hidden">
+                ( {entity_count} )
+            </span>
+            <span class="pull-right-container {is_has_children}">
+                <i class="fa fa-angle-left pull-right">
+                </i>
+                <small class="label pull-right bg-{module_color} ">
+                    {has_children}
+                </small>
+            </span>
+        </a>
+        <ul class="treeview-menu {is_has_children}">
+            {mc_1}
+            <li class=" " id="{mc_1_module_slug}_menu">
+                <a href="{base}/{mc_1_module_url}">
+                    <i class="fa fa-{mc_1_module_icon} text-{mc_1_module_color}">
+                    </i>
+                    {mc_1_module_name}
+                    <span class="pull-right-container {mc_1_is_has_children}">
+                        <i class="fa fa-angle-left pull-right">
+                        </i>
+                        <small class="label pull-right bg-{mc_1_module_color} ">
+                            {mc_1_has_children}
+                        </small>
+                    </span>
+                </a>
+                <ul class="treeview-menu {mc_1_is_has_children}">
+                    {mc_1_2}
+                    <li id="{mc_2_module_slug}_menu">
+                        <a href="{base}/{mc_2_module_url}">
+                            <i class="fa fa-{mc_2_module_icon} text-{mc_2_module_color}">
+                            </i>
+                            {mc_2_module_name}
+                        </a>
+                        <ul class="treeview-menu {mc_2_is_has_children}">
+                            {mc_2_3}
+                            <li id="{mc_3_module_slug}_menu">
+                                <a href="{base}/{mc_3_module_url}">
+                                    <i class="fa fa-{mc_3_module_icon} text-{mc_3_module_color}">
+                                    </i>
+                                    {mc_3_module_name}
+                                </a>
+                                <ul class="treeview-menu {mc_3_is_has_children}">
+                                    {mc_3_4}
+                                    <li id="{mc_4_module_slug}_menu">
+                                        <a href="{base}/{mc_4_module_url}">
+                                            <i class="fa fa-{mc_4_module_icon} text-{mc_4_module_color}">
+                                            </i>
+                                            {mc_4_module_name}
+                                        </a>
+                                    </li>
+                                    {/mc_3_4}
+                                </ul>
+                            </li>
+                            {/mc_2_3}
+                        </ul>
+                    </li>
+                    {/mc_1_2}
+                </ul>
+            </li>
+            {/mc_1}
+        </ul>
+    </li>
+    {/module_left}
+</ul>
+<script type="text/javascript">
+    $('.destroy').remove();
+    $('#{treeview_menu}_menu').addClass('menu-open active');
+    $('#{treeview_menu}_menu').css({'background-color': '#450', });
+    $('#{treeview_menu}_menu').parent().addClass('menu-open active');
+    $('#{treeview_menu}_menu').parent().parent().addClass('menu-open active');
+    $('#{treeview_menu}_menu').parent().parent().parent().addClass('menu-open active');
+    $('#{treeview_menu}_menu').parent().parent().parent().parent().addClass('menu-open active');
+</script>

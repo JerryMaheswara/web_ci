@@ -1,0 +1,116 @@
+<!-- <embed src="http://kmmc.in/wp-content/uploads/2014/01/lesson2.pdf" width="100%" height="375" type='application/pdf'> -->
+
+
+<div class="box box-{skin_box} skin_box">
+    <div class="box-body">
+        <legend>
+            Youtube Search
+        </legend>
+        <form>
+            <div class="input-group">
+                <input class="form-control" id="q" name="q" placeholder="Search" type="text"/>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" id="btn_submit_search" type="submit">
+                        <i class="fa fa-fw fa-search">
+                        </i>
+                    </button>
+                </span>
+            </div>
+        </form>
+    </div>
+    <div class="box-footer">
+        <div class="row">
+            <div class="col-sm-12">
+                <iframe allowfullscreen="" class="embed-responsive-item" frameborder="0" height="360" id="youtube_player" src="{base}/files/images/youtube-ads.jpg" width="640">
+                </iframe>
+                <span class="pull-right">
+                    <input id="url_youtube" type=""/>
+                    <button id="play_youtube">play</button>
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <legend id="title_active">
+                    Title
+                </legend>
+            </div>
+        </div>
+        <div id="youtube_container">
+        </div>
+    </div>
+</div>
+<!-- -->
+<style type="text/css">
+    .itemsContainer {
+        background:red; 
+        float:left;
+        position:relative
+    }
+    .itemsContainer:hover .play{display:block}
+    .play{
+        position : absolute;
+        display:none;
+        top:30%; 
+        width:40px;
+        margin:0 auto; left:0px;
+        right:0px;
+        z-index:100;
+        cursor: pointer;
+    } 
+    .itemsContainer:hover .duration{display:block}
+    .duration{
+        display:block;
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        background-color: rgba(0,0,0,.5);
+        color: #fff;
+        padding:0 10px;
+    }
+</style>
+<!-- -->
+<script type="text/javascript">
+    ///////////////////////////
+    
+    $('#play_youtube').on('click', function(event) {
+        event.preventDefault();
+        video_url = '//www.youtube.com/embed/'+$('#url_youtube').val()+'?rel=0&autoplay=1';
+        // console.log(url);
+        $("#youtube_player").attr('src',  video_url );
+ 
+    });
+    ///////////////////////////
+    ///////////////////////////
+    // $.ajax({
+    //     url: '{base}/{controller}/youtube_ajax',
+    //     type: 'GET',
+    //     data: {q: ''},
+    // })
+    // .done(function(res) {
+    //     // console.log(res);
+    //     $('#youtube_container').html(res.youtube_container);
+    //     $('#youtube_data').html(res.youtube_data);
+    // })
+    // .fail(function(error) {
+    //     console.log(error.responseText);
+    // });
+    ///////////////////////////
+    $('#btn_submit_search').on('click', function(event) {
+        event.preventDefault();
+        var q = $('#q').val();
+        $.ajax({
+            url: '{base}/{controller}/youtube_ajax',
+            type: 'GET',
+            data: {q: q},
+        })
+        .done(function(res) {
+            // console.log(res);
+            $('#youtube_container').html(res.youtube_container);
+            $('#youtube_data').html(res.youtube_data);
+        })
+        .fail(function(error) {
+            console.log(error.responseText);
+        });
+    });
+</script>

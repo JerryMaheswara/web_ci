@@ -1,0 +1,71 @@
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        {user_info}
+        <div class="user-panel ">
+            <div class="pull-left image">
+                <div class="img-circle img-responsive" style="
+                    width: 32px;
+                    height: 32px;
+                    background-image: url('{base}/files/images/{user_avatar}');
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    background-position: 50% 50%;
+                ">
+                </div>
+            </div>
+            <div class="pull-left info" style="padding-left: 0px;">
+                {user_name_first} {user_name_last}
+            </div>
+        </div>
+        {/user_info}
+        <!-- search form (Optional) -->
+        <form action="{base}/search" class="sidebar-form hidden" method="get">
+            <div class="input-group">
+                <input class="form-control" name="q" placeholder="Search..." type="text"/>
+                <span class="input-group-btn">
+                    <button class="btn btn-flat" id="search-btn" type="submit">
+                        <i class="fa fa-search">
+                        </i>
+                    </button>
+                </span>
+            </div>
+        </form>
+        <!-- /.search form -->
+        <!-- Sidebar Menu -->
+        <ul class="sidebar-menu">
+            <li class="header">
+                MAIN MENU
+            </li>
+            <!-- Optionally, you can add icons to the links -->
+            <li class="treeview" id="dashboard_menu">
+                <a href="{base}/dashboard">
+                    <i class="fa fa-tachometer">
+                    </i>
+                    <span>
+                        {m_dashboard}
+                    </span>
+                </a>
+            </li>
+        </ul>
+        <div id="module_left">
+            {_module_left_}
+        </div>
+        <ul class="sidebar-menu">
+            <li class="treeview hidden- {is_admin}">
+                <a href="{base}/files/bower_components/AdminLTE/index.html" target="_blank">
+                    AdminLTE
+                </a>
+            </li>
+            <li class="header">
+                <div class="text-center" id="skin_changer">
+                </div>
+            </li>
+        </ul>
+        <!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+</aside>
+<!-- ======================================================================== -->
+<!-- ======================================================================== -->

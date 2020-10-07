@@ -1,0 +1,54 @@
+<h5 class="mb-30 padding-top-1x">
+    Leave Review
+</h5>
+<form class="row" id="form_review" method="post">
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="review_name">
+                Subject
+            </label>
+            <input class="form-control form-control-rounded" id="review_name" name="review_name" required="" type="text"/>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="review_star">
+                Rating
+            </label>
+            <select class="form-control form-control-rounded" id="review_star" name="review_star">
+                <option value="5">
+                    5 Stars
+                </option>
+                <option value="4">
+                    4 Stars
+                </option>
+                <option value="3">
+                    3 Stars
+                </option>
+                <option value="2">
+                    2 Stars
+                </option>
+                <option value="1">
+                    1 Star
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="form-group">
+            <label for="review_description">
+                Review
+            </label>
+            <textarea class="form-control form-control-rounded" id="review_description" name="review_description" required="" rows="8">
+            </textarea>
+        </div>
+    </div>
+    <div class="col-12 text-right">
+        <button class="btn btn-outline-primary" id="form_review_submit" type="button">
+            Submit Review
+        </button>
+    </div>
+</form>
+<script type="text/javascript">
+    $('textarea').val('');
+</script>

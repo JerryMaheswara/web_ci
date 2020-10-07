@@ -1,0 +1,71 @@
+<div class="clearfix" style="margin-bottom: 6px;">
+    <div class=" form-group">
+        <div class="pull-left" style="margin: 0 0 4px 0;">
+            {set_limit}
+            <span class="{_is_allowed}">
+                <a class="btn btn-success" href="{base}/{controller}/add">
+                    <i class="fa fa-fw fa-plus">
+                    </i>
+                    Add
+                </a>
+            </span>
+            <span class="hidden" style="display: inline-block;">
+                <select class="form-control" id="status">
+                    <option value="">
+                        All
+                    </option>
+                    <option value="1">
+                        New
+                    </option>
+                    <option value="2">
+                        Invoiced
+                    </option>
+                </select>
+            </span>
+        </div>
+        <div class="pull-right" style="margin: 0 0 4px 0;">
+            <form class="form-inline" role="form">
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <a class="btn btn-primary" href="{base}/{controller}/{method}">
+                            <i class="fa fa-fw fa-refresh">
+                            </i>
+                        </a>
+                    </span>
+                    <input class="form-control" id="search" name="search" type="text" value="{search}"/>
+                    <span class="input-group-btn">
+                        <button class="btn btn-success" type="submit">
+                            <i class="fa fa-fw fa-search">
+                            </i>
+                        </button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="text-center " id="total_rows">
+        <label>
+            Total
+            <span style="text-transform: capitalize;">
+                {controller} :
+            </span>
+            <span id="angka">
+                {total_rows}
+            </span>
+        </label>
+    </div>
+</div>
+<!-- -->
+<script type="text/javascript">
+    $('#status').val('{status}').trigger('change')
+    $('#status').change(function(event) {
+        var status = $(this).val();
+        var url = location.href.split('?')[0];
+        if (status.length > 0) {
+            // console.log(location.href);
+            location.href = url+'?status='+status;
+        }else{
+            location.href = url
+        }
+    });
+</script>

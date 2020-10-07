@@ -1,0 +1,96 @@
+<div class="box box-{skin_box} skin_box">
+    <div class="box-body">
+        {breadcrumb}
+        {searchbar}
+        <div class="table-responsive">
+            <table cellpadding="0" cellspacing="0" class="display table table-striped table-bordered responsive" id="datatable" width="100%">
+                <thead>
+                    <tr class="bg-{skin} tr_skin">
+                        <th width="30px" class="{_is_allowed}">
+                            <input class="check_all" style="cursor: pointer;" type="checkbox"/>
+                        </th>
+                        <th class="text-center" width="60px">
+                            #
+                        </th>
+                        <th width="15%" class="text-center">
+                            Faktur
+                        </th>
+                        <th width="110px" class="text-center">
+                            Tanggal
+                        </th>
+                        <th class="text-center" >
+                            Pemilik
+                        </th>
+                        <th width="25%" class="text-center" >
+                            Alamat
+                        </th>
+                        <th class="text-center">
+                            Kendaraan
+                        </th>
+                        <th class="text-center {_is_allowed}" width="150px">
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="{controller}_tbody">
+                </tbody>
+                <tr class="{_is_allowed}">
+                    <td colspan="20">
+                        <label style="cursor: pointer;">
+                            <input class="check_all" type="checkbox"/>
+                            <i class="fa fa- ">
+                            </i>
+                            Check all
+                        </label>
+                    </td>
+                </tr>
+            </table>
+            <span class="{_is_allowed}">
+                <i class="fa fa-fw fa-lg fa-level-up">
+                </i>
+                With Selected :
+                <button class="toggle_all btn btn-xs btn-flat btn-success" data-action_name="Enabled" data-{controller}_disabled="0">
+                    Enabled
+                </button>
+                <button class="toggle_all btn btn-xs btn-flat btn-primary" data-action_name="Disabled" data-{controller}_disabled="1">
+                    Disabled
+                </button>
+                <button class="delete_all btn btn-xs btn-flat btn-danger" data-action_name="Delete">
+                    Delete
+                </button>
+            </span>
+        </div>
+        <div class="text-center paging"></div>
+    </div>
+</div>
+<!-- -->
+<script type="text/javascript">
+    function {controller}_ajax(search,offset,status) {
+        $.ajax({
+            url: '{base}/{controller}/{controller}_ajax',
+            data:{
+                search : search,
+                offset : offset,
+                status : status
+            }
+        })
+        .done(function(data) {
+            // data = $.parseJSON(data);
+            $.each(data, function(index, val) { 
+                $('#{controller}_tbody').html(val._tbody);
+                $('#total_rows').find('span').html(val.total_rows);
+                $('.paging').html(val.paging);
+            });
+        })
+        .fail(function(error) {
+            console.log(error.responseText);
+        });
+    }
+    {controller}_ajax('{search}', '{offset}', '{status}');
+    ////////////
+    $('#search').on('keyup', function(event) {
+        event.preventDefault();
+        var search = $(this).val();
+        {controller}_ajax(search, 0, '{status}');
+    });
+</script>

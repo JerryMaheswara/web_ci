@@ -1,0 +1,693 @@
+<div class="box box-{skin_box} skin_box">
+    <div class="box-header">
+        <legend>
+            <a class=" " href="{base}/dashboard">
+                <i class="fa fa-fw fa-angle-left">
+                </i>
+            </a>
+            {m_user}
+        </legend>
+        <div class="form-group">
+            <span class="pull-right">
+                <form action="{base}/user/admin" class="form-inline" method="GET">
+                    <a class="btn btn-success " href="{base}/user/admin">
+                        <i class="fa fa-refresh fa-fw">
+                        </i>
+                    </a>
+                    <div class="form-group">
+                        <input class="form-control" name="search" placeholder="{m_search}" type="text" value="{search}"/>
+                    </div>
+                    <button class="btn btn-default" type="submit">
+                        {m_search}
+                    </button>
+                </form>
+            </span>
+            <a class="btn btn-success" href="{base}/user/adduser">
+                <i class="fa fa-plus fa-fw">
+                </i>
+                {m_add} {m_user}
+            </a>
+            <a class="btn btn-success" href="{base}/user/role_label">
+                Role Label
+            </a>
+            <span>
+                {set_limit}
+            </span>
+            <span style="display: inline-block; width: 200px">
+                <select class="form-control user_level">
+                </select>
+            </span>
+        </div>
+        <table cellpadding="0" cellspacing="0" class="display table table-striped table-bordered responsive" id="datatable" width="100%">
+            <thead>
+                <tr class="bg-{skin} tr_skin">
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        <a class="bg-{skin}" href="?order=user_name&sort={sort}">
+                            <div style="display: block;">
+                                <span class="icon_sort pull-right" id="user_name" style="display: none;">
+                                    <i class="fa fa-fw fa-sort-alpha-{sort_icon}">
+                                    </i>
+                                </span>
+                                {m_name}
+                            </div>
+                        </a>
+                    </th>
+                    <th>
+                        <a class="bg-{skin}" href="?order=role_label_name&sort={sort}">
+                            <div style="display: block;">
+                                <span class="icon_sort pull-right" id="role_label_name" style="display: none;">
+                                    <i class="fa fa-fw fa-sort-alpha-{sort_icon}">
+                                    </i>
+                                </span>
+                                {m_level}
+                            </div>
+                        </a>
+                    </th>
+                    <th>
+                        <a class="bg-{skin}" href="?order=user_email&sort={sort}">
+                            <div style="display: block;">
+                                <span class="icon_sort pull-right" id="user_email" style="display: none;">
+                                    <i class="fa fa-fw fa-sort-alpha-{sort_icon}">
+                                    </i>
+                                </span>
+                                {m_email}
+                            </div>
+                        </a>
+                    </th>
+                    <th>
+                        {m_action}
+                    </th>
+                    <th>
+                        {m_login} {m_from}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {user_all}
+                <tr>
+                    <td>
+                        {nomor_user}
+                    </td>
+                    <td>
+                        <a href="{base}/user/profile/{user_id}">
+                            {user_name_first} {user_name_last}
+                        </a>
+                    </td>
+                    <td>
+                        {level}
+                    </td>
+                    <td>
+                        {user_email}
+                        <span class="pull-right hidden">
+                            {user_role}
+                            <a class="btn_role btn btn-xs btn-flat btn-primary" href="{base}/user/role/{role_label_id}">
+                                {role_label_id}
+                            </a>
+                            {/user_role}
+                        </span>
+                    </td>
+                    <td>
+                        <a class="btn btn-warning btn-xs btn-flat btn_edit" href="{base}/user/edit/{user_id_nya}">
+                            {m_edit}
+                        </a>
+                        <a class=" btn btn-danger btn-xs btn-flat btn_delete" data-toggle="modal" data-user_name_first="{user_name_first}" data-user_id="{user_id}" href="#user_delete">
+                            {m_delete}
+                        </a>
+                        <a class="btn btn-primary btn-xs btn-flat btn_role_edit" data-title="Edit User Role" data-toggle="modal" data-user_email="{user_email}" data-user_name_first="{user_name_first}" data-user_id="{user_id}" data-user_role_before={user_role_before} href="#user_role_edit">
+                            {m_role}
+                        </a>
+                        <a class="btn btn-success btn-xs btn-flat btn_change_password" data-title="Change Password" data-toggle="modal" data-user_name_first="{user_name_first} {user_family_name}" data-user_id="{user_id}" href="#user_change_password">
+                            {m_password}
+                        </a>
+                    </td>
+                    <td>
+                        {ip_address}
+                        <a class="pull-right {is_logged_in} btn btn-xs btn-flat btn-danger" href="{base}/user/force_logout/{user_id}">
+                            <i class="fa fa-fw fa-unlock">
+                            </i>
+                            Logout
+                        </a>
+                    </td>
+                </tr>
+                {/user_all}
+            </tbody>
+        </table>
+        <div class="text-center">
+            {paging}
+        </div>
+    </div>
+    <!-- /.box-body -->
+</div>
+<!-- ========================================================================== -->
+<script type="text/javascript">
+    $('.icon_sort').each(function(index, el) {
+        $(this).hide();
+        $('#{order}').show();
+    });
+    $('.user_level').on('change', function(event) {
+        var role_label_id = $(this).val();
+        if (role_label_id !== null && role_label_id !== '' && role_label_id !== '{role_label_id}') {
+            location.href="{base}/user/level/"+role_label_id;
+        }
+    });
+</script>
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<div class="modal fade" id="user_change_password">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+                    ×
+                </button>
+                <h4 class="modal-title">
+                    {m_change_password}
+                </h4>
+            </div>
+            <form autocomplete="off" class="form-horizontal" id="form_change_password" method="POST">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="text-right col-sm-4">
+                            {m_name} :
+                        </label>
+                        <div class="col-sm-8">
+                            <span id="user_name_first">
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4">
+                            {m_new_password} :
+                        </label>
+                        <div class="col-sm-8">
+                            <input autocomplete="off" class="form-control" id="user_password" name="user_password" required="" type="password"/>
+                            <input class="form-control" id="user_id" name="user_id" type="hidden"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4">
+                            {m_confirm_password} :
+                        </label>
+                        <div class="col-sm-8">
+                            <input autocomplete="off" class="form-control" id="user_confirm_password" name="user_confirm_password" required="" type="password"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal" type="button">
+                        {m_close}
+                    </button>
+                    <button class="btn btn-primary" id="submit_change_password" type="submit">
+                        {m_submit}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- ========================================================================== -->
+<div class="modal modal-success fade" id="modal_sukses">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+                    ×
+                </button>
+                <h4 class="modal-title">
+                    {m_congratulation}
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="fa fa-exclamation-circle fa-4x">
+                    </i>
+                    <h4>
+                        {m_change_password} {m_successful}...!!
+                    </h4>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal" type="button">
+                    {m_close}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<!-- -->
+<script src="{base}/files/bower_components/formvalidation.io/dist/js/formValidation.min.js">
+</script>
+<script src="{base}/files/bower_components/formvalidation.io/dist/js/framework/bootstrap.min.js">
+</script>
+<script type="text/javascript">
+    $('#user_change_password').on('show.bs.modal', function (event) {
+      // $(this).find('[autofocus]').focus();
+      var button = $(event.relatedTarget); 
+      var modal = $(this);
+      user_name_first = button.data('user_name_first'); 
+      user_id = button.data('user_id'); 
+      modal.find('#user_name_first').text(user_name_first); 
+      modal.find('#user_id').val(user_id);  
+    });
+
+    $('#user_change_password').on('hidden.bs.modal', function(){
+      // $(this).find('#form_change_password').get(0).reset();
+      $(this).find('#user_password').val('');
+      $(this).find('#user_confirm_password').val('');  
+    });
+    // $('#submit_change_password').on('click', function(event) {
+    //   fr = $('#form_change_password').serialize();
+    //   console.log(fr);
+    //   // location.reload();
+
+    // });
+    ////////////////////////
+    ////////////////////////
+
+    $('#form_change_password').formValidation({
+        framework: 'bootstrap',
+        icon: {
+            valid: 'fa fa-ok',
+            invalid: 'fa fa-remove',
+            validating: 'fa fa-refresh'
+        },
+        fields: {
+            user_confirm_password: {
+                validators: {
+                    identical: {
+                        field: 'user_password',
+                        message: 'The password and its confirm are not the same'
+                    }
+                }
+            },
+            user_password: {
+                validators: {
+                    identical: {
+                        field: 'user_confirm_password',
+                        message: 'Please retype password in column bellow.'
+                    }
+                }
+            },
+        }
+    }).on('err.form.fv', function(e) {
+        // $('#modal_agree').modal('show');
+    }).on('success.form.fv', function(e) {
+        e.preventDefault();
+        var form_data = new FormData($('#form_change_password')[0]);
+        $.ajax({
+            url: '{base}/user/change_password',
+            type: 'POST',
+            data: form_data,
+            mimeTypes: 'multipart/form-data',
+            cache: false,
+            contentType: false,
+            processData: false
+        }).done(function(data) {
+            // console.log(data);
+            $('#user_change_password').modal('hide');
+            $('#modal_sukses').modal('show');
+            $('#form_change_password').get(0).reset();
+            // $("#form_register select").val('').trigger('change');
+        }).fail(function(error) {
+            console.log(error.responseText);
+        });
+    });
+    ////////////////////////
+</script>
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<div class="modal fade" id="user_role_edit">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{base}/user/user_role_action" class="form-horizontal" id="form_user_role_edit" method="POST">
+                <div class="modal-header">
+                    <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+                        ×
+                    </button>
+                    <h4 class="modal-title">
+                        Modal title
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-sm-3 text-right">
+                            {m_user} :
+                        </label>
+                        <div class="col-sm-9">
+                            <input id="user_id" name="user_id" type="hidden"/>
+                            <span id="user_name_first">
+                            </span>
+                            <span id="user_family_name">
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">
+                            {m_user_roles} :
+                        </label>
+                        <div class="col-sm-9 ">
+                            <input class="form-control" id="user_role_before" type="hidden" value="{user_role_before}"/>
+                            <select class="user_role" name="user_role[]" required="required">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal" type="button">
+                        {m_close}
+                    </button>
+                    <button class="btn btn-primary" type="submit">
+                        {m_submit}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<script type="text/javascript">
+    $('#user_role_edit').on('show.bs.modal', function (event) {
+      // $(this).find('[autofocus]').focus();
+      var button = $(event.relatedTarget);
+      var title = button.data('title');
+      var modal = $(this);
+      data = button.data();
+      // console.log(data);
+      Object.keys(data).forEach(function(k) {
+        modal.find('#'+k).val(data[k]);
+        modal.find('#'+k).html(data[k]);
+        modal.find('#'+k+'_before').val(data[k]);
+      }); 
+      modal.find('.modal-title').text(title); 
+      
+
+      //----------user_role -- begin
+      user_role_before = modal.find('#user_role_before').val() ;  
+      user_role_before = $.parseJSON('[' + user_role_before + ']');
+      // console.log(user_role_before);
+      
+      $('.user_role').val(user_role_before).trigger('change') ;
+
+      user_id = modal.find('#user_id').val();
+      // console.log(user_id);
+      if (user_id == '') {
+        $('#user_level').val('1').trigger('change');
+        $('.from_permission').hide();
+      }else{
+        $('.from_permission').show();
+      }
+      // ----------user_role -- end
+      ////////////////////////////// modification  --- end
+
+
+    });
+    $('#user_role_edit').on('hidden.bs.modal', function(){
+      $(this).find('#form_user_role_edit').get(0).reset();
+      $(this).find('input[id$="_before"]').val('');
+      $(this).find('input#user_id').val('');
+    });
+    // $('#user_role_edit').on('hide.bs.modal', function(){
+    //   $(this).find('form')[0].reset();
+    //   // $(this).find('input[id$="_before"]').val('');
+    //   // $(this).find('input').val('');
+    // });
+    $('#user_role_edit').on('shown.bs.modal', function(){
+      $(this).find('[autofocus]').focus();
+    });
+</script>
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<script type="text/javascript">
+    $(document).ready(function() {
+
+    /**/ 
+    ///////////////////////////////////////////////////////////////////////////
+    //// create index column 1
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+    $('#del_submit').click(function(event) {
+      user_id = $(this).data('user_id');
+      // console.log(user_id);
+      $.ajax({
+        url: '{base}/user/action',
+        type: 'POST',
+        data:{
+          user_id:user_id,
+          action: 'delete'
+        }
+      })
+      .done(function(data) {
+        console.log(data);
+        // table.ajax.reload( null, false );
+        location.href = '';
+      })
+      .fail(function() {
+        console.log("error");
+      });
+      
+      /* Act on the event */
+    });
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    $('#btn_submit').click(function(event) {
+      var form = $('#form_user_add_edit');
+      data_user = form.serialize();
+
+      // var data_user = new FormData($('#form_user_add_edit')[0]) ;
+      // console.log(data_user);
+      $.ajax({
+        url: '{base}/user/action',
+        type: 'POST',
+        data: data_user,
+      })
+      .done(function(data) {
+        console.log(data);
+        // data = jQuery.parseJSON(data);
+        // console.log(data.status);
+        table.ajax.reload( null, false );
+      })
+      .fail(function(data) {
+        console.log('Failed');
+        // console.log(data);
+      });
+      
+    });
+    ///////////////////////////////////////////////////////////////////////////
+    // $('input').keypress(function(e) {
+    //     if (e.which == '13') {
+    //       $('#btn_submit').trigger('click');
+    //     }
+    // });
+
+    ///////////////////////////////////////////////////////////////////////////
+
+  });
+</script>
+<!-- ========================================================================== -->
+<div class="modal fade" id="user_delete">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+                    ×
+                </button>
+                <h4 class="modal-title">
+                    Modal title
+                </h4>
+            </div>
+            <div class="modal-body">
+                Are you sure to delete
+                <b>
+                    <span id="user_name_first">
+                    </span>
+                </b>
+                ?
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal" type="button">
+                    No
+                </button>
+                <button class="btn btn-danger" data-dismiss="modal" id="del_submit" type="button">
+                    Yes
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<div class="modal fade" id="user_add_edit">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+                    ×
+                </button>
+                <h4 class="modal-title">
+                    Edit
+                </h4>
+            </div>
+            <form class="form-horizontal" id="form_user_add_edit" method="POST">
+                <div class="modal-body">
+                    <div class="form-group form-sm">
+                        <div class="col-xs-3 text-right">
+                            <label class="label-sm">
+                                Display Name :
+                            </label>
+                        </div>
+                        <div class="col-xs-9">
+                            <input autofocus="" class="form-control input-sm" id="user_name_first" name="user_name_first" placeholder="" type=""/>
+                            <input id="user_id" name="user_id" type="hidden"/>
+                            <input name="action" type="hidden" value="add"/>
+                        </div>
+                    </div>
+                    <!-- -->
+                    <div class="form-group form-sm">
+                        <div class="col-xs-3 text-right">
+                            <label>
+                                Email :
+                            </label>
+                        </div>
+                        <div class="col-xs-9">
+                            <input class="form-control input-sm" id="user_email" name="user_email" placeholder="" type=""/>
+                        </div>
+                    </div>
+                    <!-- -->
+                    <!-- -->
+                    <div class="form-group form-sm from_permission">
+                        <div class="col-xs-3 text-right">
+                            <label>
+                                Role :
+                            </label>
+                        </div>
+                        <div class="col-xs-9">
+                            <input class="form-control" id="user_role_before" type="hidden"/>
+                            <select class="user_role" id="user_role" name="user_role[]">
+                            </select>
+                        </div>
+                    </div>
+                    <!-- -->
+                    <div class="modal-footer">
+                        <button class="btn btn-default btn-flat" data-dismiss="modal" type="button">
+                            Close
+                        </button>
+                        <button class="btn btn-primary btn-flat" data-dismiss="modal" id="btn_submit" type="button">
+                            Save changes
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- ========================================================================== -->
+<script type="text/javascript">
+    $(document).ready(function() {
+
+    var user_role = $.ajax({
+      type: "GET",
+      url: "{base}/user/role_ajax",
+      // url: "{base}/public/scripts/fa.json?s=s",
+      dataType: "json",
+      async: false,
+      cache: true
+    }).responseJSON;
+    // console.log(user_role);
+
+    $('.user_role').select2({
+      width: "100%",
+      multiple: true,  
+      data: user_role,
+      allowClear:true,
+      placeholder:'',
+    })
+    $('.user_level').select2({
+      width: "100%",
+      // multiple: true,  
+      data: user_role,
+      allowClear:true,
+      placeholder:'- Level -',
+    }).val('{role_label_id}').trigger('change');
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    $('#user_add_edit').on('show.bs.modal', function (event) {
+      // $(this).find('[autofocus]').focus();
+      var button = $(event.relatedTarget);
+      var title = button.data('title');
+      var modal = $(this);
+      data = button.data();
+      console.log(data);
+      Object.keys(data).forEach(function(k) {
+        modal.find('#'+k).val(data[k]);
+        modal.find('#'+k+'_before').val(data[k]);
+      }); 
+      modal.find('.modal-title').text(title); 
+      
+
+      //----------user_role -- begin
+      user_role_before = $('#user_role_before').val() ;  
+      user_role_before = $.parseJSON('[' + user_role_before + ']');
+      $('.user_role').val(user_role_before).trigger('change') ;
+
+      // user_id = modal.find('#user_id').val();
+      // // console.log(user_id);
+      // if (user_id == '') {
+      //   $('#user_level').val('1').trigger('change');
+      //   $('.from_permission').hide();
+      // }else{
+      //   $('.from_permission').show();
+      // }
+      //----------user_role -- end
+      ////////////////////////////// modification  --- end
+
+
+    });
+    $('#user_add_edit').on('hidden.bs.modal', function(){
+      $(this).find('#form_user_add_edit').get(0).reset();
+      $(this).find('input[id$="_before"]').val('');
+      $(this).find('input#user_id').val('');
+    });
+    // $('#user_add_edit').on('hide.bs.modal', function(){
+    //   $(this).find('form')[0].reset();
+    //   // $(this).find('input[id$="_before"]').val('');
+    //   // $(this).find('input').val('');
+    // });
+    $('#user_add_edit').on('shown.bs.modal', function(){
+      $(this).find('[autofocus]').focus();
+    });
+  });
+</script>
+<!-- ========================================================================== -->
+<script type="text/javascript">
+    $('#user_delete').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    var title = button.data('title');
+    var user_id = button.data('user_id');
+    var user_name_first = button.data('user_name_first');
+    var modal = $(this);
+    modal.find('.modal-title').text('Delete '+user_name_first);
+    modal.find('#user_name_first').html(user_name_first);
+    modal.find('#del_submit').data('user_id',user_id);
+  });
+</script>
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->

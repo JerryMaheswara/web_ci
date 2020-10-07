@@ -1,0 +1,166 @@
+{{controller}_all}
+<tr>
+    <td class="{_is_allowed}">
+        <input class="check_each " data-{controller}_disabled="{{controller}_disabled}" data-{controller}_id="{{controller}_id}" data-pemilik_name="{pemilik_name}" style="cursor: pointer;" type="checkbox"/>
+    </td>
+    <td>
+        {nomor_urut}
+    </td>
+    <td>
+        {{controller}_name}
+    </td>
+    <td>
+        {{controller}_price}
+    </td>
+    <td class="text-center {_is_allowed}">
+        <a class="text-{toggle_btn} btn_toggle" data-{controller}_disabled="{{controller}_disabled}" data-{controller}_id="{{controller}_id}" data-{controller}_name="{{controller}_name}" data-pemilik_name="{pemilik_name}" href="#">
+            <i class="fa fa-fw fa-lg fa-{toggle_icon}">
+            </i>
+        </a>
+        <a class="btn btn-xs btn-flat btn-warning btn_edit" href="{base}/{controller}/edit/{{controller}_id}">
+            <i class="fa fa-fw fa-pencil ">
+            </i>
+        </a>
+        <a class="btn btn-xs btn-flat btn-danger btn_delete " href="{base}/{controller}/delete/{{controller}_id}" onclick="return confirm('Are you sure?')">
+            <i class="fa fa-fw fa-trash ">
+            </i>
+        </a>
+    </td>
+</tr>
+{/{controller}_all}
+<!-- -->
+<script type="text/javascript">
+    /////////////////////////////////////////
+    $('.check_all').on('change', function(event) {
+        // event.preventDefault();
+        if ($(this).is(":checked")) {
+            $('.check_each').prop('checked', true);
+            $('.check_all').prop('checked', true);
+        }else{
+            $('.check_each').prop('checked', false);
+            $('.check_all').prop('checked', false);
+
+        }
+        // console.log('Log message');
+    });
+    /////////////////////////////////////////
+
+    $('.btn_toggle').each(function(index, el) {
+        var btn_toggle = $(this);
+        $(this).on('click', function(event) {
+            event.preventDefault();
+            toggle = $(this).data('{controller}_disabled')?'enable':'disable';
+            {controller}_name = $(this).data('{controller}_name') ;
+            {controller}_id = $(this).data('{controller}_id') ;
+            {controller}_disabled = $(this).data('{controller}_disabled')?0:1;
+            if (confirm('Are you sure to '+toggle+' "'+{controller}_name+'" ...?')) {
+                $.ajax({
+                    url: '{base}/{controller}/{controller}_toggle',
+                    type: 'POST',
+                    data: {
+                        {controller}_id: {controller}_id,
+                        {controller}_disabled: {controller}_disabled
+                    },
+                })
+                .done(function(data) {
+                    data = jQuery.parseJSON(data);
+                    btn_toggle.removeClass('text-success').removeClass('text-default').addClass('text-'+data.toggle_btn);
+                    btn_toggle.find('i').removeClass('fa-toggle-on').removeClass('fa-toggle-off').addClass('fa-'+data.toggle_icon);
+                    btn_toggle.attr('data-{controller}_disabled', {controller}_disabled).data('{controller}_disabled', {controller}_disabled);
+                    btn_toggle.parent().siblings().find('.check_each').attr('data-{controller}_disabled', {controller}_disabled).data('{controller}_disabled', {controller}_disabled);
+                })
+                .fail(function(error) {
+                    console.log(error.responseText);
+                });
+            }
+        });
+    });
+
+    /////////////////////////////////////////
+
+    /////////////////////////////////////////
+    $('.toggle_all').on('click', function(event) {
+        event.preventDefault();
+        var action_name = $(this).data('action_name');
+        if (confirm('Are you sure to "'+action_name+'" all selected item ...?')) {
+            var {controller}_disabled = $(this).data('{controller}_disabled') ;
+            $('.check_each').each(function(index, el) {
+                var check_each = $(this);
+                var toggle = check_each.data('{controller}_disabled')?'enable':'disable'; 
+                var {controller}_id = check_each.data('{controller}_id') ;
+
+                if (check_each.is(":checked")) {
+                    // console.log({controller}_disabled);
+
+                    event.preventDefault();
+                    $.ajax({
+                        url: '{base}/{controller}/{controller}_toggle',
+                        type: 'POST',
+                        data: {
+                            {controller}_id: {controller}_id,
+                            {controller}_disabled: {controller}_disabled
+                        },
+                    })
+                    .done(function(data) {
+                        data = jQuery.parseJSON(data);
+                        check_each.parent().siblings().find('.btn_toggle').removeClass('text-success').removeClass('text-default').addClass('text-'+data.toggle_btn);
+                        check_each.parent().siblings().find('.btn_toggle').find('i').removeClass('fa-toggle-on').removeClass('fa-toggle-off').addClass('fa-'+data.toggle_icon);
+                        check_each.parent().siblings().find('.btn_toggle').attr('data-{controller}_disabled', {controller}_disabled).data('{controller}_disabled', {controller}_disabled);
+                        check_each.parent().siblings().find('.btn_toggle').attr('data-{controller}_disabled', {controller}_disabled).data('{controller}_disabled', {controller}_disabled);
+                    })
+                    .fail(function(error) {
+                        console.log(error.responseText);
+                    }); 
+                }
+            });
+            // $('.check_all').prop('checked', false);
+            // $('.check_each').prop('checked', false);
+        }
+    });
+    /////////////////////////////////////////
+
+    $('.delete_all').on('click', function(event) {
+        event.preventDefault();
+        var action_name = $(this).data('action_name');
+        if (confirm('Are you sure to "'+action_name+'" all selected item ...?')) {
+            $('.check_each').each(function(index, el) {
+                var check_each = $(this);
+                if (check_each.is(":checked")) {
+                    {controller}_id = check_each.data('{controller}_id');
+                    $.ajax({
+                        url: '{base}/{controller}/delete/'+{controller}_id,
+                    })
+                    .done(function(data) {
+                        // console.log(data);
+                        check_each.parent().parent().remove();
+                        // {controller}_ajax(); 
+                        // console.log("success");
+                        // table.ajax.reload( null, false );
+                    })
+                    .fail(function(error) {
+                        console.log(error.responseText);
+                    }); 
+                }
+
+            });
+        }
+    });
+    /////////////////////////////////////////
+
+    $('#del_submit').click(function(event) {
+        {controller}_id = $(this).data('{controller}_id');
+        // console.log({controller}_id);
+        $.ajax({
+            url: '{base}/{controller}/{controller}_delete/'+{controller}_id,
+        })
+        .done(function() {
+            {controller}_ajax(); 
+            // console.log("success");
+            // table.ajax.reload( null, false );
+        })
+        .fail(function(error) {
+            console.log(error.responseText);
+        }); 
+    });
+    /////////////////////////////////////////
+</script>

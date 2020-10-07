@@ -1,0 +1,60 @@
+{youtube_all}
+{items}
+<div class="col-sm-3" style="min-height: 212px;">
+    <div class="itemsContainer">
+        <a class="play_url" data-title_active="{title}" data-videoid="{videoId}" href="//www.youtube.com/embed/{videoId}?rel=0">
+            <div class="image">
+                <img class="img img-responsive" src="{thumbnails}"/>
+            </div>
+            <div class="play">
+                <img src="{base}/files/images/icon-play.png" width="100%"/>
+            </div>
+        </a>
+        <div class="duration">{duration}</div>
+    </div>
+    <div>
+        {title}
+    </div>
+</div>
+{/items}
+{/youtube_all}
+<script type="text/javascript">
+
+
+
+    // www.youtube.com/embed/B81qd2v6alw?rel=0
+    $('.play_url').each(function(index, el) {
+        $(this).on('click', function(event) {
+            video_url = $(this).attr('href');
+            title_active = $(this).data('title_active');
+            $('.play_url').find('.image').css('border', '0px red solid');
+            $(this).find('.image').css('border', '4px red solid');
+            event.preventDefault();
+            $("#youtube_player").attr('src',  video_url+'&autoplay=1');
+            $('#title_active').text(title_active);
+            $("html, body").animate({ scrollTop: 174 }, 500);
+
+        });
+        // $(this).on('mouseover', function(event) {
+        //     play_url = $(this);
+        //     videoid = $(this).data('videoid');
+        //     if (play_url.parent().find('div.duration').html() == '') {
+        //         event.preventDefault();
+        //         $.ajax({
+        //             url: '{base}/{controller}/video_detail',
+        //             type: 'GET',
+        //             data: {id: videoid},
+        //         })
+        //         .done(function(res) {
+        //             play_url.parent().find('div.duration').html(res.duration);
+        //             // console.log(res.duration);
+        //         })
+        //         .fail(function(error) {
+        //             console.log(error.responseText);
+        //         });
+        //     }
+            
+        // });
+    });
+    //////////////////
+</script>

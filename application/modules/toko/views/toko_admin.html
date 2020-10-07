@@ -1,0 +1,43 @@
+<div class="box box-{skin_box} skin_box"> 
+    <div class="box-body">
+    	<legend>
+    		Toko
+    	</legend>
+    	<div class="table-responsive">
+    		<table class="table table-hover">
+    			<thead>
+    				<tr>
+    					<th>#</th>
+    					<th>Nama Toko</th>
+    					<th>Alamat</th>
+    					<th>Kelurahan</th>
+    					<th>Kecamatan</th>
+    					<th>Kabupaten</th>
+    					<th>Propinsi</th>
+    					<th>Kodepos</th>
+    					<th>Action</th>
+    				</tr>
+    			</thead>
+    			<tbody>
+    				{toko_all}
+    				<tr>
+    					<td>{nomor_urut}</td>
+    					<td>{billing_name_first}</td>
+    					<td>{billing_address}</td>
+    					<td>{billing_subdistrict}</td>
+    					<td>{billing_district}</td>
+    					<td>{billing_city_type} {billing_city}</td>
+    					<td>{billing_province}</td>
+    					<td>{billing_postal_code}</td>
+    					<td>
+    						<a class="btn btn-warning btn-xs" href="{base}/{controller}/detail/{billing_id}">Edit</a>
+    						<a onclick="return confirm('Are you sure...?\n\nWarning: This action can\'t be undone.')" class="btn btn-danger btn-xs" href="{base}/{controller}/delete/{billing_id}">Delete</a>
+    					</td>
+    				</tr>
+    				{/toko_all}
+    			</tbody>
+    		</table>
+    	</div>
+
+    </div> 
+</div>

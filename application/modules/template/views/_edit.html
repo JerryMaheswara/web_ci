@@ -1,0 +1,349 @@
+<div class="box box-{skin_box} skin_box">
+    <div class="box-body">
+        <legend>
+            Edit
+        </legend>
+        <div class="col-sm-6">
+            <form action="" class="form-horizontal" method="POST" role="form">
+                {template_detail}
+                <div class="form-group">
+                    <label class="control-label">
+                        Name :
+                    </label>
+                    <input class="form-control" data--value="" id="template_name" name="template_name" placeholder="template_name" required="required" type="" value="{template_name}"/>
+                </div>
+                <div class="form-group">
+                    {template_content}
+                    <div class="col-sm-4">
+                        <h4>
+                            Logo:
+                        </h4>
+                        <div class="logo_align">
+                            <label>
+                                Align:
+                            </label>
+                            <input type="hidden" id="logo_align_before" value="{logo_align}"/>
+                            <select class="form-control" data-label="logo" id="logo_align" name="logo_align">
+                                <option value="left">
+                                    Left
+                                </option>
+                                <option value="right">
+                                    Right
+                                </option>
+                            </select>
+                        </div>
+                        <div class="logo_width">
+                            <label>
+                                Width (%):
+                            </label>
+                            <input class="form-control" data--value="10" data-label="logo" id="logo_width" max="100" min="0" name="logo_width" placeholder="" type="number" value="{logo_width}"/>
+                        </div>
+                        <div class="logo_top">
+                            <label>
+                                Top (%):
+                            </label>
+                            <input class="form-control" data--value="10" data-label="logo" id="logo_top" max="100" min="0" name="logo_top" placeholder="" type="number" value="{logo_top}"/>
+                        </div>
+                        <div class="logo_left_right">
+                            <label>
+                                Left (%):
+                            </label>
+                            <input class="form-control" data--value="10" data-label="logo" id="logo_left_right" max="100" min="0" name="logo_left_right" placeholder="" type="number" value="{logo_left_right}"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <h4>
+                            Photo:
+                        </h4>
+                        <div class="photo_align">
+                            <label>
+                                Align:
+                            </label>
+                            <input type="hidden" id="photo_align_before" value="{photo_align}"/>
+                            <select class="form-control" data-label="photo" id="photo_align" name="photo_align">
+                                <option value="right">
+                                    Right
+                                </option>
+                                <option value="left">
+                                    Left
+                                </option>
+                            </select>
+                        </div>
+                        <div class="photo_width">
+                            <label>
+                                Width (%):
+                            </label>
+                            <input class="form-control" data--value="25" data-label="photo" id="photo_width" max="100" min="0" name="photo_width" placeholder="" type="number" value="{photo_width}"/>
+                        </div>
+                        <div class="photo_top">
+                            <label>
+                                Top (%):
+                            </label>
+                            <input class="form-control" data--value="10" data-label="photo" id="photo_top" max="100" min="0" name="photo_top" placeholder="" type="number" value="{photo_top}"/>
+                        </div>
+                        <div class="photo_left_right">
+                            <label>
+                                Right (%):
+                            </label>
+                            <input class="form-control" data--value="10" data-label="photo" id="photo_left_right" max="100" min="0" name="photo_left_right" placeholder="" type="number" value="{photo_left_right}"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <h4>
+                            Info:
+                        </h4>
+                        <div class="info_align">
+                            <label>
+                                Align:
+                            </label>
+                            <input type="hidden" id="info_align_before" value="{info_align}"/>
+                            <select class="form-control" data-label="info" id="info_align" name="info_align">
+                                <option value="left">
+                                    Left
+                                </option>
+                                <option value="center">
+                                    Center
+                                </option>
+                                <option value="right">
+                                    Right
+                                </option>
+                            </select>
+                        </div>
+                        <div class="info_width">
+                            <label>
+                                Width (%):
+                            </label>
+                            <input class="form-control" data--value="100" data-label="info" id="info_width" name="info_width" placeholder="" type="number" value="{info_width}"/>
+                        </div>
+                        <div class="info_top">
+                            <label>
+                                Top (%):
+                            </label>
+                            <input class="form-control" data--value="60" data-label="info" id="info_top" max="100" min="0" name="info_top" placeholder="" type="number" value="{info_top}"/>
+                        </div>
+                        <div class="info_left_right">
+                            <label>
+                                Left (%):
+                            </label>
+                            <input class="form-control" data--value="10" data-label="info" id="info_left_right" max="100" min="0" name="info_left_right" placeholder="" type="number" value="{info_left_right}"/>
+                        </div>
+                    </div>
+                    {/template_content}
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <button class="btn btn-primary" type="submit">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+                {/template_detail}
+            </form>
+        </div>
+        <div class="col-sm-6">
+            <div class="row">
+                <center>
+                    {template_detail}
+                    <div style="min-width:300px; max-width: 460px; ">
+                        <div class="" style=" border-radius: 13px; color:#222; padding: 22px;">
+                            <label>
+                                Preview
+                            </label>
+                            <div class="" style="width:100%;position: relative;">
+                                {template_content}
+                                <span class=" text-{logo_align}" style="width:100%;position: ">
+                                    <div class="preview_card_logo" style="position: absolute; 
+                                        top: {logo_top}%;  
+                                        {logo_align} : {logo_left_right}%;
+                                        width: {logo_width}%; ">
+                                        <img src="{base}/files/images/default-logo.png" style="border: 1px solid #eee; width: 100% !important;"/>
+                                    </div>
+                                </span>
+                                <span class="text-{photo_align}" style="width:100%;position: ">
+                                    <div class="preview_card_photo " style="position: absolute; 
+                                        top: {photo_top}%;  
+                                        {photo_align} :{photo_left_right}%;
+                                        width: {photo_width}%; ">
+                                        <img src="{base}/files/images/default-avatar.png" style="border: 1px solid #eee; width: 100% !important;"/>
+                                    </div>
+                                </span>
+                                <span class="text-{info_align}" style="width:100%;position: ">
+                                    <span class="preview_card_info" style="position: absolute; 
+                                        top: {info_top}%;  
+                                        {info_align} :{info_left_right}%;
+                                        width: {info_width}%;
+                                        color:#fff;
+                                        text-transform: uppercase;
+                                        font-weight: bold ">
+                                        <div class="min320">
+                                            <div style="font-size: 10pt;">
+                                                1234 5678 9102 3456
+                                            </div>
+                                            <div style="font-size: 12pt; white-space: nowrap;">
+                                                The name of member
+                                            </div>
+                                            <div style="font-size: 10pt;">
+                                                Expired : 2018-10-30
+                                            </div>
+                                        </div>
+                                        <div class="min480">
+                                            <div style="font-size: 16pt">
+                                                1234 5678 9102 3456
+                                            </div>
+                                            <div style="font-size: 20pt">
+                                                The name of member
+                                            </div>
+                                            <div style="font-size: 15pt">
+                                                Expired : 2018-10-30
+                                            </div>
+                                        </div>
+                                    </span>
+                                </span>
+                                <img id="preview_card_bg" src="{base}/files/images/default-card.png" style="border-radius: 10px;" width="100%"/>
+                                {/template_content}
+                            </div>
+                        </div>
+                    </div>
+                    {/template_detail}
+                </center>
+            </div>
+                <div class="col-sm-12" style="margin-top: 20px">
+                    <input type="file" class="form-control" id="sample_card" />
+                </div>
+        </div>
+    </div>
+</div>
+<!-- -->
+<!-- -->
+<style type="text/css">
+    @media screen and (min-width: 430px) {
+        .min320 {
+           display: none;
+        }
+        .min480{
+            text-shadow: 0px 0px 6px #000;
+        }
+    }
+    @media screen and (max-width: 429px) {
+        .min320 {
+            text-shadow: 0px 0px 6px #000;
+        }
+        .min480{
+           display: none;
+        }
+    }
+</style>
+<!-- -->
+<!-- -->
+<script type="text/javascript">
+
+    ///////////////////
+    function readURL(input, img_id_or_class) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                // console.log(e);
+                $(img_id_or_class).attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#sample_card").change(function() {
+        var _URL = window.URL || window.webkitURL;
+        var image, file;
+        var el = this ;
+        if ((file = el.files[0])) {
+            image = new Image();
+            image.src = _URL.createObjectURL(file);
+            image.onload = function() {
+                if (this.width == 540 &&  this.height == 350 ) {
+                    readURL(el, '#preview_card_bg');
+                }else{
+                    alert('Error:\n\The card dimension must 540 x 350 pixels.');
+                    $("#sample_card").val('');
+
+                }
+            }
+            console.log(image);
+        }
+    });
+    ///////////////////
+
+    logo_align_before = $('#logo_align_before').val();
+    photo_align_before = $('#photo_align_before').val();
+    info_align_before = $('#info_align_before').val();
+    $('#logo_align').val(logo_align_before).trigger('change');
+    $('#photo_align').val(photo_align_before).trigger('change');
+    $('#info_align').val(info_align_before).trigger('change'); 
+
+    // $('.logo_right, .photo_right, .info_right').hide();
+    $('#logo_align, #photo_align, #info_align').on('change',function(event) {
+        event.preventDefault();
+        var val = $(this).val();
+        var label = $(this).data('label');
+        kanan_kiri(label, val); 
+    }); 
+
+    function kanan_kiri(label, val) {
+        if (val == 'left') {
+            $('.'+label+'_left_right').find('label').html('Left (%)'); 
+            $('.preview_card_'+label).css('left', '5%');
+            $('.preview_card_'+label).css('right', '');
+            // $('#'+label+'_left_right').val('0');
+        }else{
+            $('.'+label+'_left_right').find('label').html('Right (%)'); 
+            $('.preview_card_'+label).css('left', '');
+            $('.preview_card_'+label).css('right', '5%');
+            // $('#'+label+'_left_right').val('0');
+        }
+        $('#'+label+'_left_right').val('5');
+        if (val == 'center') {
+            $('.preview_card_'+label).css('left', '');
+            $('.preview_card_'+label).css('right', '');
+            $('#'+label+'_left_right').val('0');
+        } 
+        $('.preview_card_'+label).parent()
+        .removeClass('text-left')
+        .removeClass('text-right')
+        .removeClass('text-center')
+        .addClass('text-'+val);  
+
+
+    }
+    /////////////////////
+    /////////////////////
+    
+    $('#logo_top, #photo_top, #info_top').on('change keyup', function(event) {
+        var top = $(this).val();
+        var label = $(this).data('label');
+        $('.preview_card_'+label).css('top', top+'%');
+    });
+    /////////////////////
+    
+    $('#logo_left_right, #photo_left_right, #info_left_right').on('change keyup', function(event) {
+        var left_right = $(this).val();
+        var label = $(this).data('label');
+        if ($('#'+label+'_align').val() == 'left') {
+            $('.preview_card_'+label).css('left', left_right+'%');
+            $('.preview_card_'+label).css('right', '');
+        }else{
+            $('.preview_card_'+label).css('left', '');
+            $('.preview_card_'+label).css('right', left_right+'%');
+        }
+    });
+    /////////////////////
+    
+    $('#logo_width, #photo_width, #info_width').on('change keyup', function(event) {
+        var width = $(this).val();
+        var label = $(this).data('label');
+        $('.preview_card_'+label).css('width', width+'%');
+    });
+    /////////////////////
+    
+    // $('#logo_align, #photo_align, #info_align').on('change keyup', function(event) {
+    //     var align = $(this).val();
+    //     var label = $(this).data('label');
+    //     $('.preview_card_'+label).css('text-align', align );
+    // });
+    /////////////////////
+</script>

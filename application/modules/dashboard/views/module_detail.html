@@ -1,0 +1,745 @@
+<div class="box box-{skin_box} skin_box">
+  <div class="box-header ">
+    <h3 class="box-title">
+      {module_detail}
+      {module_name}
+      {/module_detail}
+    </h3>
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body ">
+    <div class=" ">
+      <a class="btn btn-primary" href="{base}/dashboard/module">
+        <i class="fa fa-chevron-left fa-fw">
+        </i>
+        {m_back}
+      </a>
+      <a class="btn btn-success " data-title="{m_add} {m_module}" data-toggle="modal" href="#module_add_edit">
+        <i class="fa fa-plus">
+        </i>
+        {m_add} {m_module}
+      </a>
+    </div>
+    <table cellpadding="0" cellspacing="0" class="display table table-striped table-bordered responsive" id="datatable" width="100%">
+      <thead>
+        <tr class="bg-{skin}">
+          <th>
+            #
+          </th>
+          <th>
+            ID
+          </th>
+          <th>
+            Name
+          </th>
+          <th>
+            URL
+          </th>
+          <th>
+            Action
+          </th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <!-- /.box-body -->
+</div>
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<script type="text/javascript">
+  $(document).ready(function() {
+
+    var table = $('#datatable').DataTable( {  
+        "bPaginate": false,
+        // "processing": true,
+        // "serverSide": true,
+        "ajax": {
+          "url": "{base}/dashboard/module_ajax/{module_id}",
+          "dataSrc": "",
+          // "data" : function ( d ) {
+          //       d.myKey = "myValue";
+          //       // d.custom = $('#myInput').val();
+          //       // etc
+          //   }
+        },
+        "scrollX": true,
+        // "fixedHeader": true,
+        // "scrollY":        "90vh",
+        // "scrollCollapse": false,
+        // "paging":         false,
+        "columns": [
+            { "data": null },
+            // { "data": "module_rank" },
+            { "data": "module_id" },
+            { "data": "module_name",  
+                render : function ( data, type, full, meta ) {
+                  return '<a href="{base}/'+full.module_url+'"><i class="fa fa-fw fa-'+full.module_icon+'"></i> '+data+'</a>'+
+                  '<b class="pull-right text-center bg-'+full.module_color+'-" style="width:30px;background-color:'+full.module_warna+'-">'+full.entity_count+'</b>';
+                }
+            },
+            { "data": "module_url",  
+                render : function ( data, type, full, meta ) {
+                  module_permission = full.module_permission;
+                  return data+'<span class="pull-right">'+ module_permission +'</span>'
+                }
+
+            }, 
+            { "data": null,
+              render : function(data, type, full, meta){
+                return '<a class="btn btn-warning btn-xs btn-flat btn_edit visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"" data-toggle="modal" href="#module_add_edit" data-title="{m_edit}"><i class="fa fa-pencil"></i> Edit</a> '+
+                       '<a class="btn btn-danger btn-xs btn-flat btn_delete visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"" data-toggle="modal" href="#module_delete" data-module_name="'+full.module_name+'" data-module_id="'+full.module_id+'"><i class="fa fa-trash"></i> Delete</a>'
+              }
+        
+            }, 
+        ],
+        // "columnDefs": [ {
+        //     "targets": -1,
+        //     "data": null,
+        //     "defaultContent": 
+        //     '<a class="btn btn-warning btn-xs btn-flat btn_edit visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"" data-toggle="modal" href="#module_add_edit"><i class="fa fa-pencil"></i> Edit</a> '+
+        //     '<a class="btn btn-danger btn-xs btn-flat btn_delete visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"" data-toggle="modal" href="#module_delete"><i class="fa fa-trash"></i> Delete</a>'
+        // } ],
+        
+        "columnDefs": [ {
+          "searchable": false,
+          "orderable": false,
+          "targets": 0
+        } ],
+        "order": [[1, 'asc']]
+    });
+    /**/
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+    //// create index column 1
+    table.on('order.dt search.dt', function () {
+      table.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+          cell.innerHTML = i + 1;
+      });
+    }).draw();
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+    $('#datatable tbody').on( 'click', '.btn_edit', function () {
+      var btn_edit = $(this);
+      var data = table.row(btn_edit.parents('tr')).data();
+      var result = Object.keys(data).forEach(function(k) {
+        btn_edit.data(k,data[k]);
+      }); 
+    });
+    ///////////////////////////////////////////////////////////////////////////
+    $('#del_submit').click(function(event) {
+      module_id = $(this).data('module_id');
+      // console.log(module_id);
+      $.ajax({
+        url: '{base}/dashboard/module_delete/'+module_id,
+      })
+      .done(function() {
+        console.log("success");
+        table.ajax.reload( null, false );
+      })
+      .fail(function() {
+        console.log("error");
+      })
+      .always(function() {
+        console.log("complete");
+      });
+      
+      /* Act on the event */
+    });
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    $('#btn_submit').click(function(event) {
+      var form = $('#form_module_add_edit');
+      fff = form.serialize();
+      // console.log(fff);
+      $.ajax({
+        url: '{base}/dashboard/module_post',
+        type: 'POST',
+        data: form.serialize(),
+      })
+      .done(function(data) {
+        // console.log('Success');
+        // data = jQuery.parseJSON(data);
+        console.log(data);
+        table.ajax.reload( null, false );
+      })
+      .fail(function(data) {
+        console.log('Failed');
+        // console.log(data);
+      });
+      
+    });
+    ///////////////////////////////////////////////////////////////////////////
+    $('input').keypress(function(e) {
+        if (e.which == '13') {
+          $('#btn_submit').trigger('click');
+        }
+    });
+
+    ///////////////////////////////////////////////////////////////////////////
+
+  });
+</script>
+<!-- ========================================================================== -->
+<div class="modal fade" id="module_delete">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+          ×
+        </button>
+        <h4 class="modal-title">
+          Modal title
+        </h4>
+      </div>
+      <div class="modal-body">
+        Are you sure to delete
+        <b>
+          <span id="module_name">
+          </span>
+        </b>
+        ?
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal" type="button">
+          No
+        </button>
+        <button class="btn btn-danger" data-dismiss="modal" id="del_submit" type="button">
+          Yes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<div class="modal fade" id="module_add_edit">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+          ×
+        </button>
+        <h4 class="modal-title">
+          Edit
+        </h4>
+      </div>
+      <form class="form-horizontal" id="form_module_add_edit" method="POST">
+        <div class="modal-body">
+          <div class="form-group form-sm">
+            <div class="col-xs-3 text-right">
+              <label class="label-sm">
+                Name :
+              </label>
+            </div>
+            <div class="col-xs-9">
+              <input autofocus="" class="form-control input-sm" id="module_name" name="module_name" placeholder="" type=""/>
+              <input id="module_id" name="module_id" type="hidden"/>
+            </div>
+          </div>
+          <!-- -->
+          <div class="form-group form-sm">
+            <div class="col-xs-3 text-right">
+              <label>
+                URL :
+              </label>
+            </div>
+            <div class="col-xs-9">
+              <input class="form-control input-sm" id="module_url" name="module_url" placeholder="" type=""/>
+            </div>
+          </div>
+          <!-- -->
+          <div class="form-group form-sm">
+            <div class="col-xs-3 text-right">
+              <label>
+                Level :
+              </label>
+            </div>
+            <div class="col-xs-9">
+              <div class="row">
+                <div class="col-sm-3">
+                  <input id="module_level_before" type="hidden" value="2"/>
+                  <select id="module_level" name="module_level">
+                  </select>
+                </div>
+                <div class="col-sm-9">
+                  <div class="row">
+                    <div class="col-xs-3 text-right">
+                      <label>
+                        Parent :
+                      </label>
+                    </div>
+                    <div class="col-xs-9">
+                      <input id="module_parent_before" type="hidden" value="{module_id}"/>
+                      <select id="module_parent" name="module_parent">
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- -->
+          <div class="form-group form-sm">
+            <div class="col-xs-3 text-right">
+              <label>
+                Type :
+              </label>
+            </div>
+            <div class="col-xs-9">
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-default btn-sm">
+                  <input name="module_type" type="radio" value="1"/>
+                  <span class="text-default">
+                    System
+                  </span>
+                  <input id="module_type_before" type="hidden"/>
+                </label>
+                <label class="btn btn-default btn-sm">
+                  <input name="module_type" type="radio" value="2"/>
+                  <span class="text-primary">
+                    Entity
+                  </span>
+                </label>
+                <label class="btn btn-default btn-sm">
+                  <input name="module_type" type="radio" value="3"/>
+                  <span class="text-danger">
+                    Transaction
+                  </span>
+                </label>
+                <label class="btn btn-default btn-sm">
+                  <input name="module_type" type="radio" value="4"/>
+                  <span class="text-warning">
+                    Other
+                  </span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- -->
+          <div class="form-group form-sm">
+            <div class="col-xs-3 text-right">
+              <label>
+                Rank :
+              </label>
+            </div>
+            <div class="col-xs-9">
+              <select id="module_rank" name="module_rank">
+              </select>
+              <input id="module_rank_before" type="hidden"/>
+            </div>
+          </div>
+          <!-- -->
+          <div class="form-group form-sm">
+            <div class="col-xs-3 text-right">
+              <label>
+                Icon :
+              </label>
+            </div>
+            <div class="col-xs-9">
+              <input id="module_icon_before" type="hidden"/>
+              <div class="input-group">
+                <select class="form-control block module_icon" id="module_icon" name="module_icon">
+                </select>
+                <span class="input-group-btn">
+                  <button class="btn btn-default" id="icon_result" type="button">
+                    Go!
+                  </button>
+                </span>
+              </div>
+            </div>
+          </div>
+          <!-- -->
+          <div class="form-group form-sm">
+            <div class="col-xs-3 text-right">
+              <label>
+                Color :
+              </label>
+            </div>
+            <div class="col-xs-9">
+
+              <input id="module_color_before" type="hidden"/>
+              <div class="div_module_color">
+              </div>
+
+
+              <!-- 
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-default btn-sm ">
+                  <input autocomplete="off" name="module_color" type="radio" value="default"/>
+                  Default
+                </label>
+                <input id="module_color_before" type="hidden"/>
+                <label class="btn btn-default btn-sm ">
+                  <input autocomplete="off" name="module_color" type="radio" value="primary"/>
+                  <span class="text-primary">
+                    Primary
+                  </span>
+                </label>
+                <label class="btn btn-default btn-sm">
+                  <input autocomplete="off" name="module_color" type="radio" value="danger"/>
+                  <span class="text-danger">
+                    Danger
+                  </span>
+                </label>
+                <label class="btn btn-default btn-sm">
+                  <input autocomplete="off" name="module_color" type="radio" value="warning"/>
+                  <span class="text-warning">
+                    Warning
+                  </span>
+                </label>
+                <label class="btn btn-default btn-sm">
+                  <input autocomplete="off" name="module_color" type="radio" value="success"/>
+                  <span class="text-success">
+                    Success
+                  </span>
+                </label>
+              </div>
+              <div class="form-group">
+              </div>
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-default btn-sm">
+                  <input autocomplete="off" name="module_color" type="radio" value="blue"/>
+                  <span class="text-blue">
+                    Blue
+                  </span>
+                </label>
+                <label class="btn btn-default btn-sm">
+                  <input autocomplete="off" name="module_color" type="radio" value="red"/>
+                  <span class="text-danger">
+                    Red
+                  </span>
+                </label>
+                <label class="btn btn-default btn-sm">
+                  <input autocomplete="off" name="module_color" type="radio" value="green"/>
+                  <span class="text-success">
+                    Green
+                  </span>
+                </label>
+                <label class="btn btn-default btn-sm">
+                  <input autocomplete="off" name="module_color" type="radio" value="yellow"/>
+                  <span class="text-warning">
+                    Yellow
+                  </span>
+                </label>
+              </div>
+
+               -->
+            </div>
+          </div>
+          <!-- -->
+          <div class="form-group form-sm from_permission">
+            <div class="col-xs-3 text-right">
+              <label>
+                Permision :
+              </label>
+            </div>
+            <div class="col-xs-9">
+              <input type="hidden" class="form-control"  id="module_permission_before"/>
+              <select class="module_permission" id="module_permission" name="module_permission[]"></select>
+            </div>
+          </div>
+          <!-- -->
+          <div class="modal-footer">
+            <button class="btn btn-default btn-flat" data-dismiss="modal" type="button">
+              Close
+            </button>
+            <button class="btn btn-primary btn-flat" data-dismiss="modal" id="btn_submit" type="button">
+              Save changes
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- ========================================================================== -->
+<script type="text/javascript">
+  $(document).ready(function() {
+
+    function format(icon) { 
+      return $('<span>').html( "<i class='fa fa-fw fa-" + icon.id + "'></i>   " + icon.text);
+    }
+
+    var fa_icon = $.ajax({
+      type: "GET",
+      url: "{base}/fontawesome/icon",
+      // url: "{base}/public/scripts/fa.json?s=s",
+      dataType: "json",
+      async: false,
+      cache: true
+    }).responseJSON;
+
+    $('.module_icon').select2({
+      width: "100%",
+      multiple: false,  
+      data: fa_icon,
+      allowClear:true,
+      placeholder:'',
+      templateResult: format,
+      formatResult: format,
+      templateSelection: format
+    });
+
+
+    var module_permission = $.ajax({
+      type: "GET",
+      url: "{base}/user/roles_ajax",
+      // url: "{base}/public/scripts/fa.json?s=s",
+      dataType: "json",
+      async: false,
+      cache: true
+    }).responseJSON;
+    // console.log(module_permission);
+
+    $('.module_permission').select2({
+      width: "100%",
+      multiple: true,  
+      data: module_permission,
+      allowClear:true,
+      placeholder:'',
+    });
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    $('#module_add_edit').on('show.bs.modal', function (event) {
+
+      // $(this).find('[autofocus]').focus();
+      var button = $(event.relatedTarget);
+      var title = button.data('title');
+      var modal = $(this);
+      data = button.data();
+      // console.log(data);
+      Object.keys(data).forEach(function(k) {
+        modal.find('#'+k).val(data[k]);
+        modal.find('#'+k+'_before').val(data[k]);
+      }); 
+      modal.find('.modal-title').text(title);
+      ////////////////////////////// modification --- begin
+      var module_type_before = $('#module_type_before').val();
+      $('input[type=radio][name=module_type]').parent().removeClass('active');
+      if (module_type_before !== '') {
+        $('input[type=radio][name=module_type]').filter('[value='+module_type_before+']').prop('checked', true).parent().addClass('active');
+      }
+      
+      var module_color_before = $('#module_color_before').val();
+      $('input[type=radio][name=module_color]').parent().removeClass('active');
+      if (module_color_before !== '') {
+        $('input[type=radio][name=module_color]').filter('[value='+module_color_before+']').prop('checked', true).parent().addClass('active');
+      }
+
+      //----------rank
+      module_rank_before = $('#module_rank_before').val();
+      // console.log(module_rank_before);
+
+      // function* range(a, b) {
+      //   for (var i = a; i <= b; ++i) yield i;
+      // }
+      // number = Array.from(range(1, 100));  
+      number = new Array(100).join().split(',').map(function(item, index){return ++index});
+      $('#module_rank').select2({
+        width:'100%',
+        data: number
+      }).val(module_rank_before).trigger('change');
+
+
+
+      //----------color -- begin
+
+      var colors =[
+      // 'red',
+      // 'yellow',
+      // 'aqua',
+      // 'blue',
+      // 'light-blue',
+      // 'green',
+      // 'navy',
+      // 'teal',
+      // 'olive',
+      // 'lime',
+      // 'orange',
+      // 'fuchsia',
+      // 'purple',
+      // 'maroon',
+      // 'black',
+      // 'red-active',
+      // 'yellow-active',
+      // 'aqua-active',
+      // 'blue-active',
+      // 'light-blue-active',
+      // 'green-active',
+      // 'navy-active',
+      // 'teal-active',
+      // 'olive-active',
+      // 'lime-active',
+      // 'orange-active',
+      // 'fuchsia-active',
+      // 'purple-active',
+      // 'maroon-active',
+      // 'black-active',
+      // 'black-gradient',
+      // 'teal-gradient',
+      // 'light-blue-gradient',
+      // 'blue-gradient',
+      // 'aqua-gradient',
+      // 'yellow-gradient',
+      // 'purple-gradient',
+      // 'green-gradient',
+      // 'red-gradient',
+      // 'maroon-gradient', 
+      'red',
+      'green',
+      'blue',
+      'teal',
+      'yellow',
+      'aqua',
+      'light-blue',
+      'purple',
+      'maroon', 
+      ];
+      $('.div_module_color').html('');
+      var module_color_before = $('#module_color_before').val();
+      $.each(colors, function(index, val) {
+         // console.log(val); 
+        active = (val == module_color_before)?'text-black text-bold':'';
+        btn_color = '<div class="col-sm-4"><div class="'+active+' row" data-toggle="buttons"><label class="'+active+'  btn btn-block bg-'+  val  +' btn-sm btn-flat "> <input autocomplete="off" name="module_color" type="radio" value="'+val+'"/> '+val+' </label></div></div>'
+        $('.div_module_color').append(btn_color);
+      });
+      // var module_color_before = $('#module_color_before').val();
+      // $('input[type=radio][name=module_color]').parent().removeClass('active');
+      // if (module_color_before !== '') {
+      //   $('input[type=radio][name=module_color]').filter('[value='+module_color_before+']').prop('checked', true).parent().addClass('active');
+      // }
+
+      //----------color -- end
+   
+      //----------icon
+
+      /// ICON - BEGIN ------- marai abot//
+      module_icon_before = $('#module_icon_before').val();
+      $('#icon_result').html('<i class="fa fa-'+module_icon_before+'"></i>');
+      // var fa_icon = $.ajax({
+      //     type: "GET",
+      //     url: "{base}/public/scripts/fa.json?s=s",
+      //     dataType: "json",
+      //     async: false,
+      //     cache: true
+      //   }).responseJSON;
+      // fa_icon = $.parseJSON(fa_icon);
+      // $('#module_icon').select2({
+      //   width: "80%",
+      //   multiple: false,  
+      //   data: fa_icon,
+      //   allowClear:true,
+      //   placeholder:''
+      // }).val(module_icon_before).trigger('change')
+      $('#module_icon').val(module_icon_before).trigger('change')
+      $('#module_icon').on('change', function(e) {  
+        icon = $(this).val();
+        $('#icon_result').html('<i class="fa fa-'+icon+'"></i>');
+      });
+   
+      /// ICON - END //
+      /// LEVEL - BEGIN //
+      module_level_before = $('#module_level_before').val();
+      $('#module_level').select2({
+        width:'100%', 
+        data:[1,2,3,4]
+      }).val(module_level_before).trigger('change');
+      /// LEVEL - END //
+      /// LEVEL - BEGIN ////
+      module_parent($('#module_parent_before').val());
+
+      function module_parent(value) {
+        $('#module_parent').empty();
+        // $('#module_parent').val('0').trigger('change');
+        module_level = parseInt($('#module_level').val()) - 1 ;
+        // console.log(module_level);
+        if (module_level > 0) {
+          $('#module_parent').parent().parent().show();
+          $.ajax({
+            url: '{base}/dashboard/module_level_ajax/'+module_level+'/'+$('#module_id').val(),
+            // type: 'GET',
+          })
+          .done(function(data) {
+            // console.log($('#module_id').val());
+            data = $.parseJSON(data);
+            $('#module_parent').select2({
+              data: data,
+              width:'100%',
+              allowClear:true,
+              placeholder:'Parent'
+            }).val(value).trigger('change');
+          })
+          .fail(function() {
+            console.log("error");
+          });
+        }else{
+          $('#module_parent').val(0) ;
+          $('#module_parent').parent().parent().hide();
+        }
+      }
+      $('#module_level').change(function(event) {
+        module_parent();
+      });
+      // module_parent();
+      /// LEVEL - END ////
+
+      //----------permission -- begin
+
+      module_permission_before = $('#module_permission_before').val() ;  
+      module_permission_before = $.parseJSON('[' + module_permission_before + ']');
+      $('.module_permission').val(module_permission_before).trigger('change') ;
+
+      module_id = modal.find('#module_id').val();
+      // console.log(module_id);
+      if (module_id == '') {
+        $('#module_level').val('2').trigger('change');
+        $('#module_parent').val('{module_id}').trigger('change');
+        $('.from_permission').hide();
+      }else{
+        $('.from_permission').show();
+      }
+
+
+      //----------permission -- end
+      // 
+
+      ////////////////////////////// modification  --- end
+
+
+    });
+    $('#module_add_edit').on('hidden.bs.modal', function(){
+      $(this).find('form')[0].reset();
+    });
+    $('#module_add_edit').on('hide.bs.modal', function(){
+      $(this).find('form')[0].reset();
+      $(this).find('input[id$="_before"]').val('');
+      $(this).find('input').val('');
+    });
+    $('#module_add_edit').on('shown.bs.modal', function(){
+      $(this).find('[autofocus]').focus();
+    });
+  });
+</script>
+<!-- ========================================================================== -->
+<script type="text/javascript">
+  $('#module_delete').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    var title = button.data('title');
+    var module_id = button.data('module_id');
+    var module_name = button.data('module_name');
+    var modal = $(this);
+    modal.find('.modal-title').text('Delete '+module_name);
+    modal.find('#module_name').html(module_name);
+    modal.find('#del_submit').data('module_id',module_id);
+  });
+</script>
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->

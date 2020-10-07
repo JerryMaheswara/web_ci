@@ -1,0 +1,119 @@
+<div class="box box-{skin_box} skin_box">
+    <div class="box-body">
+        {breadcrumb}
+        {searchbar}
+        <div class="table-responsive">
+            <table cellpadding="0" cellspacing="0" class="display table table-striped table-bordered responsive" id="datatable" width="100%">
+                <thead>
+                    <tr class="bg-{skin} tr_skin">
+                        <th class="{_is_allowed}" width="30px">
+                            <input class="check_all" style="cursor: pointer;" type="checkbox"/>
+                        </th>
+                        <th class="text-center" width="60px">
+                            #
+                        </th>
+                        <th>
+                            <a class="bg-{skin}" href="?view=list&order=user_name_first&sort={sort}">
+                                <div style="display: block;">
+                                    <span class="icon_sort pull-right" id="user_name_first" style="display: none;">
+                                        <i class="fa fa-fw fa-sort-alpha-{sort_icon}">
+                                        </i>
+                                    </span>
+                                    Nama Member
+                                </div>
+                            </a>
+                        
+                        <th>
+                            <a class="bg-{skin}" href="?view=list&order=user_email&sort={sort}">
+                                <div style="display: block;">
+                                    <span class="icon_sort pull-right" id="user_email" style="display: none;">
+                                        <i class="fa fa-fw fa-sort-alpha-{sort_icon}">
+                                        </i>
+                                    </span>
+                                    Email
+                                </div>
+                            </a>
+                        </th>
+                        <th>
+                            <a class="bg-{skin}" href="?view=list&order=user_phone&sort={sort}">
+                                <div style="display: block;">
+                                    <span class="icon_sort pull-right" id="user_phone" style="display: none;">
+                                        <i class="fa fa-fw fa-sort-alpha-{sort_icon}">
+                                        </i>
+                                    </span>
+                                    Telp
+                                </div>
+                            </a>
+                        </th>
+                        <th class="text-center {_is_allowed}" width="150px">
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="user_tbody">
+                </tbody>
+                <tr class="{_is_allowed}">
+                    <td colspan="20">
+                        <label style="cursor: pointer;">
+                            <input class="check_all" type="checkbox"/>
+                            <i class="fa fa- ">
+                            </i>
+                            Check all
+                        </label>
+                    </td>
+                </tr>
+            </table>
+            <span class="{_is_allowed}">
+                <i class="fa fa-fw fa-lg fa-level-up">
+                </i>
+                With Selected :
+                <button class="toggle_all btn btn-xs btn-flat btn-success" data-action_name="Enabled" data-user_disabled="0">
+                    Enabled
+                </button>
+                <button class="toggle_all btn btn-xs btn-flat btn-primary" data-action_name="Disabled" data-user_disabled="1">
+                    Disabled
+                </button>
+                <button class="delete_all btn btn-xs btn-flat btn-danger" data-action_name="Delete">
+                    Delete
+                </button>
+            </span>
+        </div>
+        <div class="text-center paging">
+        </div>
+    </div>
+</div>
+<!-- -->
+<script type="text/javascript">
+    $('#{order}').show();
+    function user_ajax(search,offset, status) {
+        $.ajax({
+            url: '{base}/member/member_ajax',
+            data:{
+                search : search,
+                offset : offset,
+                status : status,
+                order  : '{order}',
+                sort   : '{sort}',
+                view   : '{view}',
+            }
+        })
+        .done(function(data) {
+            // data = $.parseJSON(data);
+            $.each(data, function(index, val) { 
+                $('#user_tbody').html(val._tbody);
+                $('#total_rows').find('span').html(val.total_rows);
+                $('.paging').html(val.paging);
+            });
+        })
+        .fail(function(error) {
+            console.log(error.responseText);
+        });
+    }
+    user_ajax('{search}', '{offset}', '{status}');
+    ////////////
+    $('#search').on('keyup', function(event) {
+        event.preventDefault();
+        var search = $(this).val();
+        user_ajax(search, 0, '{status}');
+    });
+</script>

@@ -1,0 +1,42 @@
+<section class="container padding-top-3x">
+    <h3 class="text-center mb-30">
+        Top Categories
+    </h3>
+    <div class="row">
+
+        {top_categories}
+        <div class="col-md-4 col-sm-6">
+            <div class="card mb-30">
+                <a class="card-img-tiles" href="{base}/item/?category_id={category_id}">
+                    <div class="inner">
+                        <div class="main-img"> 
+                            <img alt="Category" src="{base}/files/images/{category_image}"/> 
+                        </div>
+                        <div class="thumblist">
+                            {category_image_additional}
+                            <img alt="Category" src="{base}/files/images/{category_thumbnail_image}"/>
+                            {/category_image_additional} 
+                        </div>
+                    </div>
+                </a>
+                <div class="card-body text-center">
+                    <h4 class="card-title">
+                        {category_name}
+                    </h4>
+                    <p class="text-muted hidden">
+                        Starting from $49.99
+                    </p>
+                    <a class="btn btn-outline-primary btn-sm" href="{base}/item/?category_id={category_id}">
+                        View Products
+                    </a>
+                </div>
+            </div>
+        </div>
+        {/top_categories}
+    </div>
+    <div class="text-center">
+        <a class="btn btn-outline-secondary margin-top-none" href="{base}/category">
+            All Categories
+        </a>
+    </div>
+</section>

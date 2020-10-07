@@ -1,0 +1,301 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="text-center">
+      <h3 class="widget-title">
+        {m_admin} {m_site} {m_term}
+      </h3>
+    </div>
+  </div>
+</div>
+<!-| =======  ======= |->
+<span class="pull-right">
+  <a class="btn btn-sm btn-success" data-toggle="modal" href='#site_term_add_edit'
+    data-action="add"
+    data-title="Add Term" >
+    <i class="fa fa-plus-circle">
+    </i>
+    Add {m_term}
+  </a>
+</span>
+<div class=" text-center">
+  {language_menu}
+</div>
+<div class="clearfix">
+  <br/>
+</div>
+<div>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>
+            #
+          </th>
+          <th>
+            {m_alias}
+          </th>
+          <th>
+            {m_name}
+          </th>
+          <th>
+            {m_status}
+          </th>
+          <th>
+            {m_action}
+          </th>
+          <th>
+            {m_translation}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {site_term}
+        <tr id="tr_{site_term_id}">
+          <td>
+            {nomor}
+          </td>
+          <td>
+            m_{site_term_slug}
+          </td>
+          <td>
+            <a href="{base}/language/admin/translate/{site_term_id}">
+              {site_term_name}
+            </a>
+            <br/>
+            <small>
+              <i>
+                <!-- {site_term_description} -->
+              </i>
+            </small>
+          </td>
+          <td>
+            <a style="cursor:pointer" class="toogle_status" id="btn_toggle_{site_term_id}"
+              data-site_term_name="{site_term_name}"
+              data-site_term_id="{site_term_id}"
+              data-site_term_disabled="{site_term_disabled}"
+              data-on_off="{on_off}"
+              >
+              <i class="fa fa-toggle-{on_off} " id="toogle_{site_term_id}">
+              </i>
+            </a>
+          </td>
+          <td>
+            <a class="btn btn-warning btn-xs"
+              data-action="edit"
+              data-title="Edit Term"
+              data-toggle="modal"
+              data-site_term_id="{site_term_id}"
+              data-site_term_slug="{site_term_slug}"
+              data-site_term_name="{site_term_name}"
+              data-site_term_description="{site_term_description}"
+              href='#site_term_add_edit'>
+              <i class="fa fa-pencil">
+              </i>
+            </a>
+            <a style="cursor:pointer" class="btn_delete btn btn-danger btn-xs" id="btn_delete_{site_term_id}"
+              data-site_term_id="{site_term_id}"
+              >
+              <i class="fa fa-trash">
+              </i>
+            </a>
+          </td>
+          <td>
+            <a href="{base}/language/admin/translate/{site_term_id}">
+              Translate to other language
+            </a>
+          </td>
+        </tr>
+        {/site_term}
+      </tbody>
+    </table>
+  </div>
+  <!-| ======= NAVIGATION : FIRST : PREV : PAGE : NEXT : LAST ======= |->
+  <!-| ======= NAVIGATION : FIRST : PREV : PAGE : NEXT : LAST ======= |->
+  <!-| ======= NAVIGATION : FIRST : PREV : PAGE : NEXT : LAST ======= |->
+  <div class="row text-center ">
+    <a class="btn btn-success btn-xs {prev_disabled}" href="{base}/language/admin/term?q={query}&limit={limit_number}&offset={first_offset}">
+      <i class="fa fa-step-backward">
+      </i>
+      First
+    </a>
+    <a class="btn btn-primary btn-xs {prev_disabled}" href="{base}/language/admin/term?q={query}&limit={limit_number}&offset={prev_number}">
+      <i class="fa fa-chevron-left">
+      </i>
+      Prev
+    </a>
+    Jump to page :
+    <select id="pagers">
+      {pager}
+      <option value="{jump_offset}" >
+        {jump_halaman}
+      </option>
+      {/pager}
+    </select>
+    <a class="btn btn-primary btn-xs {next_disabled}" href="{base}/language/admin/term?q={query}&limit={limit_number}&offset={next_number}">
+      Next
+      <i class="fa fa-chevron-right">
+      </i>
+    </a>
+    <a class="btn btn-danger btn-xs {next_disabled}" href="{base}/language/admin/term?q={query}&limit={limit_number}&offset={last_offset}">
+      Last
+      <i class="fa fa-step-forward">
+      </i>
+    </a>
+  </div>
+  <!-| ======= NAVIGATION : FIRST : PREV : PAGE : NEXT : LAST ======= |->
+  <!-| ======= NAVIGATION : FIRST : PREV : PAGE : NEXT : LAST ======= |->
+</div>
+<!-| =======  ======= |->
+<script type="text/javascript">
+  $(document).ready(function() {
+  // ////////
+  // ////////
+  // ////////
+  // ////////
+  // ////////
+  pager('{base}/language/admin/term', '{query}');
+  // ////////
+  // limit = '{limit}';
+  // offset = '{offset}';
+  // $('#pagers').val(offset).select();
+  // $('#pagers').change(function(event) {
+  // offset_number = $(this).val();
+  // window.location.href = '{base}/language/admin/term?q={query}&limit={limit_number}&offset='+offset_number;
+  // });
+  // ////////
+  // ////////
+  // ////////
+  // ////////
+  /*--------------*/
+  $('.toogle_status').each(function(index, el) {
+  $(this).click(function(event) {
+  site_term_name = $(this).attr('data-site_term_name');
+  site_term_id = $(this).attr('data-site_term_id');
+  site_term_disabled = $(this).attr('data-site_term_disabled')==0?1:0;
+  on_off =  $(this).attr('data-on_off');
+  $.ajax({
+  url: '{base}/language/ajax_insert_site_term',
+  type: 'POST',
+  data: {
+  site_term_name:site_term_name,
+  site_term_id:site_term_id,
+  site_term_disabled:site_term_disabled
+  },
+  })
+  .done(function(data) {
+  data = $.parseJSON(data);
+  // $('#span_on_of_'+site_term_id).html(data[0].on_off);
+  $('#toogle_'+site_term_id).removeClass('fa-toggle-'+on_off).addClass('fa-toggle-'+data[0].on_off);
+  $('#btn_toggle_'+site_term_id).attr('data-on_off', data[0].on_off);
+  $('#btn_toggle_'+site_term_id).attr('data-site_term_disabled', data[0].site_term_disabled);
+  // console.log($(this));
+  })
+  .fail(function() {
+  console.log("error");
+  });
+  });
+  });
+  /*--------------*/
+  /*--------------*/
+  $('.btn_delete').each(function(index, el) {
+  $(this).click(function(event) {
+  if (confirm('Are you sure ...?')) {
+  site_term_id = $(this).attr('data-site_term_id');
+  $.ajax({
+  url: '{base}/language/ajax_delete_site_term',
+  type: 'POST',
+  data: {
+  site_term_id:site_term_id
+  },
+  })
+  .done(function() {
+  $('#tr_'+site_term_id).remove();
+  // console.log("success");
+  })
+  .fail(function(data) {
+  console.log("error" . data);
+  });
+  }
+  });
+  });
+  /*--------------*/
+  /*--------------*/
+  /*--------------*/
+  /*--------------*/
+  });
+</script>
+<!-| =======  ======= |->
+<!-| =======  ======= |->
+<!-| =======  ======= |->
+<div class="modal fade" id="site_term_add_edit">
+  <div class="modal-dialog">
+    <form action="" method="POST" class="form-horizontal" role="form">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            &times;
+          </button>
+          <h4 class="modal-title">
+            Add Site Term
+          </h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <input type="hidden" class="form-control" name="site_term_id" id="site_term_id" value="" placeholder="site_term_id"/>
+            <input type="hidden" class="form-control" name="site_term_slug" id="site_term_slug" value="" placeholder="site_term_slug"/>
+          </div>
+          <div class="form-group">
+            <div class="control-label col-sm-3">
+              <label >
+                Name
+              </label>
+            </div>
+            <div class="col-sm-9 ">
+              <input required autofocus type="text" class="form-control" name="site_term_name" id="site_term_name"  placeholder="Insert Term Name...."/>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="control-label col-sm-3">
+              <label >
+                Description
+              </label>
+            </div>
+            <div class="col-sm-9 ">
+              <textarea class="form-control vertical" name="site_term_description" id="site_term_description"  placeholder="Where is this term exist? Type URL here, please...!">
+              </textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            Close
+          </button>
+          <button type="submit" class="btn btn-primary">
+            Submit
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!-| =======  ======= |->
+<!-| =======  ======= |->
+<script type="text/javascript">
+  $(document).ready(function() {
+  $('#site_term_add_edit').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) ;
+  var title = button.data('title') ;
+  var site_term_id = button.data('site_term_id') ;
+  var site_term_slug = button.data('site_term_slug') ;
+  var site_term_name = button.data('site_term_name') ;
+  var site_term_description = button.data('site_term_description') ;
+  var modal = $(this);
+  modal.find('.modal-title').text(title);
+  modal.find('.modal-body #site_term_id').val(site_term_id);
+  modal.find('.modal-body #site_term_slug').val(site_term_slug);
+  modal.find('.modal-body #site_term_name').val(site_term_name);
+  modal.find('.modal-body #site_term_description').val(site_term_description);
+  })
+  });
+</script>
+<!-| =======  ======= |->

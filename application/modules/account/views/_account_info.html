@@ -1,0 +1,77 @@
+<aside class="user-info-wrapper">
+    {my_account_detail}
+    <div class="user-cover" style="background-image: url('{base}/files/unishop/img/account/user-cover-img.jpg');">
+        <div class="info-label" data-toggle="tooltip" title="You currently have 0 Reward Points to spend">
+            <i class="icon-medal">
+            </i>
+            0 points
+        </div>
+    </div>
+    <div class="user-info">
+        <div class="user-avatar">
+            <a class="edit-avatar" data-id="{{table_aktif}_id}" href="#" id="_avatar_remove" style="z-index: 999">
+            </a>
+            <img alt="User" class="my_avatar" src="{base}/files/images/{my_avatar}" style="
+                background-color: #fff;
+                -webkit-filter: drop-shadow(0px 0px 5px rgba(0,0,0,0.05)); 
+                filter: drop-shadow(0px 0px 5px rgba(0,0,0,0.05));
+             "/>
+        </div>
+        <div class="user-data">
+            <h4>
+                <span class="my_name_first" style="display: inline-block;">
+                    {my_name_first}
+                </span>
+                <span class="my_name_last" style="display: inline-block;">
+                    {my_name_last}
+                </span>
+            </h4>
+            <span>
+                Joined {my_created_format}
+            </span>
+        </div>
+    </div>
+    {/my_account_detail}
+</aside>
+<nav class="list-group list_info">
+    <a class="list-group-item profile" href="{base}/account/profile.html">
+        <i class="icon-head">
+        </i>
+        Profile
+    </a>
+    <a class="list-group-item address" href="{base}/account/address.html">
+        <i class="icon-map">
+        </i>
+        Addresses
+    </a>
+    <a class="list-group-item with-badge order hidden" href="{base}/account/order.html">
+        <i class="icon-bag">
+        </i>
+        Orders
+        <span class="badge badge-primary badge-pill">
+            6
+        </span>
+    </a>
+    <a class="list-group-item with-badge wishlist" href="{base}/account/wishlist.html">
+        <i class="icon-heart">
+        </i>
+        Wishlist
+        <span class="wishlist_badge badge badge-primary badge-pill">
+            {wishlist_badge}
+        </span>
+    </a>
+    <a class="list-group-item with-badge hidden ticket" href="{base}/account/ticket.html">
+        <i class="icon-tag">
+        </i>
+        My Tickets
+        <span class="badge badge-primary badge-pill">
+            4
+        </span>
+    </a>
+</nav>
+<input id="info_active" type="hidden" value="{info_active}"/>
+<script type="text/javascript">
+    info_active = $('#info_active').val();
+    $('.list_info').find('a').removeClass('active');
+    $('.list_info').find('a.'+info_active).addClass('active');
+</script>

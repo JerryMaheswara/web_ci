@@ -1,0 +1,229 @@
+{user_detail}
+<section class="row">
+    <div class="col-sm-12">
+        {breadcrumb}
+    </div>
+    <div class="col-sm-6 col-xs-12">
+        <div class="box box-{skin_box} skin_box">
+            <div class=" box-body">
+                <legend>
+                    <span class="pull-right">
+                        <a class="{is_login} btn btn-xs btn-warning" href="{base}/user/edit/{user_id}">
+                            <i class="fa fa-fw fa-pencil">
+                            </i>
+                            {m_edit}
+                        </a>
+                        <a class="hidden {is_admin} btn btn-xs btn-danger" href="{base}/user/delete/{user_id}" onclick="return confirm('Are you sure..?')">
+                            <i class="fa fa-fw fa-trash">
+                            </i>
+                            {m_delete}
+                        </a>
+                    </span>
+                    {m_user}
+                </legend>
+                <div class="row">
+                    <div>
+                        <div class="clearfix form-group">
+                            <label class="col-sm-4 control-label text-right">
+                                {m_user_name} :
+                            </label>
+                            <div class="col-sm-8">
+                                {user_name_display}
+                            </div>
+                        </div>
+                        <!-- -->
+                        <div class="clearfix form-group">
+                            <label class="col-sm-4 control-label text-right">
+                                {m_email} :
+                            </label>
+                            <div class="col-sm-8">
+                                {user_email}
+                            </div>
+                        </div>
+                        <!-- -->
+                        <div class="clearfix form-group">
+                            <label class="col-sm-4 control-label text-right">
+                                {m_given_name} :
+                            </label>
+                            <div class="col-sm-8">
+                                {user_name_first}
+                            </div>
+                        </div>
+                        <!-- -->
+                        <div class="clearfix form-group">
+                            <label class="col-sm-4 control-label text-right">
+                                {m_family_name} :
+                            </label>
+                            <div class="col-sm-8">
+                                {user_name_last}
+                            </div>
+                        </div>
+                        <!-- -->
+                        <!-- -->
+                        <!-- -->
+                        <div class="clearfix form-group">
+                            <label class="col-sm-4 control-label text-right">
+                                {m_date_of_birth} :
+                            </label>
+                            <div class="col-sm-8">
+                                {user_birthday}
+                            </div>
+                        </div>
+                        <!-- -->
+                        <!-- -->
+                        <div class="clearfix form-group">
+                            <label class="col-sm-4 control-label text-right">
+                                {m_gender} :
+                            </label>
+                            <div class="col-sm-8">
+                                {user_gender}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- -->
+                    <!-- -->
+                    <div class=" ">
+                        <div class="clearfix form-group">
+                            <label class="col-sm-4 control-label text-right">
+                                {m_address} :
+                            </label>
+                            <div class="col-sm-8">
+                                {user_address}
+                                <br/>
+                                Kel. {user_subdistrict} - Kec. {user_district}
+                                <br/>
+                                {user_city_type}
+                                {user_city}
+                                <br/>
+                                {user_state}
+                                - {user_postcode}
+                            </div>
+                        </div>
+                        <!-- -->
+                        <!-- -->
+                        <!-- -->
+                        <!-- -->
+                        <div class="clearfix form-group">
+                            <label class="col-sm-4 control-label text-right">
+                                {m_phone} :
+                            </label>
+                            <div class="col-sm-8">
+                                {user_phone}
+                            </div>
+                        </div>
+                        <!-- -->
+                        <div class="clearfix form-group">
+                            <label class="col-sm-4 control-label text-right">
+                                {m_country} :
+                            </label>
+                            <div class="col-sm-8">
+                                {country_name}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xs-12">
+        <div class="box box-{skin_box} skin_box">
+            <div class=" box-body">
+                <legend>
+                    {m_image}
+                </legend> 
+                <div class="img-recrangle" style="
+                    width: 200px;
+                    height: 200px;
+                    background-image: url('{base}/files/images/{user_avatar_nya}');
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    background-position: 50% 50%;
+                ">
+                </div>
+                <div>
+                    <!-- {user_verification_code} -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- -->
+<!-- -->
+<!-- -->
+<!-- -->
+<div class="box box-{skin_box} skin_box hidden">
+    <div class="form-horizontal">
+        <div class="box-body">
+            <legend>
+                {m_user} :
+                <strong>
+                    {user_name_first} {user_name_last}
+                </strong>
+                ({total_rows} receivers)
+            </legend>
+            <div class="form-group">
+                <div class="col-sm-3 text-right text-bold">
+                    {m_username} :
+                </div>
+                <div class="col-sm-9">
+                    <span class="">
+                        {user_name} ({user_name_first} {user_name_last})
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-3 text-right text-bold">
+                    {m_email} :
+                </div>
+                <div class="col-sm-9">
+                    <span class="">
+                        {user_email}
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-3 text-right text-bold">
+                    {m_given_name} :
+                </div>
+                <div class="col-sm-9">
+                    <span class="">
+                        {user_name_first}
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-3 text-right text-bold">
+                    {m_family_name} :
+                </div>
+                <div class="col-sm-9">
+                    <span class="">
+                        {user_name_last}
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-3 text-right text-bold">
+                    {m_phone} :
+                </div>
+                <div class="col-sm-9">
+                    <span class="">
+                        {user_phone}
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-3 text-right text-bold">
+                    {m_document} :
+                </div>
+                <div class="col-sm-9">
+                    <span class="">
+                        {user_image_nya}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- -->
+</div>
+{/user_detail}

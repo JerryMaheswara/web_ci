@@ -1,0 +1,54 @@
+<div class="box box-{skin_box} skin_box">
+    <div class="box-body">
+        {breadcrumb}
+        <div class="col-sm-6">
+            {{controller}_detail}
+            <legend class="text-center">
+                {m_detail}
+                <span style="text-transform: capitalize;">
+                    {controller}
+                </span>
+            </legend>
+            <div class=" form-horizontal">
+                <div class="clearfix">
+                    <div class="col-sm-4 text-right">
+                        <label>
+                            {m_name}   :
+                        </label>
+                    </div>
+                    <div class="col-sm-8">
+                        {{controller}_name}
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="col-sm-4 text-right">
+                        <label>
+                            {m_description} :
+                        </label>
+                    </div>
+                    <div class="col-sm-8">
+                        {{controller}_description}
+                    </div>
+                </div>
+                <div class="clearfix {_is_allowed}">
+                    <div class="col-sm-4 text-right">
+                        <label>
+                            Action:
+                        </label>
+                    </div>
+                    <div class="col-sm-8">
+                        <a class="btn btn-warning btn-xs" href="{base}/{controller}/edit/{{controller}_id}">
+                            <i class="fa fa-fw fa-pencil">
+                            </i>
+                            Edit
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {/{controller}_detail}
+        </div>
+        <div class="col-sm-6">
+            {{controller}_images}
+        </div>
+    </div>
+</div>

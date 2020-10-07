@@ -1,0 +1,207 @@
+<div class="box box-{skin_box} skin_box">
+    <div class="box-body">
+        {breadcrumb}
+                {{controller}_detail}
+        <form action="" class="form-horizontal row" enctype="multipart/form-data" id="form_customer" method="POST" role="form">
+            <div class="col-sm-6 ">
+                <div>
+                    <legend class="h4">
+                        {m_edit}
+                        <span style="text-transform: capitalize;">
+                            {controller} :
+                        </span>
+                    </legend>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">
+                            {m_name}  :
+                        </label>
+                        <div class="col-sm-8">
+                            <input autofocus="on" class="form-control" id="{controller}_name" name="{controller}_name" placeholder="{m_{controller}_name} " required="required" type="" value="{{controller}_name}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">
+                            {m_description}  :
+                        </label>
+                        <div class="col-sm-8">
+                            <textarea class="form-control vertical" id="{controller}_description" name="{controller}_description" rows="4">
+                                {{controller}_description}
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">
+                            {m_level}  :
+                        </label>
+                        <div class="col-sm-8">
+                            <input id="category_level_before" type="hidden" value="{category_level}">
+                                <select class="form-control" data-category_id="{category_id}" id="category_level" name="category_level">
+                                    <option value="1">
+                                        1
+                                    </option>
+                                    <option value="2">
+                                        2
+                                    </option>
+                                    <option value="3">
+                                        3
+                                    </option>
+                                    <option value="4">
+                                        4
+                                    </option>
+                                </select>
+                            </input>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">
+                            {m_parent}  :
+                        </label>
+                        <div class="col-sm-8">
+                            <select class="form-control" id="category_parent" name="category_parent">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                    <legend class="h4">
+                        Image :
+                    </legend>
+                    <div style="margin-bottom: 10px">
+                        <input name="{controller}_image_before" type="hidden" value="{{controller}_image}"/>
+                        <img id="{controller}_image" src="{base}/files/images/{{controller}_image}" width="128px"/>
+                        <button class="btn btn-danger btn-flat btn-xs {remove_button_display}" data-{controller}_id="{{controller}_id}" id="{controller}_image_remove" style="vertical-align: top" type="button">
+                            <i class="fa fa-fw fa-trash">
+                            </i>
+                            Remove
+                        </button>
+                    </div>
+                    <input accept="image/png" class="form-control" id="{controller}_image_file" name="{controller}_image_file" type="file"/>
+                    <small>
+                        <i>
+                            Allowed Type: *.png,  Dimension : 256 x 256 pixel
+                        </i>
+                    </small>
+                </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <button class="btn btn-success" type="submit">
+                            Submit
+                        </button>
+                        <a class="btn btn-default" href="{base}/{controller}/detail/{{controller}_id}">
+                            Cancel
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+        {/{controller}_detail}
+    </div>
+</div>
+<script type="text/javascript">
+    $('#{controller}_name').on('focus', function(event) {
+        event.preventDefault();
+        $(this).select();
+    });
+    //////////////////////////////////////////////////
+    //////////////////////////////////////////////////
+    //////////////////////////////////////////////////
+    //////////////////////////////////////////////////
+    $('#category_level').on('change', function(event) {
+        event.preventDefault();
+        category_level = $(this).val();
+        category_id = $(this).data('category_id');
+        if (category_level > 1) {
+            category_level = category_level-1;
+            $.ajax({
+                url: '{base}/{controller}/parent/', 
+                type: 'POST', 
+                // dataType: 'json', 
+                data:{
+                    category_id : category_id,
+                    category_level : category_level
+                }
+            })
+            .done(function(ret) {
+                console.log(ret);
+                $('#category_parent option').remove(); 
+                $.each(ret, function(index, val) { 
+                    $("#category_parent").append('<option value="'+val.id+'">'+val.text+'</option>');
+                });
+            })
+            .fail(function(error) {
+                console.log(error.responseText);
+            });
+        }else{
+            $('#category_parent option').remove(); 
+        }
+        
+    });
+    //////////////////////////////////////////////////
+    var category_level_before = $('#category_level_before').val();
+    $('#category_level').val(category_level_before).trigger('change');
+    //////////////////////////////////////////////////
+    ///////////////////
+    function readURL(input, img_id_or_class) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                // console.log(e);
+                $(img_id_or_class).attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    ///////////////////
+    ///////////////////
+    $("#{controller}_image_file").change(function() {
+        var _URL = window.URL || window.webkitURL;
+        var image, file;
+        var el = this ;
+        $('#{controller}_image_remove').removeClass('hidden').show(); 
+        if ((file = el.files[0])) {
+            image = new Image();
+            image.src = _URL.createObjectURL(file);
+            image.onload = function() {
+                if (this.width == 256 && this.height == 256 ) {
+                    readURL(el, '#{controller}_image');
+                    // readURL(el, $('.preview_card_image').find('img'));
+                }else{
+                    alert('Error:\n\nThe image dimension must 256 x 256 pixels.');
+                    $("#{controller}_image_file").val(''); 
+                    $('#{controller}_image').attr('src', '{base}/files/images/default-category.png');
+                    $('.preview_card_image').find('img').attr('src', '{base}/files/images/default-category.png');
+                    $('#{controller}_image_remove').removeClass('hidden').hide(); 
+                }
+            }
+        }
+    });
+    ///////////////////
+    ////////////////////
+    $('#{controller}_image_remove').on('click', function(event) {
+        event.preventDefault();
+        if (confirm('Are you sure?')) {
+            $(this).hide(); 
+            var _id = $(this).data('{controller}_id');
+            $.ajax({
+                url: '{base}/{controller}/remove_image/' + _id,
+                data: {_id: _id},
+            })
+            .done(function(res) {
+                // console.log(res);
+                $('#{controller}_image_remove').hide(); 
+                $('#{controller}_image').attr('src', '{base}/files/images/default-category.png');
+                $('.preview_card_image').find('img').attr('src', '{base}/files/images/default-category.png');
+            })
+            .fail(function(error) {
+                console.log(error.responseText);
+            });
+        }
+    });
+    ////////////////////
+    ////////////////////
+    ////////////////////
+</script>

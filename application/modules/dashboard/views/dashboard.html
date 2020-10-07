@@ -1,0 +1,59 @@
+<div class="box box-{skin_box} skin_box">
+    <div class="box-body">
+        {breadcrumb}
+        <div class="{is_admin} form-group">
+            <a class="{is_admin} btn btn-primary" href="{base}/dashboard/module">
+                <i class="fa fa-fw fa-puzzle-piece">
+                </i>
+                Module
+            </a>
+            <a class="{is_admin} btn btn-danger" href="{base}/language/site_term">
+                <i class="fa fa-fw fa-flag">
+                </i>
+                Site Term
+            </a>
+            <a class="{is_admin} btn btn-success" href="{base}/user">
+                <i class="fa fa-fw fa-flag">
+                </i>
+                User
+            </a>
+            <a class="{is_admin} btn btn-warning" href="{base}/user/role_label">
+                <i class="fa fa-fw fa-flag">
+                </i>
+                Role Label
+            </a>
+        </div>
+        <div class="row">
+            {modules}
+            <div class="col-md-4 col-sm-6 col-xs-12 {module_display}">
+                <!-- small box -->
+                <div class="small-box bg-primary bg-{module_color} bg-{module_color}-gradient- " style="background-color:{module_warna};">
+                    <div class="inner">
+                        <h3 class="{is_has_children}">
+                            {has_children}
+                        </h3>
+                        <h3 class="{is_has_no_children}">
+                            {entity_count}
+                        </h3>
+                        <p>
+                            {module_name}
+                        </p>
+                    </div>
+                    <div class="icon">
+                        <a href="{base}/{module_url}" style="color: rgba(0,0,0,0.15);">
+                            <i class="fa fa-{module_icon}">
+                            </i>
+                        </a>
+                    </div>
+                    <a class="small-box-footer" href="{base}/{module_url}">
+                        <!-- {m_detail} -->
+                        {m_detail}
+                        <i class="fa fa-arrow-circle-right">
+                        </i>
+                    </a>
+                </div>
+            </div>
+            {/modules}
+        </div>
+    </div>
+</div>

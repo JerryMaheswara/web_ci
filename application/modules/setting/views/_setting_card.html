@@ -1,0 +1,709 @@
+{card_detail}
+<div class="box box-{skin_box} skin_box">
+    <div class="box-body">
+        <legend class="">
+            {m_setting} : {m_card}
+        </legend>
+        <form action="" class="form-horizontal row" enctype="multipart/form-data" id="form_organisation" method="POST" role="form">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label>
+                            Organisation:
+                        </label>
+                    </div>
+                    <div class="col-sm-8">
+                        <a href="{base}/organisation/detail/{organisation_id}">
+                            {organisation_name}
+                        </a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label>
+                            Logo :
+                        </label>
+                    </div>
+                    <div class="col-sm-8">
+                        <div style="margin-bottom: 10px ">
+                            <span style="
+                                    -webkit-filter: drop-shadow(0px 0px 2px rgba(000,000,000,.1)); 
+                                    filter: drop-shadow(0px 0px 2px rgba(000,000,000,.1)); ">
+                                <img id="organisation_logo" src="{base}/files/images/organisation/{organisation_logo}.png" width="128px"/>
+                            </span>
+                            <button class="hidden btn btn-xs btn-flat btn-danger {remove_button_logo}" data-organisation_id="{organisation_id}" id="organisation_logo_remove" style="vertical-align: bottom;" type="button">
+                                <i class="fa fa-fw fa-trash">
+                                </i>
+                                Remove
+                            </button>
+                        </div>
+                        <div class="hidden">
+                            <input accept="image/png" class="form-control" id="organisation_logo_file" name="organisation_logo" placeholder="" type="file" value="{organisation_logo}"/>
+                            <input id="organisation_logo_before" type="hidden" value="{organisation_logo}"/>
+                            <small>
+                                <i>
+                                    Type: *.png, Dimension : 256 x 256 pixel
+                                </i>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label class="control-label">
+                            Sample Background :
+                        </label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input id="card_background_before" name="card_background_before" type="hidden" value="{card_background}"/>
+                        <select class="form-control" id="card_background" name="card_background">
+                            <option value="">
+                                -- Select --
+                            </option>
+                            <option value="sample-card-1">
+                                Sample 1
+                            </option>
+                            <option value="sample-card-2">
+                                Sample 2
+                            </option>
+                            <option value="sample-card-3">
+                                Sample 3
+                            </option>
+                            <option value="sample-card-4">
+                                Sample 4
+                            </option>
+                            <option value="sample-card-5">
+                                Sample 5
+                            </option>
+                            <option value="sample-card-6">
+                                Sample 6
+                            </option>
+                            <option value="sample-card-7">
+                                Sample 7
+                            </option>
+                            <option value="sample-card-8">
+                                Sample 8
+                            </option>
+                            <option value="sample-card-9">
+                                Sample 9
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label class="control-label">
+                            Custom Background:
+                        </label>
+                    </div>
+                    <div class="col-sm-8 text-left ">
+                        <input accept="image/png" class="form-control" id="card_background_file" name="card_background_file" placeholder="" type="file" value="{organisation_card}"/>
+                        <small>
+                            <i>
+                                Type: *.png, Dimension : 540 x 350 pixel
+                            </i>
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label class="control-label">
+                            Sample Template :
+                        </label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input id="template_id_before" type="hidden" value="{template_id}"/>
+                        <select class="form-control" id="template_id" name="template_id">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <label>
+                            Custom Template :
+                        </label>
+                    </div>
+                    {template_detail} 
+                        {template_content}
+                    <div class="col-sm-4">
+                        <legend class="h4">
+                            Logo:
+                        </legend>
+                        <div class="logo_align row form-group">
+                            <div class="col-sm-4">
+                                <label class="control-label">
+                                    Align:
+                                </label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input id="logo_align_before" type="hidden" value="{logo_align}"/>
+                                <select class="form-control" data-label="logo" id="logo_align" name="logo_align">
+                                    <option value="left">
+                                        Left
+                                    </option>
+                                    <option value="right">
+                                        Right
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="logo_width row form-group">
+                            <div class="col-sm-4">
+                                <label class="control-label">
+                                    Width:
+                                </label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input class="form-control" data--value="10" data-label="logo" id="logo_width" max="100" min="0" name="logo_width" placeholder="" type="number" value="{logo_width}"/>
+                            </div>
+                        </div>
+                        <div class="logo_top row form-group">
+                            <div class="col-sm-4">
+                                <label>
+                                    Top:
+                                </label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input class="form-control" data--value="10" data-label="logo" id="logo_top" max="100" min="0" name="logo_top" placeholder="" type="number" value="{logo_top}"/>
+                            </div>
+                        </div>
+                        <div class="logo_left_right row form-group">
+                            <div class="col-sm-4">
+                                <label>
+                                    Left:
+                                </label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input class="form-control" data--value="10" data-label="logo" id="logo_left_right" max="100" min="0" name="logo_left_right" placeholder="" type="number" value="{logo_left_right}"/>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- -->
+                    <div class="col-sm-4">
+                        <legend class="h4">
+                            Photo:
+                        </legend>
+                        <div class="photo_align row form-group">
+                            <div class="col-sm-4">
+                                <label>
+                                    Align:
+                                </label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input id="photo_align_before" type="hidden" value="{photo_align}"/>
+                                <select class="form-control" data-label="photo" id="photo_align" name="photo_align">
+                                    <option value="right">
+                                        Right
+                                    </option>
+                                    <option value="left">
+                                        Left
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="photo_width row form-group">
+                            <div class="col-sm-4">
+                                <label>
+                                    Width:
+                                </label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input class="form-control" data--value="25" data-label="photo" id="photo_width" max="100" min="0" name="photo_width" placeholder="" type="number" value="{photo_width}"/>
+                            </div>
+                        </div>
+                        <div class="photo_top row form-group">
+                            <div class="col-sm-4">
+                                <label>
+                                    Top:
+                                </label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input class="form-control" data--value="10" data-label="photo" id="photo_top" max="100" min="0" name="photo_top" placeholder="" type="number" value="{photo_top}"/>
+                            </div>
+                        </div>
+                        <div class="photo_left_right row form-group">
+                            <div class="col-sm-4">
+                                <label>
+                                    Right:
+                                </label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input class="form-control" data--value="10" data-label="photo" id="photo_left_right" max="100" min="0" name="photo_left_right" placeholder="" type="number" value="{photo_left_right}"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <legend class="h4">
+                            Info:
+                        </legend>
+                        <div class="info_align row form-group">
+                            <div class="col-sm-4">
+                                <label>
+                                    Align:
+                                </label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input id="info_align_before" type="hidden" value="{info_align}"/>
+                                <select class="form-control" data-label="info" id="info_align" name="info_align">
+                                    <option value="left">
+                                        Left
+                                    </option>
+                                    <option value="center">
+                                        Center
+                                    </option>
+                                    <option value="right">
+                                        Right
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="info_width row form-group">
+                            <div class="col-sm-4">
+                                <label>
+                                    Width:
+                                </label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input class="form-control" data--value="100" data-label="info" id="info_width" name="info_width" placeholder="" type="number" value="{info_width}"/>
+                            </div>
+                        </div>
+                        <div class="info_top row form-group">
+                            <div class="col-sm-4">
+                                <label>
+                                    Top:
+                                </label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input class="form-control" data--value="60" data-label="info" id="info_top" max="100" min="0" name="info_top" placeholder="" type="number" value="{info_top}"/>
+                            </div>
+                        </div>
+                        <div class="info_left_right row form-group">
+                            <div class="col-sm-4">
+                                <label>
+                                    Left:
+                                </label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input class="form-control" data--value="10" data-label="info" id="info_left_right" max="100" min="0" name="info_left_right" placeholder="" type="number" value="{info_left_right}"/>
+                            </div>
+                        </div>
+                    </div>
+                    {/template_content}
+                        {/template_detail}
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <button class="btn btn-success" type="submit">
+                            Submit
+                        </button>
+                        <a class="btn btn-danger" href="{base}/organisation/detail/{organisation_id}">
+                            Cancel
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="box-footer">
+        <center>
+            {template_detail}
+            <div style="min-width:300px; max-width: 460px; ">
+                <div class="" style=" border-radius: 13px; color:#222; padding: 0 22px;">
+                    <label class="text-center">
+                        Card Preview
+                    </label>
+                    <div class="" style="width:100%;position: relative;">
+                        {template_content}
+                        <span class=" text-{logo_align}" style="width:100%;position: ">
+                            <div class="preview_card_logo" style="position: absolute; 
+                                                    top: {logo_top}%;  
+                                                    {logo_align} : {logo_left_right}%;
+                                                    width: {logo_width}%; 
+                                                    /*-webkit-filter: drop-shadow(0px 0px 2px rgba(255,255,255,.8)); */
+                                                    /*filter: drop-shadow(0px 0px 2px rgba(255,255,255,.8));*/
+                                                    ">
+                                <img src="{base}/files/images/organisation/{organisation_logo}.png" style="border: 0px solid #eee; width: 100% !important;"/>
+                            </div>
+                        </span>
+                        <span class=" text-{photo_align}" style="width:100%;position: ">
+                            <div class="preview_card_photo" style="position: absolute; 
+                                                    top: {photo_top}%;  
+                                                    {photo_align} :{photo_left_right}%;
+                                                    width: {photo_width}%; ">
+                                <img src="{base}/files/images/default-avatar.png" style="border: 1px solid #eee; width: 100% !important;"/>
+                            </div>
+                        </span>
+                        <span class="text-{info_align}" style="width:100%;position: ">
+                            <span class="preview_card_info " style="position: absolute; 
+                                                    top: {info_top}%;  
+                                                    {info_align} :{info_left_right}%;
+                                                    width: {info_width}%;
+                                                    color:#fff;
+                                                    text-transform: uppercase;
+                                                    font-weight: bold ">
+                                <div class="min320">
+                                    <div style="font-size: 10pt;">
+                                        1234 5678 9102 3456
+                                    </div>
+                                    <div style="font-size: 12pt; white-space: nowrap;">
+                                        The name of member
+                                    </div>
+                                    <div style="font-size: 10pt;">
+                                        Expired : 2018-10-30
+                                    </div>
+                                </div>
+                                <div class="min480">
+                                    <div style="font-size: 16pt">
+                                        1234 5678 9102 3456
+                                    </div>
+                                    <div style="font-size: 20pt">
+                                        The name of member
+                                    </div>
+                                    <div style="font-size: 15pt">
+                                        Expired : 2018-10-30
+                                    </div>
+                                </div>
+                            </span>
+                        </span>
+                        <img id="preview_card_bg" src="{base}/files/images/card/{card_background}.png" style="border-radius: 10px;" width="100%"/>
+                        {/template_content}
+                    </div>
+                </div>
+            </div>
+            {/template_detail}
+        </center>
+    </div>
+</div>
+{/card_detail}
+<!-- -->
+<style type="text/css">
+    @media screen and (min-width: 430px) {
+        .min320 {
+           display: none;
+        }
+        .min480{
+            text-shadow: 0px 0px 6px #000;
+        }
+    }
+    @media screen and (max-width: 429px) {
+        .min320 {
+            text-shadow: 0px 0px 6px #000;
+        }
+        .min480{
+           display: none;
+        }
+    }
+</style>
+<!-- -->
+<script type="text/javascript">
+    ///////////////////
+    $('#logo_align').select2();
+    $('#photo_align').select2();
+    $('#info_align').select2();
+    ///////////////////
+    $('#card_background').select2();
+    var card_background_before = $('#card_background_before').val();
+    $('#card_background').val(card_background_before).change();
+
+
+
+    $('#template_id').on('change', function(event) {
+        event.preventDefault();
+        template_id = ($(this).val() != null)?$(this).val() : 1;
+        $.ajax({
+            url: "{base}/template/template_ajax/"+template_id,
+        })
+        .done(function(res) {
+            // console.log(res[0].template_content);
+            template_content = [$.parseJSON(res[0].template_content)];
+            // console.log(template_content);
+
+            $.each(template_content, function(index, val) {  
+
+                if (val.logo_align == 'left') {
+                    $('.preview_card_logo').css('left', val.logo_left_right +'%'); 
+                    $('.preview_card_logo').css('right', ''); 
+                    $('.preview_card_logo').css('top', val.logo_top +'%'); 
+                    $('.preview_card_logo').css('width', val.logo_width +'%'); 
+
+                    $('#logo_align').val('left').change();
+                    $('#logo_top').val(val.logo_top).change();
+                    $('#logo_width').val(val.logo_width).change();
+                    $('#logo_left_right').val(val.logo_left_right).change();
+                }else{
+                    $('.preview_card_logo').css('left', ''); 
+                    $('.preview_card_logo').css('right', val.logo_left_right +'%'); 
+                    $('.preview_card_logo').css('top', val.logo_top +'%'); 
+                    $('.preview_card_logo').css('width', val.logo_width +'%'); 
+
+                    $('#logo_align').val('right').change();
+                    $('#logo_top').val(val.logo_top).change();
+                    $('#logo_width').val(val.logo_width).change();
+                    $('#logo_left_right').val(val.logo_left_right).change();
+                }
+                //
+                if (val.photo_align == 'left') {
+                    $('.preview_card_photo').css('left', val.photo_left_right +'%'); 
+                    $('.preview_card_photo').css('right', ''); 
+                    $('.preview_card_photo').css('top', val.photo_top +'%'); 
+                    $('.preview_card_photo').css('width', val.photo_width +'%'); 
+
+                    $('#photo_align').val('left').change();
+                    $('#photo_top').val(val.photo_top).change();
+                    $('#photo_width').val(val.photo_width).change();
+                    $('#photo_left_right').val(val.photo_left_right).change();
+                }else{
+                    $('.preview_card_photo').css('left', ''); 
+                    $('.preview_card_photo').css('right', val.photo_left_right +'%'); 
+                    $('.preview_card_photo').css('top', val.photo_top +'%'); 
+                    $('.preview_card_photo').css('width', val.photo_width +'%'); 
+
+                    $('#photo_align').val('right').change();
+                    $('#photo_top').val(val.photo_top).change();
+                    $('#photo_width').val(val.photo_width).change();
+                    $('#photo_left_right').val(val.photo_left_right).change();
+                }
+
+                //
+                if (val.info_align == 'left') {
+                    $('.preview_card_info').css('left', val.info_left_right +'%'); 
+                    $('.preview_card_info').css('right', ''); 
+                    $('.preview_card_info').css('top', val.info_top +'%'); 
+                    $('.preview_card_info').css('width', val.info_width +'%'); 
+                    $('.preview_card_info').parent()
+                    .removeClass('text-left')
+                    .removeClass('text-right')
+                    .removeClass('text-center')
+                    .addClass('text-left'); 
+
+                    $('#info_align').val('left').change();
+                    $('#info_top').val(val.info_top).change();
+                    $('#info_width').val(val.info_width).change();
+                    $('#info_left_right').val(val.info_left_right).change();
+                }
+                if (val.info_align == 'right') {
+                    $('.preview_card_info').css('left', ''); 
+                    $('.preview_card_info').css('right', val.info_left_right +'%'); 
+                    $('.preview_card_info').css('top', val.info_top +'%'); 
+                    $('.preview_card_info').css('width', val.info_width +'%'); 
+                    $('.preview_card_info').parent()
+                    .removeClass('text-left')
+                    .removeClass('text-right')
+                    .removeClass('text-center')
+                    .addClass('text-right' ); 
+
+
+                    $('#info_align').val('right').change();
+                    $('#info_top').val(val.info_top).change();
+                    $('#info_width').val(val.info_width).change();
+                    $('#info_left_right').val(val.info_left_right).change();
+                }
+
+                if (val.info_align == 'center') {
+                    $('.preview_card_info').css('right','') ; 
+                    $('.preview_card_info').css('left','' ); 
+                    $('.preview_card_info').css('top', val.info_top +'%'); 
+                    $('.preview_card_info').css('width', val.info_width +'%'); 
+                    $('.preview_card_info').parent()
+                    .removeClass('text-left')
+                    .removeClass('text-right')
+                    .removeClass('text-center')
+                    .addClass('text-center'); 
+
+                    $('#info_align').val('center').change();
+                    $('#info_top').val(val.info_top).change();
+                    $('#info_width').val(val.info_width).change();
+                    $('#info_left_right').val('').change();
+                }
+            });
+        })
+        .fail(function(error) {
+            console.log(error.responseText);
+        });
+    });
+    ////////////////////
+
+    var template = $.ajax({
+        type: "GET",
+        url: "{base}/template/template_ajax",
+        dataType: "json",
+        async: false,
+        cache: true
+    }).responseJSON;
+    // console.log(template);
+    var template_id_before = $('#template_id_before').val();
+    $('#template_id').select2({
+        width: "100%",
+        multiple: false,
+        data: template,
+        allowClear: true,
+        placeholder: 'Template',
+    }).val(template_id_before).trigger('change') ;
+    ////////////////////
+
+    // var organisation_card_template_before = $('#organisation_card_template').val() ; 
+    // $('#template_id').val(organisation_card_template_before).trigger('change');
+    ///////////////////
+    ///////////////////
+    ///////////////////
+    ///////////////////
+    ///////////////////
+    $('#card_background').on('change', function(event) {
+        event.preventDefault();
+        var _card = $(this).val();
+        if (_card!='') {
+            $('#preview_card_bg').attr('src', '{base}/files/images/card/'+_card+'.png');
+        }else{
+            $('#preview_card_bg').attr('src', '{base}/files/images/default-card.png');
+
+        }
+    });
+    ///////////////////
+    function readURL(input, img_id_or_class) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                // console.log(e);
+                $(img_id_or_class).attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#card_background_file").change(function() {
+        var _URL = window.URL || window.webkitURL;
+        var image, file;
+        var el = this ;
+        if ((file = el.files[0])) {
+            image = new Image();
+            image.src = _URL.createObjectURL(file);
+            image.onload = function() {
+                if (this.width == 540 &&  this.height == 350 ) {
+                    readURL(el, '#preview_card_bg');
+                }else{
+                    alert('Error:\n\The card dimension must 540 x 350 pixels.');
+                    $("#card_background_file").val('');
+
+                }
+            }
+            console.log(image);
+        }
+    });
+    ///////////////////
+
+    $("#organisation_logo_file").change(function() {
+        var _URL = window.URL || window.webkitURL;
+        var image, file;
+        var el = this ;
+        $('#organisation_logo_remove').removeClass('hidden').show(); 
+        if ((file = el.files[0])) {
+            image = new Image();
+            image.src = _URL.createObjectURL(file);
+            image.onload = function() {
+                if (this.width == 256 && this.height == 256 ) {
+                    readURL(el, '#organisation_logo');
+                    readURL(el, $('.preview_card_logo').find('img'));
+                }else{
+                    alert('Error:\n\nThe logo dimension must 256 x 256 pixels.');
+                    $("#organisation_logo_file").val(''); 
+                    $('#organisation_logo').attr('src', '{base}/files/images/default-logo.png');
+                    $('.preview_card_logo').find('img').attr('src', '{base}/files/images/default-logo.png');
+                    $('#organisation_logo_remove').removeClass('hidden').hide(); 
+                }
+            }
+        }
+    });
+    ///////////////////
+    ////////////////////
+    $('#organisation_logo_remove').on('click', function(event) {
+        event.preventDefault();
+        if (confirm('Are you sure?')) {
+            $(this).hide(); 
+            var _id = $(this).data('organisation_id');
+            $.ajax({
+                url: '{base}/organisation/remove_logo/' + _id,
+                data: {_id: _id},
+            })
+            .done(function(res) {
+                // console.log(res);
+                $('#organisation_logo_remove').hide(); 
+                $('#organisation_logo').attr('src', '{base}/files/images/default-logo.png');
+                $('.preview_card_logo').find('img').attr('src', '{base}/files/images/default-logo.png');
+            })
+            .fail(function(error) {
+                console.log(error.responseText);
+            });
+        }
+    });
+    ////////////////////
+    ////////////////////
+
+    // $('.logo_right, .photo_right, .info_right').hide();
+    $('#logo_align, #photo_align, #info_align').on('change',function(event) {
+        event.preventDefault();
+        var val = $(this).val();
+        var label = $(this).data('label');
+        kanan_kiri(label, val); 
+    }); 
+
+    function kanan_kiri(label, val) {
+        if (val == 'left') {
+            $('.'+label+'_left_right').find('label').html('Left:'); 
+            $('.preview_card_'+label).css('left', '5%');
+            $('.preview_card_'+label).css('right', '');
+            // $('#'+label+'_left_right').val('0');
+        }else{
+            $('.'+label+'_left_right').find('label').html('Right:'); 
+            $('.preview_card_'+label).css('left', '');
+            $('.preview_card_'+label).css('right', '5%');
+            // $('#'+label+'_left_right').val('0');
+        }
+        $('#'+label+'_left_right').val('5');
+        if (val == 'center') {
+            $('.preview_card_'+label).css('left', '');
+            $('.preview_card_'+label).css('right', '');
+            $('#'+label+'_left_right').val('0');
+        } 
+        $('.preview_card_'+label).parent()
+        .removeClass('text-left')
+        .removeClass('text-right')
+        .removeClass('text-center')
+        .addClass('text-'+val);  
+
+
+    }
+    /////////////////////
+    /////////////////////
+    
+    $('#logo_top, #photo_top, #info_top').on('change keyup', function(event) {
+        var top = $(this).val();
+        var label = $(this).data('label');
+        $('.preview_card_'+label).css('top', top+'%');
+    });
+    /////////////////////
+    
+    $('#logo_left_right, #photo_left_right, #info_left_right').on('change keyup', function(event) {
+        var left_right = $(this).val();
+        var label = $(this).data('label');
+        if ($('#'+label+'_align').val() == 'left') {
+            $('.preview_card_'+label).css('left', left_right+'%');
+            $('.preview_card_'+label).css('right', '');
+        }else{
+            $('.preview_card_'+label).css('left', '');
+            $('.preview_card_'+label).css('right', left_right+'%');
+        }
+    });
+    /////////////////////
+    
+    $('#logo_width, #photo_width, #info_width').on('change keyup', function(event) {
+        var width = $(this).val();
+        var label = $(this).data('label');
+        $('.preview_card_'+label).css('width', width+'%');
+    });
+    /////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+</script>

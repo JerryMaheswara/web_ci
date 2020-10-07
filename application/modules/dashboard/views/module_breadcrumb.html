@@ -1,0 +1,35 @@
+{module_detail}
+<legend>
+    {module_name}
+</legend>
+<div>
+    <span class="pull-right" style="margin-bottom: 1px">
+        <div aria-label="..." class="btn-group" role="group">
+            <a class=" btn btn-default btn-sm-" href="//{current_uri}?view=list">
+                <i class="fa fa-fw fa-list">
+                </i>
+            </a>
+            <a class=" btn btn-default btn-sm-" href="//{current_uri}?view=grid">
+                <i class="fa fa-fw fa-th-large">
+                </i>
+            </a>
+        </div>
+    </span>
+    <ol class="breadcrumb ">
+        <li>
+            <a href="{base}/dashboard">
+                <i class="fa fa-fw fa-dashboard">
+                </i>
+                {m_dashboard}
+            </a>
+        </li>
+        {breadcrumb}
+        <li>
+            <a href="{base}/{breadcrumb_url}">
+                {breadcrumb_name}
+            </a>
+        </li>
+        {/breadcrumb}
+    </ol>
+</div>
+{/module_detail}

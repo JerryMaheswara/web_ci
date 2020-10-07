@@ -1,0 +1,64 @@
+<div id="review_data"></div>
+<div id="review_post">{review_post}</div>
+<!-- Review--> 
+<script type="text/javascript">
+    // /////////////////////
+    // /////////////////////
+    $('#form_review_submit').on('click', function(event) {
+        event.preventDefault();
+        if ($('#form_review').find('#review_name').val() != '' && 
+            $('#form_review').find('#review_description').val() != '') {
+
+            var data = $('#form_review').serialize();
+            data += '&item_id={item_id}&action=add';
+                // console.log(data);
+            $.ajax({
+                url: '{base}/{controller}/review_ajax',
+                type: 'POST',
+                data: data,
+            })
+            .done(function(res) {
+                console.log(res);
+                $('#review_data').html(res.review_data);
+                $('.review_count').html(res.review_count);
+                $('#form_review')[0].reset();
+                $('html, body').animate({
+                    scrollTop: $('.tab-content').offset().top-150
+                }, 500);
+                $('#review_post').html('\
+                    <h5 class="mb-20 padding-top-1x text-center">\
+                    Thanks for give us a review. This is very valuable...!\
+                    </h5>\
+                ');
+            })
+            .fail(function(error) {
+                console.log(error.responseText);
+            });
+
+
+        }
+
+        
+    });
+    // /////////////////////
+    // /////////////////////
+    $.ajax({
+        url: '{base}/{controller}/review_ajax',
+        type: 'POST',
+        data: {
+            item_id : '{item_id}',
+            limit: 5,
+            offset:0
+        },
+    })
+    .done(function(res) {
+        // console.log(res);
+        $('#review_data').html(res.review_data);
+    })
+    .fail(function(error) {
+        console.log(error.responseText);
+    });
+    
+    // /////////////////////
+    // /////////////////////
+</script>

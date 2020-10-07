@@ -1,0 +1,147 @@
+<link href="{base}/files/bower_components/lightbox2/dist/css/lightbox.min.css" rel="stylesheet" />
+<script src="{base}/files/bower_components/lightbox2/dist/js/lightbox.min.js"></script>
+
+
+<!-- <link  href="{base}/files/bower_components/fancybox/dist/jquery.fancybox.min.css" rel="stylesheet"> -->
+<!-- <script src="{base}/files/bower_components/fancybox/dist/jquery.fancybox.min.js"></script> -->
+
+
+<div class="col-sm-12 text-center" style="margin-bottom: 20px">
+  <input type="hidden" id="entity_table" value="{entity_table}">
+  <input type="hidden" id="entity_id" value="{entity_id}">
+  {image_of}
+ 
+
+  <div class="col-sm-12 hidden destroy" style="margin:10px 0; padding:0 auto;">
+    <div>
+      
+      <a data-fancybox-="gallery" data-lightbox="gallery" href="{base}/files/images/{image_path}/{image_filename}.{image_ext}">
+        <img src="{base}/files/images/{image_path}/thumbnail/{image_filename}_256.{image_ext}">
+      </a>
+    </div>
+
+    <div class="text-center bg-info- " style="width: 100%" >
+      <button class="copy_image btn btn-xs btn-primary" data-url="{base}/files/images/{image_path}/{image_filename}.{image_ext}" title="Copy Image URL">
+        <i class="fa fa-copy">
+        </i>
+      </button>
+      <a class="preview_image btn btn-success btn-xs" href="{base}/files/images/{image_path}/thumbnail/{image_filename_large}" target="_blank" title="Preview">
+        <i class="fa fa-anchor">
+        </i>
+      </a>
+      <button class="btn btn-xs btn-danger {_is_allowed} delete_image" data-image_ext="{image_ext}" data-image_filename="{image_filename}" data-image_id="{image_id}" data-image_path="{image_path}" title="Delete">
+        <i class="fa fa-times">
+        </i>
+      </button>
+    </div>
+
+  </div>
+
+  <div class=" " style="width:128px; height: 128px; margin: 10px 0; display: inline-block;">
+    <div class=" ">
+      <a href="{base}/files/images/{image_path}/{image_filename}.{image_ext}" data-lightbox="image-1" target="_blank">
+      <div class="" style=" 
+      height: 128px;
+      background-image:url('{base}/files/images/{image_path}/thumbnail/{image_filename}_256.{image_ext}');
+      background-size: cover ;
+      background-repeat: no-repeat;
+      background-position: center center ;
+      " title="{image_width} x {image_height}">
+      </div>
+      </a>
+      <div class="text-center bg-info- {_is_allowed} " style="padding: 1px 0 2px ;">
+        <button class="copy_image btn btn-xs btn-primary" data-url="{base}/files/images/{image_path}/{image_filename}.{image_ext}" title="Copy Image URL">
+          <i class="fa fa-copy">
+          </i>
+        </button>
+        <a class="preview_image btn btn-success btn-xs" href="{base}/files/images/{image_path}/{image_filename}.{image_ext}" target="_blank" title="Preview">
+          <i class="fa fa-anchor">
+          </i>
+        </a>
+        <button class="btn btn-xs btn-danger delete_image" data-image_ext="{image_ext}" data-image_filename="{image_filename}" data-image_id="{image_id}" data-image_path="{image_path}" title="Delete">
+          <i class="fa fa-times">
+          </i>
+        </button>
+      </div>
+    </div>
+  </div>
+  {/image_of}
+</div>
+<script>
+    lightbox.option({
+      'resizeDuration': 000,
+      'wrapAround': true, 
+    })
+</script>
+
+<script type="text/javascript">
+  // $(document).ready(function() {
+    ///////////////////////////////////////////////////////////////////////////
+    $('.copy_image, .preview_image, .delete_image').tooltip();
+    $('.delete_image').each(function(index, el) {
+      $(this).click(function(event) {
+        if (confirm('Are you sure..?')) {
+          image_id = $(this).data('image_id');
+          image_filename = $(this).data('image_filename');
+          image_path = $(this).data('image_path');
+          image_ext = $(this).data('image_ext');
+          $.ajax({
+            url: '{base}/image/delete',
+            type: 'POST',
+            data: {
+              image_id: image_id,
+              image_filename:image_filename,
+              image_path:image_path,
+              image_ext:image_ext,
+            },
+          })
+          .done(function(data) {
+            // console.log(data);
+            refresh_image();
+          })
+          .fail(function() {
+            console.log("error");
+          });
+        }
+
+        
+      });
+    });
+ 
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+    $('.copy_image').each(function(index, el) {
+      $(this).on('click', function(event) {
+        event.preventDefault();
+        var url = $(this).data('url');
+        copyText(url);
+      });    
+    });
+    ///////////////////////////////////////////////////////////////////////////
+    function copyText(text) {
+      function selectElementText(element) {
+        if (document.selection) {
+          var range = document.body.createTextRange();
+          range.moveToElementText(element);
+          range.select();
+        } else if (window.getSelection) {
+          var range = document.createRange();
+          range.selectNode(element);
+          window.getSelection().removeAllRanges();
+          window.getSelection().addRange(range);
+        }
+      }
+      var element = document.createElement('DIV');
+      element.textContent = text;
+      document.body.appendChild(element);
+      selectElementText(element);
+      document.execCommand('copy');
+      element.remove();
+    }
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+  // });
+
+
+
+</script>

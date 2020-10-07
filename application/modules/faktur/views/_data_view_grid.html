@@ -1,0 +1,60 @@
+{{controller}_all}
+<div class="col-lg-4 col-sm-6 col-md-6 col-xs-12" style="margin-bottom: 20px;">
+    <div class="panel panel-{skin_box} skin_box">
+        <div class="panel-body">
+            <a href="{base}/{controller}/detail/{{controller}_id}" class="hidden destroy">
+                <div class="aspek_rasio">
+                    <div class="gambar" style="background-image: url('{{controller}_image}'); background-size: cover; background-position: center center; ">
+                    </div>
+                </div>
+            </a>
+            <b>
+                Nomor Faktur :
+            </b>
+            <a href="{base}/{controller}/detail/{{controller}_id}">
+                {{controller}_nomor}
+            </a>
+            <span class="pull-right">
+                <i class="fa fa-fw fa-{{controller}_icon}  text-{{controller}_color}"></i>
+            </span>
+
+            <div style="min-height: 120px; max-height: 120px; overflow: hidden; ">
+                <b>
+                    Tanggal :
+                </b>
+                {{controller}_tanggal}
+                <br/>
+                <b>
+                    Atas nama :
+                </b>
+                {pemilik_nama}
+                <br/>
+                <b>
+                    Alamat :
+                </b>
+                {pemilik_alamat}
+                <br/>
+                Kel. {pemilik_kelurahan} -
+                Kec. {pemilik_kecamatan}
+            </div>
+            <div>
+                . . .
+                <a class=" " href="{base}/{controller}/detail/{{controller}_id}">
+                    More info
+                </a>
+                <div class="pull-right {_is_allowed}">
+                    <a class="btn btn-sm btn-success {_is_allowed}" href="{base}/{controller}/detail/{{controller}_id}">
+                        {m_detail}
+                    </a>
+                    <a class="btn btn-sm btn-warning {_is_allowed}" href="{base}/{controller}/edit/{{controller}_id}">
+                        {m_edit}
+                    </a>
+                    <a class="btn btn-sm btn-danger {_is_allowed} " href="{base}/{controller}/delete/{{controller}_id}" onclick="return confirm('Are you sure...?')">
+                        {m_delete}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/{controller}_all}

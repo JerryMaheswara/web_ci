@@ -1,0 +1,65 @@
+<aside class="sidebar">
+    <div class="padding-top-2x hidden-lg-up">
+    </div>
+    <!-- Order Summary Widget-->
+    <section class="widget widget-order-summary">
+        <h3 class="widget-title">
+            Order Summary
+        </h3>
+        <table class="table">
+            <tr>
+                <td>
+                    Cart Subtotal:
+                </td>
+                <td class="text-medium">
+                    Rp. <span class="cart_total_format">{cart_total_format}</span>,-
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Shipping:
+                </td>
+                <td class="text-medium">
+                    Rp. <span class="shipping_fee">10.000</span>,-
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Estimated tax:
+                </td>
+                <td class="text-medium">
+                    Rp. <span class="ppn">3.42</span>,,-
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td class="text-lg text-medium">
+                    Rp. <span class="total_jendral">{cart_total_format}</span>,-
+                </td>
+            </tr>
+        </table>
+    </section>
+</aside>
+
+<script type="text/javascript">
+    var nf = new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2
+    });
+    var cart_total_format = {cart_total};
+    var shipping_fee = 10000;
+    var ppn = (cart_total_format+shipping_fee) * 10 /100;
+    var total_jendral = (cart_total_format+shipping_fee) + ppn;
+
+    $('.ppn').html(nf.format(ppn.toFixed(0)).substring(2));
+    $('.total_jendral').html(nf.format(total_jendral.toFixed(0)).substring(2));
+
+    // console.log(nf.format(total_jendral.toFixed(0)));
+    // var str = nf.format(total_jendral.toFixed(0));
+    // var res = str.substring(2);
+    // console.log({cart_total});
+
+</script>

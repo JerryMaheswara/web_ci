@@ -1,0 +1,78 @@
+<div class=" ">
+    {{controller}_all}
+    <div class="col-lg-6 col-sm-12 col-md-6 col-xs-12" style="margin-bottom: 20px;">
+        <div class="panel panel-{skin_box} skin_box ">
+            <div class="panel-body ">
+                <span class="pull-right">
+                    <div class="text-center">
+                        <img height="80px" src="{base}/files/images/foto_anggota/{anggota_foto}.jpg" style="border: 1px solid #eee;" width="80px"/>
+                        <br>
+                            Expired
+                            <br>
+                                {{controller}_tanggal_expired}
+                            </br>
+                        </br>
+                    </div>
+                </span>
+                <div style="min-height: 130px; max-height: 130px; overflow: hidden; ">
+                    <div style=" 
+
+                  white-space: nowrap;
+                  overflow: hidden;
+                  display: inline-block;
+                  text-overflow: ellipsis;
+                  ">
+                        <b>
+                            Nama :
+                        </b>
+                        <a href="{base}/{controller}/profile/{user_id}">
+                            {{controller}_nama}
+                        </a>
+                    </div>
+                    <div>
+                        <b>
+                            No. Anggota :
+                        </b>
+                        {{controller}_nomor}
+                    </div>
+                    <div>
+                        <b>
+                            Tgl. Lahir :
+                        </b>
+                        {{controller}_tanggal_lahir}
+                    </div>
+                    <div>
+                        <b>
+                            Jenis Kelamin :
+                        </b>
+                        {{controller}_jenis_kelamin}
+                    </div>
+                    <div>
+                        <b>
+                            Status :
+                        </b>
+                        {{controller}_status}
+                    </div>
+                </div>
+                <div>
+                    . . .
+                    <a class=" " href="{base}/{controller}/profile/{user_id}">
+                        More info
+                    </a>
+                    <div class="pull-right {_is_allowed}">
+                        <a class="btn btn-sm btn-success {_is_allowed}" href="{base}/{controller}/detail/{{controller}_id}">
+                            {m_detail}
+                        </a>
+                        <a class="btn btn-sm btn-warning {_is_allowed}" href="{base}/{controller}/edit/{{controller}_id}">
+                            {m_edit}
+                        </a>
+                        <a class="btn btn-sm btn-danger {_is_allowed} " href="{base}/{controller}/delete/{{controller}_id}" onclick="return confirm('Are you sure...?')">
+                            {m_delete}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {/{controller}_all}
+</div>

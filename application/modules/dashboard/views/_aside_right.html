@@ -1,0 +1,198 @@
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Create the tabs -->
+    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+        <li class="active">
+            <a data-toggle="tab" href="#control-sidebar-home-tab">
+                <i class="fa fa-home">
+                </i>
+            </a>
+        </li>
+        <li>
+            <a data-toggle="tab" href="#control-sidebar-settings-tab">
+                <i class="fa fa-gears">
+                </i>
+            </a>
+        </li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <!-- Home tab content -->
+        <div class="tab-pane active" id="control-sidebar-home-tab">
+            <h3 class="control-sidebar-heading">
+                Language :
+            </h3>
+            <div class="form-group">
+                <select class="form-control block change_site_language_id" id="change_site_language_id" name="change_site_language_id">
+                </select>
+                <button class="hidden form-control btn btn-flat btn-success btn-block" id="change_submit" type="button">
+                    Go!
+                </button>
+            </div>
+            <div class="form-group">
+                <h3 class="control-sidebar-heading">
+                    Skin :
+                </h3>
+                <div id="skin">
+                </div>
+            </div>
+            <!-- /.control-sidebar-menu -->
+            <!-- /.control-sidebar-menu -->
+        </div>
+        <!-- /.tab-pane -->
+        <!-- Stats tab content -->
+        <div class="tab-pane" id="control-sidebar-stats-tab">
+            Stats Tab Content
+        </div>
+        <!-- /.tab-pane -->
+        <!-- Settings tab content -->
+        <div class="tab-pane" id="control-sidebar-settings-tab">
+            <form method="post">
+                <h3 class="control-sidebar-heading">
+                    General Settings
+                </h3>
+                <!-- /.form-group -->
+            </form>
+        </div>
+        <!-- /.tab-pane -->
+    </div>
+</aside>
+<div class="control-sidebar-bg">
+</div>
+<script type="text/javascript">
+
+  console.log(localStorage.getItem('skin'));
+    // $(document).ready(function() {
+
+      // console.log(sessionStorage);
+
+      /////////////////////////////////////////////////////////////////////////
+      /// SKIN - BEGIN
+      var my_skins = [ 
+        "red",
+        "green",
+        "blue",
+        "yellow",
+        "purple", 
+      ];
+      var skin_box = [ 
+        "danger",
+        "success",
+        "primary",
+        "warning",
+        "info", 
+      ];
+      $.each(my_skins, function(index, val) {
+        // console.log(val);
+        skin_changer_kanan = '<div class="col-sm-6"><div class="row"><button data-skin="'+val+'" class="btn btn-flat btn-block bg-'+val+'">'+val+'</button></div></div>'
+        $('#skin').append(skin_changer_kanan);
+        skin_changer_kiri = '<button data-skin="'+val+'" style="width:30px;margin:0 2px" class="btn_skin_changer btn btn-xs bg-'+val+'">&nbsp;</button>';
+        $('#skin_changer').append(skin_changer_kiri);
+
+        $("[data-skin]").on('click', function (e) {
+            e.preventDefault();
+            skin = $(this).data('skin');
+            change_skin(skin);
+            $.post('{base}/{controller}/change_skin', {skin: skin});
+        });
+
+
+      });
+
+
+      function change_skin(cls) {
+        $.each(my_skins, function (i) {
+            $("body").removeClass('skin-'+my_skins[i]) ;
+            $("tr").removeClass('bg-'+my_skins[i]+'-gradient');
+            $(".skin_box").removeClass('box-'+skin_box[i]);
+            if (cls == my_skins[i]) {
+                $(".skin_box").addClass('box-'+skin_box[i]);
+                $("body").addClass('skin-'+cls); 
+                $("tr.tr_skin").addClass('bg-'+cls+'-gradient'); 
+            }
+        });
+ 
+        store('skin', 'skin-'+cls);
+        return false;
+      }
+
+
+      function store(name, val) {
+        if (typeof (Storage) !== "undefined") {
+          localStorage.setItem(name, val);
+        } else {
+          window.alert('Please use a modern browser to properly view this template!');
+        }
+      }
+      
+      function get(name) {
+        if (typeof (Storage) !== "undefined") {
+          return localStorage.getItem(name);
+        } else {
+          window.alert('Please use a modern browser to properly view this template!');
+        }
+      }
+      function setup() {
+        var tmp = get('skin');
+        if (tmp && $.inArray(tmp, my_skins))
+          change_skin(tmp);
+
+        //Add the change skin listener
+        $("[data-skin]").on('click', function (e) {
+            if($(this).hasClass('knob'))
+                return;
+            e.preventDefault();
+            change_skin($(this).data('skin'));
+        });
+      }
+
+      // setup();
+
+      /// SKIN - END
+      /////////////////////////////////////////////////////////////////////////
+      /////////////////////////////////////////////////////////////////////////
+      /////////////////////////////////////////////////////////////////////////
+      /////////////////////////////////////////////////////////////////////////
+      var language_data = $.ajax({
+        type: "GET",
+        url: "{base}/language/site_language_ajax",
+        // url: "{base}/public/scripts/fa.json?s=s",
+        dataType: "json",
+        async: false,
+        cache: true
+      }).responseJSON;
+
+      $('#change_site_language_id').select2({
+        width: "100%",
+        multiple: false,  
+        data: language_data,
+        allowClear:false,
+        placeholder:'',
+        minimumResultsForSearch: -1,
+        // templateResult: format,
+        // formatResult: format,
+        // templateSelection: format
+      }).val('{current_language}{site_language_id}{/current_language}').trigger('change');
+
+
+      $('#change_submit').click(function() {$('#change_site_language_id').trigger('change')});
+      
+      $('#change_site_language_id').change(function() {
+        var site_language_id = $('#change_site_language_id').val();
+        // location.reload();
+        $('#test_id').val(site_language_id);
+        $.ajax({
+            url: '{base}/language/change',
+            type: 'POST',
+            data: {site_language_id: site_language_id},
+        })
+        .done(function(data) {
+            // console.log(data);
+            location.reload();
+        })
+        .fail(function(error) {
+            console.log(error.responseText);
+        });
+      });
+
+    // });
+</script>

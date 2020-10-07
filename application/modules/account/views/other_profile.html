@@ -1,0 +1,61 @@
+<div class="offcanvas-wrapper">
+      <!-- Page Title-->
+      <div class="page-title">
+        <div class="container">
+          <div class="column">
+            <h1>My Profile</h1>
+          </div>
+          <div class="column">
+            <ul class="breadcrumbs">
+              <li><a href="{base}">Home</a>
+              </li>
+              <li class="separator">&nbsp;</li>
+              <li><a href="{base}/account/profile">Account</a>
+              </li>
+              <li class="separator">&nbsp;</li>
+              <li>My Profile</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Page Content-->
+      <div class="container padding-bottom-3x mb-2">
+        <div class="row">
+          <div class="col-lg-4">
+            {other_account_info}
+          </div>
+          <div class="col-lg-8">
+            <div class="padding-top-2x mt-2 hidden-lg-up"></div>
+            <div class="row">
+              {other_account_detail}
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="account-fn">First Name</label> 
+                  <input disabled class="form-control" type="text" id="account-fn" value="{user_name_first}" required/>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="account-ln">Last Name</label>
+                  <input disabled class="form-control" type="text" id="account-ln" value="Adams" required/>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="account-email">E-mail Address</label>
+                  <input disabled class="form-control" type="email" id="account-email" value="daniel.adams@mail.com" disabled/>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="account-phone">Phone Number</label>
+                  <input disabled class="form-control" type="text" id="account-phone" value="+7(805) 348 95 72" required/>
+                </div>
+              </div>
+              {/other_account_detail}
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Site Footer-->
+    </div>

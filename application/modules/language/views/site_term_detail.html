@@ -1,0 +1,331 @@
+<div class="box box-{skin_box} skin_box">
+  <div class="box-header ">
+    <legend>
+      <a class=" " href="{base}/language/site_term">
+        <i class="fa fa-angle-left fa-fw">
+        </i> 
+      </a>
+      {site_term_detail}
+      {m_site_translate} : {site_term_name} 
+      {/site_term_detail}
+    </legend>
+    <div class="">
+      <a class="btn btn-success" data-action="add" data-site_term_id="{site_term_id}" data-title="{m_add} {m_site_translate}" data-toggle="modal" href="#site_translate_add_edit">
+        <i class="fa fa-plus">
+        </i>
+        {m_add} {m_site_translate}
+      </a>
+    </div> 
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body ">
+    <table cellpadding="0" cellspacing="0" class="display table table-striped table-bordered responsive" id="datatable" width="100%">
+      <thead>
+        <tr class="bg-{skin} tr_skin">
+          <th>
+            #
+          </th>
+          <th>
+            {m_id}
+          </th>
+          <th>
+            {m_language}
+          </th>
+          <th>
+            {m_translation}
+          </th>
+          <th>
+            {m_action}
+          </th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <!-- /.box-body -->
+</div>
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<link rel="stylesheet" type="text/css" href="{base}/files/bower_components/AdminLTE/plugins/datatables/dataTables.bootstrap.css">
+<script src="{base}/files/bower_components/AdminLTE/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="{base}/files/bower_components/AdminLTE/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<!-- ========================================================================== -->
+<script type="text/javascript">
+
+    var table = $('#datatable').DataTable( {  
+        // "bPaginate": false,
+        // "processing": true,
+        // "serverSide": true,
+        "ajax": {
+          "url": "{base}/language/site_translate_ajax/{site_term_id}",
+          "dataSrc": "",
+          // "data" : function ( d ) {
+          //       d.myKey = "myValue";
+          //       // d.custom = $('#myInput').val();
+          //       // etc
+          //   }
+        },
+        "scrollX": true,
+        // "fixedHeader": true,
+        // "scrollY":        "90vh",
+        // "scrollCollapse": false,
+        // "paging":         false,
+        "columns": [
+            { "data": "nomor" }, 
+            { "data": "site_language_id"},
+            { "data": "language_name",
+              render : function(data, type, full, meta){ 
+                return ''+full.language_name + ' - ' + full.language_country;
+              }
+            },
+            { "data": "site_translate_translation"},
+            { "data": null,
+              render : function(data, type, full, meta){ 
+                return '<a class="btn_edit btn btn-warning btn-xs btn-flat " data-toggle="modal" href="#site_translate_add_edit" data-action="add" data-title="{m_edit}"><i class="fa fa-pencil"></i> {m_edit}</a> '+
+                       '<a class="btn_delete btn btn-danger btn-xs btn-flat " data-toggle="modal" href="#site_term_delete" data-language_name="'+full.language_name+'" data-site_translate_id="'+full.site_translate_id+'"><i class="fa fa-trash"></i> {m_delete}</a>'
+              }
+        
+            }, 
+        ],
+        // "columnDefs": [ {
+        //     "targets": -1,
+        //     "data": null,
+        //     "defaultContent": 
+        //     '<a class="btn btn-warning btn-xs btn-flat btn_edit visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"" data-toggle="modal" href="#site_translate_add_edit"><i class="fa fa-pencil"></i> Edit</a> '+
+        //     '<a class="btn btn-danger btn-xs btn-flat btn_delete visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"" data-toggle="modal" href="#site_term_delete"><i class="fa fa-trash"></i> Delete</a>'
+        // } ],
+    });
+    /**/ 
+    ///////////////////////////////////////////////////////////////////////////
+    $('#datatable tbody').on( 'click', '.btn_edit', function () {
+      var btn_edit = $(this);
+      var data = table.row(btn_edit.parents('tr')).data();
+      // console.log(data);
+      var result = Object.keys(data).forEach(function(k) {
+        btn_edit.data(k,data[k]);
+      }); 
+    });
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+</script>
+<!-- ========================================================================== -->
+<div class="modal fade" id="site_term_delete">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+          ×
+        </button>
+        <h4 class="modal-title">
+          Modal title
+        </h4>
+      </div>
+      <div class="modal-body">
+        Are you sure to delete
+        <b>
+          <span id="language_name">
+          </span>
+          translation
+        </b>
+        ?
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal" type="button">
+          No
+        </button>
+        <button class="btn btn-danger" data-dismiss="modal" id="del_submit" type="button">
+          Yes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<div class="modal fade" id="site_translate_add_edit">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+          ×
+        </button>
+        <h4 class="modal-title">
+          {m_edit}
+        </h4>
+      </div>
+      <form class="form-horizontal" id="form_site_translate_add_edit" method="POST">
+        <div class="modal-body">
+          <div class="form-group form-sm">
+            <div class="col-xs-3 text-right">
+              <label class="label-sm">
+                {m_name} :
+              </label>
+            </div>
+            <div class="col-xs-9">
+              <input id="site_term_id" name="site_term_id" type="hidden"/>
+              <input autofocus="" class="form-control input-sm" id="site_translate_translation" name="site_translate_translation" placeholder="" type=""/>
+              <input id="site_translate_id" name="site_translate_id" type="hidden"/>
+              <input id="action" name="action" type="hidden" value="add"/>
+            </div>
+          </div>
+          <!-- -->
+          <div class="form-group form-sm form_language">
+            <div class="col-xs-3 text-right">
+              <label class="label-sm">
+                {m_language} :
+              </label>
+            </div>
+            <div class="col-xs-9">
+              <input id="language_id_before" type="hidden"/>
+              <input id="site_language_id_before" type="hidden"/>
+              <select id="site_language_id" name="site_language_id">
+              </select>
+            </div>
+          </div>
+          <!-- -->
+          <!-- -->
+          <div class="modal-footer">
+            <button class="btn btn-default btn-flat" data-dismiss="modal" type="button">
+              Close
+            </button>
+            <button class="btn btn-primary btn-flat" data-dismiss="modal" id="btn_submit" type="button">
+              Submit
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- ========================================================================== -->
+<script type="text/javascript">
+
+    $('#site_translate_add_edit').on('show.bs.modal', function (event) {
+      // $(this).find('[autofocus]').focus();
+      var button = $(event.relatedTarget);
+      var title = button.data('title');
+      var action = button.data('action');
+      var modal = $(this);
+      data = button.data();
+      // console.log(data);
+      Object.keys(data).forEach(function(k) {
+        modal.find('#'+k).val(data[k]); 
+        modal.find('#'+k+'_before').val(data[k]);
+      }); 
+        // x = modal.find('#language_id').val(); 
+        // console.log(x);
+      modal.find('.modal-title').text(title); 
+      site_language_id_before= $('#site_language_id_before').val();
+      // console.log(site_language_id_before);
+      site_language = $.ajax({
+        type: "GET",
+        url: "{base}/language/site_language_ajax" ,
+        dataType: "json",
+        async: false,
+        cache: true
+      }).responseJSON;
+      // site_language = JSON.stringify(site_language) ;
+      // console.log(site_language);
+      modal.find('#site_language_id').select2({
+        width: "100%",
+        multiple: false,  
+        data: site_language,
+        allowClear:true,
+        placeholder:'',
+
+        // templateResult: format,
+        // formatResult: format,
+        // templateSelection: format
+      });
+
+      modal.find('#site_language_id').val(site_language_id_before).trigger('change') ;
+     
+ 
+
+      // /////////////////// site_language - end
+
+
+    });
+    $('#site_translate_add_edit').on('hidden.bs.modal', function(){
+      $(this).find('form')[0].reset();
+      // $('#site_language_id').select2("val", "");
+    });
+    $('#site_translate_add_edit').on('hide.bs.modal', function(){
+      // $(this).find('form')[0].reset(); 
+      $(this).find('input[id$="_before"]').val('').trigger("change");
+    });
+    $('#site_translate_add_edit').on('shown.bs.modal', function(){
+      $(this).find('[autofocus]').focus();
+    });
+
+    ///////////////////////////////////////////////////////////////////////////
+
+    $('#btn_submit').click(function(event) {
+      var form = $('#form_site_translate_add_edit');
+      fff = form.serialize();
+      // console.log(fff);
+      $.ajax({
+        url: '{base}/language/site_translate_ajax/{site_term_id}',
+        type: 'POST',
+        data: form.serialize(),
+      })
+      .done(function(data) {
+        // console.log('Success');
+        // data = jQuery.parseJSON(data);
+        console.log(data);
+        table.ajax.reload( null, false );
+      })
+      .fail(function(error) { 
+        console.log(error);
+      });
+      
+    });
+    ///////////////////////////////////////////////////////////////////////////
+    $('input').keypress(function(e) {
+        if (e.which == '13') {
+          $('#btn_submit').trigger('click');
+        }
+    });
+
+</script>
+<!-- ========================================================================== -->
+<script type="text/javascript">
+  $('#site_term_delete').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    var title = button.data('title');
+    var site_translate_id = button.data('site_translate_id');
+    var language_name = button.data('language_name');
+    var modal = $(this);
+    modal.find('.modal-title').text('Delete '+language_name +' translation');
+    modal.find('#language_name').html(language_name);
+    modal.find('#del_submit').data('site_translate_id',site_translate_id);
+  });
+  
+  $('#del_submit').click(function(event) {
+    site_translate_id = $(this).data('site_translate_id');
+    // console.log(site_translate_id);
+    $.ajax({
+      url: '{base}/language/site_translate_ajax/{site_term_id}',
+      type : 'POST',
+      data: {
+        action:'delete',
+        site_translate_id:site_translate_id
+      }
+    })
+    .done(function(data) {
+      console.log(data);
+      table.ajax.reload( null, false );
+    })
+    .fail(function(error) {
+      console.log(error);
+    });
+    
+    /* Act on the event */
+  });
+  ///////////////////////////////////////////////////////////////////////////
+</script>
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->

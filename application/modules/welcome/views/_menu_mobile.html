@@ -1,0 +1,59 @@
+<div class="offcanvas-container" id="mobile-menu">
+    {my_account_detail}
+    <a class="account-link" href="{base}/account">
+        <div class="user-ava">
+            <img alt="{user_name_first}" src="{base}/files/images/{my_avatar}"/>
+        </div>
+        <div class="user-info">
+            <h6 class="user-name">
+                {user_name_first}
+            </h6>
+            <span class="text-sm text-white opacity-60">
+                0 Reward points
+            </span>
+        </div>
+    </a>
+    {/my_account_detail}
+    <nav class="offcanvas-menu">
+        <ul class="menu">
+            <li class="has-children active">
+                <span>
+                    <a href="{base}">
+                        <span>
+                            Home
+                        </span>
+                    </a>
+                    <span class="sub-menu-toggle hidden">
+                    </span>
+                </span>
+            </li> 
+            <li class="{menu_active_toko} " style="display: ;">
+                <span>
+                    <a href="{base}/toko.html">
+                        <span>
+                            Pilih Toko
+                        </span>
+                    </a>
+                </span>
+            </li>
+            <li class="has-children active">
+                <span>
+                    <a href="{base}/category">
+                        <span>
+                            Category
+                        </span>
+                    </a> 
+                </span>
+            </li>
+            <li class="has-children active">
+                <span>
+                    <a href="{base}/item">
+                        <span>
+                            Item
+                        </span>
+                    </a> 
+                </span>
+            </li>
+        </ul>
+    </nav>
+</div>

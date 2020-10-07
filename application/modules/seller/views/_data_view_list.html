@@ -1,0 +1,175 @@
+{user_all}
+<tr>
+    <td class="{_is_allowed}">
+        <input class="check_each " data-user_disabled="{user_disabled}" data-user_id="{user_id}" data-user_name="{user_name}" style="cursor: pointer;" type="checkbox"/>
+    </td>
+    <td>
+        {nomor_urut}
+    </td>
+    <td>
+        <a href="{base}/{controller}/profile/{user_id}">
+        {user_name_first}
+        {user_name_last}
+        </a>
+    </td>
+    <td>
+        {user_email}
+    </td> 
+    <td>
+        {user_created_format}
+    </td>
+    <td>
+        {jumlah_item}
+    </td>
+    <td class="text-center {_is_allowed}">
+        <a class="text-{toggle_btn} btn_toggle" data-user_disabled="{user_disabled}" data-user_id="{user_id}" data-user_name="{user_name}"  href="#">
+            <i class="fa fa-fw fa-lg fa-{toggle_icon}">
+            </i>
+        </a>
+        <a class="btn btn-xs btn-flat btn-warning btn_edit" href="{base}/{controller}/edit/{user_id}">
+            <i class="fa fa-fw fa-pencil ">
+            </i>
+        </a>
+        <a class="btn btn-xs btn-flat btn-danger btn_delete " href="{base}/{controller}/delete/{user_id}" onclick="return confirm('Are you sure?')">
+            <i class="fa fa-fw fa-trash ">
+            </i>
+        </a>
+    </td>
+</tr>
+{/user_all}
+<!-- -->
+<script type="text/javascript">
+    /////////////////////////////////////////
+    $('.check_all').on('change', function(event) {
+        // event.preventDefault();
+        if ($(this).is(":checked")) {
+            $('.check_each').prop('checked', true);
+            $('.check_all').prop('checked', true);
+        }else{
+            $('.check_each').prop('checked', false);
+            $('.check_all').prop('checked', false);
+
+        }
+        // console.log('Log message');
+    });
+    /////////////////////////////////////////
+
+    $('.btn_toggle').each(function(index, el) {
+        var btn_toggle = $(this);
+        $(this).on('click', function(event) {
+            event.preventDefault();
+            toggle = $(this).data('user_disabled')?'enable':'disable';
+            user_name = $(this).data('user_name') ;
+            user_id = $(this).data('user_id') ;
+            user_disabled = $(this).data('user_disabled')?0:1;
+            if (confirm('Are you sure to '+toggle+' "'+user_name+'" ...?')) {
+                $.ajax({
+                    url: '{base}/{controller}/user_toggle',
+                    type: 'POST',
+                    data: {
+                        user_id: user_id,
+                        user_disabled: user_disabled
+                    },
+                })
+                .done(function(data) {
+                    data = jQuery.parseJSON(data);
+                    btn_toggle.removeClass('text-success').removeClass('text-default').addClass('text-'+data.toggle_btn);
+                    btn_toggle.find('i').removeClass('fa-toggle-on').removeClass('fa-toggle-off').addClass('fa-'+data.toggle_icon);
+                    btn_toggle.attr('data-user_disabled', user_disabled).data('user_disabled', user_disabled);
+                    btn_toggle.parent().siblings().find('.check_each').attr('data-user_disabled', user_disabled).data('user_disabled', user_disabled);
+                })
+                .fail(function(error) {
+                    console.log(error.responseText);
+                });
+            }
+        });
+    });
+
+    /////////////////////////////////////////
+
+    /////////////////////////////////////////
+    $('.toggle_all').on('click', function(event) {
+        event.preventDefault();
+        var action_name = $(this).data('action_name');
+        if (confirm('Are you sure to "'+action_name+'" all selected item ...?')) {
+            var user_disabled = $(this).data('user_disabled') ;
+            $('.check_each').each(function(index, el) {
+                var check_each = $(this);
+                var toggle = check_each.data('user_disabled')?'enable':'disable'; 
+                var user_id = check_each.data('user_id') ;
+
+                if (check_each.is(":checked")) {
+                    // console.log(user_disabled);
+
+                    event.preventDefault();
+                    $.ajax({
+                        url: '{base}/{controller}/user_toggle',
+                        type: 'POST',
+                        data: {
+                            user_id: user_id,
+                            user_disabled: user_disabled
+                        },
+                    })
+                    .done(function(data) {
+                        data = jQuery.parseJSON(data);
+                        check_each.parent().siblings().find('.btn_toggle').removeClass('text-success').removeClass('text-default').addClass('text-'+data.toggle_btn);
+                        check_each.parent().siblings().find('.btn_toggle').find('i').removeClass('fa-toggle-on').removeClass('fa-toggle-off').addClass('fa-'+data.toggle_icon);
+                        check_each.parent().siblings().find('.btn_toggle').attr('data-user_disabled', user_disabled).data('user_disabled', user_disabled);
+                        check_each.parent().siblings().find('.btn_toggle').attr('data-user_disabled', user_disabled).data('user_disabled', user_disabled);
+                    })
+                    .fail(function(error) {
+                        console.log(error.responseText);
+                    }); 
+                }
+            });
+            // $('.check_all').prop('checked', false);
+            // $('.check_each').prop('checked', false);
+        }
+    });
+    /////////////////////////////////////////
+
+    $('.delete_all').on('click', function(event) {
+        event.preventDefault();
+        var action_name = $(this).data('action_name');
+        if (confirm('Are you sure to "'+action_name+'" all selected item ...?')) {
+            $('.check_each').each(function(index, el) {
+                var check_each = $(this);
+                if (check_each.is(":checked")) {
+                    user_id = check_each.data('user_id');
+                    $.ajax({
+                        url: '{base}/{controller}/delete/'+user_id,
+                    })
+                    .done(function(data) {
+                        // console.log(data);
+                        check_each.parent().parent().remove();
+                        // user_ajax(); 
+                        // console.log("success");
+                        // table.ajax.reload( null, false );
+                    })
+                    .fail(function(error) {
+                        console.log(error.responseText);
+                    }); 
+                }
+
+            });
+        }
+    });
+    /////////////////////////////////////////
+
+    $('#del_submit').click(function(event) {
+        user_id = $(this).data('user_id');
+        // console.log(user_id);
+        $.ajax({
+            url: '{base}/{controller}/user_delete/'+user_id,
+        })
+        .done(function() {
+            user_ajax(); 
+            // console.log("success");
+            // table.ajax.reload( null, false );
+        })
+        .fail(function(error) {
+            console.log(error.responseText);
+        }); 
+    });
+    /////////////////////////////////////////
+</script>

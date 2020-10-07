@@ -1,0 +1,227 @@
+<div class="box box-{skin_box} skin_box">
+    <div class="box-body">
+        {breadcrumb}
+        <div class="row">
+            <div class="col-sm-6">
+                <legend>
+                    Detail
+                </legend>
+                {{controller}_detail}
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <th class="text-right" width="40%">
+                                Name :
+                            </th>
+                            <td class="text-left">
+                                <span class="pull-right">
+                                    <a class="btn btn-warning btn-xs" href="{base}/{controller}/edit/{{controller}_id_before}">
+                                        <i class="fa fa-fw fa-pencil">
+                                        </i>
+                                        Edit
+                                    </a>
+                                </span>
+                                {{controller}_name}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">
+                                Subdomain :
+                            </th>
+                            <td>
+                                <a href="//{{controller}_subdomain_url}/" target="_blank">
+                                    {{controller}_subdomain_url}
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-right" width="40%">
+                                Email :
+                            </th>
+                            <td class="text-left">
+                                {{controller}_email}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">
+                                Phone :
+                            </th>
+                            <td class="text-left">
+                                {{controller}_phone}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">
+                                Address :
+                            </th>
+                            <td class="text-left">
+                                {{controller}_address}
+                                <div>
+                                    {kelurahan}
+                                {kecamatan}
+                                </div>
+                                <div>
+                                    {jenis_kabupaten}
+                                {kabupaten}
+                                </div>
+                                <div>
+                                    {kodepos}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">
+                                Since :
+                            </th>
+                            <td>
+                                {{controller}_created}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">
+                                Last Update :
+                            </th>
+                            <td>
+                                {{controller}_updated}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-right" width="40%">
+                                Owner :
+                            </th>
+                            <td class="text-left">
+                                <a href="{base}/seller/profile/{seller_id}">
+                                    {seller_name}
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-right" width="40%">
+                                Logo :
+                            </th>
+                            <td class="text-left">
+                                <span style="
+                        -webkit-filter: drop-shadow(0px 0px 2px rgba(000,000,000,.1)); 
+                        filter: drop-shadow(0px 0px 2px rgba(000,000,000,.1)); ">
+                                    <img src="{base}/files/images/{controller}/{{controller}_logo}.png" width="128px"/>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                {/{controller}_detail}
+            </div>
+            <div class="col-sm-6">
+                <legend>
+                    Apps:
+                </legend>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr class="tr_{skin} bg-{skin}">
+                            <th class="text-center">
+                                <input id="checkbox_all" type="checkbox"/>
+                            </th>
+                            <th class="text-center">
+                                #
+                            </th>
+                            <th class="text-center">
+                                {m_name}
+                            </th>
+                            <th class="text-center">
+                                {m_price} ($)
+                            </th>
+                            <th class="text-center">
+                                {m_status}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {app_all}
+                        <tr>
+                            <td class="text-center">
+                                <input class="checkbox_each {subscribe_status}{subscribe_status_check}{/subscribe_status}" name="app_id[]" type="checkbox" value="{app_id}"/>
+                            </td>
+                            <td class="text-center">
+                                {nomor_urut}
+                            </td>
+                            <td class="text-center">
+                                <a href="{base}/setting/{app_slug}?organisation_id={organisation_id}">
+                                    {app_name}
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                {app_price}
+                            </td>
+                            <td class="text-center ">
+                                {subscribe_status}
+                                <div class="text-{subscribe_status_color}">
+                                    <i class="fa fa-fw fa-{subscribe_status_icon} ">
+                                    </i>
+                                    {subscribe_status_name}
+                                </div>
+                                {/subscribe_status}
+                            </td>
+                        </tr>
+                        {/app_all}
+                    </tbody>
+                </table>
+                <div>
+                    <button class="btn btn-success btn_subscribe" disabled="" type="button">
+                        Subscribe
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- -->
+<script type="text/javascript">
+    var organisation_id = '{organisation_id}';
+    $('.checkbox_each').removeAttr('checked');
+    $('#checkbox_all').removeAttr('checked');
+    $('#checkbox_all').on('change',function() {
+        if($(this).is(":checked")) {
+            $('.checkbox_each').prop('checked', 'checked');
+            // $('.btn_subscribe').removeClass('hidden');
+            $('.btn_subscribe').removeAttr('disabled');
+            // $('.btn_subscribe').show();
+        }else{
+            $('.checkbox_each').removeAttr('checked');
+            $('.btn_subscribe').attr('disabled','disabled');
+            // $('.btn_subscribe').hide();
+        }
+    });
+    ///////////////////
+    $('.checkbox_each').on('change', function(event) {
+        event.preventDefault();
+        $('#checkbox_all').removeAttr('checked');
+        var checked_exist = 0;
+        $('.checkbox_each').each(function(index, el) {
+            if($(this).is(":checked")) {
+                checked_exist = 1;
+            }
+        });
+        console.log(checked_exist);
+        if (checked_exist==1) {
+            $('.btn_subscribe').removeAttr('disabled');
+        }else{
+            $('.btn_subscribe').attr('disabled','disabled');
+        }
+    });
+    ///////////////////
+    $('.btn_subscribe').on('click', function(event) {
+        event.preventDefault();
+        var app_ids = [];
+        $('.checkbox_each').each(function(index, el) {
+            if($(this).is(":checked")) {
+                app_ids.push($(this).val());
+            }
+        }); 
+            
+        location.href = '{base}/app/subscribe?organisation_id='+organisation_id+'&app_ids='+JSON.stringify(app_ids);
+
+    });
+    ///////////////////
+    ///////////////////
+</script>
+<!-- -->

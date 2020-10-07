@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Profile Anggota
+        </title>
+        <meta charset="utf-8"/>
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+        <meta content="Member Cards" name="description"/>
+        <meta content="no-cache" http-equiv="pragma"/>
+
+        <link href="{base}/files/images/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+        <meta content="Jerry Maheswara (jerrymaheswara@gmail.com) +6208990055099" name="Author"/>
+        <link href="{base}/files/bower_components/AdminLTE/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="{base}/files/bower_components/AdminLTE/dist/css/AdminLTE.min.css" rel="stylesheet"/>
+        <link href="{base}/files/bower_components/AdminLTE/dist/css/skins/_all-skins.css" rel="stylesheet"/>
+        <script src="{base}/files/bower_components/AdminLTE/plugins/jQuery/jquery-2.2.3.min.js">
+        </script>
+        <script src="{base}/files/bower_components/AdminLTE/plugins/jQueryUI/jquery-ui.min.js">
+        </script>
+        <script src="{base}/files/bower_components/AdminLTE/bootstrap/js/bootstrap.min.js">
+        </script>
+    </head>
+    <body style="background-color: #000;">
+        <div class="box box-{skin_box} box-danger skin_box" style="background-color: #000;">
+            <div class="box-body text-center">
+                <div>
+                    <img src="{base}/files/images/logo.png" width="60px"/>
+                </div>
+                <center>
+                    <div style="min-width:300px; max-width: 460px;">
+                        <div class="row" style="color: #fff; background-color: #f00; 
+                        margin-top: 20px;
+                        margin-bottom: 20px;
+                        font-size: 20pt; font-weight: bold; text-transform: uppercase;
+                        ">
+                            MEMBERSHIP
+                        </div>
+                        {anggota_detail}
+                        <div class="hidden" style="margin:20px 0; color: #fff; font-size: 14pt; font-weight: bold">
+                            {anggota_nama}
+                        </div>
+                    </div>
+                    <div style="min-width:300px; max-width: 460px;">
+                        <div class=" " style=" border-radius: 13px; color:#222; background-color: #fff; padding: 0 0 10px 0;">
+                            <div class="text-left" style="width:100%;position: relative;">
+                                <span class="text-right" style="width:100%;position: ">
+                                    <div style="position: absolute; 
+                                       top: 30%;  
+                                       width: 100%;
+                                       right :6%;
+                                       color:#fff;
+                                       text-transform: uppercase;
+                                       font-weight: bold;
+
+                                   ">
+                                        <img src="{base}/files/images/foto_anggota/{anggota_foto}.jpg" style="border: 1px solid #eee; width: 27%!important;"/>
+                                    </div>
+                                </span>
+                                <span style="position: absolute; 
+                                   top: 60%;  
+                                   left :6%;
+                                   color:#fff;
+                                   text-transform: uppercase;
+                                   font-weight: bold
+                                   ">
+                                    <div class="min320">
+                                        <div style="font-size: 10pt;">
+                                            {anggota_nomor}
+                                        </div>
+                                        <div style="font-size: 12pt;
+                                            white-space: nowrap;">
+                                            {anggota_nama}
+                                        </div>
+                                        <div style="font-size: 10pt;">
+                                            Berlaku s/d: {anggota_tanggal_expired_format}
+                                        </div>
+                                    </div>
+                                    <div class="min480">
+                                        <div style="font-size: 16pt">
+                                            {anggota_nomor}
+                                        </div>
+                                        <div style="font-size: 20pt">
+                                            {anggota_nama}
+                                        </div>
+                                        <div style="font-size: 15pt">
+                                            Berlaku s/d: {anggota_tanggal_expired_format}
+                                        </div>
+                                    </div>
+                                </span>
+                                <img src="{base}/files/images/card-design.png" width="100%"/>
+                            </div>
+                            <style type="text/css">
+                                @media screen and (min-width: 430px) {
+                                    .min320 {
+                                       display: none;
+                                    }
+                                    .min480{
+                                    }
+                                }
+                                @media screen and (max-width: 429px) {
+                                    .min320 {
+                                    }
+                                    .min480{
+                                       display: none;
+                                    }
+                                }
+                            </style>
+                            <div class="hidden">
+                                <div style="margin: 10px 0px">
+                                    <img height="200px" src="{base}/files/images/foto_anggota/{anggota_foto}.jpg" style="border: 1px solid #eee;" width="200px"/>
+                                </div>
+                                <div style="font-size: 20px; font-weight: bold">
+                                    Kartu Anggota
+                                    <br/>
+                                    Masa Berlaku Sampai {anggota_tanggal_expired_format}
+                                </div>
+                            </div>
+                            <div style="margin: 20px 0px">
+                                <img src="{base}/code/bar/{anggota_nomor}" width="300px"/>
+                            </div>
+                            <div style="margin: 20px 0px">
+                                <img src="{base}/code/qr/{anggota_nomor}" width="200px"/>
+                            </div>
+                        </div>
+                        <div style="margin:20px 0;">
+                            <a class="btn btn-success" href="{base}/logout">
+                                Logout
+                            </a>
+                            <a class="{_is_allowed} btn btn-danger" href="{base}/anggota">
+                                Dashboard
+                            </a>
+                            <a class="{_is_allowed} btn btn-primary" href="{base}/{controller}/edit/{{controller}_id}">
+                                Edit
+                            </a>
+                            <a class="btn btn-primary {_is_mine}" data-toggle="modal" data-user_given_name="{anggota_nama}" data-user_id="{user_id}" href="#user_change_password">
+                                Change Password
+                            </a>
+                        </div>
+                    </div>
+                    <input data-user_given_name="{anggota_nama}" data-user_id="{user_id}" id="force_change_password" type="hidden" value="{force_change_password}">
+                        {/anggota_detail}
+                    </input>
+                </center>
+            </div>
+        </div>
+        <!-- -->
+        <!-- -->
+        <!-- ========================================================================== -->
+        <div class="modal fade" id="user_change_password">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+                            ×
+                        </button>
+                        <h4 class="modal-title">
+                            {m_change_password}
+                        </h4>
+                    </div>
+                    <form autocomplete="off" class="form-horizontal" id="form_change_password" method="POST">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label class="text-right col-sm-4">
+                                    {m_name} :
+                                </label>
+                                <div class="col-sm-8">
+                                    <span id="user_given_name">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">
+                                    {m_new_password} :
+                                </label>
+                                <div class="col-sm-8">
+                                    <input autocomplete="off" class="form-control" id="user_password" name="user_password" required="" type="password"/>
+                                    <input class="form-control" id="user_id" name="user_id" type="hidden"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">
+                                    {m_confirm_password} :
+                                </label>
+                                <div class="col-sm-8">
+                                    <input autocomplete="off" class="form-control" id="user_confirm_password" name="user_confirm_password" required="" type="password"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-default" data-dismiss="modal" type="button">
+                                {m_close}
+                            </button>
+                            <button class="btn btn-primary" id="submit_change_password" type="submit">
+                                {m_submit}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- ========================================================================== -->
+        <div class="modal modal-success fade" id="modal_sukses">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+                            ×
+                        </button>
+                        <h4 class="modal-title">
+                            {m_congratulation}
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text-center">
+                            <i class="fa fa-exclamation-circle fa-4x">
+                            </i>
+                            <h4>
+                                {m_change_password} {m_successful}...!!
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-default" href="{base}/logout">
+                            Login Ulang
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ========================================================================== -->
+        <!-- ========================================================================== -->
+        <!-- ========================================================================== -->
+        <!-- -->
+        <script src="{base}/files/bower_components/formvalidation.io/dist/js/formValidation.min.js">
+        </script>
+        <script src="{base}/files/bower_components/formvalidation.io/dist/js/framework/bootstrap.min.js">
+        </script>
+        <script type="text/javascript">
+            if ($('#force_change_password').val() == 'change') {
+                $('#user_change_password').modal('show');
+                $('#user_given_name').text($('#force_change_password').data('user_given_name'));
+                $('#user_id').val($('#force_change_password').data('user_id'));
+            }
+
+
+            $('#user_change_password').on('show.bs.modal', function (event) {
+              // $(this).find('[autofocus]').focus();
+              var button = $(event.relatedTarget); 
+              var modal = $(this);
+              user_given_name = button.data('user_given_name'); 
+              user_id = button.data('user_id'); 
+              modal.find('#user_given_name').text(user_given_name); 
+              modal.find('#user_id').val(user_id);  
+            });
+
+            $('#user_change_password').on('hidden.bs.modal', function(){
+              // $(this).find('#form_change_password').get(0).reset();
+              $(this).find('#user_password').val('');
+              $(this).find('#user_confirm_password').val('');  
+            });
+            // $('#submit_change_password').on('click', function(event) {
+            //   fr = $('#form_change_password').serialize();
+            //   console.log(fr);
+            //   // location.reload();
+
+            // });
+            ////////////////////////
+            ////////////////////////
+
+            $('#form_change_password').formValidation({
+                framework: 'bootstrap',
+                icon: {
+                    valid: 'fa fa-ok',
+                    invalid: 'fa fa-remove',
+                    validating: 'fa fa-refresh'
+                },
+                fields: {
+                    user_confirm_password: {
+                        validators: {
+                            identical: {
+                                field: 'user_password',
+                                message: 'The password and its confirm are not the same'
+                            }
+                        }
+                    },
+                    user_password: {
+                        validators: {
+                            identical: {
+                                field: 'user_confirm_password',
+                                message: 'Please retype password in column bellow.'
+                            }
+                        }
+                    },
+                }
+            }).on('err.form.fv', function(e) {
+                // $('#modal_agree').modal('show');
+            }).on('success.form.fv', function(e) {
+                e.preventDefault();
+                var form_data = new FormData($('#form_change_password')[0]);
+                $.ajax({
+                    url: '{base}/user/change_password',
+                    type: 'POST',
+                    data: form_data,
+                    mimeTypes: 'multipart/form-data',
+                    cache: false,
+                    contentType: false,
+                    processData: false
+                }).done(function(data) {
+                    // console.log(data);
+                    $('#user_change_password').modal('hide');
+                    $('#modal_sukses').modal('show');
+                    $('#form_change_password').get(0).reset();
+                    // $("#form_register select").val('').trigger('change');
+                }).fail(function(error) {
+                    console.log(error.responseText);
+                });
+            });
+    ////////////////////////
+        </script>
+        <!-- ========================================================================== -->
+        <!-- ========================================================================== -->
+        <!-- ========================================================================== -->
+        <!-- -->
+    </body>
+</html>

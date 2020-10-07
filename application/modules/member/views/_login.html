@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+        <link href="{base}/files/images/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+        <meta content="Jerry Maheswara (jerrymaheswara@gmail.com) +6208990055099" name="Author"/>
+        <title>
+            {site_title} | Login
+        </title>
+        <link href="{base}/files/bower_components/AdminLTE/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="{base}/files/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+        <link href="{base}/files/bower_components/AdminLTE/dist/css/AdminLTE.min.css" rel="stylesheet"/>
+    </head>
+    <body class="hold-transition login-page">
+        <div class="login-box">
+            <div class="login-logo">
+                <a href="{base}/">
+                    <img src="{base}/files/images/logo.png" width="100px"/>
+                </a>
+            </div>
+            <!-- /.login-logo -->
+            <div class="login-box-body">
+                <h3 class="login-box-msg">
+                    Login
+                </h3>
+                <form action="" method="POST">
+                    <div class="form-group has-feedback">
+                        <input required="required" class="form-control" name="{controller}_email" placeholder="Email" type="email"/>
+                        <span class="fa fa-envelope form-control-feedback">
+                        </span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input required="required" class="form-control" name="{controller}_password" placeholder="Password" type="password"/>
+                        <span class="fa fa-lock form-control-feedback">
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox"/>
+                        Remember Me
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block btn-flat" type="submit">
+                            Login
+                        </button>
+                    </div>
+                </form>
+                <div class="social-auth-links text-center hidden">
+                    <p>
+                        - OR -
+                    </p>
+                    <a class="btn btn-block btn-social btn-facebook btn-flat" href="#">
+                        <i class="fa fa-facebook">
+                        </i>
+                        Sign in using Facebook
+                    </a>
+                    <a class="btn btn-block btn-social btn-google btn-flat" href="#">
+                        <i class="fa fa-google-plus">
+                        </i>
+                        Sign in using Google+
+                    </a>
+                </div>
+                <div class="form-group text-right">
+                    <a class="hidden" href="#">
+                        I forgot my password
+                    </a>
+                    <a class="text-center" href="register.html">
+                        Register
+                    </a>
+                </div>
+            </div>
+        </div>
+        <script src="{base}/files/bower_components/AdminLTE/plugins/jQuery/jquery-2.2.3.min.js">
+        </script>
+        <script src="{base}/files/bower_components/AdminLTE/bootstrap/js/bootstrap.min.js">
+        </script>
+    </body>
+
+</html>

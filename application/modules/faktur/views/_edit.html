@@ -1,0 +1,350 @@
+<div class="box box-{skin_box} skin_box">
+    <div class="box-body">
+        {breadcrumb}
+        <form action="" class="form-horizontal row" id="form_kendaraan" method="POST" role="form">
+            {{controller}_detail}
+            <div class="col-sm-6">
+                <div>
+                    <legend>
+                        Faktur :
+                    </legend>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label-">
+                            Nomor Faktur :
+                        </label>
+                        <div class="col-sm-8">
+                            <input autofocus="on" class="form-control" id="faktur_nomor" name="faktur_nomor" placeholder="Nomor Faktur" required="required" type="" value="{faktur_nomor}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label-">
+                            Tanggal Faktur :
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="faktur_tanggal" max="{today}" name="faktur_tanggal" placeholder="Tanggal Faktur" required="required" type="date" value="{faktur_tanggal}"/>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <legend class="">
+                        Identitas Pemilik :
+                    </legend>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label-">
+                            Atas Nama :
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="pemilik_nama" name="pemilik_nama" placeholder="Nama Pemilik" required="required" type="" value="{pemilik_nama}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label-">
+                            Alamat :
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="pemilik_alamat" name="pemilik_alamat" placeholder="Nama Jalan / Kampung, No. Rumah, RT / RW" required="required" type="" value="{pemilik_alamat}"/>
+                            <div style="margin-top: 6px">
+                                <input id="kodepos_id_before" type="hidden" value="{kodepos_id}"/>
+                                <select class="form-control" id="kodepos_id" name="kodepos_id" type="hidden">
+                                </select>
+                            </div>
+                            <div style="margin-top: 6px">
+                                <input class="form-control" disabled="" id="kelurahan_kecamatan" readonly="readonly" type=""/>
+                            </div>
+                            <div style="margin-top: 6px">
+                                <input class="form-control" disabled="" id="kabupaten_kodepos" readonly="readonly" type=""/>
+                            </div>
+                            <div>
+                                <input id="pemilik_kelurahan" name="pemilik_kelurahan" type="hidden" value="{pemilik_kelurahan}"/>
+                                <input id="pemilik_kecamatan" name="pemilik_kecamatan" type="hidden" value="{pemilik_kecamatan}"/>
+                                <input id="pemilik_jenis_kabupaten" name="pemilik_jenis_kabupaten" type="hidden"/>
+                                <input id="pemilik_kabupaten" name="pemilik_kabupaten" type="hidden" value="{pemilik_kabupaten}"/>
+                                <input id="pemilik_propinsi" name="pemilik_propinsi" type="hidden" value="{pemilik_propinsi}"/>
+                                <input id="pemilik_kodepos" name="pemilik_kodepos" type="hidden" value="{pemilik_kodepos}"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label-">
+                            No. KTP / TDP :
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="pemilik_ktp" name="pemilik_ktp" pattern="\d+.{15,}" placeholder="1234567890123456" required="required" type="text" value="{pemilik_ktp}"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div>
+                    <legend class="">
+                        Identitas Kendaraan :
+                    </legend>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label-">
+                            Merk :
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="kendaraan_merk" name="kendaraan_merk" placeholder="Merk" required="required" type="" value="{kendaraan_merk}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label-">
+                            Type :
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="kendaraan_type" name="kendaraan_type" placeholder="Type" required="required" type="" value="{kendaraan_type}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label-">
+                            Jenis :
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="kendaraan_jenis" name="kendaraan_jenis" placeholder="Jenis" type="" value="{kendaraan_jenis}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label-">
+                            Model :
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="kendaraan_model" name="kendaraan_model" placeholder="Model" type="" value="{kendaraan_model}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label-">
+                            Tahun Pembuatan :
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="kendaraan_tahun" name="kendaraan_tahun" placeholder="Tahun Pembuatan" type="" value="{kendaraan_tahun}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label-">
+                            Isi Silinder :
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="kendaraan_isi_silinder" name="kendaraan_isi_silinder" placeholder="Isi Silinder" type="" value="{kendaraan_isi_silinder}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label-">
+                            Warna :
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="kendaraan_warna" name="kendaraan_warna" placeholder="Warna" type="" value="{kendaraan_warna}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label-">
+                            No. Rangkaian/ NIK/VIN :
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="kendaraan_no_rangkaian" name="kendaraan_no_rangkaian" placeholder="No. Rangkaian/NIK/VIN" required="required" type="" value="{kendaraan_no_rangkaian}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label-">
+                            Nomor Mesin :
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="kendaraan_no_mesin" name="kendaraan_no_mesin" placeholder="Nomor Mesin" required="required" type="" value="{kendaraan_no_mesin}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label-">
+                            Bahan Bakar :
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="kendaraan_bahan_bakar" name="kendaraan_bahan_bakar" placeholder="Bahan Bakar" type="" value="{kendaraan_bahan_bakar}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label-">
+                            Harga :
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="kendaraan_harga" name="kendaraan_harga" placeholder="Harga" type="" value="{kendaraan_harga}"/>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <legend>
+                        Data Dokumen Pendukung:
+                    </legend>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label-">
+                            Formulir A/B :
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="dokumen_formulir_ab" name="dokumen_formulir_ab" placeholder="Formulir A/B" type="" value="{dokumen_formulir_ab}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label-">
+                            PIB :
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="dokumen_pib" name="dokumen_pib" placeholder="PIB" type="" value="{dokumen_pib}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label-">
+                            TPT :
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="dokumen_tpt" name="dokumen_tpt" placeholder="TPT" type="" value="{dokumen_tpt}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label-">
+                            SUT :
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="dokumen_sut" name="dokumen_sut" placeholder="SUT" type="" value="{dokumen_sut}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label-">
+                            SRUT :
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="dokumen_srut" name="dokumen_srut" placeholder="SRUT" type="" value="{dokumen_srut}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-8 col-sm-offset-4">
+                            <button class="btn btn-success btn-block btn-lg" type="submit">
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {/{controller}_detail}
+        </form>
+    </div>
+</div>
+<!-- <link rel="stylesheet" type="text/css" href="https://select2.github.io/select2/select2-master/select2.css"> -->
+<!-- <script src="https://select2.github.io/select2/select2-master/select2.js"></script> -->
+<script type="text/javascript">
+    ////////////////////   
+    // $('#kodepos_id').select2( { 
+    // }).one('select2-focus', select2Focus).on("select2-blur", function () {
+    //     $(this).one('select2-focus', select2Focus)
+    // })
+
+    // function select2Focus() {
+    //     var select2 = $(this).data('select2');
+    //     console.log(select2);
+    //     setTimeout(function() {
+    //         if (!select2.opened()) {
+    //             select2.open();
+    //         }
+    //     }, 0);  
+    // }
+    ////////////////////   
+    ////////////////////   
+    $('#kodepos_id').select2({ 
+        placeholder: 'Kelurahan / Desa',
+        allowClear: true,
+        width: "100%", 
+        minimumInputLength: 2,
+        ajax: {
+            url: '{base}/country/kelurahan_ajax',
+            dataType: 'json',
+            delay: 250,
+            type: "GET",
+            data: function (params) {
+                // console.log(params);
+                var queryParameters = {
+                    search: params.term
+                }
+                return queryParameters;
+            },
+            processResults: function (data) {
+                // console.log(data);
+                return {
+                    results: data
+                };
+            },
+            cache: true
+        }
+    }) ;
+    ////////////////////
+    $('#pemilik_alamat').on('blur',function(event) {
+        // console.log(event);
+        $('#kodepos_id').select2('open');
+    });
+    $('#kodepos_id').on('blur', function(event) {
+        event.preventDefault();
+        /* Act on the event */
+    });
+
+    $('#kodepos_id').on('change', function(event) {
+        event.preventDefault();
+        id = $(this).val();
+
+        if (id != null) {
+            // console.log(id);
+            $.ajax({
+                url: '{base}/country/kelurahan_ajax', 
+                data: {id: id},
+            })
+            .done(function(data) {
+                // console.log(data);
+                $.each(data, function(index, val) {
+                    $('#kelurahan_kecamatan').val('Kel. ' + val.kelurahan + ' - Kec. ' + val.kecamatan);
+                    $('#kabupaten_kodepos').val(val.jenis + ' ' + val.kabupaten + ' - '+val.kodepos);
+                    $('#pemilik_kelurahan').val(val.kelurahan);
+                    $('#pemilik_kecamatan').val(val.kecamatan);
+                    $('#pemilik_jenis_kabupaten').val(val.jenis);
+                    $('#pemilik_kabupaten').val(val.kabupaten);
+                    $('#pemilik_propinsi').val(val.propinsi);
+                    $('#pemilik_kodepos').val(val.kodepos);
+                });
+                $('#pemilik_ktp').focus();
+                
+            })
+            .fail(function(error) {
+                console.log(error.responseText);
+            });
+        }else{
+            $('#kelurahan_kecamatan').val('');
+            $('#kabupaten_kodepos').val('');
+        }
+        
+
+    });
+    ////////////////////
+    
+    ////////////////////
+    kodepos_id_before = $('#kodepos_id_before').val();
+    kodepos_before(kodepos_id_before);
+    function kodepos_before(id) {
+        $.ajax({
+            url: '{base}/country/kelurahan_ajax', 
+            data: {id: id},
+        })
+        .done(function(data) {
+            // console.log(data);
+            $.each(data, function(index, val) {
+                $('#kelurahan_kecamatan').val('Kel. ' + val.kelurahan + ' - Kec. ' + val.kecamatan);
+                $('#kabupaten_kodepos').val(val.jenis + ' ' + val.kabupaten + ' - '+val.kodepos);
+                $('#pemilik_kelurahan').val(val.kelurahan);
+                $('#pemilik_kecamatan').val(val.kecamatan);
+                $('#pemilik_jenis_kabupaten').val(val.jenis);
+                $('#pemilik_kabupaten').val(val.kabupaten);
+                $('#pemilik_propinsi').val(val.propinsi);
+                $('#pemilik_kodepos').val(val.kodepos);
+            });
+            // $('#pemilik_ktp').focus();
+            
+        })
+        .fail(function(error) {
+            console.log(error.responseText);
+        });
+    }
+    ////////////////////
+    ////////////////////
+</script>

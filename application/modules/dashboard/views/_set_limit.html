@@ -1,0 +1,38 @@
+<span style="display: inline-block;">
+    <select class="form-control" id="set_limit">
+        <option>
+            5
+        </option>
+        <option>
+            10
+        </option>
+        <option>
+            20
+        </option>
+        <option>
+            50
+        </option>
+        <option>
+            100
+        </option>
+    </select>
+</span>
+
+
+<script type="text/javascript">
+  $('#set_limit').val('{limit}');
+  $('#set_limit').on('change', function(event) {
+    val = $(this).val();
+    // console.log(val);
+    $.ajax({
+      url: '{base}/{controller}/set_limit/'+val,
+    })
+    .done(function(data) {
+      // console.log(data);
+      location.reload();
+    })
+    .fail(function(error) {
+      console.log(error.responseText);
+    });
+  });
+</script>

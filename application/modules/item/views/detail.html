@@ -1,0 +1,352 @@
+<div class="offcanvas-wrapper">
+      <!-- Page Title-->
+      <div class="page-title">
+        <div class="container">
+          <div class="column">
+            <h1>Single Product</h1>
+          </div>
+          <div class="column">
+            <ul class="breadcrumbs">
+              <li><a href="index.html">Home</a>
+              </li>
+              <li class="separator">&nbsp;</li>
+              <li><a href="shop-grid-ls.html">Shop</a>
+              </li>
+              <li class="separator">&nbsp;</li>
+              <li>Single Product</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Page Content-->
+      <div class="container padding-bottom-3x mb-1">
+        <div class="row">
+          <!-- Poduct Gallery-->
+          <div class="col-md-3">
+            <div class="product-gallery" style="padding-top: 15px;"> 
+                {item_detail}
+              <div class="gallery-wrapper" >
+                {item_images}
+                <div class="gallery-item"><a href="{base}/files/images/{image_original}" data-hash="hash_{image_id}" data-size="256x256"></a></div>
+                {/item_images}
+              </div>
+              <div class="product-carousel owl-carousel">
+                {item_images}
+                <div data-hash="hash_{image_id}"><img src="{base}/files/images/{image_original}" alt="Product" style="height:auto;" /></div>
+                {/item_images} 
+              </div>
+              <ul class="product-thumbnails- hidden-" style=" 
+    /*display: block;*/
+    margin-top: 24px;
+    text-align: center;
+    /*margin: 0;*/
+
+
+              ">
+                {item_images}
+
+                <li class="" style="width: 30px;
+    display: inline-block;
+    /*margin: 0;*/
+    /*margin-top: 24px;*/
+    /*padding: 0;*/
+    list-style: none;
+    /*text-align: center;*/
+                "><a href="#hash_{image_id}"><img src="{base}/files/images/{image_128}" alt="Product" /></a></li>
+                {/item_images}
+                
+              </ul>
+            </div>
+                {/item_detail}
+          </div>
+          <!-- Product Info-->
+          <div class="col-md-9">
+            <div class="padding-top-2x mt-2 hidden-md-up"></div>
+              <div class="rating-stars">
+                <i class="icon-star {review_average_star_1}"></i>
+                <i class="icon-star {review_average_star_2}"></i>
+                <i class="icon-star {review_average_star_3}"></i>
+                <i class="icon-star {review_average_star_4}"></i>
+                <i class="icon-star {review_average_star_5}"></i>
+              </div><span class="text-muted align-middle">&nbsp;&nbsp;{review_average} | <a href="#reviews" data-tab="reviews" id="show_review"><span class="review_count">{review_count}</span> reviews</a></span>
+
+              {item_detail}
+
+            <h2 class="padding-top-1x text-normal">{item_name}</h2><span class="h2 d-block">
+              <del class="text-muted text-normal hidden">$68.00</del>Rp. {item_price_format}</span>
+            <p>{item_description}</p>
+
+              <p>
+                Available: {item_available}
+              </p>
+            {/item_detail}
+
+            <div class="row margin-top-1x">
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label for="quantity">Quantity</label>
+                  <select class="form-control" id="quantity">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="pt-1 mb-2 hidden"><span class="text-medium">SKU:</span> #21457832</div>
+            <div class="padding-bottom-1x mb-2 hidden"><span class="text-medium">Categories:&nbsp;</span><a class="navi-link" href="#">Men’s shoes,</a><a class="navi-link" href="#"> Snickers,</a><a class="navi-link" href="#"> Sport shoes</a></div>
+            <hr class="mb-3">
+            <div class="d-flex flex-wrap justify-content-between">
+              <div class="entry-share mt-2 mb-2"><span class="text-muted">Share:</span>
+                <div class="share-links"><a class="social-button shape-circle sb-facebook" href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="socicon-facebook"></i></a><a class="social-button shape-circle sb-twitter" href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="socicon-twitter"></i></a><a class="social-button shape-circle sb-instagram" href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><i class="socicon-instagram"></i></a><a class="social-button shape-circle sb-google-plus" href="#" data-toggle="tooltip" data-placement="top" title="Google +"><i class="socicon-googleplus"></i></a></div>
+              </div>
+              <div class="sp-buttons mt-2 mb-2 {is_login}">
+            {item_detail}
+                <button data-iteration="{iteration}" class="btn_wishlist_add btn btn-outline-secondary btn-sm btn-wishlist {my_wishlist}" data-id="{{controller}_id}" data-toggle="tooltip" title="Whishlist"><i class="icon-heart"></i></button>
+                <button class="{is_available} btn_cart_add btn btn-primary " data-user_id="{user_id}" data-img_src="{base}/files/images/{item_image_main}" data-id="{{controller}_id}" data-name="{{controller}_name}" data-price="{{controller}_price}" data-toast="" data-toast-icon="icon-circle-check" data-toast-message="successfuly added to cart!" data-toast-position="bottomRight" data-toast-title="Product" data-toast-type="success">
+                  <i class="icon-bag"></i>
+                    Add to Cart
+                </button>
+            {/item_detail}
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Product Tabs-->
+        <div class="row padding-top-3x mb-3">
+          <div class="col-lg-10 offset-lg-1">
+            <ul class="nav nav-tabs" role="tablist">
+              <li class="nav-item"><a class="nav-link active" href="#description" data-toggle="tab" role="tab">Description</a></li>
+              <li class="nav-item"><a class="nav-link" href="#reviews" data-toggle="tab" role="tab">Reviews (<span class="review_count">{review_count}</span>)</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane fade show active" id="description" role="tabpanel">
+            {item_detail}
+                {item_description}
+            {/item_detail}
+
+              </div>
+              <div class="tab-pane fade" id="reviews" role="tabpanel">
+                  {review_grid}
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Related Products Carousel-->
+        <h3 style="display: none;"  class="text-center padding-top-2x mt-2 padding-bottom-1x">You May Also Like</h3>
+        <!-- Carousel-->
+        <div style="display: none;" class="owl-carousel " data-owl-carousel="{ &quot;nav&quot;: false, &quot;dots&quot;: true, &quot;margin&quot;: 30, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;576&quot;:{&quot;items&quot;:2},&quot;768&quot;:{&quot;items&quot;:3},&quot;991&quot;:{&quot;items&quot;:4},&quot;1200&quot;:{&quot;items&quot;:4}} }">
+          <!-- Product-->
+          <div class="grid-item">
+            <div class="product-card">
+              <div class="product-badge text-danger">22% Off</div><a class="product-thumb" href="shop-single.html"><img src="{base}/files/unishop/img/shop/products/09.jpg" alt="Product" /></a>
+              <h3 class="product-title"><a href="shop-single.html">Rocket Dog</a></h3>
+              <h4 class="product-price">
+                <del>$44.95</del>$34.99
+              </h4>
+              <div class="product-buttons">
+                <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist"><i class="icon-heart"></i></button>
+                <button class="btn btn-outline-primary btn-sm" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="successfuly added to cart!">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+          <!-- Product-->
+          <div class="grid-item">
+            <div class="product-card">
+                <div class="rating-stars"><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star"></i>
+                </div><a class="product-thumb" href="shop-single.html"><img src="{base}/files/unishop/img/shop/products/03.jpg" alt="Product" /></a>
+              <h3 class="product-title"><a href="shop-single.html">Oakley Kickback</a></h3>
+              <h4 class="product-price">$155.00</h4>
+              <div class="product-buttons">
+                <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist"><i class="icon-heart"></i></button>
+                <button class="btn btn-outline-primary btn-sm" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="successfuly added to cart!">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+          <!-- Product-->
+          <div class="grid-item">
+            <div class="product-card"><a class="product-thumb" href="shop-single.html"><img src="{base}/files/unishop/img/shop/products/12.jpg" alt="Product" /></a>
+              <h3 class="product-title"><a href="shop-single.html">Vented Straw Fedora</a></h3>
+              <h4 class="product-price">$49.50</h4>
+              <div class="product-buttons">
+                <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist"><i class="icon-heart"></i></button>
+                <button class="btn btn-outline-primary btn-sm" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="successfuly added to cart!">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+          <!-- Product-->
+          <div class="grid-item">
+            <div class="product-card">
+                <div class="rating-stars"><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star filled"></i>
+                </div><a class="product-thumb" href="shop-single.html"><img src="{base}/files/unishop/img/shop/products/11.jpg" alt="Product" /></a>
+              <h3 class="product-title"><a href="shop-single.html">Top-Sider Fathom</a></h3>
+              <h4 class="product-price">$90.00</h4>
+              <div class="product-buttons">
+                <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist"><i class="icon-heart"></i></button>
+                <button class="btn btn-outline-primary btn-sm" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="successfuly added to cart!">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+          <!-- Product-->
+          <div class="grid-item">
+            <div class="product-card"><a class="product-thumb" href="shop-single.html"><img src="{base}/files/unishop/img/shop/products/04.jpg" alt="Product" /></a>
+              <h3 class="product-title"><a href="shop-single.html">Waist Leather Belt</a></h3>
+              <h4 class="product-price">$47.00</h4>
+              <div class="product-buttons">
+                <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist"><i class="icon-heart"></i></button>
+                <button class="btn btn-outline-primary btn-sm" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="successfuly added to cart!">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+          <!-- Product-->
+          <div class="grid-item">
+            <div class="product-card">
+              <div class="product-badge text-danger">50% Off</div><a class="product-thumb" href="shop-single.html"><img src="{base}/files/unishop/img/shop/products/01.jpg" alt="Product" /></a>
+              <h3 class="product-title"><a href="shop-single.html">Unionbay Park</a></h3>
+              <h4 class="product-price">
+                <del>$99.99</del>$49.99
+              </h4>
+              <div class="product-buttons">
+                <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist"><i class="icon-heart"></i></button>
+                <button class="btn btn-outline-primary btn-sm" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="successfuly added to cart!">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Site Footer-->
+
+    </div>
+        <!-- Photoswipe container-->
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="pswp__bg"></div>
+      <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+          <div class="pswp__item"></div>
+          <div class="pswp__item"></div>
+          <div class="pswp__item"></div>
+        </div>
+        <div class="pswp__ui pswp__ui--hidden">
+          <div class="pswp__top-bar">
+            <div class="pswp__counter"></div>
+            <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+            <button class="pswp__button pswp__button--share" title="Share"></button>
+            <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+            <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+            <div class="pswp__preloader">
+              <div class="pswp__preloader__icn">
+                <div class="pswp__preloader__cut">
+                  <div class="pswp__preloader__donut"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+            <div class="pswp__share-tooltip"></div>
+          </div>
+          <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+          <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+          <div class="pswp__caption">
+            <div class="pswp__caption__center"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<script type='text/javascript' src='{base}/files/bower_components/currencyformatter.js/currencyFormatter.min.js'></script> 
+
+<script type="text/javascript">
+  
+    // /////////////////////
+
+    // /////////////////////
+    // /////////////////////
+    $('#show_review').on('click', function(event) {
+ 
+        event.preventDefault(); 
+        tab = $(this).data('tab');
+        $('html, body').animate({
+            scrollTop: $('.tab-content').offset().top-150
+        }, 500);
+        $('.nav-tabs a[href="#' + tab + '"]').tab('show');
+
+    });
+    // /////////////////////
+    // /////////////////////
+    $('.btn_wishlist_add').each(function(index, el) {
+        $(this).on('click', function(event) {
+            event.preventDefault();
+            item_id = $(this).data('id');
+
+            if ($(this).hasClass('active')) {
+                action = 'wishlist_remove';
+            }else{
+                action = 'wishlist_add';
+
+            }
+
+            $.ajax({
+                url: '{base}/account/' + action,
+                type: 'POST',
+                data: {item_id: item_id},
+            })
+            .done(function(res) {
+                console.log(res);
+            })
+            .fail(function(error) {
+                console.log(error.responseText);
+            });
+            
+
+        });
+    });
+    // /////////////////////
+    $('.btn_cart_add').each(function(index, el) {
+        var data = {};
+        $(this).on('click', function(event) {
+            event.preventDefault();
+
+            id = $(this).data('id');
+            name = $(this).data('name');
+            user_id = $(this).data('user_id');
+            qty = 1;
+            price = $(this).data('price');
+            img_src = $(this).data('img_src');
+
+
+            data['id'] = id;
+            data['name'] = name;
+            data['qty'] = qty;
+            data['price'] = price;
+            
+            data['seller_id'] = user_id;
+            data['img_src'] = img_src;
+
+            // console.log(data);
+
+            $.ajax({
+                url: '{base}/cart/add_item',
+                type: 'POST', 
+                data: {data: data},
+            })
+            .done(function(res) {
+                // console.log(res);
+                res = $.parseJSON(res);
+                var cart_total_format = OSREC.CurrencyFormatter.format(res.cart_total, { currency: 'IDR', symbol: 'Rp. ' });
+
+                $('.cart_count').html(res.cart_count);
+                $('.cart_total_format').html(cart_total_format);
+            })
+            .fail(function(error) {
+                console.log(error.responseText);
+            });
+            
+
+
+        });
+    });
+</script>

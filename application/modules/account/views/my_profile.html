@@ -1,0 +1,255 @@
+<div class="offcanvas-wrapper">
+    <!-- Page Title-->
+    <div class="page-title">
+        <div class="container">
+            <div class="column">
+                <h1>
+                    My Profile
+                </h1>
+            </div>
+            <div class="column">
+                <ul class="breadcrumbs">
+                    <li>
+                        <a href="{base}">
+                            Home
+                        </a>
+                    </li>
+                    <li class="separator">
+                    </li>
+                    <li>
+                        <a href="{base}/account/profile">
+                            Account
+                        </a>
+                    </li>
+                    <li class="separator">
+                    </li>
+                    <li>
+                        My Profile
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Page Content-->
+    <div class="container padding-bottom-3x mb-2">
+        <div class="row">
+            <div class="col-lg-4">
+                {account_info}
+            </div>
+            <div class="col-lg-8">
+                <div class="padding-top-2x mt-2 hidden-lg-up">
+                </div>
+                <form class="row" enctype="multipart/form-data" id="form_update" method="POST" action="{base}/{controller}/profile_update">
+                    {my_account_detail}
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="account-fn">
+                                First Name
+                            </label>
+                            <input class="form-control" id="{table_aktif}_id" name="{table_aktif}_id" placeholder="" type="hidden" value="{{table_aktif}_id}"/>
+                            <input class="form-control" id="{table_aktif}_name_first" name="{table_aktif}_name_first" required="required" type="text" value="{{table_aktif}_name_first}"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="account-ln">
+                                Last Name
+                            </label>
+                            <input class="form-control" id="{table_aktif}_name_last" name="{table_aktif}_name_last" required="required" type="text" value="{{table_aktif}_name_last}"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="account-email">
+                                E-mail Address
+                            </label>
+                            <input class="form-control" disabled="" id="{table_aktif}_email" name="{table_aktif}_email" type="email" value="{{table_aktif}_email}"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="account-phone">
+                                Phone Number
+                            </label>
+                            <input required="required" class="form-control" id="{table_aktif}_phone" name="{table_aktif}_phone" placeholder="+6212345678901"  type="text" value="{{table_aktif}_phone}"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="account-pass">
+                                New Password
+                            </label>
+                            <input class="form-control" id="{table_aktif}_password" name="{table_aktif}_password" type="password"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="account-confirm-pass">
+                                Confirm Password
+                            </label>
+                            <input class="form-control" id="{table_aktif}_password_confirm" name="{table_aktif}_password_confirm" type="password"/>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group"> 
+                            <label for="avatar">
+                                Avatar
+                            </label>
+                            <input type="hidden" class="form-control" name="avatar_before" id="avatar_before" value="{{table_aktif}_avatar}" placeholder="" />
+                            <input accept="image/png"  class="form-control avatar" id="avatar"  name="avatar" type="file" />
+                        </div>
+                    </div> 
+                    <div class="col-12">
+                        <hr class="mt-2 mb-3"/>
+                        <div class="d-flex flex-wrap justify-content-between align-items-center">
+                            <label class="custom-control custom-checkbox d-block">
+                                <input checked="" class="custom-control-input" type="checkbox"/>
+                                <span class="custom-control-indicator">
+                                </span>
+                                <span class="custom-control-description">
+                                    Subscribe me to Newsletter
+                                </span>
+                            </label>
+                            <button class="btn_profile_update btn btn-success margin-right-none" data-toast="" data-toast-icon="icon-circle-check" data-toast-message="Your profile updated successfuly." data-toast-position="bottomRight" data-toast-title="Success!" data-toast-type="success" type="submit">
+                                Update Profile
+                            </button>
+                        </div>
+                    </div>
+                    {/my_account_detail}
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Site Footer-->
+</div>
+<!-- -->
+<!-- -->
+<style type="text/css">
+    .avatar{
+        padding-top: 7px;
+    }
+    .custom-file-control, .custom-file-control:before{
+        line-height: 30px;
+    }
+    .custom-file-input{
+
+    }
+    .custom-file{
+        display: block;
+    }
+</style>
+<!-- -->
+<script type="text/javascript">
+    // //////////////
+    $('#{table_aktif}_password').on('change keyup', function(event) {
+        event.preventDefault();
+        _password = $('#{table_aktif}_password').val();
+        _password_confirm = $('#{table_aktif}_password_confirm').val();
+        if (_password != _password_confirm) {
+            $('.btn_profile_update').prop('disabled', true);
+        }else{
+            $('.btn_profile_update').prop('disabled', false);
+        }
+    });
+    // //////////////
+    $('#{table_aktif}_password_confirm').on('change keyup', function(event) {
+        event.preventDefault();
+        _password = $('#{table_aktif}_password').val();
+        _password_confirm = $('#{table_aktif}_password_confirm').val();
+        if (_password != _password_confirm) {
+            $('.btn_profile_update').prop('disabled', true);
+        }else{
+            $('.btn_profile_update').prop('disabled', false);
+        }
+    });
+    // //////////////
+    // //////////////
+    $('.btn_profile_update_').on('click', function(event) {
+        event.preventDefault();
+        var form_update = $('#form_update').serialize();
+        // console.log(form_update);
+        $.ajax({
+            url: 'profile_update',
+            type: 'POST',
+            data: form_update,
+            cache: false,
+            contentType: false,
+            processData: false,
+        })
+        .done(function(res) {
+            console.log(res);
+
+            $('.my_name_first').html($('#{table_aktif}_name_first').val());
+            $('.my_name_last').html($('#{table_aktif}_name_last').val());
+        })
+        .fail(function(error) {
+            console.log(error.responseText);
+        });
+        
+        
+    });
+    // ////////////////
+    // ////////////////
+    // ////////////////
+    // ////////////////
+
+    ///////////////////
+    function readURL(input, img_id_or_class) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                // console.log(e);
+                $(img_id_or_class).attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    ///////////////////
+    ///////////////////
+    $("#avatar").change(function() {
+        var _URL = window.URL || window.webkitURL;
+        var image, file;
+        var el = this ;
+        $('#_avatar_remove').removeClass('hidden').show(); 
+        if ((file = el.files[0])) {
+            image = new Image();
+            image.src = _URL.createObjectURL(file);
+            image.onload = function() {
+                if (this.width == 256 && this.height == 256 ) {
+                    readURL(el, '.my_avatar');
+                    // readURL(el, $('.preview_card_avatar').find('img'));
+                }else{
+                    alert('Error:\n\nThe avatar dimension must 256 x 256 pixels.');
+                    $("#avatar").val(''); 
+                    $('.my_avatar').attr('src', '{base}/files/images/default.png');
+                    // $('.preview_card_avatar').find('img').attr('src', '{base}/files/images/default-avatar.png');
+                    // $('#_avatar_remove').removeClass('hidden').hide(); 
+                }
+            }
+        }
+    });
+    ///////////////////
+    ////////////////////
+    $('#_avatar_remove').on('click', function(event) {
+        event.preventDefault();
+        if (confirm('Are you sure?')) {
+            $(this).hide(); 
+            var _id = $(this).data('id');
+            $.ajax({
+                url: '{base}/{controller}/remove_avatar/' + _id,
+                data: {_id: _id},
+            })
+            .done(function(res) {
+                // console.log(res);
+                $('#_avatar_remove').hide(); 
+                $('.my_avatar').attr('src', '{base}/files/images/default.png');
+                // $('.preview_card_avatar').find('img').attr('src', '{base}/files/images/default-avatar.png');
+            })
+            .fail(function(error) {
+                console.log(error.responseText);
+            });
+        }
+    });
+    ////////////////////
+    // ////////////////
+</script>

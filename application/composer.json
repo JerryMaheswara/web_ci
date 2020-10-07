@@ -1,0 +1,11 @@
+{
+    "require": {
+        "hautelook/phpass": "^1.1",
+        "zendframework/zend-barcode": "^2.6",
+        "phpoffice/phpexcel": "^1.8",
+        "chrisjean/php-ico": "^1.0",
+        "bshaffer/oauth2-server-php": "^1.10",
+        "google/apiclient": "^2.2",
+        "endroid/qr-code": "^2.5"
+    }
+}

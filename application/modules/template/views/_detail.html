@@ -1,0 +1,255 @@
+<div class="box box-{skin_box} skin_box">
+    <div class="box-body">
+        <legend>
+            Detail
+        </legend>
+        <div class="col-sm-6">
+            <form action="" class="form-horizontal" method="POST" role="form">
+                {template_detail}
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <span class="pull-right">
+                            <a class="btn btn-xs btn-warning" href="{base}/{controller}/edit/{{controller}_id}">
+                                <i class="fa fa-fw fa-pencil"></i>
+                                Edit
+                            </a>
+                        </span>
+                        <label class="control-label">
+                            Name :
+                        </label>
+                        {template_name}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {template_content}
+                    <div class="col-sm-4">
+                        <h4>
+                            Logo:
+                        </h4>
+                        <div class="logo_align">
+                            <label>
+                                Align:
+                            </label>
+                            {logo_align}
+                        </div>
+                        <div class="logo_width">
+                            <label>
+                                Width:
+                            </label>
+                            {logo_width}%
+                        </div>
+                        <div class="logo_top">
+                            <label>
+                                Top:
+                            </label>
+                            {logo_top}%
+                        </div>
+                        <div class="logo_left_right">
+                            <label>
+                                Left:
+                            </label>
+                            {logo_left_right}%
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <h4>
+                            Photo:
+                        </h4>
+                        <div class="photo_align">
+                            <label>
+                                Align:
+                            </label>
+                            {photo_align}
+                        </div>
+                        <div class="photo_width">
+                            <label>
+                                Width:
+                            </label>
+                            {photo_width}%
+                        </div>
+                        <div class="photo_top">
+                            <label>
+                                Top:
+                            </label>
+                            {photo_top}%
+                        </div>
+                        <div class="photo_left_right">
+                            <label>
+                                Right:
+                            </label>
+                            {photo_left_right}%
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <h4>
+                            Info:
+                        </h4>
+                        <div class="info_align">
+                            <label>
+                                Align:
+                            </label>
+                            {info_align}
+                        </div>
+                        <div class="info_width">
+                            <label>
+                                Width :
+                            </label>
+                            {info_width}%
+                        </div>
+                        <div class="info_top">
+                            <label>
+                                Top :
+                            </label>
+                            {info_top}%
+                        </div>
+                        <div class="info_left_right">
+                            <label>
+                                Left:
+                            </label>
+                            {info_left_right}%
+                        </div>
+                    </div>
+                    {/template_content}
+                </div>
+                {/template_detail}
+            </form>
+        </div>
+        <div class="col-sm-6">
+                <center>
+            {template_detail}
+            <div style="min-width:300px; max-width: 460px;">
+                <div class="" style=" border-radius: 13px; color:#222; padding: 0 22px;">
+                    <label>
+                        Preview
+                    </label>
+                    <div class="" style="width:100%;position: relative;">
+                        {template_content}
+                        <span class=" text-{logo_align}" style="width:100%;position: ">
+                            <div class="preview_card_logo" style="position: absolute; 
+                                        top: {logo_top}%;  
+                                        {logo_align} : {logo_left_right}%;
+                                        width: {logo_width}%; ">
+                                <img src="{base}/files/images/default-logo.png" style="border: 1px solid #eee; width: 100% !important;"/>
+                            </div>
+                        </span>
+                        <span class=" text-{photo_align}" style="width:100%;position: ">
+                            <div class="preview_card_photo" style="position: absolute; 
+                                        top: {photo_top}%;  
+                                        {photo_align} :{photo_left_right}%;
+                                        width: {photo_width}%; ">
+                                <img src="{base}/files/images/default-avatar.png" style="border: 1px solid #eee; width: 100% !important;"/>
+                            </div>
+                        </span>
+                        <span class="preview_card_info text-{info_align}" style="position: absolute; 
+                                    top: {info_top}%;  
+                                    {info_align} :{info_left_right}%;
+                                    width: {info_width}%;
+                                    color:#fff;
+                                    text-transform: uppercase;
+                                    font-weight: bold ">
+                            <div class="min320">
+                                <div style="font-size: 10pt;">
+                                    1234 5678 9102 3456
+                                </div>
+                                <div style="font-size: 12pt; white-space: nowrap;">
+                                    The name of member
+                                </div>
+                                <div style="font-size: 10pt;">
+                                    Expired : 2018-10-30
+                                </div>
+                            </div>
+                            <div class="min480">
+                                <div style="font-size: 16pt">
+                                    1234 5678 9102 3456
+                                </div>
+                                <div style="font-size: 20pt">
+                                    The name of member
+                                </div>
+                                <div style="font-size: 15pt">
+                                    Expired : 2018-10-30
+                                </div>
+                            </div>
+                        </span>
+                        <img id="preview_card_bg" src="{base}/files/images/default-card.png" style="border-radius: 10px;" width="100%"/>
+                        {/template_content}
+                    </div>
+                </div>
+            </div>
+            {/template_detail}
+        </center>
+        </div>
+    </div>
+</div>
+<!-- -->
+<!-- -->
+<style type="text/css">
+    @media screen and (min-width: 430px) {
+        .min320 {
+           display: none;
+        }
+        .min480{
+            text-shadow: 0px 0px 6px #000;
+        }
+    }
+    @media screen and (max-width: 429px) {
+        .min320 {
+            text-shadow: 0px 0px 6px #000;
+        }
+        .min480{
+           display: none;
+        }
+    }
+</style>
+<!-- -->
+<!-- -->
+<script type="text/javascript">
+    // $('.logo_right, .photo_right, .info_right').hide();
+    $('#logo_align, #photo_align, #info_align').on('change',function(event) {
+        event.preventDefault();
+        var val = $(this).val();
+        var label = $(this).data('label');
+        kanan_kiri(label, val); 
+    }); 
+
+    function kanan_kiri(label, val) {
+        if (val == 'left') {
+            $('.'+label+'_left_right').find('label').html('Left'); 
+        }else{
+            $('.'+label+'_left_right').find('label').html('Right'); 
+        }
+    }
+    /////////////////////
+    /////////////////////
+    
+    $('#logo_top, #photo_top, #info_top').on('change keyup', function(event) {
+        var top = $(this).val();
+        var label = $(this).data('label');
+        $('.preview_card_'+label).css('top', top+'%');
+    });
+    /////////////////////
+    
+    $('#logo_left_right, #photo_left_right, #info_left_right').on('change keyup', function(event) {
+        var left_right = $(this).val();
+        var label = $(this).data('label');
+        if ($('#'+label+'_align').val() == 'left') {
+            $('.preview_card_'+label).css('left', left_right+'%');
+        }else{
+            $('.preview_card_'+label).css('right', left_right+'%');
+        }
+    });
+    /////////////////////
+    
+    $('#logo_width, #photo_width, #info_width').on('change keyup', function(event) {
+        var width = $(this).val();
+        var label = $(this).data('label');
+        $('.preview_card_'+label).css('width', width+'%');
+    });
+    /////////////////////
+    
+    $('#logo_align, #photo_align, #info_align').on('change keyup', function(event) {
+        var align = $(this).val();
+        var label = $(this).data('label');
+        $('.preview_card_'+label).css('text-align', align );
+    });
+    /////////////////////
+</script>

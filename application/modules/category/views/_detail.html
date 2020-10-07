@@ -1,0 +1,87 @@
+<div class="box box-{skin_box} skin_box">
+    <div class="box-body">
+        {breadcrumb}
+        <div class="row">
+            <div class="col-sm-6">
+                <span class="pull-right {_is_allowed}">
+                    <a class="btn btn-warning btn-xs" href="{base}/{controller}/edit/{{controller}_detail}{{controller}_id}{/{controller}_detail}">
+                        <i class="fa fa-fw fa-pencil">
+                        </i>
+                        Edit
+                    </a>
+                </span>
+                <legend class="h4">
+                    <span style="text-transform: capitalize;">
+                        {m_detail} {controller}
+                    </span>
+                </legend>
+                <div class=" form-horizontal">
+                    <table class="table table-striped">
+                        <tbody>
+                            {{controller}_detail}
+                            <tr>
+                                <th class="text-right" width="40%">
+                                    {m_name} :
+                                </th>
+                                <td>
+                                    {{controller}_name}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="text-right">
+                                    {m_description} :
+                                </th>
+                                <td>
+                                    {{controller}_description}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="text-right">
+                                    {m_level} :
+                                </th>
+                                <td>
+                                    {{controller}_level}
+                                </td>
+                            </tr>
+                            {/{controller}_detail}
+                            <tr>
+                                <th class="text-right">
+                                    Parent :
+                                </th>
+                                <td>
+                                    {parent_category}
+                                    <a href="{base}/{controller}/detail/{category_id}">
+                                        {category_name}
+                                    </a>
+                                    {/parent_category}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="text-right">
+                                    Sub :
+                                </th>
+                                <td>
+                                    {sub_category}
+                                    <li>
+                                        <a href="{base}/{controller}/detail/{category_id}">
+                                            {category_name}
+                                        </a>
+                                    </li>
+                                    {/sub_category}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <legend class="h4">
+                    Image:
+                </legend>
+                {{controller}_detail}
+                <img class="img-responsive" src="{base}/files/images/{{controller}_image}" width="128px"/>
+                {/{controller}_detail}
+            </div>
+        </div>
+    </div>
+</div>

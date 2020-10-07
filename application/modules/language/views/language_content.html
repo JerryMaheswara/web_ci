@@ -1,0 +1,323 @@
+<div class="box box-{skin_box} skin_box">
+    <div class="box-header ">
+        <legend>
+            <a class=" " href="{base}/dashboard">
+                <i class="fa fa-fw fa-angle-left">
+                </i>
+            </a>
+            {m_language}
+        </legend>
+        <div class="">
+            <a class="btn btn-primary" href="{base}/dashboard">
+                <i class="fa fa-dashboard fa-fw">
+                </i>
+                {m_dashboard}
+            </a>
+            <a class="btn btn-danger " href="{base}/language/site_term">
+                <i class="fa fa-flag fa-fw">
+                </i>
+                {m_site_term}
+            </a>
+        </div>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body ">
+        <div class="row">
+            <div class="col-sm-6">
+                <h4>
+                    {m_language}
+                </h4>
+                <table cellpadding="0" cellspacing="0" class="display table table-striped table-bordered responsive" id="all_language" width="100%">
+                    <thead>
+                        <tr class="bg-{skin} tr_skin">
+                            <th>
+                                #
+                            </th>
+                            <th>
+                                {m_language}
+                            </th>
+                            <th>
+                                {m_action}
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="col-sm-6">
+                <h4>
+                    {m_site_language}
+                </h4>
+                <table cellpadding="0" cellspacing="0" class="display table table-striped table-bordered responsive" id="site_language" width="100%">
+                    <thead>
+                        <tr class="bg-{skin} tr_skin">
+                            <th>
+                                #
+                            </th>
+                            <th>
+                                {m_id}
+                            </th>
+                            <th>
+                                {m_language}
+                            </th>
+                            <th>
+                                {m_action}
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- /.box-body -->
+</div>
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<link href="{base}/files/bower_components/AdminLTE/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css">
+    <script src="{base}/files/bower_components/AdminLTE/plugins/datatables/jquery.dataTables.min.js">
+    </script>
+    <script src="{base}/files/bower_components/AdminLTE/plugins/datatables/dataTables.bootstrap.min.js">
+    </script>
+    <!-- ========================================================================== -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+    var table_all_language = $('#all_language').DataTable( {  
+        // "bPaginate": false,
+        // "processing": true,
+        // "serverSide": true,
+        "pagingType":"simple", //numbers, simple, simple_numbers, full, full_numbers
+        "ajax": {
+          "url": "{base}/language/language_ajax",
+          "dataSrc": "",
+          // "data" : function ( d ) {
+          //       d.myKey = "myValue";
+          //       // d.custom = $('#myInput').val();
+          //       // etc
+          //   }
+        },
+        "scrollX": true,
+        // "fixedHeader": true,
+        // "scrollY":        "90vh",
+        // "scrollCollapse": false,
+        // "paging":         false,
+        "columns": [  
+            { "data": "nomor" }, 
+            { "data": null,  
+                render : function ( data, type, full, meta ) {
+                  return '<a href="{base}/language/detail/'+full.language_id+'">'+full.language_name+' - '+full.language_country+' </a>'+
+                  '<span class="pull-right">'+full.language_culture_name+'-'+full.country_iso_short+'</span> ';
+                }
+            }, 
+            { "data": null,
+              render : function(data, type, full, meta){
+                return '<a class="btn_add btn btn-success btn-xs btn-flat" data-language_name="'+full.language_name+' - '+full.language_country+'" data-language_id="'+full.language_id+'"><i class="fa fa-plus fa-fw"></i> {m_add}</a>'
+              }
+        
+            }, 
+        ],
+        // "columnDefs": [ {
+        //     "targets": -1,
+        //     "data": null,
+        //     "defaultContent": 
+        //     '<a class="btn btn-warning btn-xs btn-flat btn_edit visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"" data-toggle="modal" href="#language_add_edit"><i class="fa fa-pencil"></i> Edit</a> '+
+        //     '<a class="btn btn-danger btn-xs btn-flat btn_delete visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"" data-toggle="modal" href="#language_delete"><i class="fa fa-trash"></i> Delete</a>'
+        // } ],
+    });
+    /**/ 
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+    var table_site_language = $('#site_language').DataTable( {  
+        "bPaginate": false,
+        // "processing": true,
+        // "serverSide": true,
+        "ajax": {
+          "url": "{base}/language/site_language_ajax",
+          "dataSrc": "",
+          // "data" : function ( d ) {
+          //       d.myKey = "myValue";
+          //       // d.custom = $('#myInput').val();
+          //       // etc
+          //   }
+        },
+        "scrollX": true,
+        // "fixedHeader": true,
+        // "scrollY":        "90vh",
+        // "scrollCollapse": false,
+        // "paging":         false,
+        "columns": [ 
+            { "data": "nomor" },
+            { "data": "language_id" },
+            { "data": "language_name",  
+                render : function ( data, type, full, meta ) {
+                  return '<a href="{base}/language/detail/'+full.language_id+'">'+full.language_name+' - '+full.language_country+' </a>'+
+                  '<span class="pull-right">'+full.language_culture_name+'-'+full.country_iso_short+'</span> ';
+                }
+            }, 
+            { "data": null,
+              render : function(data, type, full, meta){
+                return '<a class="btn_delete btn btn-danger btn-xs btn-flat  visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" '+
+                'data-toggle="modal" href="#language_delete" data-language_name="'+full.language_name+' - '+full.language_country+'" data-language_id="'+full.language_id+'"><i class="fa fa-trash fa-fw"></i> {m_delete}</a>'
+              }
+        
+            }, 
+        ],
+        // "columnDefs": [ {
+        //     "targets": -1,
+        //     "data": null,
+        //     "defaultContent": 
+        //     '<a class="btn btn-warning btn-xs btn-flat btn_edit visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"" data-toggle="modal" href="#language_add_edit"><i class="fa fa-pencil"></i> Edit</a> '+
+        //     '<a class="btn btn-danger btn-xs btn-flat btn_delete visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block"" data-toggle="modal" href="#language_delete"><i class="fa fa-trash"></i> Delete</a>'
+        // } ],
+    });
+    /**/ 
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+    $('#site_language tbody').on( 'click', '.btn_edit', function () {
+      var btn_edit = $(this);
+      var data = table.row(btn_edit.parents('tr')).data();
+      var result = Object.keys(data).forEach(function(k) {
+        btn_edit.data(k,data[k]);
+      }); 
+    });
+    ///////////////////////////////////////////////////////////////////////////
+    $('#del_submit').click(function(event) {
+      language_id = $(this).data('language_id');
+      // console.log(language_id);
+      $.ajax({
+        url: '{base}/language/site_language_ajax',
+        type: 'POST',
+        data: {
+          action: 'delete',
+          language_id: language_id,
+        },
+      })
+      .done(function() {
+        // console.log("success");
+        table_all_language.ajax.reload( null, false );
+        table_site_language.ajax.reload( null, false );
+      })
+      .fail(function(error) {
+        console.log(error.responseText);
+      });
+    });
+    ///////////////////////////////////////////////////////////////////////////
+    $('#all_language tbody').on( 'click', '.btn_add', function () {
+      language_id = $(this).data('language_id');
+      // console.log(language_id);
+      $.ajax({
+        url: '{base}/language/site_language_ajax',
+        type: 'POST',
+        data: {
+          action: 'add',
+          language_id: language_id,
+        },
+      })
+      .done(function() {
+        // console.log("success");
+        table_all_language.ajax.reload( null, false );
+        table_site_language.ajax.reload( null, false );
+      })
+      .fail(function(error) {
+        console.log(error.responseText);
+      });
+    });
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    $('#btn_submit').click(function(event) {
+      var form = $('#form_language_add_edit');
+      fff = form.serialize();
+      // console.log(fff);
+      $.ajax({
+        url: '{base}/dashboard/language_post',
+        type: 'POST',
+        data: form.serialize(),
+      })
+      .done(function(data) {
+        // console.log('Success');
+        // data = jQuery.parseJSON(data);
+        // console.log(data.status);
+        table.ajax.reload( null, false );
+      })
+      .fail(function(error) {
+        console.log(error.responseText);
+        // console.log(data);
+      });
+      
+    });
+    ///////////////////////////////////////////////////////////////////////////
+    $('input').keypress(function(e) {
+        if (e.which == '13') {
+          $('#btn_submit').trigger('click');
+        }
+    });
+
+    ///////////////////////////////////////////////////////////////////////////
+
+  });
+    </script>
+    <!-- ========================================================================== -->
+    <div class="modal modal-warning fade" id="language_delete">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+                        ×
+                    </button>
+                    <h4 class="modal-title">
+                        Modal title
+                    </h4>
+                </div>
+                <div class="modal-body text-center">
+                    <div class=" ">
+                        <i class="fa fa-ban fa-4x">
+                        </i>
+                        <h4>
+                            <div>
+                                Are you sure to delete
+                                <b>
+                                    <span id="language_name">
+                                    </span>
+                                    language
+                                </b>
+                                ?
+                            </div>
+                            Warning: All related translation will be deleted.
+                        </h4>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal" type="button">
+                        No
+                    </button>
+                    <button class="btn btn-danger" data-dismiss="modal" id="del_submit" type="button">
+                        Yes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <script type="text/javascript">
+        $('#language_delete').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    var title = button.data('title');
+    var language_id = button.data('language_id');
+    var language_name = button.data('language_name');
+    var modal = $(this);
+    modal.find('.modal-title').text('Delete '+language_name +' Language');
+    modal.find('#language_name').html(language_name);
+    modal.find('#del_submit').data('language_id',language_id);
+  });
+    </script>
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+    <!-- ========================================================================== -->
+</link>

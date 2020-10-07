@@ -1,0 +1,70 @@
+<div class="box box-{skin_box} skin_box">
+    <div class="box-header">
+        <legend>
+            {m_setting}
+        </legend>
+        <div>
+            {set_limit}
+        </div>
+    </div>
+    <div class="box-body">
+        <div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            {m_app}
+                        </th>
+                        <th>
+                            {m_organisation}
+                        </th>
+                        <th>
+                            {m_price}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {setting_all}
+                    <tr>
+                        <td>
+                            {nomor_urut}
+                        </td>
+                        <td>
+                            {app_name}
+                        </td>
+                        <td>
+                            <div aria-label="..." class="btn-group" role="group">
+                                <div class="btn-group" role="group">
+                                    <button aria-expanded="false" aria-haspopup="true" class="btn btn-success btn-xs dropdown-toggle" data-toggle="dropdown" type="button">
+                                        Select...
+                                        <span class="caret">
+                                        </span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        {organisation}
+                                        <li>
+                                            <a href="{base}/setting/{app_slug}/?organisation_id={organisation_id}">
+                                                {organisation_name}
+                                            </a>
+                                        </li>
+                                        {/organisation}
+                                    </ul>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            $ {app_price} / user
+                        </td>
+                    </tr>
+                    {/setting_all}
+                </tbody>
+            </table>
+        </div>
+        <div>
+            {paging}
+        </div>
+    </div>
+</div>

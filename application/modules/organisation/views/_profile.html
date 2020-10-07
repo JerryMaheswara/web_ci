@@ -1,0 +1,89 @@
+<div class="box box-{skin_box} skin_box">
+    <div class="box-body">
+        <div class="pull-right">
+            <a class="btn btn-warning btn-xs" href="{base}/{controller}/edit/{{controller}_id_before}">
+                <i class="fa fa-fw fa-pencil">
+                </i>
+                Edit
+            </a>
+        </div>
+        <legend>
+            Profile
+        </legend>
+        {{controller}_detail}
+        <div class="col-sm-6">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th class="text-right" width="40%">
+                            Name :
+                        </th>
+                        <td class="text-left">
+                            {{controller}_name}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="text-right" width="40%">
+                            Email :
+                        </th>
+                        <td class="text-left">
+                            {{controller}_email}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">
+                            Phone :
+                        </th>
+                        <td class="text-left">
+                            {{controller}_phone}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">
+                            Address :
+                        </th>
+                        <td class="text-left">
+                            {{controller}_address}
+                            <div>
+                                {kelurahan}
+                                {kecamatan}
+                            </div>
+                            <div>
+                                {jenis_kabupaten}
+                                {kabupaten}
+                            </div>
+                            <div>
+                                {kodepos}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">
+                            Since :
+                        </th>
+                        <td>
+                            {{controller}_created}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">
+                            Last Update :
+                        </th>
+                        <td>
+                            {{controller}_updated}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-6">
+            <img src="{base}/files/images/{controller}/{{controller}_avatar}.jpg" width="100px"/>
+        </div>
+    </div>
+    <div class="box-body">
+        <legend>
+            Community
+        </legend>
+    </div>
+</div>
+{/{controller}_detail}

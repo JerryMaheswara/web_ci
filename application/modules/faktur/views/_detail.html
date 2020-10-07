@@ -1,0 +1,248 @@
+<div class="box box-{skin_box} skin_box">
+    <div class="box-body">
+        {breadcrumb}
+        {{controller}_detail}
+        <div class="form-horizontal">
+            <legend class="text-center">
+                Faktur Kendaraan Bermotor
+            </legend>
+            <div id="faktur"> 
+                <div class="clearfix row">
+                    <div class="col-sm-6 text-left">
+                        <legend>
+                            Nomor Faktur : {faktur_nomor}
+                        </legend>
+                    </div> 
+                    <div class="col-sm-6 text-right">
+                        <legend>
+                            Tanggal : {faktur_tanggal}
+                        </legend>
+                    </div> 
+                </div>
+            </div>
+            <div id="pemilik">
+                <legend>
+                    Identitas Pemilik :
+                </legend>
+                <div class="clearfix">
+                    <div class="col-sm-4 text-right">
+                        <label>
+                            Atas Nama :
+                        </label>
+                    </div>
+                    <div class="col-sm-8 ">
+                        {pemilik_nama}
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="col-sm-4 text-right">
+                        <label>
+                            Alamat :
+                        </label>
+                    </div>
+                    <div class="col-sm-8 ">
+                        {pemilik_alamat}
+                        <br/>
+                        Kel. {pemilik_kelurahan} - Kec. {pemilik_kecamatan}
+                        <br/>
+                        {pemilik_jenis_kabupaten} {pemilik_kabupaten} - {pemilik_kodepos}
+                        <br/>
+                    </div>
+                </div>
+            </div>
+            <div id="kendaraan">
+                <legend>
+                    Identitas Kendaraan :
+                </legend>
+                <div class="clearfix">
+                    <div class="col-sm-4 text-right">
+                        <label>
+                            Merk :
+                        </label>
+                    </div>
+                    <div class="col-sm-8 ">
+                        {kendaraan_merk}
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="col-sm-4 text-right">
+                        <label>
+                            Type :
+                        </label>
+                    </div>
+                    <div class="col-sm-8 ">
+                        {kendaraan_type} 
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="col-sm-4 text-right">
+                        <label>
+                            Jenis :
+                        </label>
+                    </div>
+                    <div class="col-sm-8 ">
+                        {kendaraan_jenis} 
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="col-sm-4 text-right">
+                        <label>
+                            Model :
+                        </label>
+                    </div>
+                    <div class="col-sm-8 ">
+                        {kendaraan_model} 
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="col-sm-4 text-right">
+                        <label>
+                            Tahun Pembuatan :
+                        </label>
+                    </div>
+                    <div class="col-sm-8 ">
+                        {kendaraan_tahun} 
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="col-sm-4 text-right">
+                        <label>
+                            Isi Silinder :
+                        </label>
+                    </div>
+                    <div class="col-sm-8 ">
+                        {kendaraan_isi_silinder} 
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="col-sm-4 text-right">
+                        <label>
+                            Warna :
+                        </label>
+                    </div>
+                    <div class="col-sm-8 ">
+                        {kendaraan_warna} 
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="col-sm-4 text-right">
+                        <label>
+                            No. Rangkaian/ NIK/VIN :
+                        </label>
+                    </div>
+                    <div class="col-sm-8 ">
+                        {kendaraan_no_rangkaian} 
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="col-sm-4 text-right">
+                        <label>
+                            Nomor Mesin :
+                        </label>
+                    </div>
+                    <div class="col-sm-8 ">
+                        {kendaraan_no_mesin} 
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="col-sm-4 text-right">
+                        <label>
+                            Bahan Bakar :
+                        </label>
+                    </div>
+                    <div class="col-sm-8 ">
+                        {kendaraan_bahan_bakar} 
+                    </div>
+                </div>
+
+                <div class="clearfix">
+                    <div class="col-sm-4 text-right">
+                        <label>
+                            Harga :
+                        </label>
+                    </div>
+                    <div class="col-sm-8 ">
+                        {kendaraan_harga} 
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div id="dokumen">
+                <legend>
+                    Data Dokumen Pendukung :
+                </legend>
+                <div class="clearfix">
+                    <div class="col-sm-4 text-right">
+                        <label>
+                            Formulir A/B :
+                        </label>
+                    </div>
+                    <div class="col-sm-8 ">
+                        {dokumen_formulir_ab}
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="col-sm-4 text-right">
+                        <label>
+                            PIB :
+                        </label>
+                    </div>
+                    <div class="col-sm-8 ">
+                        {dokumen_pib} 
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="col-sm-4 text-right">
+                        <label>
+                            TPT :
+                        </label>
+                    </div>
+                    <div class="col-sm-8 ">
+                        {dokumen_tpt} 
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="col-sm-4 text-right">
+                        <label>
+                            SUT :
+                        </label>
+                    </div>
+                    <div class="col-sm-8 ">
+                        {dokumen_sut} 
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="col-sm-4 text-right">
+                        <label>
+                            SRUT :
+                        </label>
+                    </div>
+                    <div class="col-sm-8 ">
+                        {dokumen_srut} 
+                    </div>
+                </div>
+ 
+
+
+
+            </div>
+            <div id="action">
+                <div class="clearfix">
+                    <div class="col-sm-4">
+                    </div>
+                    <div class="col-sm-8 ">
+                        <a class="btn btn-sm btn-warning {_is_allowed}" href="{base}/{controller}/edit/{{controller}_id}">
+                            {m_edit}
+                        </a>
+                        <a class="btn btn-sm btn-danger {_is_allowed}" href="{base}/{controller}/delete/{{controller}_id}" onclick="return confirm('Are you sure...?')">
+                            {m_delete}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {/{controller}_detail}
+    </div>
+</div>

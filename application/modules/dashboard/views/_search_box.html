@@ -1,0 +1,18 @@
+<form action="{base}/{controller}/search" id=" " method="GET">
+    <div class="input-group col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-12 col-xs-12">
+        <span class="input-group-btn">
+            <a class="btn btn-success btn-sm" href="{base}/{controller} ">
+                <i class="fa fa-fw fa-chevron-left">
+                </i>
+            </a>
+        </span>
+        <input autocomplete="off" class="form-control input-sm search_term" name="search" placeholder="{m_search}" type="text" value="{query_strings}{value}{/query_strings}"/>
+        <span class="input-group-btn">
+            <button class="btn btn-primary btn-sm" type="submit">
+                <i class="fa fa-search">
+                </i>
+                {m_search}
+            </button>
+        </span>
+    </div>
+</form>

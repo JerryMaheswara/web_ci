@@ -1,0 +1,136 @@
+<div class="box box-{skin_box} skin_box">
+    <div class="box-body">
+        <legend>
+            Lottery
+        </legend>
+            <div class="text-center" style="margin-bottom: 30px;">
+                {organisation}
+                <a href="{base}/">
+                    <img src="{base}/files/images/organisation/{organisation_logo}.png" width="64px"/>
+                </a>
+                {/organisation}
+            </div>
+        <div class=" col-sm-4 col-sm-offset-4 text-center" style="margin-bottom: 50px;">
+            <div class="output">
+                0
+            </div>
+        </div>
+        <div action="" class="form-horizontal col-sm-6" method="POST" role="form">
+            <legend class="h4">
+                Setting:
+            </legend>
+            <div class="form-group">
+                <div class="col-sm-3">
+                    <label class="control-label">
+                        Total Winner :
+                    </label>
+                </div>
+                <div class="col-sm-9">
+                    <input class="form-control" id="winner" type="number" value="5"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-3">
+                    <label class="control-label">
+                        Last Number:
+                    </label>
+                </div>
+                <div class="col-sm-9">
+                    <input class="form-control" id="lastdigit" type="number" value="100"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-9 col-sm-offset-3">
+                    <button class="btn btn-lg btn-block btn-danger" id="stop" style="display: none;">
+                        Stop
+                    </button>
+                    <button class="btn btn-lg btn-block btn-success" id="shuffle">
+                        Shuffle
+                    </button>
+                    <button class="btn btn-lg btn-block btn-success" id="again" style="display: none;">
+                        Play Again!
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <legend class="h4">
+                Result:
+            </legend>
+            <div class="lot">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- -->
+<style type="text/css">
+    .output { 
+        background: #b00;
+        font-size: 80px;
+        border-radius: 110px;
+        /*width: 220px;*/
+        height: 150px;
+        line-height: 150px;
+        color: white;
+        /*text-align: center;*/
+    }
+</style>
+<!-- -->
+<script type="text/javascript">
+    // var numbers = [12, 54, 32, 45, 21, 69, 20];
+    // function printNumbers(numbersToPrint) {
+    //     $(".output").text(numbersToPrint.shift());
+    //     if (numbersToPrint.length) {
+    //         setTimeout(function() {
+    //             printNumbers(numbersToPrint);
+    //         }, 500)
+    //     }
+    // }
+
+    // $('#shuffle').on('click', function(event) {
+    //     event.preventDefault(); 
+    //     printNumbers(numbers.slice()); 
+    // });
+    var animationTimer, output, started, duration, nn;
+    function generate() {
+        var lastdigit = parseInt($('#lastdigit').val());
+        output = $('.output'); 
+        animationTimer = setInterval(function() { 
+            output.text(
+                ''+ 
+                Math.floor(Math.random() * lastdigit)
+            );
+        }, 100);
+    }
+
+    $("#shuffle").on("click", function(e){
+        e.preventDefault();
+        generate();
+        $(this).hide();
+        var ke = $('.lot').children('div').length + 1;
+
+        $("#stop").show().text('Get Winner # '+ ke);
+
+    });
+    $('#stop').on('click', function(event) {
+        var winner = parseInt($('#winner').val()) - 1;
+        event.preventDefault();
+        clearInterval(animationTimer);
+        $(this).hide();
+        $("#shuffle").show().text('Next Winner');
+        var ke = $('.lot').children('div').length + 1;
+        $('.lot').append('<div class="h4">Winner #'+ke+' : No. '+output.text()+'</div>');
+        if ($('.lot').children().length > winner ) {
+            $("#shuffle").hide();
+            $("#stop").hide();
+            // $("#again").show();
+        }
+    });
+
+    $('#again').on('click', function(){
+        $(this).hide();
+        $('.lot').children().remove(); 
+        $('#shuffle').show();
+        $('.output').text('888');
+    });
+</script>

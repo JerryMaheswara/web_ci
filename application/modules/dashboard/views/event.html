@@ -1,0 +1,568 @@
+Event
+<!-- fullCalendar 2.2.5-->
+<link href="{base}/files/bower_components/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet"/>
+<link href="{base}/files/bower_components/fullcalendar/dist/fullcalendar.print.css" media="print" rel="stylesheet"/>
+<script src="{base}/files/bower_components/moment/moment.js"></script>
+<script src="{base}/files/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+<div class="row">
+
+  <div class="col-md-3">
+    <div class="box box-solid">
+      <div class="box-header with-border">
+        <h4 class="box-title">Draggable Events</h4>
+      </div>
+      <div class="box-body">
+        <!-- the events -->
+        <div id="external-events">
+          <div class="external-event bg-green">Lunch</div>
+          <div class="external-event bg-yellow">Go home</div>
+          <div class="external-event bg-aqua">Do homework</div>
+          <div class="external-event bg-light-blue">Work on UI design</div>
+          <div class="external-event bg-red">Sleep tight</div>
+          <div class="checkbox">
+            <label for="drop-remove">
+              <input type="checkbox" id="drop-remove">
+              remove after drop
+            </label>
+          </div>
+        </div>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /. box -->
+    <div class="box box-solid">
+      <div class="box-header with-border">
+        <h3 class="box-title">Create Event</h3>
+      </div>
+      <div class="box-body">
+        <div class="btn-group" style="width: 100%; margin-bottom: 10px;">
+          <!--<button type="button" id="color-chooser-btn" class="btn btn-info btn-block dropdown-toggle" data-toggle="dropdown">Color <span class="caret"></span></button>-->
+          <ul class="fc-color-picker" id="color-chooser">
+            <li><a class="text-aqua" href="#"><i class="fa fa-square"></i></a></li>
+            <li><a class="text-blue" href="#"><i class="fa fa-square"></i></a></li>
+            <li><a class="text-light-blue" href="#"><i class="fa fa-square"></i></a></li>
+            <li><a class="text-teal" href="#"><i class="fa fa-square"></i></a></li>
+            <li><a class="text-yellow" href="#"><i class="fa fa-square"></i></a></li>
+            <li><a class="text-orange" href="#"><i class="fa fa-square"></i></a></li>
+            <li><a class="text-green" href="#"><i class="fa fa-square"></i></a></li>
+            <li><a class="text-lime" href="#"><i class="fa fa-square"></i></a></li>
+            <li><a class="text-red" href="#"><i class="fa fa-square"></i></a></li>
+            <li><a class="text-purple" href="#"><i class="fa fa-square"></i></a></li>
+            <li><a class="text-fuchsia" href="#"><i class="fa fa-square"></i></a></li>
+            <li><a class="text-muted" href="#"><i class="fa fa-square"></i></a></li>
+            <li><a class="text-navy" href="#"><i class="fa fa-square"></i></a></li>
+          </ul>
+        </div>
+        <!-- /btn-group -->
+        <div class="input-group">
+          <input id="new-event" type="text" class="form-control" placeholder="Event Title">
+
+          <div class="input-group-btn">
+            <button id="add-new-event" type="button" class="btn btn-primary btn-flat">Add</button>
+          </div>
+          <!-- /btn-group -->
+        </div>
+        <!-- /input-group -->
+      </div>
+    </div>
+  </div>
+        <!-- /.col -->  
+  <div class="col-md-9">
+    <div class="box box-primary">
+      <div class="box-body no-padding">
+        <!-- THE CALENDAR -->
+        <div class="fc fc-ltr fc-unthemed" id="calendar">
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /. box -->
+    </div>
+  </div>
+</div>
+
+<!-- ============================ -->
+<div class="modal fade" id="modal_event">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form method="POST" id="form_event" action="{base}/event/event_ajax">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Modal title</h4>
+        </div>
+        <div class="modal-body">
+
+
+                <!--  -->
+                <div class="form-group">
+                  <label>Date:</label>
+
+                  <div class="input-group">
+                    <div class="input-group-addon">
+                      <i class="fa fa-calendar"></i>
+                    </div> 
+                      <input type="text" name="event_date_range" class="form-control pull-right" id="event_date_range"/>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Title:</label>
+                  <input type="hidden" name="action" value="add" />
+                  <input type="hidden" name="event_id"  id="event_id"/>
+                  <input type="text" name="event_title" class="form-control pull-right" id="event_title"/>
+                </div>
+                <!--  -->
+                <div class="form-group">
+                  <label>Description:</label>
+                  <input type="text" name="event_description" class="form-control pull-right" id="event_description"/>
+                </div>
+                <!--  -->
+                <div class="form-group">
+                  <label>URL:</label>
+                  <input type="text" name="event_url" class="form-control pull-right" id="event_url"/>
+                </div>
+                <!--  -->
+                <div class="form-group">
+                  <label>Color:</label>
+                  <input type="hidden" class="form-control pull-right" id="event_color_before"/> 
+                  <div class="div_event_color"></div>
+                </div>
+                <!--  -->
+                <div class="form-group">
+                  <label>All Day:</label> 
+                  <select id="event_all_day" name="event_all_day" class="form-control">
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                  </select>
+                </div>
+                <!--  -->
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button type="button" id="event_submit" class="btn btn-primary" data-dismiss="modal">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- ============================ -->
+ 
+<!-- ============================ -->
+<link rel="stylesheet" href="{base}/files/bower_components/AdminLTE/plugins/daterangepicker/daterangepicker.css">
+<link rel="stylesheet" href="{base}/files/bower_components/AdminLTE/plugins/colorpicker/bootstrap-colorpicker.min.css">
+<script src="{base}/files/bower_components/AdminLTE/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="{base}/files/bower_components/AdminLTE/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+
+<script type="text/javascript">
+
+    var event_all = $.ajax({
+        type: "GET",
+        url: "{base}/event/event_ajax",
+        // url: "{base}/public/scripts/fa.json?s=s",
+        dataType: "json",
+        async: false,
+        cache: true
+      }).responseJSON; 
+    
+  // console.log(event_all);
+
+  $(document).ready(function() {
+    // $("#event_color").colorpicker();
+    // $('#event_date_range').daterangepicker();
+    $('#event_submit').click(function(event) {
+      /* Act on the event */
+      // $('#form_event').submit();
+      var post_data = $('#form_event').serialize();
+      $.ajax({
+        url: '{base}/event/event_ajax',
+        type: 'POST',
+        data: post_data,
+      })
+      .done(function(data) {
+        console.log(data);
+        var event_all = $.ajax({
+          type: "GET",
+          url: "{base}/event/event_ajax",
+          // url: "{base}/public/scripts/fa.json?s=s",
+          dataType: "json",
+          async: false,
+          cache: true
+        }).responseJSON;
+        $('#calendar').fullCalendar('removeEvents');
+        $('#calendar').fullCalendar('addEventSource', event_all);         
+        $('#calendar').fullCalendar('rerenderEvents' );
+      })
+      .fail(function() {
+        console.log("error");
+      });
+      
+      // console.log(post_data);
+    });
+ 
+    var colors = ['red', 'green', 'blue', 'teal', 'yellow', 'aqua', 'light-blue', 'purple', 'maroon'];
+    
+    /* initialize the external events
+     -----------------------------------------------------------------*/
+    function ini_events(ele) {
+      ele.each(function () {
+
+        // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
+        // it doesn't need to have a start or end
+        var eventObject = {
+          title: $.trim($(this).text()) // use the element's text as the event title
+        };
+
+        // store the Event Object in the DOM element so we can get to it later
+        $(this).data('eventObject', eventObject);
+
+        // make the event draggable using jQuery UI
+        $(this).draggable({
+          zIndex: 1070,
+          revert: true, // will cause the event to go back to its
+          revertDuration: 0  //  original position after the drag
+        });
+
+      });
+    }
+
+    ini_events($('#external-events div.external-event'));
+
+    /* initialize the calendar
+     -----------------------------------------------------------------*/
+    //Date for the calendar events (dummy data)
+    var date = new Date();
+    var d = date.getDate(),
+        m = date.getMonth(),
+        y = date.getFullYear();
+    // $('#calendar').fullCalendar('option', 'timezone', 'Asia/Jakarta');
+
+
+    $('#calendar').fullCalendar('option', 'timezone', 'local');
+
+    $('#calendar').fullCalendar({ 
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        // right: 'month,listWeek,listDay'
+        right: 'month,agendaWeek,agendaDay,list day'
+      },
+      // buttonText: {
+      //   today: 'today',
+      //   month: 'month',
+      //   week: 'week',
+      //   day: 'day',
+      //   listDay: 'list day',
+      //   listWeek: 'list week'
+      // },
+
+      views: {
+        listDay: { buttonText: 'list day' },
+        listWeek: { buttonText: 'list week' }
+      },
+
+      //Random default events 
+      editable: true,
+      droppable: false, // this allows things to be dropped onto the calendar !!! 
+      navLinks: true, // can click day/week names to navigate views
+      selectable: true,
+      selectHelper: true,
+      timezoneParam:'Asia/Jakarta',
+      displayEventTime: true,
+
+      select: function(start_new, end_new) {
+        // alert( new Date(Date.parse(end_new) ));
+        // alert( new Date(Date.parse(end_new)-86400000));
+        $('#modal_event').modal('show');
+        $('#modal_event').find('.modal-title').text('Create Event');
+
+        $('#modal_event').find('form')[0].reset();
+        $('.div_event_color').html('');
+        $.each(colors, function(index, val) {
+          btn_color_div = ' <span class=" " data-toggle="buttons">'
+          +'<label class=" btn  bg-'+ val +' btn-xs ">'
+          +'<input autocomplete="off" name="event_color" type="radio" value="'+val+'"/>'
+          +'<i class="color_check fa fa-fw "></i>'  
+          +' </label></span> ';
+          $('.div_event_color').append(btn_color_div);
+          $('input[type=radio][name=event_color]').change(function(event) {
+            $('.color_check').removeClass('fa-check');
+            $(this).siblings('i').addClass('fa-check');
+          });
+        });
+
+        start = new Date(start_new._d);
+        start_date = start.getDate() < 10 ?'0'+start.getDate():start.getDate();
+        start_month = parseInt(start.getMonth()) + 1; 
+        start_month = start_month < 10 ? '0' + start_month : start_month;
+        start_year = start.getFullYear(); 
+        start = start_month +'/'+start_date+'/'+start_year;
+
+        // end = new Date(end_new._d)-86400000;
+        end = new Date(Date.parse(end_new)-86400000); // ini untuk daterangepicker supaya sinkron
+        end_date = end.getDate() < 10 ?'0'+end.getDate():end.getDate();
+        end_month = parseInt(end.getMonth()) + 1; 
+        end_month = end_month < 10 ? '0' + end_month : end_month;
+        end_year = end.getFullYear(); 
+        end = end_month +'/'+end_date+'/'+end_year;
+
+        // console.log(start);
+        $('#event_date_range').daterangepicker({
+          startDate: start,
+          endDate: end
+        });
+
+        // console.log(start._d);
+        // var title = prompt('Event Title:');
+        // var eventData;
+        // if (title) {
+        //   eventData = {
+        //     title: title,
+        //     start: start,
+        //     end: end
+        //   };
+        // $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+        // }
+        $('#calendar').fullCalendar('unselect');
+      }, 
+
+
+
+
+      eventClick: function(calEvent, jsEvent, view) {
+        // console.log(calEvent);
+        // alert(calEvent._end.format());
+        $('#modal_event').modal('show');
+        $('.div_event_color').html('');
+        var event_color_before = calEvent.event_background;
+        // console.log(event_color_before); 
+        $.each(colors, function(index, val) {
+          active = (val == event_color_before)?'text-black text-bold':'';
+          check = (val == event_color_before)?'check':' ';
+          checked = (val == event_color_before)?'checked':' ';
+
+          btn_color_div = ' <span class="'+active+' " data-toggle="buttons">'
+          +'<label class="'+active+'  btn  bg-'+  val  +' btn-xs ">'
+          +'<input autocomplete="off" name="event_color" type="radio" value="'+val+'" '+checked+'/>'
+          +'<i class="color_check fa-fw fa fa-'+check+'"></i>'  
+          +' </label></span> ';
+          $('.div_event_color').append(btn_color_div);
+          // $('input[type=radio][name=event_color]').val(event_color_before).prop('checked', 'checked');
+          $('input[type=radio][name=event_color]').change(function(event) {
+            $('.color_check').removeClass('fa-check');
+            $(this).siblings('i').addClass('fa-check');
+          });
+        });
+        // alert(calEvent._end);
+        var modal = $('#modal_event');
+        modal.find('.modal-title').text('Edit / Update Event');
+        modal.find('.modal-body #event_id').val(calEvent.event_id);
+        modal.find('.modal-body #event_title').val(calEvent.event_title);
+        modal.find('.modal-body #event_description').val(calEvent.event_description);
+        modal.find('.modal-body #event_url').val(calEvent.event_url);
+        modal.find('.modal-body #event_color_before').val(calEvent.event_background);
+        modal.find('.modal-body #event_all_day option[value='+calEvent.allDay+']').prop('selected', 'selected');
+        // console.log(calEvent);
+        start = new Date(calEvent._start);
+        start_date = start.getDate() < 10 ?'0'+start.getDate():start.getDate();
+        start_month = parseInt(start.getMonth()) + 1; 
+        start_month = start_month < 10 ? '0' + start_month : start_month;
+        start_year = start.getFullYear(); 
+        start = start_month +'/'+start_date+'/'+start_year;
+
+        // end = new Date(calEvent.event_end);
+        end = (calEvent._end != null) ? new Date(Date.parse(calEvent._end)-86400000) : new Date(calEvent._start.format()); // ini untuk daterangepicker supaya sinkron
+        end_date = end.getDate() < 10 ?'0'+end.getDate():end.getDate();
+        end_month = parseInt(end.getMonth()) +1; 
+        end_month = end_month < 10 ? '0' + end_month : end_month;
+        end_year = end.getFullYear(); 
+        end = end_month +'/'+end_date+'/'+end_year;
+
+        $('#event_date_range').daterangepicker({
+          startDate: start,
+          endDate: end
+        });
+        
+        // $('#calendar').fullCalendar('renderEvent', calEvent, true); // stick? = true
+        $('#calendar').fullCalendar('updateEvent', calEvent);
+      },
+
+ 
+
+
+      eventRender: function(event, element) {
+
+        element.attr('title', event.tooltip);
+        element.prepend('<span class="pull-right closeon"><i class="fa fa-times"></i></span>' );
+        element.find(".closeon").click(function() {
+          // alert(event.event_id);
+          if (confirm('Are you Sure?')) {
+            $.ajax({
+              url: '{base}/event/event_ajax',
+              type: 'POST',
+              data: {
+                action:'delete',
+                event_id : event.event_id,
+              },
+            })
+            .done(function(data) {
+              console.log(data);
+            })
+            .fail(function() {
+              console.log("error");
+            });
+            $('#calendar').fullCalendar('removeEvents',event._id);
+          }else{
+            $('#modal_event').modal('hide');
+
+          } 
+            // $('#calendar').fullCalendar('unselect');
+        });
+      },
+
+      eventDrop: function(event, delta, revertFunc) {
+        // console.log(event.start.format());
+        // console.log(event.end);
+        // alert(event.title + " was dropped on " + event.start.format() +'--'+ event.end.format());
+        // if (!confirm("Are you sure about this change?")) {
+            // revertFunc();
+        // }
+        start = event.start.format();
+        end = (event.end!=null)?event.end.format():event.start.format();
+        $.ajax({
+          url: '{base}/event/event_ajax',
+          type: 'POST',
+          data: {
+            action:'update',
+            event_id:event.event_id,
+            event_title:event.title,
+            event_background:event.event_background,
+            event_border:event.event_border, 
+            event_start: start,
+            event_end: end,
+            event_all_day:event.allDay,
+          },
+        })
+        .done(function(data) {
+          console.log(data);
+        })
+        .fail(function() {
+          console.log("error");
+        });
+        
+      },
+
+
+      eventResize: function(event, delta, revertFunc) {
+          // alert(event.title + " end is now " + event.end.format());
+          // if (!confirm("is this okay?")) {
+          //     revertFunc();
+          // }
+        start = event.start.format();
+        end = (event.end!=null)?event.end.format():event.start.format();
+        $.ajax({
+          url: '{base}/event/event_ajax',
+          type: 'POST',
+          data: {
+            action:'update',
+            event_id:event.event_id,
+            event_title:event.title,
+            event_background:event.event_background,
+            event_border:event.event_border, 
+            event_start: start,
+            event_end: end,
+            event_all_day:event.allDay,
+        },
+        })
+        .done(function(data) {
+          console.log(data);
+        })
+        .fail(function() {
+          console.log("error");
+        });
+        
+      },
+
+
+
+      eventLimit: false, // allow "more" link when too many events
+
+      events: event_all,
+
+
+
+
+      drop: function (date, allDay) { // this function is called when something is dropped
+
+        // retrieve the dropped element's stored Event Object
+        var originalEventObject = $(this).data('eventObject');
+
+        // we need to copy it, so that multiple events don't have a reference to the same object
+        var copiedEventObject = $.extend({}, originalEventObject);
+
+        // assign it the date that was reported
+        copiedEventObject.start = date;
+        copiedEventObject.allDay = allDay;
+        copiedEventObject.backgroundColor = $(this).css("background-color");
+        copiedEventObject.borderColor = $(this).css("border-color");
+
+        // render the event on the calendar
+        // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
+        $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+
+        // is the "remove after drop" checkbox checked?
+        if ($('#drop-remove').is(':checked')) {
+          // if so, remove the element from the "Draggable Events" list
+          $(this).remove();
+        }
+
+      }
+    }); 
+
+    /* ADDING EVENTS */
+    var currColor = "#3c8dbc"; //Red by default
+    //Color chooser button
+    var colorChooser = $("#color-chooser-btn");
+    $("#color-chooser > li > a").click(function (e) {
+      e.preventDefault();
+      //Save color
+      currColor = $(this).css("color");
+      //Add color effect to button
+      $('#add-new-event').css({"background-color": currColor, "border-color": currColor});
+    });
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    $("#add-new-event").click(function (e) {
+      e.preventDefault();
+      //Get value and make sure it is not null
+      var val = $("#new-event").val();
+      if (val.length == 0) {
+        return;
+      }
+
+      //Create events
+      var event = $("<div />");
+      event.css({"background-color": currColor, "border-color": currColor, "color": "#fff"}).addClass("external-event");
+      event.html(val);
+      $('#external-events').prepend(event);
+
+      //Add draggable funtionality
+      ini_events(event);
+
+      //Remove event from text input
+      $("#new-event").val("");
+    });
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    $('#modal_event').on('hidden.bs.modal', function(){
+      $(this).find('form')[0].reset();
+    });
+    // $('#modal_event').on('show.bs.modal', function (event) {
+          
+
+        // });
+
+
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+  });
+</script>

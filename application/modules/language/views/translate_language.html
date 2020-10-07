@@ -1,0 +1,277 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="text-center">
+      <legend>
+        {m_admin} {m_site} {m_translation}
+      </legend>
+    </div>
+  </div>
+</div>
+<!-| =======  ======= |->
+<div class=" text-center">
+  {language_menu}
+</div>
+<div class="clearfix">
+  <br/>
+</div>
+<div class="">
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>
+            #
+          </th>
+          <th>
+            {m_alias}
+          </th>
+          <th>
+            {m_name}
+          </th>
+          <th>
+            {m_translation}
+          </th>
+          <th>
+            {m_action}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {site_translate}
+        <tr>
+          <td>
+            {nomor}
+          </td>
+          <td>
+            m_{site_term_slug}
+          </td>
+          <td>
+            <a href="{base}/language/admin/translate/{site_term_id}">
+              {site_term_name}
+            </a>
+            <br/>
+            <small>
+              <i>
+                <!-- {site_term_description} -->
+              </i>
+            </small>
+          </td>
+          <td >
+            <table class="table borderless table-hover" style="margin-bottom:0px !important">
+              <tr class="hidden">
+                <th>
+                  {m_language}
+                </th>
+                <th>
+                  {m_translation}
+                </th>
+                <th>
+                  Action
+                </th>
+              </tr>
+              {translation}
+              <tr id="tr_{site_translate_id}">
+                <td width="200" class="text-right">
+                  {language_name} ({language_country}) :
+                </td>
+                <td >
+                  {site_translate_translation}
+                </td>
+                <td width="70px">
+                  <a class="btn btn-warning btn-xs"
+                    data-action="edit"
+                    data-title="Edit Tranlation"
+                    data-site_translate_id="{site_translate_id}"
+                    data-site_term_name="{site_term_name}"
+                    data-site_term_id="{site_term_id}"
+                    data-site_language_id="{site_language_id}"
+                    data-site_translate_translation="{site_translate_translation}"
+                    data-toggle="modal" href='#site_language_add'>
+                    <i class="fa fa-pencil">
+                    </i>
+                  </a>
+                  <a  class="btn_delete btn btn-danger btn-xs"
+                    data-site_translate_id="{site_translate_id}"
+                    >
+                    <i class="fa fa-trash">
+                    </i>
+                  </a>
+                </td>
+              </tr>
+              {/translation}
+            </table>
+          </td>
+          <td>
+            <a class="btn btn-success btn-xs"
+              data-action="add"
+              data-title="{m_add} {m_translation}"
+              data-site_term_id="{site_term_id}"
+              data-site_term_name="{site_term_name}"
+              data-site_language_id=""
+              data-toggle="modal" href='#site_language_add'>
+              <i class="fa fa-plus-circle">
+              </i>
+              {m_add} {m_translation}
+            </a>
+          </td>
+        </tr>
+        {/site_translate}
+      </tbody>
+    </table>
+  </div>
+  <!-| ======= NAVIGATION : FIRST : PREV : PAGE : NEXT : LAST ======= |->
+  <!-| ======= NAVIGATION : FIRST : PREV : PAGE : NEXT : LAST ======= |->
+  <!-| ======= NAVIGATION : FIRST : PREV : PAGE : NEXT : LAST ======= |->
+  <div class="row text-center ">
+    <a class="btn btn-success btn-xs {prev_disabled}" href="{base}/language/admin/translate?q={query}&limit={limit_number}&offset={first_offset}">
+      <i class="fa fa-step-backward">
+      </i>
+      {m_first}
+    </a>
+    <a class="btn btn-primary btn-xs {prev_disabled}" href="{base}/language/admin/translate?q={query}&limit={limit_number}&offset={prev_number}">
+      <i class="fa fa-chevron-left">
+      </i>
+      {m_prev}
+    </a>
+    {m_jump_to_page} :
+    <select id="pagers">
+      {pager}
+      <option value="{jump_offset}" >
+        {jump_halaman}
+      </option>
+      {/pager}
+    </select>
+    <a class="btn btn-primary btn-xs {next_disabled}" href="{base}/language/admin/translate?q={query}&limit={limit_number}&offset={next_number}">
+      {m_next}
+      <i class="fa fa-chevron-right">
+      </i>
+    </a>
+    <a class="btn btn-danger btn-xs {next_disabled}" href="{base}/language/admin/translate?q={query}&limit={limit_number}&offset={last_offset}">
+      {m_last}
+      <i class="fa fa-step-forward">
+      </i>
+    </a>
+  </div>
+  <!-| ======= NAVIGATION : FIRST : PREV : PAGE : NEXT : LAST ======= |->
+  <!-| ======= NAVIGATION : FIRST : PREV : PAGE : NEXT : LAST ======= |->
+</div>
+<!-| =======  ======= |->
+<script type="text/javascript">
+  $(document).ready(function() {
+  // ////////
+  // ////////
+  // ////////
+  // ////////
+  // ////////
+  pager('{base}/language/admin/translate','{query}');
+  // ////////
+  // limit = '{limit}';
+  // offset = '{offset}';
+  // $('#pagers').val(offset).select();
+  // $('#pagers').change(function(event) {
+  // offset_number = $(this).val();
+  // window.location.href = '{base}/language/admin/translate?q={query}&limit={limit_number}&offset='+offset_number;
+  // });
+  // ////////
+  // ////////
+  // ////////
+  // ////////
+  $('.btn_delete').each(function(index, el) {
+  $(this).click(function(event) {
+  if (confirm('Are you sure ...?')) {
+  site_translate_id = $(this).attr('data-site_translate_id');
+  $.ajax({
+  url: '{base}/language/ajax_delete_site_translate',
+  type: 'POST',
+  data: {
+  site_translate_id:site_translate_id
+  },
+  })
+  .done(function() {
+  $('#tr_'+site_translate_id).remove();
+  // console.log("success");
+  })
+  .fail(function(data) {
+  console.log("error" . data);
+  });
+  }
+  });
+  });
+  });
+</script>
+<!-| =======  ======= |->
+<div class="modal fade" id="site_language_add">
+  <div class="modal-dialog">
+    <form action="" method="POST" class="form-horizontal" role="form">
+      <!--
+      -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            &times;
+          </button>
+          <h4 class="modal-title">
+            Modal title
+          </h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <div class="col-sm-9 col-sm-offset-3">
+              <input type="hidden" class="form-control" name="site_term_id" id="site_term_id" placeholder="{site_term_id}"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-9 col-sm-offset-3">
+              <input required type="text" class="form-control" name="site_translate_translation" id="site_translate_translation" placeholder="Translation..."/>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-9 col-sm-offset-3">
+              <select class="form-control" id="site_language_id" name="site_language_id" required>
+                <option value="">
+                  :: Select Language ::
+                </option>
+                {site_language}
+                <option value="{site_language_id}">
+                  {language_name} - {language_country}
+                </option>
+                {/site_language}
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            {m_close}
+          </button>
+          <button type="submit" class="btn btn-primary">
+            {m_submit}
+          </button>
+        </div>
+      </div>
+      <!--
+      -->
+    </form>
+  </div>
+</div>
+<!-| =======  ======= |->
+<!-| =======  ======= |->
+<script type="text/javascript">
+  $(document).ready(function() {
+  $('#site_language_add').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) ;
+  var title = button.data('title') ;
+  var site_term_id = button.data('site_term_id') ;
+  var site_term_name = button.data('site_term_name') ;
+  var site_translate_translation = button.data('site_translate_translation') ;
+  var site_language_id = button.data('site_language_id') ;
+  var modal = $(this);
+  modal.find('.modal-title').text(title +' of "'+ site_term_name+'"');
+  modal.find('.modal-body #site_term_id').val(site_term_id);
+  modal.find('.modal-body #site_term_name').val(site_term_name);
+  modal.find('.modal-body #site_translate_translation').val(site_translate_translation);
+  modal.find('.modal-body #site_language_id').val(site_language_id).select();
+  })
+  });
+</script>
+<!-| =======  ======= |->

@@ -1,0 +1,35 @@
+<div class=" ">
+    {{controller}_all}
+    <div class="col-sm-4" style="margin-bottom: 20px;">
+        <div class="panel panel-{skin_box} skin_box ">
+            <div class="panel-body ">
+                <div style="min-height: 130px; max-height: 130px; overflow: hidden; ">
+                    <div>
+                        Name : {{controller}_name}
+                    </div>
+                    <div>
+                        Price: $ {{controller}_price}
+                    </div>
+                </div>
+                <div>
+                    . . .
+                    <a class=" " href="{base}/{controller}/detail/{{controller}_id}">
+                        More info
+                    </a>
+                    <div class="pull-right {_is_allowed}">
+                        <a class="btn btn-sm btn-success {_is_allowed}" href="{base}/{controller}/detail/{{controller}_id}">
+                            {m_detail}
+                        </a>
+                        <a class="btn btn-sm btn-warning {_is_allowed}" href="{base}/{controller}/edit/{{controller}_id}">
+                            {m_edit}
+                        </a>
+                        <a class="btn btn-sm btn-danger {_is_allowed} " href="{base}/{controller}/delete/{{controller}_id}" onclick="return confirm('Are you sure...?')">
+                            {m_delete}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {/{controller}_all}
+</div>

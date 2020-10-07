@@ -1,0 +1,210 @@
+{modules}
+<tr>
+    <td>
+        <input style="cursor: pointer;" type="checkbox" class="check_each " data-module_name="{module_name}" data-module_disabled="{module_disabled}" data-module_id="{module_id}" />
+    </td>
+    <td>
+        {nomor}
+    </td> 
+    <td>
+        <span class="pull-right bg-{module_color} text-center" style="width:30px;"> 
+            <i class="fa fa-fw fa-{module_icon}"></i>
+        </span>
+        <a href="{base}/{module_url}">
+            {module_name} 
+        </a>
+    </td>
+    <td>
+        <span class="pull-right text-center" > {mp}</span>
+        {module_url} 
+    </td>
+    <td>
+        <a href="#" class="text-{toggle_btn} btn_toggle" data-module_name="{module_name}" data-module_disabled="{module_disabled}" data-module_id="{module_id}">
+            <i class="fa fa-fw fa-lg fa-{toggle_icon}"></i>
+        </a>
+        <a class="btn btn-xs btn-flat btn-warning  btn_edit"
+            data-module_id="{module_id}"
+            data-module_name="{module_name}"
+            data-module_table="{module_table}"
+            data-module_parent="{module_parent}"
+            data-module_level="{module_level}"
+            data-module_rank="{module_rank}"
+            data-module_icon="{module_icon}"
+            data-module_color="{module_color}"
+            data-module_type="{module_type}"
+            data-module_url="{module_url}"
+            data-module_permission={module_permission}
+            data-toggle="modal" href="#module_add_edit" data-title="{m_edit}">
+            <i class="fa fa-fw fa-pencil ">
+            </i> 
+        </a>
+        <a class="btn btn-xs btn-flat btn-danger  btn_delete " data-module_id="{module_id}" data-module_name="{module_name}" data-toggle="modal" href="#module_delete">
+            <i class="fa fa-fw fa-trash ">
+            </i> 
+        </a> 
+    </td>
+</tr>
+{/modules} 
+
+<!--  -->
+<script type="text/javascript">
+    /////////////////////////////////////////
+    /////////////////////////////////////////
+
+    $('.delete_all').on('click', function(event) {
+        event.preventDefault();
+        var action_name = $(this).data('action_name');
+        if (confirm('Are you sure to "'+action_name+'" all selected item ...?')) {
+            $('.check_each').each(function(index, el) {
+                var check_each = $(this);
+                if (check_each.is(":checked")) {
+                    module_id = check_each.data('module_id');
+                    $.ajax({
+                        url: '{base}/dashboard/module_delete/'+module_id,
+                    })
+                    .done(function(data) {
+                        // console.log(data);
+                        check_each.parent().parent().remove();
+                        // module_ajax(); 
+                        // console.log("success");
+                        // table.ajax.reload( null, false );
+                    })
+                    .fail(function(error) {
+                        console.log(error.responseText);
+                    }); 
+                }
+
+            });
+        }
+    });
+    /////////////////////////////////////////
+    $('.toggle_all').on('click', function(event) {
+        event.preventDefault();
+        var action_name = $(this).data('action_name');
+        if (confirm('Are you sure to "'+action_name+'" all selected item ...?')) {
+            var module_disabled = $(this).data('module_disabled') ;
+            $('.check_each').each(function(index, el) {
+                var check_each = $(this);
+                var toggle = check_each.data('module_disabled')?'enable':'disable'; 
+                var module_id = check_each.data('module_id') ;
+
+                if (check_each.is(":checked")) {
+                    // console.log(module_disabled);
+
+                    event.preventDefault();
+                    $.ajax({
+                        url: '{base}/dashboard/module_toggle',
+                        type: 'POST',
+                        data: {
+                            module_id: module_id,
+                            module_disabled: module_disabled
+                        },
+                    })
+                    .done(function(data) {
+                        data = jQuery.parseJSON(data);
+                        check_each.parent().siblings().find('.btn_toggle').removeClass('text-success').removeClass('text-default').addClass('text-'+data.toggle_btn);
+                        check_each.parent().siblings().find('.btn_toggle').find('i').removeClass('fa-toggle-on').removeClass('fa-toggle-off').addClass('fa-'+data.toggle_icon);
+                        check_each.parent().siblings().find('.btn_toggle').attr('data-module_disabled', module_disabled).data('module_disabled', module_disabled);
+                        check_each.parent().siblings().find('.btn_toggle').attr('data-module_disabled', module_disabled).data('module_disabled', module_disabled);
+                    })
+                    .fail(function(error) {
+                        console.log(error.responseText);
+                    }); 
+                }
+            });
+            // $('.check_all').prop('checked', false);
+            // $('.check_each').prop('checked', false);
+        }
+    });
+    /////////////////////////////////////////
+    $('.check_all').on('change', function(event) {
+        // event.preventDefault();
+        if ($(this).is(":checked")) {
+            $('.check_each').prop('checked', true);
+            $('.check_all').prop('checked', true);
+        }else{
+            $('.check_each').prop('checked', false);
+            $('.check_all').prop('checked', false);
+
+        }
+        // console.log('Log message');
+    });
+    /////////////////////////////////////////
+    /////////////////////////////////////////
+    $('.btn_toggle').each(function(index, el) {
+        var btn_toggle = $(this);
+        $(this).on('click', function(event) {
+            event.preventDefault();
+            toggle = $(this).data('module_disabled')?'enable':'disable';
+            module_name = $(this).data('module_name') ;
+            module_id = $(this).data('module_id') ;
+            module_disabled = $(this).data('module_disabled')?0:1;
+            if (confirm('Are you sure to '+toggle+' "'+module_name+'" ...?')) {
+                $.ajax({
+                    url: '{base}/dashboard/module_toggle',
+                    type: 'POST',
+                    data: {
+                        module_id: module_id,
+                        module_disabled: module_disabled
+                    },
+                })
+                .done(function(data) {
+                    data = jQuery.parseJSON(data);
+                    btn_toggle.removeClass('text-success').removeClass('text-default').addClass('text-'+data.toggle_btn);
+                    btn_toggle.find('i').removeClass('fa-toggle-on').removeClass('fa-toggle-off').addClass('fa-'+data.toggle_icon);
+                    btn_toggle.attr('data-module_disabled', module_disabled).data('module_disabled', module_disabled);
+                    btn_toggle.parent().siblings().find('.check_each').attr('data-module_disabled', module_disabled).data('module_disabled', module_disabled);
+                })
+                .fail(function(error) {
+                    console.log(error.responseText);
+                });
+            }
+        });
+    });
+
+
+    $('#btn_submit').click(function(event) {
+        var form = $('#form_module_add_edit');
+        fff = form.serialize();
+        // console.log(fff);
+        $.ajax({
+            url: '{base}/dashboard/module_post',
+            type: 'POST',
+            data: form.serialize(),
+        })
+        .done(function(data) {
+            // module_ajax(); 
+            location.href = '{base}/dashboard/module';
+        })
+        .fail(function(error) {
+            console.log(error.responseText);
+        });
+    });
+    ///////////////////////////////////////////////////////////////////////////
+    
+    // $('input').keypress(function(e) {
+    //     if (e.which == '13') {
+    //       $('#btn_submit').trigger('click');
+    //     }
+    // });
+
+    ///////////////////////////////////////////////////////////////////////////
+    $('#del_submit').click(function(event) {
+        module_id = $(this).data('module_id');
+        // console.log(module_id);
+        $.ajax({
+            url: '{base}/dashboard/module_delete/'+module_id,
+        })
+        .done(function() {
+            module_ajax(); 
+            // console.log("success");
+            // table.ajax.reload( null, false );
+        })
+        .fail(function(error) {
+            console.log(error.responseText);
+        }); 
+    });
+    ///////////////////////////////////////////////////////////////////////////
+</script>
+<!--  -->
+

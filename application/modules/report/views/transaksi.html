@@ -1,0 +1,60 @@
+<legend>
+    Report Transaksi
+</legend>
+<div class="box box-{skin_box} skin_box">
+    <div class="box-body">
+        <table class="table table-bordered" id="example">
+            <thead>
+                <tr class="bg-{skin}">
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        No. Transaksi
+                    </th>
+                    <th>
+                        Tanggal
+                    </th> 
+                    <th>
+                        Member
+                    </th>
+                    <th>
+                        Total
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {transaction_all}
+                <tr>
+                    <td>
+                        {nomor_urut}
+                    </td>
+                    <td>
+                        {invoice}
+                    </td>
+                    <td>
+                        {shopping_created_format}
+                    </td> 
+                    <td>
+                        {member_name_first} {member_name_last}
+                    </td>
+                    <td>
+                        Rp.
+                        <span class="pull-right">
+                            {trans_total_format}
+                        </span>
+                    </td>
+                </tr>
+                {/transaction_all}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td class="h2 text-right" colspan="20">
+                        TOTAL : Rp. {grand_total_format}
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<!-- -->

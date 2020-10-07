@@ -1,0 +1,35 @@
+<div class="box box-{skin_box} skin_box"> 
+    <!-- -->
+    <div class="box-body"> 
+        {breadcrumb} 
+        <div class="row">
+            {module_children}
+            <div class="col-md-4 col-sm-6 col-xs-12 {module_display}">
+                <!-- small box -->
+                <div class="small-box bg-primary bg-{module_color} bg-{module_color}-gradient- ">
+                    <div class="inner">
+                        <h3>
+                            {entity_count}
+                        </h3>
+                        <p>
+                            {module_name}
+                        </p>
+                    </div>
+                    <div class="icon">
+                        <a href="{base}/{module_url}" style="color: rgba(0,0,0,0.15);">
+                            <i class="fa fa-{module_icon}">
+                            </i>
+                        </a>
+                    </div>
+                    <a class="small-box-footer" href="{base}/{module_url}">
+                        <!-- {m_detail} -->
+                        Detail
+                        <i class="fa fa-arrow-circle-right">
+                        </i>
+                    </a>
+                </div>
+            </div>
+            {/module_children}
+        </div>
+    </div>
+</div>

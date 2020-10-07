@@ -1,0 +1,57 @@
+ 
+<div class="box box-{skin_box} skin_box">
+    <div class="box-body">
+        <table id="example">
+            <thead>
+                <tr><th>
+                        Kodepos
+                    </th>
+                    <th>
+                        Desa
+                    </th>
+                    <th>
+                        Kecamatan
+                    </th>
+                    <th>
+                        Kabupaten
+                    </th>
+                    
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<!--  -->
+<link rel="stylesheet" type="text/css" href="{base}/files/bower_components/datatables/media/css/jquery.dataTables.min.css">
+<!-- <link rel="stylesheet" type="text/css" href="{base}/files/bower_components/datatables/media/css/dataTables.bootstrap.css"> -->
+<style type="text/css">
+    .paginate_button{
+        padding: 0 !important; 
+        margin-left: 0 !important; 
+        border: 0px solid #ccc !important; 
+    }
+    .paginate_button.disabled{ 
+        border: 0px solid #ccc !important; 
+    }
+</style>
+<script src="{base}/files/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+<script src="{base}/files/bower_components/datatables/media/js/dataTables.bootstrap.js"></script>
+<script type="text/javascript">
+ // $(document).ready(function(){  
+      var dataTable = $('#example').DataTable({  
+           "processing":true,  
+           "serverSide":true,  
+           "order":[],  
+           "ajax":{  
+                url:"{base}/kodepos/datatables",  
+                type:"POST"  
+           },  
+           "columnDefs":[  
+                {  
+                     // "targets":[1],  
+                     // "orderable":false,  
+                },  
+           ],  
+      });  
+ // });  
+</script>

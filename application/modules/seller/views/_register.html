@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+        <title>
+            {site_title}| Registration
+        </title>
+        <meta content="Marketplace" name="description"/>
+        <link href="{base}/files/images/logo.ico" rel="shortcut icon" type="image/x-icon"/>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+        <meta content="Jerry Maheswara (jerrymaheswara@gmail.com) +6208990055099" name="Author"/>
+        <link href="{base}/files/bower_components/AdminLTE/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="{base}/files/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+        <link href="{base}/files/bower_components/AdminLTE/dist/css/AdminLTE.min.css" rel="stylesheet"/>
+        <link href="{base}/files/bower_components/formvalidation.io/dist/css/formValidation.min.css" rel="stylesheet"/>
+    </head>
+    <body class="hold-transition register-page">
+        <div class="register-box">
+            <div class="register-logo">
+                <a href="{base}/">
+                    <img src="{base}/files/images/logo-ima.png" width="300px"/>
+                </a>
+            </div>
+            <div class="register-box-body">
+                <h3 class="login-box-msg">
+                    {m_register} Seller
+                </h3>
+                <form action="" id="form_register" method="POST">
+                    <div class="form-group has-feedback">
+                        <input class="form-control" name="user_name_first" placeholder="Seller Name" required="required" type="text"/>
+                        <span class="fa fa-user form-control-feedback">
+                        </span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input class="form-control" id="user_email" name="user_email" placeholder="Email" required="required" type="email"/>
+                        <span class="fa fa-envelope form-control-feedback">
+                        </span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input class="form-control" id="user_phone" name="user_phone" placeholder="Phone" required="required" type=""/>
+                        <span class="fa fa-envelope form-control-feedback">
+                        </span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input class="form-control" id="user_password" name="user_password" placeholder="Password" required="required" type="password"/>
+                        <span class="fa fa-lock form-control-feedback">
+                        </span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input class="form-control" id="user_password_confirm" name="user_password_confirm" placeholder="Retype password" required="required" type="password"/>
+                        <span class="fa fa-lock form-control-feedback">
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <input name="agree[]" type="checkbox"/>
+                        I agree to the
+                        <a href="#">
+                            terms
+                        </a>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block " type="submit">
+                            Register
+                        </button>
+                    </div>
+                </form>
+                <div class="form-group text-right">
+                    <a class="text-center" href="{base}/login">
+                        Login
+                    </a>
+                </div>
+            </div>
+        </div>
+        <script src="{base}/files/bower_components/AdminLTE/plugins/jQuery/jquery-2.2.3.min.js">
+        </script>
+        <script src="{base}/files/bower_components/AdminLTE/bootstrap/js/bootstrap.min.js">
+        </script>
+        <script src="{base}/files/bower_components/formvalidation.io/dist/js/formValidation.min.js">
+        </script>
+        <script src="{base}/files/bower_components/formvalidation.io/dist/js/framework/bootstrap.min.js">
+        </script>
+        <script type="text/javascript">
+            $('#seller_email').on('change', function(event) {
+                var seller_email = $(this).val();
+                event.preventDefault();
+                $.ajax({
+                    url: '{base}/{controller}/check_email',
+                    type: 'POST', 
+                    dataType :'json',
+                    data: {
+                        seller_email: seller_email
+                    },
+                })
+                .done(function(res) {
+                    // alert(res.message);
+                    if (res.status == 0) {
+                        $('#modal_email_check').modal('show');
+                        $('#modal_email_check').on('hidden.bs.modal', function(event) {
+                            event.preventDefault();
+                            $('#seller_email').val('').trigger('change');
+                            $('#seller_email').select();
+                            $('#form_register').formValidation('revalidateField', 'seller_email');
+                        });
+                    // console.log(res);
+                    }
+                })
+                .fail(function(err) {
+                    console.log(err.responseText);
+                });
+                
+            });
+            //--------------------------------------------------------//
+            $('#form_register').formValidation({
+                framework: 'bootstrap',
+                fields: {
+                    seller_password: {
+                        validators: {
+                            identical: {
+                                field: 'seller_password_confirm',
+                                message: 'The password and its confirm are not the same'
+                            }
+                        }
+                    },
+                    seller_password_confirm: {
+                        validators: {
+                            identical: {
+                                field: 'seller_password',
+                                message: 'The password and its confirm are not the same'
+                            }
+                        }
+                    },
+
+                    'agree[]': {
+                        validators: {
+                            choice: {
+                                min: 1,
+                                max: 1,
+                                message: 'Please check'
+                            }
+                        }
+                    },
+                }
+            });
+        </script>
+        <div class="modal fade" id="modal_email_check">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+                            ×
+                        </button>
+                        <h4 class="modal-title">
+                            Forbidden
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        Email is already taken. Please choose another one!
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" data-dismiss="modal" type="button">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

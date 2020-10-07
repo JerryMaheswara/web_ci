@@ -1,0 +1,142 @@
+<div class="box box-{skin_box} skin_box">
+    <div class="box-body">
+        <div class="pull-right">
+            <a class="btn btn-warning btn-xs" href="{base}/user/edit/{user_id_before}">
+                <i class="fa fa-fw fa-pencil">
+                </i>
+                Edit
+            </a>
+        </div>
+        <legend>
+            Profile
+        </legend>
+        {user_detail}
+        <div class="col-sm-6">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th class="text-right" width="30%">
+                            Name :
+                        </th>
+                        <td class="text-left">
+                            {user_name_first}
+                            {user_name_last}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">
+                            Email :
+                        </th>
+                        <td class="text-left">
+                            {user_email}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">
+                            Phone :
+                        </th>
+                        <td class="text-left">
+                            {user_phone}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">
+                            Address :
+                        </th>
+                        <td class="text-left">
+                            {user_address}
+                            <div>
+                                {kelurahan}
+                                {kecamatan}
+                            </div>
+                            <div>
+                                {jenis_kabupaten}
+                                {kabupaten}
+                            </div>
+                            <div>
+                                {kodepos}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">
+                            Since :
+                        </th>
+                        <td>
+                            {user_created}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">
+                            Last Update :
+                        </th>
+                        <td>
+                            {user_updated}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-6">
+            <label>
+                Avatar :
+            </label>
+            <div>
+                <img src="{base}/files/images/{user_avatar}" width="128px"/>
+            </div>
+        </div>
+        {/user_detail}
+    </div>
+    <div class="box-body">
+        <legend>
+            Items :
+        </legend>
+        <div>
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr class="bg-{skin}">
+                            <th>
+                                #
+                            </th>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Harga
+                            </th>
+                            <th>
+                                Stok (unit)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {user_item}
+                        <tr>
+                            <td>
+                                {nomor_urut}
+                            </td>
+                            <td>
+                                
+                                <img src="{base}/files/images/{item_images}{image_128}{/item_images}" width="60px" />
+                                {item_name}
+                            </td>
+                            <td>
+                                Rp.
+                                <span class="pull-right">
+                                    {item_price_format}
+                                </span>
+                            </td>
+                            <td>
+                                {item_available}
+                            </td>
+                        </tr>
+                        {/user_item}
+                    </tbody>
+                </table>
+            </div>
+            <div>
+            </div>
+        </div>
+    </div>
+</div>

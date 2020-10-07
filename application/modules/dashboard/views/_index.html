@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+        <meta content="Supersite SaaS" name="description"/>
+        <meta content="no-cache" http-equiv="pragma"/>
+        <link href="{base}/files/images/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+        <meta content="Jerry Maheswara (jerry@maheswara.com) (jerrymaheswara@gmail.com) +6208990055099" name="Author"/>
+        <link href="{base}/files/bower_components/AdminLTE/plugins/pace/pace.min.css" rel="stylesheet" type="text/css"/>
+        <!-- <link href="{base}/files/bower_components/PACE/themes/purple/pace-theme-center-simple.css" rel="stylesheet" type="text/css"/> -->
+        <script src="{base}/files/bower_components/AdminLTE/plugins/pace/pace.js">
+        </script>
+        <script type="text/javascript">
+            // $(document).ajaxStart(function() {
+            Pace.start();
+            // });
+        </script>
+        <title>
+            :: {site_title} ::
+        </title>
+        <link href="{base}/files/bower_components/AdminLTE/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        
+        <!-- <link href="{base}/files/bower_components/jquery-ui/themes/base/jquery-ui.min.css" rel="stylesheet" type="text/css"/> -->
+        <link href="{base}/files/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="{base}/files/bower_components/AdminLTE/plugins/select2/select2.min.css" rel="stylesheet" type="text/css"/>
+        <link href="{base}/files/bower_components/AdminLTE/dist/css/AdminLTE.min.css" rel="stylesheet"/>
+        <link href="{base}/files/bower_components/AdminLTE/dist/css/skins/_all-skins.css" rel="stylesheet"/>
+        <!-- <link href="{base}/files/bower_components/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css" rel="stylesheet" type="text/css"/> -->
+        <link href="{base}/files/bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <script src="{base}/files/bower_components/AdminLTE/plugins/jQuery/jquery-2.2.3.min.js"> </script>
+        <script src="{base}/files/bower_components/AdminLTE/plugins/jQueryUI/jquery-ui.min.js"> </script>
+        <script src="{base}/files/bower_components/AdminLTE/bootstrap/js/bootstrap.min.js"> </script>
+        <!-- <script src="{base}/files/bower_components/tinymce/tinymce.min.js"></script> -->
+        <!-- <script src="{base}/files/bower_components/AdminLTE/plugins/fastclick/fastclick.js"></script> -->
+        <script src="{base}/files/bower_components/AdminLTE/dist/js/app.min.js"> </script>
+        <script src="{base}/files/bower_components/AdminLTE/dist/js/demo.js"> </script>
+        <script src="{base}/files/bower_components/AdminLTE/plugins/select2/select2.min.js"> </script>
+        <!-- <script src="{base}/files/bower_components/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.min.js"></script> -->
+
+    </head>
+    <style>
+        .info-box-content {
+            padding: 0 10px;
+        }
+        .info-box-text {
+            font-size: 12px;
+        }
+        .skin-blue .main-header .logo{
+            /*background:#0360F8;*/
+        }
+        .skin-blue .main-header .logo:hover{
+            /*background:#047EF7;*/
+        }
+        .skin-blue .main-header .navbar {
+            /*background-color: #048CF4;*/
+        }
+</style>
+    <body class="hold-transition skin-{skin} sidebar-mini">
+        <div class="wrapper">
+            <!-- Main Header -->
+            <div >
+                {header}
+            </div>
+            <!-- Left side column. contains the logo and sidebar -->
+            <div id="aside_left">
+                {aside_left}
+            </div>
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+                <div class="content">
+                    {body} 
+                </div>
+            </div>
+            {footer}
+            <div id="aside_right">
+                {aside_right}
+            </div>
+        </div>
+    </body>
+</html>

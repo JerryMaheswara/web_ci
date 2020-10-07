@@ -1,0 +1,553 @@
+<link href="{base}/files/bower_components/AdminLTE/plugins/iCheck/square/blue.css" rel="stylesheet"/>
+<!-- <link href="{base}/files/css/formValidation.min.css" rel="stylesheet"/> -->
+<link href="{base}/files/bower_components/formvalidation.io/dist/css/formValidation.min.css" rel="stylesheet"/>
+<section class="row">
+    <div class="col-sm-12">
+        {breadcrumb}
+    </div>
+    <div class="col-sm-6 ">
+        {user_detail}
+        <div class="box box-{skin_box} skin_box">
+            <div class=" box-body">
+                <legend>
+                    {m_edit_user}
+                    <a class=" pull-right btn btn-xs btn-primary" href="{base}/user/profile/{user_id}">
+                        <i class="fa fa-fw fa-eye">
+                        </i>
+                        preview
+                    </a>
+                </legend>
+                <form action="" class="form-horizontal" enctype="multipart/form-data" id="form_user_edit" method="POST">
+                    <div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">
+                                {m_email} :
+                            </label>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="user_email" name="user_email" placeholder="{m_email}" type="email" value="{user_email}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">
+                                First Name :
+                            </label>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="user_name_first" name="user_name_first" placeholder="{m_given_name}" type="text" value="{user_name_first}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">
+                                Last Name :
+                            </label>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="user_name_last" name="user_name_last" placeholder="{m_family_name}" type="text" value="{user_name_last}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">
+                                {m_nick_name} :
+                            </label>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="user_name_nick" name="user_name_nick" placeholder="{m_nick_name}" type="text" value="{user_name_nick}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">
+                                {m_date_of_birth} :
+                            </label>
+                            <div class="col-sm-8">
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar">
+                                        </i>
+                                    </div>
+                                    <input class="form-control" data-date-end-date="-10y" data-date-format="yyyy-mm-dd" id="user_birthday" name="user_birthday" placeholder="{m_date_of_birth}" type="text" value="{user_birthday}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">
+                                {m_gender} :
+                            </label>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="user_gender_before" type="hidden" value="{user_gender}"/>
+                                <select class="form-control" id="user_gender" name="user_gender">
+                                    <option value="M">
+                                        {m_male}
+                                    </option>
+                                    <option value="F">
+                                        {m_female}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <legend>
+                        </legend>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label ">
+                                {m_address} :
+                            </label>
+                            <div class="col-sm-8">
+                                <input class="form-control" value="{user_address}" id="user_address" name="user_address" placeholder="Nama Jalan / Kampung, No. Rumah, RT / RW"  type=""/>
+                                <div style="margin-top: 6px">
+                                    <input id="kodepos_id_before" type="hidden" value="{kodepos_id}"/>
+                                    <select class="form-control" id="kodepos_id" name="kodepos_id" required="required" type="hidden">
+                                    </select>
+                                </div>
+                                <div style="margin-top: 6px">
+                                    <input class="form-control" disabled="" id="kelurahan_kecamatan" readonly="readonly" type="hidden"/>
+                                </div>
+                                <div style="margin-top: 6px">
+                                    <input class="form-control" disabled="" id="kabupaten_kodepos" readonly="readonly" type="hidden"/>
+                                </div>
+                                <div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label ">
+                                Kelurahan :
+                            </label>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="user_subdistrict" name="user_subdistrict" type="hidden-" readonly="readonly" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label ">
+                                Kecamatan :
+                            </label>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="user_district" name="user_district" type="hidden-" readonly="readonly" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label ">
+                                Kabupaten :
+                            </label>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="user_city_type" name="user_city_type" type="hidden" readonly="readonly" />
+                                <input class="form-control" id="user_city" name="user_city" type="hidden-" readonly="readonly" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label ">
+                                Propinsi :
+                            </label>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="user_state" name="user_state" type="hidden-" readonly="readonly" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label ">
+                                Kodepos :
+                            </label>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="user_postcode" name="user_postcode" type="hidden-" readonly="readonly" />
+                            </div>
+                        </div>
+                        <legend>
+                        </legend>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">
+                                {m_phone}  :
+                            </label>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="user_phone" name="user_phone" placeholder="{m_phone}" type="text" value="{user_phone}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">
+                                {m_country}  :
+                            </label>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="country_id_before" type="hidden" value="{country_id}"/>
+                                <select class="form-control" id="country_id" name="country_id">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- /.form-box -->
+        </div>
+        {/user_detail}
+    </div>
+    <div class="col-sm-6">
+        <div class="box box-{skin_box} skin_box">
+            <div class=" box-body">
+                <legend>
+                    {m_image}
+                </legend>
+                <div>
+                    {image_upload}
+                </div>
+                <div>
+                    <button class="btn btn-success btn-block btn-lg btn_submit btn-flat" id=" " type="submit">
+                        {m_submit}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<div class="modal modal-danger fade" id="modal_captcha">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+                    ×
+                </button>
+                <h4 class="modal-title">
+                    {m_error}:
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="fa fa-exclamation-circle fa-4x">
+                    </i>
+                    <h4>
+                        Invalid captcha code or expired. Please retype captcha...!!!
+                    </h4>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal" type="button">
+                    {m_close}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<div class="modal modal-danger fade" id="modal_email">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+                    ×
+                </button>
+                <h4 class="modal-title">
+                    {m_error}
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="fa fa-exclamation-circle fa-4x">
+                    </i>
+                    <h4>
+                        Email already registered. Choose other email...!!
+                    </h4>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal" type="button">
+                    {m_close}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ========================================================================== -->
+<div class="modal modal-warning fade" id="modal_agree">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+                    ×
+                </button>
+                <h4 class="modal-title">
+                    {m_warning}
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="fa fa-exclamation-triangle fa-4x">
+                    </i>
+                    <h4>
+                        You must agree to the terms, and fill in all column required!
+                    </h4>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal" type="button">
+                    {m_close}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ========================================================================== -->
+<div class="modal modal-success fade" id="modal_sukses">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+                    ×
+                </button>
+                <h4 class="modal-title">
+                    {m_congratulation}
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="fa fa-exclamation-circle fa-4x">
+                    </i>
+                    <h4>
+                        {m_register_successfull}...!!
+                    </h4>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal" type="button">
+                    {m_close}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ========================================================================== -->
+<style type="text/css">
+    .has-error .control-label,
+    .has-error .help-block,
+    .has-error .form-control-feedback {
+        color: #dd4b39;
+    }
+
+    .has-success .control-label,
+    .has-success .help-block,
+    .has-success .form-control-feedback {
+        color: #00a65a;
+    }
+    #form_register .form-control-feedback {
+        z-index: 100;
+    }
+    .has-error .select2-selection {
+        border-color: #dd4b39;
+    }
+    .has-success .select2-selection {
+        border-color: #00a65a;
+    }
+</style>
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<!-- <link href="{base}/files/bower_components/AdminLTE/plugins/select2/select2.min.css" rel="stylesheet" type="text/css"/> -->
+<script src="{base}/files/bower_components/AdminLTE/plugins/select2/select2.min.js">
+</script>
+<link href="{base}/files/bower_components/AdminLTE/plugins/datepicker/datepicker3.css" rel="stylesheet"/>
+<script src="{base}/files/bower_components/AdminLTE/plugins/datepicker/bootstrap-datepicker.js">
+</script>
+<script type="text/javascript">
+    ////////////////////
+    // -------------------------------------------------------------------- //
+    // -------------------------------------------------------------------- //
+
+    ////////////////////   
+    $('#kodepos_id').select2({ 
+        placeholder: '-- Cari Kelurahan / Desa, Kecamatan, Kabupaten --',
+        allowClear: true,
+        width: "100%", 
+        minimumInputLength: 4,
+        ajax: {
+            url: '{base}/country/kelurahan_ajax',
+            dataType: 'json',
+            delay: 250,
+            type: "GET",
+            data: function (params) {
+                // console.log(params);
+                var queryParameters = {
+                    search: params.term
+                }
+                return queryParameters;
+            },
+            processResults: function (data) {
+                // console.log(data);
+                return {
+                    results: data
+                };
+            },
+            cache: true
+        }
+    });
+    ////////////////////
+    $('#user_address').on('blur',function(event) {
+        // console.log(event);
+        $('#kodepos_id').select2('open');
+    });
+    $('#kodepos_id').on('blur', function(event) {
+        event.preventDefault();
+        /* Act on the event */
+    });
+
+    ////////////////////
+    $('#kodepos_id').on('change', function(event) {
+        event.preventDefault();
+        id = $(this).val();
+
+        if (id != null) {
+            // console.log(id);
+            $.ajax({
+                url: '{base}/country/kelurahan_ajax', 
+                data: {id: id},
+            })
+            .done(function(data) {
+                // console.log(data);
+                $.each(data, function(index, val) {
+                    $('#kelurahan_kecamatan').val('Kel. ' + val.kelurahan + ' - Kec. ' + val.kecamatan);
+                    $('#kabupaten_kodepos').val(val.jenis_kabupaten + ' ' + val.kabupaten + ' - '+val.kodepos);
+                    $('#user_subdistrict').val(val.kelurahan);
+                    $('#user_district').val(val.kecamatan);
+                    $('#user_city_type').val(val.jenis_kabupaten);
+                    $('#user_city').val(val.kabupaten);
+                    $('#user_state').val(val.propinsi);
+                    $('#user_postcode').val(val.kodepos);
+                });
+                $('#user_phone').focus();
+                
+            })
+            .fail(function(error) {
+                console.log(error.responseText);
+            });
+        }else{
+            $('#kelurahan_kecamatan').val('');
+            $('#kabupaten_kodepos').val('');
+        }
+
+    });
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    kodepos_id_before = $('#kodepos_id_before').val();
+    if (kodepos_id_before != '') {
+        kodepos_before(kodepos_id_before);
+    }
+    // console.log(kodepos_id_before);
+    function kodepos_before(id) {
+        $.ajax({
+            url: '{base}/country/kelurahan_ajax', 
+            data: {id: id},
+        })
+        .done(function(data) {
+            // console.log(data);
+            $.each(data, function(index, val) {
+                $('#kelurahan_kecamatan').val('Kel. ' + val.kelurahan + ' - Kec. ' + val.kecamatan);
+                $('#kabupaten_kodepos').val(val.jenis + ' ' + val.kabupaten + ' - '+val.kodepos);
+                $('#user_subdistrict').val(val.kelurahan);
+                $('#user_district').val(val.kecamatan);
+                $('#user_city_type').val(val.jenis);
+                $('#user_city').val(val.kabupaten);
+                $('#user_state').val(val.propinsi);
+                $('#user_postcode').val(val.kodepos);
+            });
+            // $('#pemilik_ktp').focus();
+            
+        })
+        .fail(function(error) {
+            console.log(error.responseText);
+        });
+    }
+    ////////////////////
+    // -------------------------------------------------------------------- //
+    // -------------------------------------------------------------------- //
+    // -------------------------------------------------------------------- //
+    // -------------------------------------------------------------------- //
+    // -------------------------------------------------------------------- //
+    ////////////////////
+    $('.btn_submit').on('click', function(event) {
+        event.preventDefault();
+        $('#form_user_edit').submit();
+    });
+    ////////////////////
+    ////////////////////
+    // -------------------------------------------------------------------- //
+    ////////////////////
+    //////////////////// 
+    ////////////////////
+    ////////////////////
+    // -------------------------------------------------------------------- //
+    ////////////////////
+    ////////////////////
+    $('#user_birthday').datepicker({
+        autoclose: true,
+        // Date: '-7y',
+        // startView:1,
+        // useCurrent: false, 
+        // dateFormat: 'yy-mm-dd',
+        // defaultDate: '01/01/1980'
+    }).on('change', function(event) {
+        event.preventDefault();
+        $('#form_register').formValidation('revalidateField', 'user_birthday');
+    });
+    // .datepicker('setDate', '1980-01-31')
+    ////////////////////
+    ////////////////////
+    // -------------------------------------------------------------------- //
+    ////////////////////
+    ////////////////////
+    var user_gender_before = $('#user_gender_before').val()
+    $('#user_gender').select2({
+        placeholder: '{m_gender}',
+        allowClear: true,
+        width: "100%",
+    }).val(user_gender_before).trigger('change');
+    ////////////////////
+    ////////////////////
+    // -------------------------------------------------------------------- //
+    ////////////////////
+    ////////////////////
+    // function format(icon) { 
+    //   return $('<span>').html(icon.text);
+    // }
+    // var currency = $.ajax({ 
+    //     type: "GET",
+    //     url: "{base}/currency/currency_ajax",
+    //     dataType: "json",
+    //     async: false,
+    //     cache: true
+    // }).responseJSON;
+    // // console.log(currency);
+    // var currency_id_before = $('#currency_id_before').val();
+    // $('#currency_id').select2({
+    //     width: "100%",
+    //     multiple: false,
+    //     data: currency,
+    //     allowClear: true,
+    //     placeholder: '{m_currency}',
+    //     templateResult: format,
+    //     formatResult: format,
+    //     templateSelection: format
+    // }).val(currency_id_before).trigger('change');
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    // -------------------------------------------------------------------- //
+    ////////////////////
+    ////////////////////
+    var country = $.ajax({
+        type: "GET",
+        url: "{base}/country/country_ajax",
+        dataType: "json",
+        async: false,
+        cache: true
+    }).responseJSON;
+    // console.log(country);
+    var country_id_before = $('#country_id_before').val();
+    $('#country_id').select2({
+        width: "100%",
+        multiple: false,
+        data: country,
+        allowClear: true,
+        placeholder: '{m_country}',
+    }).val(country_id_before).trigger('change');
+    ////////////////////
+    ////////////////////
+    // -------------------------------------------------------------------- //
+    ////////////////////
+    ////////////////////
+</script>

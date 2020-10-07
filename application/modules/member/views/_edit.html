@@ -1,0 +1,274 @@
+<div class="box box-{skin_box} skin_box">
+    <div class="box-body">
+        <legend>
+            Edit Profile
+        </legend>
+        {{controller}_detail}
+        <div>
+            <form action="" class="form-horizontal" enctype="multipart/form-data" method="POST" role="form">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="col-sm-3 text-right">
+                            <label class="control-label">
+                                Name :
+                            </label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input class="form-control" id="{controller}_name_first" name="{controller}_name_first" placeholder="" type="" value="{{controller}_name_first}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3 text-right">
+                            <label class="control-label">
+                                Email :
+                            </label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input class="form-control" id="{controller}_email" name="{controller}_email" placeholder="" type="email" value="{{controller}_email}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3 text-right">
+                            <label class="control-label">
+                                Address :
+                            </label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input class="form-control" id="{controller}_address" name="{controller}_address" placeholder="" type="" value="{{controller}_address}"/>
+                            <div style="margin-top: 10px ">
+                                <input class="form-control" id="kodepos_id_before" placeholder="" type="hidden" value="{kodepos_id}"/>
+                                <select class="form-control" id="kodepos_id" name="kodepos_id">
+                                </select>
+                            </div>
+                            <div style="margin-top: 10px ">
+                                <input class="form-control" id="kelurahan_kecamatan" name="" placeholder="" readonly="readonly"/>
+                            </div>
+                            <div style="margin-top: 10px ">
+                                <input class="form-control" id="kabupaten_kodepos" name="" placeholder="" readonly="readonly"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3 text-right">
+                            <label class="control-label">
+                                Phone :
+                            </label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input class="form-control" id="{controller}_phone" name="{controller}_phone" placeholder="" type="" value="{{controller}_phone}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <label>
+                                Avatar :
+                            </label>
+                            <div style="margin-bottom: 10px">
+                                <input name="{controller}_avatar_before" type="hidden" value="{{controller}_avatar}"/>
+                                <img id="{controller}_avatar" src="{base}/files/images/{{controller}_avatar}" width="128px"/>
+                                <button class="btn btn-danger btn-flat btn-xs {remove_button_display}" data-{controller}_id="{{controller}_id}" id="{controller}_avatar_remove" style="vertical-align: top" type="button">
+                                    <i class="fa fa-fw fa-trash">
+                                    </i>
+                                    Remove
+                                </button>
+                            </div>
+                            <input accept="image/png" class="form-control" id="{controller}_avatar_file" name="{controller}_avatar_file" type="file"/>
+                            <small>
+                                <i>
+                                    Allowed Type: *.png, Max Dimension : 512 x 512 pixel
+                                </i>
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <button class="btn btn-primary" type="submit">
+                                Submit
+                            </button>
+                            <a class="btn btn-danger" href="{base}/{controller}/profile/{{controller}_id}">
+                                Cancel
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        {/{controller}_detail}
+    </div>
+</div>
+<!-- ========================================================== -->
+<!-- ========================================================== -->
+<!-- ========================================================== -->
+<script type="text/javascript">
+    $('#kodepos_id').select2({ 
+        placeholder: 'Kelurahan / Desa',
+        allowClear: true,
+        width: "100%", 
+        minimumInputLength: 4,
+        ajax: {
+            url: '{base}/country/kelurahan_ajax',
+            dataType: 'json',
+            delay: 250,
+            type: "GET",
+            data: function (params) {
+                console.log(params);
+                var queryParameters = {
+                    search: params.term
+                }
+                return queryParameters;
+            },
+            processResults: function (data) {
+                // console.log(data);
+                return {
+                    results: data
+                };
+            },
+            cache: true
+        }
+    }); 
+    ////////////////////
+    ////////////////////
+    $('#kodepos_id').on('change', function(event) {
+        event.preventDefault();
+        id = $(this).val();
+
+        if (id != null) {
+            // console.log(id);
+            $.ajax({
+                url: '{base}/country/kelurahan_ajax', 
+                data: {id: id},
+            })
+            .done(function(data) {
+                // console.log(data);
+                $.each(data, function(index, val) {
+                    $('#kelurahan_kecamatan').val('Kel. ' + val.kelurahan + ' - Kec. ' + val.kecamatan);
+                    $('#kabupaten_kodepos').val(val.jenis_kabupaten + ' ' + val.kabupaten + ' - '+val.kodepos);
+                    $('#{controller}_kelurahan').val(val.kelurahan);
+                    $('#{controller}_kecamatan').val(val.kecamatan);
+                    $('#{controller}_jenis_kabupaten').val(val.jenis_kabupaten);
+                    $('#{controller}_kabupaten').val(val.kabupaten);
+                    $('#{controller}_propinsi').val(val.propinsi);
+                    $('#{controller}_kodepos').val(val.kodepos);
+                });
+                $('#{controller}_ktp').focus();
+                
+            })
+            .fail(function(error) {
+                console.log(error.responseText);
+            });
+        }else{
+            $('#kelurahan_kecamatan').val('');
+            $('#kabupaten_kodepos').val('');
+        }
+        
+
+    });
+    ////////////////////
+    ////////////////////
+    kodepos_id_before = $('#kodepos_id_before').val();
+    if (kodepos_id_before != '') {
+        kodepos_before(kodepos_id_before);
+    }
+    function kodepos_before(id) {
+        $.ajax({
+            url: '{base}/country/kelurahan_ajax', 
+            data: {id: id},
+        })
+        .done(function(data) {
+            // console.log(data);
+            $.each(data, function(index, val) {
+                $('#kelurahan_kecamatan').val('Kel. ' + val.kelurahan + ' - Kec. ' + val.kecamatan);
+                $('#kabupaten_kodepos').val(val.jenis_kabupaten + ' ' + val.kabupaten + ' - '+val.kodepos);
+                $('#{controller}_kelurahan').val(val.kelurahan);
+                $('#{controller}_kecamatan').val(val.kecamatan);
+                $('#{controller}_jenis_kabupaten').val(val.jenis_kabupaten);
+                $('#{controller}_kabupaten').val(val.kabupaten);
+                $('#{controller}_propinsi').val(val.propinsi);
+                $('#{controller}_kodepos').val(val.kodepos);
+            });
+            // $('#{controller}_ktp').focus();
+            
+        })
+        .fail(function(error) {
+            console.log(error.responseText);
+        });
+    }
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+
+    ///////////////////
+    function readURL(input, img_id_or_class) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                // console.log(e);
+                $(img_id_or_class).attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    ///////////////////
+    ///////////////////
+    $("#{controller}_avatar_file").change(function() {
+        var _URL = window.URL || window.webkitURL;
+        var image, file;
+        var el = this ;
+        $('#{controller}_avatar_remove').removeClass('hidden').show(); 
+        if ((file = el.files[0])) {
+            image = new Image();
+            image.src = _URL.createObjectURL(file);
+            image.onload = function() {
+                if (this.width == 256 && this.height == 256 ) {
+                    readURL(el, '#{controller}_avatar');
+                    // readURL(el, $('.preview_card_avatar').find('img'));
+                }else{
+                    alert('Error:\n\nThe avatar dimension must 256 x 256 pixels.');
+                    $("#{controller}_avatar_file").val(''); 
+                    $('#{controller}_avatar').attr('src', '{base}/files/images/default-avatar.png');
+                    $('.preview_card_avatar').find('img').attr('src', '{base}/files/images/default-avatar.png');
+                    $('#{controller}_avatar_remove').removeClass('hidden').hide(); 
+                }
+            }
+        }
+    });
+    ///////////////////
+    ////////////////////
+    $('#{controller}_avatar_remove').on('click', function(event) {
+        event.preventDefault();
+        if (confirm('Are you sure?')) {
+            $(this).hide(); 
+            var _id = $(this).data('{controller}_id');
+            $.ajax({
+                url: '{base}/{controller}/remove_avatar/' + _id,
+                data: {_id: _id},
+            })
+            .done(function(res) {
+                // console.log(res);
+                $('#{controller}_avatar_remove').hide(); 
+                $('#{controller}_avatar').attr('src', '{base}/files/images/default-avatar.png');
+                $('.preview_card_avatar').find('img').attr('src', '{base}/files/images/default-avatar.png');
+            })
+            .fail(function(error) {
+                console.log(error.responseText);
+            });
+        }
+    });
+    ////////////////////
+    ////////////////////
+    ////////////////////
+</script>

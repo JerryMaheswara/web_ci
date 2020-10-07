@@ -1,0 +1,108 @@
+<div class="views">
+  <div class="view view-main" data-page="contacts">
+    <div class="navbar">
+      <div class="navbar-inner navbar-on-center">
+        <div class="left sliding" style="transform: translate3d(0px, 0px, 0px);">
+          <a class="back link" href="{base}">
+            <i class="icon icon-back" style="transform: translate3d(0px, 0px, 0px);">
+            </i>
+            <span>
+              Back
+            </span>
+          </a>
+        </div>
+        <div class="center sliding" style="left: -7px; transform: translate3d(0px, 0px, 0px);">
+          My Friend List
+        </div>
+        <div class="right">
+          <a class="open-panel link icon-only" href="{base}/user/logout">
+            <i class="icon icon-bars">
+            </i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="pages navbar-through toolbar-through">
+      <div class="page page-on-center" data-page="contacts">
+        <div class="page-content contacts-content">
+          <div class="list-block contacts-block">
+            <div class="list-group">
+              <ul>
+                {my_friend}
+                {mukhothob_detail}
+                <li>
+                  <a class="item-link" href="{base}/chat/private/{user_id}">
+                    <div class="item-content">
+                      <div class="item-media">
+                        <img src="{user_avatar}" width="50px" class="img-circle" style="border:1px solid #ccc;">
+                        </img>
+                      </div>
+                      <div class="item-inner">
+                        <div class="item-title">
+                          {user_name}
+                        </div>
+                        <div class="item-after">
+                          <span class="badge bg-red my_friend" id="badge_{mukhothob_id}"
+                          data-mutakalim_id="{mutakalim_id}"
+                          data-mukhothob_id="{mukhothob_id}"
+                          ></span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                {/mukhothob_detail}
+                {/my_friend}
+                <li>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- | =======  ======= | -->
+
+<script type="text/javascript" src="http://bookstore.jerry.dev:8082/socket.io/socket.io.js">
+</script>
+<script type="text/javascript">
+  var socket = io('bookstore.jerry.dev:8082');
+  var mutakalim_id = '{mutakalim_id}';
+  // var mukhothob_id = '{mukhothob_id}';
+  // var user_detail = {
+  //   'mutakalim_id' : '{mutakalim_info}{user_id}{/mutakalim_info}',
+  //   'user_name' : '{mutakalim_info}{user_name}{/mutakalim_info}',
+  //   'user_email' : '{mutakalim_info}{user_email}{/mutakalim_info}',
+  //   'user_avatar' : '{mutakalim_info}{user_avatar}{/mutakalim_info}'
+  // };
+  // var payload ={};
+
+  /************************************************************************************************/
+  /************************************************************************************************/
+  socket.on('connect', function() {
+    $('.my_friend').each(function(index, el) {
+      var data = {
+        mutakalim_id: $(this).attr('data-mutakalim_id'),
+        mukhothob_id: $(this).attr('data-mukhothob_id')
+      };
+      // console.log('get_friendlist');
+      socket.emit('get_friendlist', data);
+    });
+    /* ==================================================== */
+    /* ==================================================== */
+    socket.on('badge_display', function(data_badge) {
+      console.log(data_badge);
+      $('#badge_'+data_badge.mukhothob_id).html(data_badge.badge_count);
+      if (data_badge.badge_count === 0) {
+        $('#badge_'+data_badge.mukhothob_id).html('');
+      }
+    });
+    /* ==================================================== */
+    /* ==================================================== */
+  });
+  /************************************************************************************************/
+  /************************************************************************************************/
+
+</script>

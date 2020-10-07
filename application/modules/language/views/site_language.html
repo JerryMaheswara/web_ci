@@ -1,0 +1,238 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="text-center">
+      <h3 class="widget-title">
+        {m_admin} {m_site} {m_language}
+      </h3>
+    </div>
+  </div>
+</div>
+<!-| =======  ======= |->
+<span class="pull-right">
+  <a class="btn btn-sm btn-success" data-toggle="modal" href='#site_language_add'>
+    <i class="fa fa-plus-circle">
+    </i>
+    {m_add} {m_site} {m_language}
+  </a>
+</span>
+<div class=" text-center">
+  {language_menu}
+</div>
+<div class="clearfix">
+  <br/>
+</div>
+<div class="">
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>
+            #
+          </th>
+          <th>
+            {m_language}
+          </th>
+          <th>
+            {m_status}
+          </th>
+          <th>
+            {m_action}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {site_language}
+        <tr id="tr_{site_language_id}">
+          <td>
+            {nomor}
+          </td>
+          <td>
+            {language_name} ({language_country})
+          </td>
+          <td>
+            <!--
+              <b id="span_on_of_{site_language_id}">
+                {on_off}
+              </b>
+            -->
+            <a style="cursor:pointer" class="toogle_status" id="btn_toggle_{site_language_id}"
+              data-language_id="{language_id}"
+              data-site_language_id="{site_language_id}"
+              data-site_language_disabled="{site_language_disabled}"
+              data-on_off="{on_off}"
+              >
+              <i class="fa fa-toggle-{on_off}  " id="toogle_{site_language_id}">
+              </i>
+            </a>
+          </td>
+          <td>
+            <a style="cursor:pointer" class="btn_delete btn btn-danger btn-xs" id="btn_delete_{site_language_id}"
+              data-site_language_id="{site_language_id}"
+              >
+              <i class="fa fa-trash fa-lg">
+              </i>
+            </a>
+          </td>
+        </tr>
+        {/site_language}
+      </tbody>
+    </table>
+  </div>
+  <!-| ======= NAVIGATION : FIRST : PREV : PAGE : NEXT : LAST ======= |->
+  <!-| ======= NAVIGATION : FIRST : PREV : PAGE : NEXT : LAST ======= |->
+  <!-| ======= NAVIGATION : FIRST : PREV : PAGE : NEXT : LAST ======= |->
+  <div class="row text-center ">
+    <a class="btn btn-success btn-xs {prev_disabled}" href="{base}/language/admin/site?q={query}&limit={limit_number}&offset={first_offset}">
+      <i class="fa fa-step-backward">
+      </i>
+      {m_first}
+    </a>
+    <a class="btn btn-primary btn-xs {prev_disabled}" href="{base}/language/admin/site?q={query}&limit={limit_number}&offset={prev_number}">
+      <i class="fa fa-chevron-left">
+      </i>
+      {m_prev}
+    </a>
+    {m_jump_to_page} :
+    <select id="pagers">
+      {pager}
+      <option value="{jump_offset}" >
+        {jump_halaman}
+      </option>
+      {/pager}
+    </select>
+    <a class="btn btn-primary btn-xs {next_disabled}" href="{base}/language/admin/site?q={query}&limit={limit_number}&offset={next_number}">
+      {m_next}
+      <i class="fa fa-chevron-right">
+      </i>
+    </a>
+    <a class="btn btn-danger btn-xs {next_disabled}" href="{base}/language/admin/site?q={query}&limit={limit_number}&offset={last_offset}">
+      {m_last}
+      <i class="fa fa-step-forward">
+      </i>
+    </a>
+  </div>
+  <!-| ======= NAVIGATION : FIRST : PREV : PAGE : NEXT : LAST ======= |->
+  <!-| ======= NAVIGATION : FIRST : PREV : PAGE : NEXT : LAST ======= |->
+</div>
+<!-| =======  ======= |->
+<script type="text/javascript">
+  $(document).ready(function() {
+  // ////////
+  // ////////
+  // ////////
+  // ////////
+  // ////////
+  // ////////
+  pager('{base}/language/admin/site', '{query}');
+  // limit = '{limit}';
+  // offset = '{offset}';
+  // $('#pagers').val(offset).select();
+  // $('#pagers').change(function(event) {
+  // offset_number = $(this).val();
+  // window.location.href = '{base}/language/admin/site?q={query}&limit={limit_number}&offset='+offset_number;
+  // });
+  // ////////
+  // ////////
+  // ////////
+  // ////////
+  /*--------------*/
+  /*--------------*/
+  /*--------------*/
+  $('.toogle_status').each(function(index, el) {
+  $(this).click(function(event) {
+  language_id = $(this).attr('data-language_id');
+  site_language_id = $(this).attr('data-site_language_id');
+  site_language_disabled = $(this).attr('data-site_language_disabled')==0?1:0;
+  on_off =  $(this).attr('data-on_off');
+  $.ajax({
+  url: '{base}/language/ajax_insert_site_language',
+  type: 'POST',
+  data: {
+  language_id:language_id,
+  site_language_id:site_language_id,
+  site_language_disabled:site_language_disabled
+  },
+  })
+  .done(function(data) {
+  data = $.parseJSON(data);
+  $('#span_on_of_'+site_language_id).html(data[0].on_off);
+  $('#toogle_'+site_language_id).removeClass('fa-toggle-'+on_off).addClass('fa-toggle-'+data[0].on_off);
+  $('#btn_toggle_'+site_language_id).attr('data-on_off', data[0].on_off);
+  $('#btn_toggle_'+site_language_id).attr('data-site_language_disabled', data[0].site_language_disabled);
+  // console.log($(this));
+  })
+  .fail(function() {
+  console.log("error");
+  });
+  });
+  });
+  /*--------------*/
+  $('.btn_delete').each(function(index, el) {
+  $(this).click(function(event) {
+  if (confirm('Are you sure ...?')) {
+  site_language_id = $(this).attr('data-site_language_id');
+  // $('#tr_'+site_language_id).remove();
+  $.ajax({
+  url: '{base}/language/ajax_delete_site_language',
+  type: 'POST',
+  data: {
+  site_language_id:site_language_id
+  },
+  })
+  .done(function() {
+  $('#tr_'+site_language_id).remove();
+  // console.log("success");
+  })
+  .fail(function(data) {
+  console.log("error" . data);
+  });
+  }
+  });
+  });
+  /*--------------*/
+  /*--------------*/
+  });
+</script>
+<!-| =======  ======= |->
+<div class="modal fade" id="site_language_add">
+  <div class="modal-dialog">
+    <form action="" method="POST" class="form-horizontal" role="form">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            &times;
+          </button>
+          <h4 class="modal-title">
+            {m_add} {m_site_language}
+          </h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <div class="col-sm-8 col-sm-offset-2">
+              <label>
+                {m_site_language}
+              </label>
+              <select class="form-control" name="language_id" id="language_id">
+                {language}
+                <option value="{language_id}">
+                  {language_name} - {language_country}
+                </option>
+                {/language}
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            {m_close}
+          </button>
+          <button type="submit" class="btn btn-primary">
+            {m_submit}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!-| =======  ======= |->
+<!-| =======  ======= |->

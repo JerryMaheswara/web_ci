@@ -1,0 +1,156 @@
+<!-- -->
+<div class="row image_container"></div> 
+<!-- -->
+<form id="form_image" >
+  <input id="entity_table" name="entity_table" type="hidden" value="{entity_table}"/>
+  <input id="entity_id" name="entity_id" type="hidden" value="{entity_id}"/>
+  <div id="input_file" class="form-group"></div>
+</form>
+
+<div class="form-group">
+<button class="btn btn-primary" id="button_submit" type="button">
+  Upload  
+</button>
+</div>
+<!--  --> 
+
+<div class="form-group">
+  <span id="span_persen"></span>
+  <div class="progress progress-xxs  ">
+    <div class="progress-bar progress-bar-success progress-bar-striped- " >
+      <span class="sr-only">20% Complete</span>
+    </div>
+  </div>
+</div>
+ 
+<!--  -->
+
+<div class="hidden" class="box-footer"> 
+  <div id="with_plus" class="box-footer" >
+      <div class="input-group" style="margin:2px 0;">
+        <input class="form-control" name="file_image[]" type="file" multiple/>
+        <div class="input-group-btn btn_image_plus">
+          <a class=" btn btn-success btn-flat ">
+            <i class="fa fa-plus">
+            </i>
+          </a>
+        </div> 
+      </div>
+  </div>
+  <div id="without_plus" >
+      <div class="input-group" style="margin:2px 0;">
+        <input class="form-control" name="file_image[]" type="file" multiple/>
+        <div class="input-group-btn btn_image_minus">
+          <a class=" btn btn-danger btn-flat ">
+            <i class="fa fa-minus">
+            </i>
+          </a>
+        </div>
+      </div>
+  </div>
+ 
+
+</div>
+<!-- -->
+<!-- -->
+ 
+<!-- -->
+<!-- <script src="http://malsup.github.com/jquery.form.js"></script> -->
+<script type="text/javascript">
+ 
+
+    var entity_table = $('#entity_table').val();
+    var entity_id = $('#entity_id').val();
+
+    // var button = $('#input_file') ;
+    var with_plus = $('#with_plus').html();
+    var without_plus = $('#without_plus').html();
+    $('#input_file').html(with_plus);
+    refresh_image();
+    // ---------------------------- //
+    // ---------------------------- //
+    function refresh_image() {
+      $.ajax({
+        url: '{base}/image/refresh',
+        type: 'POST',
+        data: {
+          entity_table: entity_table,
+          entity_id: entity_id,
+        },
+      })
+      .done(function(data) {
+        $('.image_container').html(data);
+        $('.btn_image_plus').click(function(event) {
+          $('#input_file').prepend(without_plus);
+          $('.btn_image_minus').click(function(event) {
+            $(this).parent().remove();
+          });
+
+        });
+
+      })
+      .fail(function() {
+        console.log("error");
+      });
+    }
+    // ---------------------------- //
+
+    $('#button_submit').click(function(event) {
+      $(this).attr('disabled', true);
+      $(this).html('<i class="fa fa-spinner fa-pulse fa-fw"></i> Please Wait...!!!');
+      $('.btn_image_plus, .btn_image_minus').parent().hide();
+      var data_image = new FormData($('#form_image')[0]) ;
+      $.ajax({
+        url: '{base}/image/upload',
+        type: 'POST',
+        data: data_image,
+        mimeTypes:"multipart/form-data",
+        cache:false, 
+        contentType: false,
+        processData: false,
+
+        xhr: function() {
+          var myXhr = $.ajaxSettings.xhr();
+          if(myXhr.upload){
+            myXhr.upload.addEventListener('progress', progress, false);
+          }
+          return myXhr;
+        },
+
+      })
+      .done(function(data) { 
+        // console.log(data);
+        // $('#form_image').get(0).reset();
+        $('#input_file').html(with_plus);
+        refresh_image();
+        $('#button_submit').attr('disabled', false);
+        $('#button_submit').html('Upload');
+        $('#span_persen').html('');
+        $('.progress-bar').css('width', '0%');
+
+
+      })
+      .fail(function() {
+        console.log("error");
+      });
+      
+    });
+    // ---------------------------- // 
+    function progress(e){
+      if(e.lengthComputable){
+          var max = e.total;
+          var current = e.loaded;
+          var Percentage = Math.floor((current * 100)/max);
+          $('#span_persen').html(Percentage+'%');
+          $('.progress-bar').css('width', Percentage+'%');
+          if(Percentage >= 100)
+          {
+            // $('.progress-bar').css('width', '0%');
+            $('#span_persen').html('Upload successfull...');
+          }
+      }  
+   }
+    // ---------------------------- // 
+    // ---------------------------- // 
+      
+</script>

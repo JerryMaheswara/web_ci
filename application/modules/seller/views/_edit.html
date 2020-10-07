@@ -1,0 +1,284 @@
+<div class="box box-{skin_box} skin_box">
+    <div class="box-body">
+        <legend>
+            Edit Profile
+        </legend>
+        {user_detail}
+        <div>
+            <form action="" class="form-horizontal" enctype="multipart/form-data" method="POST" role="form">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="col-sm-3 text-right">
+                            <label class="control-label">
+                                First Name :
+                            </label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input class="form-control" id="user_name_first" name="user_name_first" placeholder="" type="" value="{user_name_first}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3 text-right">
+                            <label class="control-label">
+                                Last Name :
+                            </label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input class="form-control" id="user_name_last" name="user_name_last" placeholder="" type="" value="{user_name_last}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3 text-right">
+                            <label class="control-label">
+                                Email :
+                            </label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input class="form-control" id="user_email" name="user_email" placeholder="" type="email" value="{user_email}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3 text-right">
+                            <label class="control-label">
+                                Address :
+                            </label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input class="form-control" id="user_address" name="user_address" placeholder="" type="" value="{user_address}"/>
+                            <div style="margin-top: 10px ">
+                                <input class="form-control" id="kodepos_id_before" placeholder="" type="hidden" value="{kodepos_id}"/>
+                                <select class="form-control" id="kodepos_id" name="kodepos_id">
+                                </select>
+                            </div>
+                            <div style="margin-top: 10px ">
+                                <input class="form-control" id="kelurahan_kecamatan" name="" placeholder="" readonly="readonly"/>
+                            </div>
+                            <div style="margin-top: 10px ">
+                                <input class="form-control" id="kabupaten_kodepos" name="" placeholder="" readonly="readonly"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3 text-right">
+                            <label class="control-label">
+                                Phone :
+                            </label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input class="form-control" id="user_phone" name="user_phone" placeholder="" type="" value="{user_phone}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <label>
+                                Avatar :
+                            </label>
+                            <div style="margin-bottom: 10px">
+                                <input name="user_avatar_before" type="hidden" value="{user_avatar}"/>
+                                <img id="user_avatar" src="{base}/files/images/{user_avatar}" width="128px"/>
+                                <button class="btn btn-danger btn-flat btn-xs {remove_button_display}" data-user_id="{user_id}" id="user_avatar_remove" style="vertical-align: top" type="button">
+                                    <i class="fa fa-fw fa-trash">
+                                    </i>
+                                    Remove
+                                </button>
+                            </div>
+                            <input accept="image/png" class="form-control" id="user_avatar_file" name="user_avatar_file" type="file"/>
+                            <small>
+                                <i>
+                                    Allowed Type: *.png, Max Dimension : 512 x 512 pixel
+                                </i>
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <button class="btn btn-primary" type="submit">
+                                Submit
+                            </button>
+                            <a class="btn btn-danger" href="{base}/user/profile/{user_id}">
+                                Cancel
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        {/user_detail}
+    </div>
+</div>
+<!-- ========================================================== -->
+<!-- ========================================================== -->
+<!-- ========================================================== -->
+<script type="text/javascript">
+    $('#kodepos_id').select2({ 
+        placeholder: 'Kelurahan / Desa',
+        allowClear: true,
+        width: "100%", 
+        minimumInputLength: 4,
+        ajax: {
+            url: '{base}/country/kelurahan_ajax',
+            dataType: 'json',
+            delay: 250,
+            type: "GET",
+            data: function (params) {
+                console.log(params);
+                var queryParameters = {
+                    search: params.term
+                }
+                return queryParameters;
+            },
+            processResults: function (data) {
+                // console.log(data);
+                return {
+                    results: data
+                };
+            },
+            cache: true
+        }
+    }); 
+    ////////////////////
+    ////////////////////
+    $('#kodepos_id').on('change', function(event) {
+        event.preventDefault();
+        id = $(this).val();
+
+        if (id != null) {
+            // console.log(id);
+            $.ajax({
+                url: '{base}/country/kelurahan_ajax', 
+                data: {id: id},
+            })
+            .done(function(data) {
+                // console.log(data);
+                $.each(data, function(index, val) {
+                    $('#kelurahan_kecamatan').val('Kel. ' + val.kelurahan + ' - Kec. ' + val.kecamatan);
+                    $('#kabupaten_kodepos').val(val.jenis_kabupaten + ' ' + val.kabupaten + ' - '+val.kodepos);
+                    $('#user_kelurahan').val(val.kelurahan);
+                    $('#user_kecamatan').val(val.kecamatan);
+                    $('#user_jenis_kabupaten').val(val.jenis_kabupaten);
+                    $('#user_kabupaten').val(val.kabupaten);
+                    $('#user_propinsi').val(val.propinsi);
+                    $('#user_kodepos').val(val.kodepos);
+                });
+                $('#user_ktp').focus();
+                
+            })
+            .fail(function(error) {
+                console.log(error.responseText);
+            });
+        }else{
+            $('#kelurahan_kecamatan').val('');
+            $('#kabupaten_kodepos').val('');
+        }
+        
+
+    });
+    ////////////////////
+    ////////////////////
+    kodepos_id_before = $('#kodepos_id_before').val();
+    if (kodepos_id_before != '') {
+        kodepos_before(kodepos_id_before);
+    }
+    function kodepos_before(id) {
+        $.ajax({
+            url: '{base}/country/kelurahan_ajax', 
+            data: {id: id},
+        })
+        .done(function(data) {
+            // console.log(data);
+            $.each(data, function(index, val) {
+                $('#kelurahan_kecamatan').val('Kel. ' + val.kelurahan + ' - Kec. ' + val.kecamatan);
+                $('#kabupaten_kodepos').val(val.jenis_kabupaten + ' ' + val.kabupaten + ' - '+val.kodepos);
+                $('#user_kelurahan').val(val.kelurahan);
+                $('#user_kecamatan').val(val.kecamatan);
+                $('#user_jenis_kabupaten').val(val.jenis_kabupaten);
+                $('#user_kabupaten').val(val.kabupaten);
+                $('#user_propinsi').val(val.propinsi);
+                $('#user_kodepos').val(val.kodepos);
+            });
+            // $('#user_ktp').focus();
+            
+        })
+        .fail(function(error) {
+            console.log(error.responseText);
+        });
+    }
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+
+    ///////////////////
+    function readURL(input, img_id_or_class) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                // console.log(e);
+                $(img_id_or_class).attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    ///////////////////
+    ///////////////////
+    $("#user_avatar_file").change(function() {
+        var _URL = window.URL || window.webkitURL;
+        var image, file;
+        var el = this ;
+        $('#user_avatar_remove').removeClass('hidden').show(); 
+        if ((file = el.files[0])) {
+            image = new Image();
+            image.src = _URL.createObjectURL(file);
+            image.onload = function() {
+                if (this.width == 256 && this.height == 256 ) {
+                    readURL(el, '#user_avatar');
+                    // readURL(el, $('.preview_card_avatar').find('img'));
+                }else{
+                    alert('Error:\n\nThe avatar dimension must 256 x 256 pixels.');
+                    $("#user_avatar_file").val(''); 
+                    $('#user_avatar').attr('src', '{base}/files/images/default-avatar.png');
+                    $('.preview_card_avatar').find('img').attr('src', '{base}/files/images/default-avatar.png');
+                    $('#user_avatar_remove').removeClass('hidden').hide(); 
+                }
+            }
+        }
+    });
+    ///////////////////
+    ////////////////////
+    $('#user_avatar_remove').on('click', function(event) {
+        event.preventDefault();
+        if (confirm('Are you sure?')) {
+            $(this).hide(); 
+            var _id = $(this).data('user_id');
+            $.ajax({
+                url: '{base}/user/remove_avatar/' + _id,
+                data: {_id: _id},
+            })
+            .done(function(res) {
+                // console.log(res);
+                $('#user_avatar_remove').hide(); 
+                $('#user_avatar').attr('src', '{base}/files/images/default-avatar.png');
+                $('.preview_card_avatar').find('img').attr('src', '{base}/files/images/default-avatar.png');
+            })
+            .fail(function(error) {
+                console.log(error.responseText);
+            });
+        }
+    });
+    ////////////////////
+    ////////////////////
+    ////////////////////
+</script>

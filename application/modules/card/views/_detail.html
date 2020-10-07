@@ -1,0 +1,89 @@
+<center>
+    {template_detail}
+    <div style="min-width:300px; max-width: 460px;">
+        <div class="" style=" border-radius: 13px; color:#222; padding: 0 22px;">
+            <div class="text-center">
+                <label>
+                    Card Preview
+                </label>
+            </div>
+            <div class="" style="width:100%;position: relative;">
+                {template_content}
+                <span class=" text-{logo_align}" style="width:100%;position: ">
+                    <div class="preview_card_logo" style="position: absolute; 
+                                                    top: {logo_top}%;  
+                                                    {logo_align} : {logo_left_right}%;
+                                                    width: {logo_width}%; 
+                                                    /*-webkit-filter: drop-shadow(0px 0px 2px rgba(255,255,255,.8)); */
+                                                    /*filter: drop-shadow(0px 0px 2px rgba(255,255,255,.8));*/
+                                                    ">
+                        <img src="{base}/files/images/{controller}/{{controller}_logo}.png" style="border: 0px solid #eee; width: 100% !important;"/>
+                    </div>
+                </span>
+                <span class=" text-{photo_align}" style="width:100%;position: ">
+                    <div class="preview_card_photo" style="position: absolute; 
+                                                    top: {photo_top}%;  
+                                                    {photo_align} :{photo_left_right}%;
+                                                    width: {photo_width}%; ">
+                        <img src="{base}/files/images/default-avatar.png" style="border: 1px solid #eee; width: 100% !important;"/>
+                    </div>
+                </span>
+                <span class=" text-{info_align}" style="width:100%;position: ">
+                    <span class="preview_card_info " style="position: absolute; 
+                                                top: {info_top}%;  
+                                                {info_align} :{info_left_right}%;
+                                                width: {info_width}%;
+                                                color:#fff;
+                                                text-transform: uppercase;
+                                                font-weight: bold ">
+                        <div class="min320">
+                            <div style="font-size: 10pt;">
+                                1234 5678 9102 3456
+                            </div>
+                            <div style="font-size: 12pt; white-space: nowrap;">
+                                The name of member
+                            </div>
+                            <div style="font-size: 10pt;">
+                                Expired : 2018-10-30
+                            </div>
+                        </div>
+                        <div class="min480">
+                            <div style="font-size: 16pt">
+                                1234 5678 9102 3456
+                            </div>
+                            <div style="font-size: 20pt">
+                                The name of member
+                            </div>
+                            <div style="font-size: 15pt">
+                                Expired : 2018-10-30
+                            </div>
+                        </div>
+                    </span>
+                </span>
+                <img id="preview_card_bg" src="{base}/files/images/card/{{controller}_card_design}.png" style="border-radius: 10px;" width="100%"/>
+                {/template_content}
+            </div>
+        </div>
+    </div>
+    {/template_detail}
+</center>
+<!-- -->
+<style type="text/css">
+    @media screen and (min-width: 430px) {
+        .min320 {
+           display: none;
+        }
+        .min480{
+            text-shadow: 0px 0px 6px #000;
+        }
+    }
+    @media screen and (max-width: 429px) {
+        .min320 {
+            text-shadow: 0px 0px 6px #000;
+        }
+        .min480{
+           display: none;
+        }
+    }
+</style>
+<!-- -->

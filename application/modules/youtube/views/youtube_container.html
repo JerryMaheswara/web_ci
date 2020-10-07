@@ -1,0 +1,80 @@
+<div class="row">
+    <div id="youtube_data">
+    </div>
+</div>
+<div class="row text-center">
+    <a class="hidden btn btn-primary btn_next_prev" data-pagetoken="{prevPageToken}" href="{base}/{controller}/?q={q}&pageToken={prevPageToken}">
+        Prev
+    </a>
+    <a class="hidden btn btn-primary btn_next_prev" data-pagetoken="{nextPageToken}" href="{base}/{controller}/?q={q}&pageToken={nextPageToken}">
+        Next
+    </a>
+    <a class="btn btn-primary btn_load_more" data-pagetoken="{nextPageToken}" href="{base}/{controller}/?q={q}&pageToken={nextPageToken}">
+        Load more..
+    </a>
+    <button class="btn btn-danger" id="to_top">
+        <i class="fa fa-fw fa-arrow-up">
+        </i>
+    </button>
+</div>
+<script type="text/javascript">
+    //////////////////
+    $('#to_top').on('click', function(event) {
+        event.preventDefault();
+        // $(window).scrollTop(0);
+        $("html, body").animate({ scrollTop: 0 }, 500);
+    });
+    //////////////////
+    //////////////////
+    //////////////////
+    $('.btn_next_prev').each(function(index, el) {
+        $(this).on('click', function(event) {
+            event.preventDefault();
+            var pageToken = $(this).data('pagetoken');
+            var q = '{q}';
+            $.ajax({
+                url: '{base}/{controller}/youtube_ajax',
+                type: 'GET',
+                data: {
+                    q: q,
+                    pageToken:pageToken
+                },
+            })
+            .done(function(res) {
+                // console.log(res);
+                $('#youtube_container').html(res.youtube_container);
+                $('#youtube_data').html(res.youtube_data);
+            })
+            .fail(function(error) {
+                console.log(error.responseText);
+            });
+        });
+    });
+    //////////////////
+    $('.btn_load_more').on('click', function(event) {
+        event.preventDefault();
+            $(this).html('<i class="fa fa-fw fa-spinner fa-pulse"></i>');
+
+            var pageToken = $(this).data('pagetoken');
+            var q = '{q}';
+            $.ajax({
+                url: '{base}/{controller}/youtube_ajax',
+                type: 'GET',
+                data: {
+                    q: q,
+                    pageToken:pageToken
+                },
+            })
+            .done(function(res) {
+                // console.log(res.nextPageToken);
+                $('#youtube_data').append(res.youtube_data);
+                $('.btn_load_more').data('pagetoken',res.nextPageToken);
+                $('.btn_load_more').html('Load more...');
+
+            })
+            .fail(function(error) {
+                console.log(error.responseText);
+            });
+    });
+    //////////////////
+</script>

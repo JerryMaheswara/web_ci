@@ -1,0 +1,41 @@
+<div class="box box-{skin_box} skin_box">
+    <div class="box-body">
+        {breadcrumb}
+        {searchbar}
+        <div class="row " id="gridview" >
+        </div>
+        <div class="paging">
+        </div>
+    </div>
+</div>
+<!-- -->
+<script type="text/javascript">
+    function {controller}_ajax(search, offset, status) {
+        $.ajax({
+            url: '{base}/{controller}/{controller}_ajax',
+            data:{
+                search : search,
+                offset : offset,
+                status : status,
+            }
+        })
+        .done(function(data) {
+            // data = $.parseJSON(data);
+            $.each(data, function(index, val) { 
+                $('#gridview').html(val._gridview);
+                $('#total_rows').find('span#angka').html(val.total_rows);
+                $('.paging').html(val.paging);
+            });
+        })
+        .fail(function(error) {
+            console.log(error.responseText);
+        });
+    }
+    {controller}_ajax('{search}', '{offset}', '{status}');
+    ////////////
+    $('#search').on('keyup', function(event) {
+        event.preventDefault();
+        var search = $(this).val();
+        {controller}_ajax(search, 0,'{status}');
+    });
+</script>

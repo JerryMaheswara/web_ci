@@ -1,0 +1,251 @@
+<header class="navbar navbar-sticky">
+    <!-- Search-->
+    <form class="site-search" method="get" action="{base}/item/search">
+        <input name="search" placeholder="Type to search..." type="text"/>
+        <div class="search-tools">
+            <span class="clear-search">
+                Clear
+            </span>
+            <span class="close-search">
+                <i class="icon-cross">
+                </i>
+            </span>
+        </div>
+    </form>
+    <div class="site-branding">
+        <div class="inner">
+            <!-- Off-Canvas Toggle (#shop-categories)-->
+            <a class="offcanvas-toggle cats-toggle" data-toggle="offcanvas" href="#shop-categories">
+            </a>
+            <!-- Off-Canvas Toggle (#mobile-menu)-->
+            <a class="offcanvas-toggle menu-toggle" data-toggle="offcanvas" href="#mobile-menu">
+            </a>
+            <!-- Site Logo-->
+            <a class="site-logo" href="{base}">
+                <img alt="Logo" src="{base}/files/images/logo-ima.png"/>
+            </a>
+        </div>
+    </div>
+    <!-- Main Navigation-->
+    <nav class="site-menu">
+        <ul>
+            <li class="{menu_active_home}">
+                <a href="{base}">
+                    <span>
+                        Home
+                    </span>
+                </a>
+            </li>
+            <li class="{menu_active_toko} " style="display: ;">
+                <a href="{base}/toko.html">
+                    <span>
+                        Toko
+                    </span>
+                </a>
+            </li>
+            <li class="{menu_active_category} " style="display: none;">
+                <a href="{base}/category.html">
+                    <span>
+                        Category
+                    </span>
+                </a>
+            </li>
+            <li class="{menu_active_item} " style="display: none;">
+                <a href="{base}/item.html">
+                    <span>
+                        Item
+                    </span>
+                </a>
+            </li>
+            <li class="unishop" style="display: none">
+                <a href="{base}/files/unishop/index.html" target="_blank">
+                    <span>
+                        unishop
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- ============== -->
+    <!-- ============== -->
+    <!-- ============== -->
+    <!-- ============== -->
+    <!-- ============== -->
+    <!-- ============== -->
+    <!-- ============== -->
+    <!-- ============== -->
+    <!-- ============== -->
+    <!-- ============== -->
+    <!-- ============== -->
+    <!-- ============== -->
+    <!-- ============== -->
+    <!-- ============== -->
+    <!-- ============== -->
+    <!-- ============== -->
+    <!-- ============== -->
+    <!-- ============== -->
+    <!-- Toolbar-->
+    <div class="toolbar">
+        <div class="inner">
+            <div class="tools">
+                <div class="search">
+                    <i class="icon-search">
+                    </i>
+                </div>
+                <div class="cart {is_login}" style="display: none">
+                    <a href="{base}/cart.html">
+                    </a>
+                    <i class="icon-bag">
+                    </i>
+                    <span class="count cart_count">
+                        {cart_count}
+                    </span>
+                    <span class="subtotal">
+                        <span class="cart_total_format">
+                            Rp. {cart_total_format}
+                        </span>
+                    </span>
+                    <div class="toolbar-dropdown hidden">
+                        <div class="dropdown-product-item">
+                            <span class="dropdown-product-remove">
+                                <i class="icon-cross">
+                                </i>
+                            </span>
+                            <a class="dropdown-product-thumb" href="shop-single.html">
+                                <img alt="Product" src="{base}/files/unishop/img/cart-dropdown/01.jpg"/>
+                            </a>
+                            <div class="dropdown-product-info">
+                                <a class="dropdown-product-title" href="shop-single.html">
+                                    Unionbay Park
+                                </a>
+                                <span class="dropdown-product-details">
+                                    1 x $43.90
+                                </span>
+                            </div>
+                        </div>
+                        <div class="dropdown-product-item">
+                            <span class="dropdown-product-remove">
+                                <i class="icon-cross">
+                                </i>
+                            </span>
+                            <a class="dropdown-product-thumb" href="shop-single.html">
+                                <img alt="Product" src="{base}/files/unishop/img/cart-dropdown/02.jpg"/>
+                            </a>
+                            <div class="dropdown-product-info">
+                                <a class="dropdown-product-title" href="shop-single.html">
+                                    Daily Fabric Cap
+                                </a>
+                                <span class="dropdown-product-details">
+                                    2 x $24.89
+                                </span>
+                            </div>
+                        </div>
+                        <div class="dropdown-product-item">
+                            <span class="dropdown-product-remove">
+                                <i class="icon-cross">
+                                </i>
+                            </span>
+                            <a class="dropdown-product-thumb" href="shop-single.html">
+                                <img alt="Product" src="{base}/files/unishop/img/cart-dropdown/03.jpg"/>
+                            </a>
+                            <div class="dropdown-product-info">
+                                <a class="dropdown-product-title" href="shop-single.html">
+                                    Haan Crossbody
+                                </a>
+                                <span class="dropdown-product-details">
+                                    1 x $200.00
+                                </span>
+                            </div>
+                        </div>
+                        <div class="toolbar-dropdown-group">
+                            <div class="column">
+                                <span class="text-lg">
+                                    Total:
+                                </span>
+                            </div>
+                            <div class="column text-right">
+                                <span class="text-lg text-medium">
+                                    $289.68
+                                </span>
+                            </div>
+                        </div>
+                        <div class="toolbar-dropdown-group">
+                            <div class="column">
+                                <a class="btn btn-sm btn-block btn-secondary" href="{base}/cart.html">
+                                    View Cart
+                                </a>
+                            </div>
+                            <div class="column">
+                                <a class="btn btn-sm btn-block btn-success" href="{base}/checkout/address.html">
+                                    Checkout
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cart account {is_login}" style="display: none"> 
+                    <a href="{base}/account/profile.html">
+                    </a>
+                    <i class="icon-head">
+                    </i>
+                    <!-- -->
+                    <!-- -->
+                    <!-- -->
+                    <ul class="toolbar-dropdown ">
+                        <li class="sub-menu-user">
+                            {my_account_detail}
+                            <div class="user-ava">
+                                <img alt="Daniel Adams" src="{base}/files/images/{my_avatar}"/>
+                            </div>
+                            <div class="user-info">
+                                <h6 class="user-name"> 
+                                    {my_name_first}
+                                    {my_name_last}
+                                </h6>
+                                <span class="text-xs text-muted">
+                                    0 Reward points
+                                </span>
+                            </div>
+                            {/my_account_detail}
+                        </li>
+                        <li>
+                            <a href="{base}/account/profile.html">
+                                My Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{base}/account/address.html">
+                                {alamat_ku}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{base}/account/order.html">
+                                Orders List
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{base}/account/wishlist.html">
+                                Wishlist
+                            </a>
+                        </li>
+                        <li class="sub-menu-separator">
+                        </li>
+                        <li>
+                            <a href="{base}/logout">
+                                <i class="icon-unlock">
+                                </i>
+                                Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<script type="text/javascript">
+    is_admin = '{is_admin}';
+    if (is_admin=='is_admin') {
+        $('.unishop').show();
+    }
+</script>

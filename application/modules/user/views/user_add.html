@@ -1,0 +1,784 @@
+<link href="{base}/files/bower_components/AdminLTE/plugins/iCheck/square/blue.css" rel="stylesheet"/>
+<!-- <link href="{base}/files/css/formValidation.min.css" rel="stylesheet"/> -->
+<link href="{base}/files/bower_components/formvalidation.io/dist/css/formValidation.min.css" rel="stylesheet"/>
+<section class="row">
+    <div class="col-sm-6 col-sm-offset-3 col-xs-12">
+        <div class="box box-{skin_box} skin_box">
+            <div class=" box-body">
+                <legend>
+                    {m_registration}
+                </legend>
+                <form action="" class="form-horizontal" enctype="multipart/form-data" id="form_register" method="POST">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">
+                            {m_email} :
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="user_email" name="user_email" placeholder="{m_email}" required="required" type="email" value=""/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">
+                            {m_password} :
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="user_password" name="user_password" placeholder="{m_password}" required="required" type="password" value=""/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">
+                            {m_confirm_password} :
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="confirm_password" name="confirm_password" placeholder="{m_confirm_password}" required="required" type="password" value=""/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">
+                            {m_given_name} :
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="user_given_name" name="user_given_name" placeholder="{m_given_name}" required="required" type="text" value=""/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">
+                            {m_family_name} :
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="user_family_name" name="user_family_name" placeholder="{m_family_name}" required="required" type="text" value=""/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">
+                            {m_nick_name} :
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="user_nick_name" name="user_nick_name" placeholder="{m_nick_name}" type="text" value=""/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">
+                            {m_security_pin} :
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="user_security_pin" maxlength="4" name="user_security_pin" placeholder="{m_security_pin}" required="required" type="number" value=""/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">
+                            {m_date_of_birth} :
+                        </label>
+                        <div class="col-sm-8">
+
+
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input class="form-control" data-date-end-date="-10y" data-date-format="yyyy-mm-dd" id="user_birthday" name="user_birthday" placeholder="{m_date_of_birth}" required="required" type="text" value=""/>
+                            </div>
+
+                
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">
+                            {m_occupation} :
+                        </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="user_occupation" name="user_occupation" placeholder="{m_occupation}" type="text" value=""/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">
+                            {m_gender} :
+                        </label>
+                        <div class="col-sm-8">
+                            <select class="form-control" id="user_gender" name="user_gender" required="required">
+                                <option value="1">
+                                    {m_male}
+                                </option>
+                                <option value="2">
+                                    {m_female}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <legend>
+                            {m_branch}
+                        </legend>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">
+                            {m_access_level} :
+                        </label>
+                        <div class="col-sm-8">
+                            <select class="form-control" id="role_label_id" name="role_label_id" required="required">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">
+                            {m_branch} :
+                        </label>
+                        <div class="col-sm-8">
+                            <select class="form-control" id="branch_id" name="branch_id" required="required">
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <legend>
+                            {m_currency}
+                        </legend>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">
+                                {m_currency} :
+                            </label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="currency_id" name="currency_id" required="required">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <legend>
+                            {m_contact_details}
+                        </legend>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">
+                                {m_residential_address} :
+                            </label>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="user_address" name="user_address" placeholder="{m_residential_address}" required="required" type="text" value=""/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">
+                                {m_city} / {m_town} / {m_suburb}  :
+                            </label>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="user_city" name="user_city" placeholder="{m_city} / {m_town} / {m_suburb} " required="required" type="text" value=""/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">
+                                {m_state}  :
+                            </label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="user_state" name="user_state" required="required">
+                                    <option value=""></option>
+                                    <option value="NSW">NSW</option>
+                                    <option value="QLD">QLD</option>
+                                    <option value="SA">SA</option>
+                                    <option value="TAS">TAS</option>
+                                    <option value="VIC">VIC</option>
+                                    <option value="WA">WA</option>
+                                </select>
+                                <!-- <input class="form-control" id="user_state" name="user_state" placeholder="{m_state}" type="text" value=""/> -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">
+                                {m_postcode}  :
+                            </label>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="user_postcode" maxlength="5" name="user_postcode" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" placeholder="{m_postcode}" size="5" type="number" value=""/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">
+                                {m_phone}  :
+                            </label>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="user_phone" name="user_phone" placeholder="{m_phone}" required="required" type="text" value=""/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">
+                                {m_country}  :
+                            </label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="country_id" name="country_id" required="required">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <legend>
+                            {m_document} / {m_electronic} {m_data_source}
+                        </legend>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">
+                                {m_id_type}  :
+                            </label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="user_nik_type" name="user_nik_type" required="required">
+                                    <option value="passport">
+                                        {m_passport}
+                                    </option>
+                                    <option value="photo_id">
+                                        {m_photo_id}
+                                    </option>
+                                    <option value="driver_license">
+                                        {m_driver_license}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">
+                                {m_id_number}  :
+                            </label>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="user_nik_number" name="user_nik_number" placeholder="{m_id_number}" required="required" type="text" value=""/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">
+                                {m_id_issuer}  :
+                            </label>
+                            <div class="col-sm-8">
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <select class="form-control" id="user_nik_issuer" name="user_nik_issuer" required="required">
+                                            <option value="Ministry of Foreign Affairs">
+                                                Ministry of Foreign Affairs
+                                            </option>
+                                            <option value="RTA">
+                                                RTA
+                                            </option>
+                                            <option value="Australia">
+                                                Australia
+                                            </option>
+                                            <option value="Other">
+                                                Other
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input class="form-control" id="user_nik_issuer_other" placeholder="{m_id_issuer}" type="text" value="" required="required"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">
+                                {m_id_expired_date}  :
+                            </label>
+                            <div class="col-sm-8">
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar">
+                                        </i>
+                                    </div>
+                                    <input class="form-control" data-date-format="yyyy-mm-dd" id="user_nik_expired" name="user_nik_expired" placeholder="{m_id_expired_date}" required="required" type="text" value=""/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">
+                                {m_id_image} :
+                            </label>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="user_nik_image" name="user_nik_image" required="required" type="file"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <hr/>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">
+                            {m_captcha}  :
+                        </label>
+                        <div class="col-sm-8">
+                            <span id="image_captcha">
+                                {captcha}{image}{/captcha}
+                            </span>
+                            <button class="btn btn-flat btn-success pull-right" id="reload_captcha" type="button">
+                                <i class="fa fa-refresh">
+                                </i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-8 col-sm-offset-4">
+                            <input class="form-control" id="captcha" name="captcha" placeholder="{m_captcha}" required="required" type=""/>
+                            <span class="hidden fa fa-pencil form-control-feedback">
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-8 col-sm-offset-4">
+                            <div class="checkbox icheck">
+                                <label>
+                                    <div aria-checked="false" aria-disabled="false" class="icheckbox_square-blue" style="position: relative;">
+                                        <input id="check_agree" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;" type="checkbox"/>
+                                        <ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;">
+                                        </ins>
+                                    </div>
+                                    <a href="{base}/about/terms">
+                                        {m_i_agree_to_the_terms}
+                                    </a>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-8 col-sm-offset-4">
+                            <button class="btn btn-primary btn-flat" id="btn_register" type="button">
+                                {m_register}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <div class="social-auth-links text-center hidden">
+                    <p>
+                        - {m_or} -
+                    </p>
+                    <a class="btn btn-block btn-social btn-facebook btn-flat-" href="#">
+                        <i class="fa fa-facebook">
+                        </i>
+                        Sign up using Facebook
+                    </a>
+                    <a class="btn btn-block btn-social btn-google btn-flat-" href="#">
+                        <i class="fa fa-google">
+                        </i>
+                        Sign up using Google+
+                    </a>
+                </div>
+                <a class="text-center" href="{base}/login.html">
+                    {m_i_already_have_a_membership}
+                </a>
+            </div>
+            <!-- /.form-box -->
+        </div>
+    </div>
+</section>
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<div class="modal modal-danger fade" id="modal_captcha">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+                    ×
+                </button>
+                <h4 class="modal-title">
+                    {m_error}:
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="fa fa-exclamation-circle fa-4x">
+                    </i>
+                    <h4>
+                        Invalid captcha code or expired. Please retype captcha...!!!
+                    </h4>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal" type="button">
+                    {m_close}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<div class="modal modal-danger fade" id="modal_email">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+                    ×
+                </button>
+                <h4 class="modal-title">
+                    {m_error}
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="fa fa-exclamation-circle fa-4x">
+                    </i>
+                    <h4>
+                        Email already registered. Choose other email...!!
+                    </h4>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal" type="button">
+                    {m_close}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ========================================================================== -->
+<div class="modal modal-warning fade" id="modal_agree">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+                    ×
+                </button>
+                <h4 class="modal-title">
+                    {m_warning}
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="fa fa-exclamation-triangle fa-4x">
+                    </i>
+                    <h4>
+                        You must agree to the terms, and fill in all column required!
+                    </h4>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal" type="button">
+                    {m_close}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ========================================================================== -->
+<div class="modal modal-success fade" id="modal_sukses">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+                    ×
+                </button>
+                <h4 class="modal-title">
+                    {m_congratulation}
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="fa fa-exclamation-circle fa-4x">
+                    </i>
+                    <h4>
+                        {m_register} {m_successfull}...!!
+                    </h4>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal" type="button">
+                    {m_close}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ========================================================================== -->
+<style type="text/css">
+    .has-error .control-label,
+    .has-error .help-block,
+    .has-error .form-control-feedback {
+        color: #dd4b39;
+    }
+
+    .has-success .control-label,
+    .has-success .help-block,
+    .has-success .form-control-feedback {
+        color: #00a65a;
+    }
+    #form_register .form-control-feedback {
+        z-index: 100;
+    }
+    .has-error .select2-selection {
+        border-color: #dd4b39;
+    }
+    .has-success .select2-selection {
+        border-color: #00a65a;
+    }
+</style>
+<!-- ========================================================================== -->
+<!-- ========================================================================== -->
+<!-- <script src="{base}/files/js/formValidation.min.js"></script> -->
+<script src="{base}/files/bower_components/formvalidation.io/dist/js/formValidation.min.js"> </script>
+<script src="{base}/files/bower_components/formvalidation.io/dist/js/framework/bootstrap.min.js"> </script>
+<script src="{base}/files/bower_components/AdminLTE/plugins/iCheck/icheck.min.js">
+</script>
+<!-- <link href="{base}/files/bower_components/AdminLTE/plugins/select2/select2.min.css" rel="stylesheet" type="text/css"/> -->
+<script src="{base}/files/bower_components/AdminLTE/plugins/select2/select2.min.js">
+</script>
+<link href="{base}/files/bower_components/AdminLTE/plugins/datepicker/datepicker3.css" rel="stylesheet"/>
+<script src="{base}/files/bower_components/AdminLTE/plugins/datepicker/bootstrap-datepicker.js">
+</script>
+
+<script type="text/javascript">
+    
+    $('#user_nik_issuer').on('change', function(event) {
+        var val = $(this).val();
+        // console.log(val);
+        if (val == 'Other') {
+            console.log(val);
+            $(this).removeAttr('name');
+            $('#user_nik_issuer_other').show();
+            $('#user_nik_issuer_other').attr('name', 'user_nik_issuer'); 
+        }else{
+            $('#user_nik_issuer_other').val('');
+            $('#user_nik_issuer_other').hide();
+            $('#user_nik_issuer_other').removeAttr('name');
+            $('#user_nik_issuer').attr('name', 'user_nik_issuer');
+        }
+
+    });
+    
+    ////////////////////
+     $('#user_state').select2({
+        placeholder: '{m_state}',
+        allowClear: true,
+        width: "100%",
+    }).val('').trigger('change');
+    ////////////////////
+
+</script>
+
+<script>
+    $(document).ready(function() {
+        // -------------------------------------------------------------------- //
+        ////////////////////
+        ////////////////////
+        $('#user_birthday').datepicker({
+            autoclose: true,
+            // Date: '-7y',
+            // startView:1,
+            //     // useCurrent: false, 
+            //     // dateFormat: 'yy-mm-dd',
+            //     // defaultDate: '01/01/1980'
+        }).val('').on('change', function(event) {
+            event.preventDefault();
+            $('#form_register').formValidation('revalidateField', 'user_birthday');
+        });
+        // .datepicker('setDate', '1980-01-31')
+        ////////////////////
+        ////////////////////
+        $('#user_nik_expired').datepicker({
+            autoclose: true,
+            dateFormat: 'yy-mm-dd'
+        }).on('change', function(event) {
+            event.preventDefault();
+            $('#form_register').formValidation('revalidateField', 'user_nik_expired');
+        });
+        ////////////////////
+        ////////////////////
+        $('#user_nik_issuer').select2({
+            placeholder: '{m_id_issuer}',
+            allowClear: true,
+            width: "100%",
+        }).val('').trigger('change');
+        ////////////////////
+        ////////////////////
+        $('#user_nik_type').select2({
+            placeholder: '{m_id_type}',
+            allowClear: true,
+            width: "100%",
+        }).val('').trigger('change');
+        ////////////////////
+        ////////////////////
+        $('#user_gender').select2({
+            placeholder: '{m_gender}',
+            allowClear: true,
+            width: "100%",
+        }).val('').trigger('change');
+        ////////////////////
+        ////////////////////
+        var role_label = $.ajax({
+            type: "GET",
+            url: "{base}/register/role_ajax",
+            dataType: "json",
+            async: false,
+            cache: true
+        }).responseJSON;
+        // console.log(role_label);
+        $('#role_label_id').select2({
+            width: "100%",
+            multiple: false,
+            data: role_label,
+            allowClear: true,
+            placeholder: '{m_access_level}',
+        }).val('').trigger('change');
+        ////////////////////
+        ////////////////////
+        $('#role_label_id').removeAttr('name').val('').parent().parent().hide();
+        // $('#branch_id').removeAttr('name').val('').parent().parent().hide();
+        // $('#currency_id').removeAttr('name').val('').parent().parent().parent().hide();
+        ////////////////////
+        ////////////////////
+        ////////////////////
+        var branch = $.ajax({
+            type: "GET",
+            url: "{base}/branch/branch_ajax",
+            dataType: "json",
+            async: false,
+            cache: true
+        }).responseJSON;
+        // console.log(branch);
+        $('#branch_id').select2({
+            width: "100%",
+            multiple: false,
+            data: branch,
+            allowClear: true,
+            placeholder: '{m_branch}',
+        }).val('').trigger('change');
+        ////////////////////
+        ////////////////////
+        var currency = $.ajax({
+            type: "GET",
+            url: "{base}/currency/currency_ajax",
+            dataType: "json",
+            async: false,
+            cache: true
+        }).responseJSON;
+        // console.log(currency);
+        $('#currency_id').select2({
+            width: "100%",
+            multiple: false,
+            data: currency,
+            allowClear: true,
+            placeholder: '{m_currency}',
+        }).val('').trigger('change');
+        ////////////////////
+        ////////////////////
+        var country = $.ajax({
+            type: "GET",
+            url: "{base}/country/country_ajax",
+            dataType: "json",
+            async: false,
+            cache: true
+        }).responseJSON;
+        // console.log(country);
+        $('#country_id').select2({
+            width: "100%",
+            multiple: false,
+            data: country,
+            allowClear: true,
+            placeholder: '{m_country}',
+        }).val('').trigger('change');
+        ////////////////////
+        ////////////////////
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' // optional
+        });
+        // -------------------------------------------------------------------- //
+        ////////////////////
+        ////////////////////
+        $('#reload_captcha').click(function(event) {
+            /* Act on the event */
+            $.ajax({
+                url: '{base}/register/reload_captcha',
+            }).done(function(data) {
+                $('#image_captcha').html(data);
+            }).fail(function() {
+                console.log("error");
+            });
+        });
+        // -------------------------------------------------------------------- //
+        // -------------------------------------------------------------------- //
+        // -------------------------------------------------------------------- //
+        ////////////////////
+        ////////////////////
+        $('#form_register').formValidation({
+            framework: 'bootstrap',
+            icon: {
+                valid: 'fa fa-ok',
+                invalid: 'fa fa-remove',
+                validating: 'fa fa-refresh'
+            },
+            fields: {
+                confirm_password: {
+                    validators: {
+                        identical: {
+                            field: 'user_password',
+                            message: 'The password and its confirm are not the same'
+                        }
+                    }
+                },
+                user_password: {
+                    validators: {
+                        identical: {
+                            field: 'confirm_password',
+                            message: 'Please retype password in column bellow.'
+                        }
+                    }
+                },
+            }
+        }).on('err.form.fv', function(e) {
+            // $('#modal_agree').modal('show');
+        }).on('success.form.fv', function(e) {
+            e.preventDefault();
+            var form_data = new FormData($('#form_register')[0]);
+            $.ajax({
+                url: '{base}/register',
+                type: 'POST',
+                data: form_data,
+                mimeTypes: 'multipart/form-data',
+                cache: false,
+                contentType: false,
+                processData: false
+            }).done(function(data) {
+                console.log(data);
+                $('#modal_sukses').modal('show');
+                $('#form_register').get(0).reset();
+                // $("#form_register select").val('').trigger('change');
+            }).fail(function(error) {
+                console.log(error.responseText);
+            });
+        });
+        // -------------------------------------------------------------------- //
+        ////////////////////
+        ////////////////////
+        $('#btn_register').click(function(event) {
+            if ($('#check_agree').is(':checked') && $('#user_email').val() !== '') {
+                // -------------------------------------------------------------------- //
+                var cek_email = $.ajax({
+                    url: '{base}/register/ajax_email',
+                    type: 'POST',
+                    data: {
+                        user_email: $('#user_email').val()
+                    },
+                }).done(function(data) {
+                    data = $.parseJSON(data);
+                    // console.log(data);
+                    if (data.status == 1) {
+                        $('#modal_email').modal('show');
+                    } else {
+                        var cek_captcha = $.ajax({
+                            url: '{base}/register/ajax_captcha',
+                            type: 'POST',
+                            data: {
+                                captcha: $('#captcha').val()
+                            },
+                        }).done(function(data) {
+                            data = $.parseJSON(data);
+                            // console.log(data);
+                            if (data.status == 0) {
+                                $('#modal_captcha').modal('show');
+                            } else {
+                                $('#form_register').submit();
+                            }
+                        }).fail(function(error) {
+                            console.log(error.responseText);
+                        });
+                    }
+                }).fail(function(error) {
+                    console.log(error.responseText);
+                });
+                // -------------------------------------------------------------------- //
+            } else {
+                $('#modal_agree').modal('show');
+            }
+        });
+    });
+</script>

@@ -1,0 +1,347 @@
+<div class="box box-{skin_box} skin_box">
+    <div class="box-body">
+        {breadcrumb}
+        <legend class="" style="text-transform: capitalize;">
+            {m_edit}
+                {controller} :
+        </legend>
+        <form action="" class="form-horizontal row" enctype="multipart/form-data" id="form_{controller}" method="POST" role="form">
+            {{controller}_detail}
+            <div class="col-sm-12-">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                            <label class="control-label">
+                                Name :
+                            </label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input name="{controller}_id" type="hidden" value="{{controller}_id}"/>
+                            <input class="form-control" id="{controller}_name" name="{controller}_name" placeholder="Name" type="" value="{{controller}_name}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                            <label class="control-label">
+                                Domain :
+                            </label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input class="form-control" id="{controller}_domain" name="{controller}_domain" placeholder="eg.: www.example.com" type="" value="{{controller}_domain}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                            <label class="control-label">
+                                Sub Domain :
+                            </label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input class="form-control" id="{controller}_subdomain" name="{controller}_subdomain" pattern="^[a-z0-9]+$" placeholder="eg.: school_01" type="text" value="{{controller}_subdomain}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                            <label class="control-label">
+                                Type :
+                            </label>
+                        </div>
+                        <div class="col-sm-9">
+                            <select class="form-control">
+                                <option>
+                                    School
+                                </option>
+                                <option>
+                                    Company
+                                </option>
+                                <option>
+                                    Community
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                            <label class="control-label">
+                                Email :
+                            </label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input class="form-control" id="{controller}_email" name="{controller}_email" placeholder="Email" type="" value="{{controller}_email}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                            <label class="control-label">
+                                Address :
+                            </label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input class="form-control" id="{controller}_address" name="{controller}_address" placeholder="eg.: RT.01 / RW.02" style="margin-bottom:10px" type="" value="{{controller}_address}"/>
+                            <input id="kodepos_id_before" type="hidden" value="{kodepos_id}"/>
+                            <select class="form-control" id="kodepos_id" name="kodepos_id">
+                            </select>
+                            <input class="form-control" id="kelurahan_kecamatan" readonly="readonly" style="margin-top:10px" type=""/>
+                            <input class="form-control" id="kabupaten_kodepos" readonly="readonly" style="margin-top:10px" type=""/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                            <label class="control-label">
+                                Phone :
+                            </label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input class="form-control" id="{controller}_phone" name="{controller}_phone" placeholder="eg.: 021-1234556" type="" value="{{controller}_phone}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                            <label class="control-label">
+                                Fax :
+                            </label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input class="form-control" id="{controller}_fax" name="{controller}_fax" placeholder="eg.: 021-1234556" type="" value="{{controller}_fax}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                            <label>
+                                Logo :
+                            </label>
+                        </div>
+                        <div class="col-sm-9">
+                            <div style="margin-bottom: 10px ">
+                                <span style="
+                                    -webkit-filter: drop-shadow(0px 0px 2px rgba(000,000,000,.1)); 
+                                    filter: drop-shadow(0px 0px 2px rgba(000,000,000,.1)); ">
+                                    <img id="{controller}_logo" src="{base}/files/images/{controller}/{{controller}_logo}.png" width="128px"/>
+                                </span>
+                                <button class="btn btn-xs btn-flat btn-danger {remove_button_logo}" data-{controller}_id="{{controller}_id}" id="{controller}_logo_remove" style="vertical-align: bottom;" type="button">
+                                    <i class="fa fa-fw fa-trash">
+                                    </i>
+                                    Remove
+                                </button>
+                            </div>
+                            <input accept="image/png" class="form-control" id="{controller}_logo_file" name="{controller}_logo" placeholder="" type="file" value="{{controller}_logo}"/>
+                            <input name="{controller}_logo_before" type="hidden" value="{{controller}_logo}"/>
+                            <small>
+                                <i>
+                                    Type: *.png, Dimension : 256 x 256 pixel
+                                </i>
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-9 col-sm-offset-3">
+                            <button class="btn btn-success" type="submit">
+                                Submit
+                            </button>
+                            <a class="btn btn-danger" href="{base}/{controller}/detail/{{controller}_id}">
+                                Cancel
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6"></div>
+            </div>
+        </form>
+    </div>
+    <div class="box-footer" style="">
+        
+    </div>
+</div>
+{/{controller}_detail}
+
+
+<!-- -->
+<script src="{base}/files/bower_components/formvalidation.io/dist/js/formValidation.min.js">
+</script>
+<script src="{base}/files/bower_components/formvalidation.io/dist/js/framework/bootstrap.min.js">
+</script>
+<!-- -->
+<script type="text/javascript">
+    ///////////////////
+    $('#form_{controller}').formValidation();
+     
+    ////////////////////
+    ////////////////////
+    ////////////////////
+
+    ///////////////////
+    function readURL(input, img_id_or_class) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                // console.log(e);
+                $(img_id_or_class).attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    ///////////////////
+    ///////////////////
+    $("#{controller}_logo_file").change(function() {
+        var _URL = window.URL || window.webkitURL;
+        var image, file;
+        var el = this ;
+        $('#{controller}_logo_remove').removeClass('hidden').show(); 
+        if ((file = el.files[0])) {
+            image = new Image();
+            image.src = _URL.createObjectURL(file);
+            image.onload = function() {
+                if (this.width == 256 && this.height == 256 ) {
+                    readURL(el, '#{controller}_logo');
+                    readURL(el, $('.preview_card_logo').find('img'));
+                }else{
+                    alert('Error:\n\nThe logo dimension must 256 x 256 pixels.');
+                    $("#{controller}_logo_file").val(''); 
+                    $('#{controller}_logo').attr('src', '{base}/files/images/default-logo.png');
+                    $('.preview_card_logo').find('img').attr('src', '{base}/files/images/default-logo.png');
+                    $('#{controller}_logo_remove').removeClass('hidden').hide(); 
+                }
+            }
+        }
+    });
+    ///////////////////
+    ////////////////////
+    $('#{controller}_logo_remove').on('click', function(event) {
+        event.preventDefault();
+        if (confirm('Are you sure?')) {
+            $(this).hide(); 
+            var _id = $(this).data('{controller}_id');
+            $.ajax({
+                url: '{base}/{controller}/remove_logo/' + _id,
+                data: {_id: _id},
+            })
+            .done(function(res) {
+                // console.log(res);
+                $('#{controller}_logo_remove').hide(); 
+                $('#{controller}_logo').attr('src', '{base}/files/images/default-logo.png');
+                $('.preview_card_logo').find('img').attr('src', '{base}/files/images/default-logo.png');
+            })
+            .fail(function(error) {
+                console.log(error.responseText);
+            });
+        }
+    });
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    ////////////////////
+    
+
+    ///////////////////
+    ///////////////////
+    $('#kodepos_id').select2({ 
+        placeholder: 'Kelurahan / Desa',
+        allowClear: true,
+        width: "100%", 
+        minimumInputLength: 4,
+        ajax: {
+            url: '{base}/country/kelurahan_ajax',
+            dataType: 'json',
+            delay: 250,
+            type: "GET",
+            data: function (params) {
+                console.log(params);
+                var queryParameters = {
+                    search: params.term
+                }
+                return queryParameters;
+            },
+            processResults: function (data) {
+                // console.log(data);
+                return {
+                    results: data
+                };
+            },
+            cache: true
+        }
+    }); 
+    ////////////////////
+    ////////////////////
+    $('#kodepos_id').on('change', function(event) {
+        event.preventDefault();
+        id = $(this).val();
+
+        if (id != null) {
+            // console.log(id);
+            $.ajax({
+                url: '{base}/country/kelurahan_ajax', 
+                data: {id: id},
+            })
+            .done(function(data) {
+                // console.log(data);
+                $.each(data, function(index, val) {
+                    $('#kelurahan_kecamatan').val('Kel. ' + val.kelurahan + ' - Kec. ' + val.kecamatan);
+                    $('#kabupaten_kodepos').val(val.jenis_kabupaten + ' ' + val.kabupaten + ' - '+val.kodepos);
+                    $('#{controller}_kelurahan').val(val.kelurahan);
+                    $('#{controller}_kecamatan').val(val.kecamatan);
+                    $('#{controller}_jenis_kabupaten').val(val.jenis_kabupaten);
+                    $('#{controller}_kabupaten').val(val.kabupaten);
+                    $('#{controller}_propinsi').val(val.propinsi);
+                    $('#{controller}_kodepos').val(val.kodepos);
+                });
+                $('#{controller}_ktp').focus();
+                
+            })
+            .fail(function(error) {
+                console.log(error.responseText);
+            });
+        }else{
+            $('#kelurahan_kecamatan').val('');
+            $('#kabupaten_kodepos').val('');
+        }
+        
+
+    });
+    ////////////////////
+    ////////////////////
+    kodepos_id_before = $('#kodepos_id_before').val();
+    if (kodepos_id_before != '') {
+        kodepos_before(kodepos_id_before);
+    }
+    function kodepos_before(id) {
+        $.ajax({
+            url: '{base}/country/kelurahan_ajax', 
+            data: {id: id},
+        })
+        .done(function(data) {
+            // console.log(data);
+            $.each(data, function(index, val) {
+                $('#kelurahan_kecamatan').val('Kel. ' + val.kelurahan + ' - Kec. ' + val.kecamatan);
+                $('#kabupaten_kodepos').val(val.jenis_kabupaten + ' ' + val.kabupaten + ' - '+val.kodepos);
+                $('#{controller}_kelurahan').val(val.kelurahan);
+                $('#{controller}_kecamatan').val(val.kecamatan);
+                $('#{controller}_jenis_kabupaten').val(val.jenis_kabupaten);
+                $('#{controller}_kabupaten').val(val.kabupaten);
+                $('#{controller}_propinsi').val(val.propinsi);
+                $('#{controller}_kodepos').val(val.kodepos);
+            });
+            // $('#{controller}_ktp').focus();
+            
+        })
+        .fail(function(error) {
+            console.log(error.responseText);
+        });
+    }
+    ////////////////////
+</script>

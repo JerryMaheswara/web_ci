@@ -1,0 +1,278 @@
+<div class="offcanvas-wrapper">
+    <!-- Page Title-->
+    <div class="page-title">
+        <div class="container">
+            <div class="column">
+                <h1>
+                    All Item
+                </h1>
+            </div>
+            <div class="column">
+                <ul class="breadcrumbs">
+                    <li>
+                        <a href="index.html">
+                            Home
+                        </a>
+                    </li>
+                    <li class="separator">
+                    </li>
+                    <li>
+                        All Item
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Page Content-->
+    <div class="container padding-bottom-3x mb-1">
+        <div class="row">
+            <!-- Products-->
+            <div class="col-xl-9 col-lg-8 order-lg-2">
+                <!-- Shop Toolbar-->
+                <div class="shop-toolbar padding-bottom-1x mb-2">
+                    <div class="column">
+                        <div class="shop-sorting">
+                            <label for="sorting">
+                                Sort by:
+                            </label>
+                            <select class="form-control" id="sorting">
+                                <option>
+                                    Popularity
+                                </option>
+                                <option>
+                                    Low - High Price
+                                </option>
+                                <option>
+                                    High - Low Price
+                                </option>
+                                <option>
+                                    Avarage Rating
+                                </option>
+                                <option>
+                                    A - Z Order
+                                </option>
+                                <option>
+                                    Z - A Order
+                                </option>
+                            </select>
+                            <span class="text-muted">
+                                Showing:
+                            </span>
+                            <span>
+                                1 - 12 items
+                            </span>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="shop-view">
+                            <a class="grid-view active" href="{base}/{controller}/{query_string}&view=grid">
+                                <span>
+                                </span>
+                                <span>
+                                </span>
+                                <span>
+                                </span>
+                            </a>
+                            <a class="list-view" href="{base}/{controller}/{query_string}&view=list">
+                                <span>
+                                </span>
+                                <span>
+                                </span>
+                                <span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Products Grid-->
+                <div class="isotope-grid cols-4 mb-2">
+                    <div class="gutter-sizer">
+                    </div>
+                    <div class="grid-sizer">
+                    </div>
+                    <!-- Product-->
+                    {item_all}
+                    <div class="grid-item">
+                        <div class="product-card" style="min-height: 294px !important; ">
+                            <div class="rating-stars hidden destroy">
+                                <i class="icon-star filled">
+                                </i>
+                                <i class="icon-star filled">
+                                </i>
+                                <i class="icon-star filled">
+                                </i>
+                                <i class="icon-star filled">
+                                </i>
+                                <i class="icon-star">
+                                </i>
+                            </div>
+                            <div class="product-badge text-danger hidden">
+                                50% Off
+                            </div>
+                            <a class="product-thumb text-center" href="{base}/{controller}/detail/{{controller}_id}">
+                                <img alt="Product" src="{base}/files/images/{{controller}_image_main}" style="width: 80px !important; display: inline; margin-top:  0px;"/>
+                            </a>
+                            <h3 class="product-title">
+                                <a href="{base}/{controller}/detail/{{controller}_id}">
+                                    {{controller}_name}
+                                </a>
+                            </h3>
+                            <h4 class="product-price ">
+                                Rp. {{controller}_price_format}
+                            </h4>
+                            <div class="product-buttons {is_login}">
+                                <button data-iteration="{iteration}" class=" mb-2 btn_wishlist_add btn btn-outline-secondary btn-sm btn-wishlist {my_wishlist}" data-id="{{controller}_id}" data-toggle="tooltip" title="Whishlist" >
+                                    <i class="icon-heart">
+                                    </i>
+                                </button>
+                                <button class="mb-2 {is_available} btn_cart_add btn btn-outline-primary btn-sm" data-user_id="{user_id}"  data-id="{{controller}_id}" data-img_src="{base}/files/images/{item_image_main}" data-name="{{controller}_name}" data-price="{{controller}_price}" data-toast="" data-toast-icon="icon-circle-check" data-toast-message="successfuly added to cart!" data-toast-position="bottomRight" data-toast-title="Product" data-toast-type="success">
+                                    Add to Cart
+                                </button>
+                                <div class="{is_not_available}"> 
+                                    OUT OF STOCK 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {/item_all}
+                    <!-- Product-->
+                    <!-- Product-->
+                    <!-- Product-->
+                    <!-- Product-->
+                    <!-- Product-->
+                    <!-- Product-->
+                    <!-- Product-->
+                    <!-- Product-->
+                    <!-- Product-->
+                    <!-- Product-->
+                    <!-- Product-->
+                </div>
+                <!-- Pagination-->
+                <nav class="pagination" style="display: none">
+                    <div class="column">
+                        <ul class="pages">
+                            <li class="active">
+                                <a href="#">
+                                    1
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    2
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    3
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    4
+                                </a>
+                            </li>
+                            <li>
+                                ...
+                            </li>
+                            <li>
+                                <a href="#">
+                                    12
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="column text-right hidden-xs-down">
+                        <a class="btn btn-outline-secondary btn-sm" href="#">
+                            Next
+                            <i class="icon-arrow-right">
+                            </i>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+            <!-- Sidebar          -->
+            <div class="col-xl-3 col-lg-4 order-lg-1">
+                {shop_category}
+            </div>
+        </div>
+    </div>
+    <!-- Site Footer-->
+</div>
+<script src="{base}/files/bower_components/currencyformatter.js/currencyFormatter.min.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+    // /////////////////////
+    // /////////////////////
+    // /////////////////////
+    $('.btn_wishlist_add').each(function(index, el) {
+        $(this).on('click', function(event) {
+            event.preventDefault();
+            item_id = $(this).data('id');
+
+            if ($(this).hasClass('active')) {
+                action = 'wishlist_remove';
+            }else{
+                action = 'wishlist_add';
+
+            }
+
+            $.ajax({
+                url: '{base}/account/' + action,
+                type: 'POST',
+                data: {item_id: item_id},
+            })
+            .done(function(res) {
+                console.log(res);
+            })
+            .fail(function(error) {
+                console.log(error.responseText);
+            });
+            
+
+        });
+    });
+    // /////////////////////
+    // /////////////////////
+    $('.btn_cart_add').each(function(index, el) {
+        var data = {};
+        $(this).on('click', function(event) {
+            event.preventDefault();
+
+            id = $(this).data('id');
+            user_id = $(this).data('user_id');
+            name = $(this).data('name');
+            qty = 1;
+            price = $(this).data('price');
+            img_src = $(this).data('img_src');
+
+            data['id'] = id;
+            data['seller_id'] = user_id;
+            data['name'] = name;
+            data['qty'] = qty;
+            data['price'] = price;
+            data['img_src'] = img_src;
+
+            // console.log(data);
+
+            $.ajax({
+                url: '{base}/cart/add_item',
+                type: 'POST', 
+                data: {data: data},
+            })
+            .done(function(res) {
+                console.log(res);
+                res = $.parseJSON(res);
+                var cart_total_format = OSREC.CurrencyFormatter.format(res.cart_total, { currency: 'IDR', symbol: 'Rp. ' });
+
+                $('.cart_count').html(res.cart_count);
+                $('.cart_total_format').html(cart_total_format);
+            })
+            .fail(function(error) {
+                console.log(error.responseText);
+            });
+            
+
+
+        });
+    });
+</script>

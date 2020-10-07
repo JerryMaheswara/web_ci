@@ -1,0 +1,272 @@
+<div class="box box-{skin_box} skin_box">
+    <div class="box-body ">
+        <legend>
+            Event
+        </legend>
+        <button class=" btn btn-success btn_event_add">
+            <i class="fa fa-fw fa-plus">
+            </i>
+            Add Event
+        </button>
+        <div class="row">
+            <div class="col-sm-12 div_kiri">
+                <legend class="h4">
+                    Event List
+                </legend>
+                <table class="table table-bordered table-hover table_event">
+                    <thead>
+                        <tr class="tr_{skin} bg-{skin}">
+                            <th class="text-center" width="50px">
+                                #
+                            </th>
+                            <th class="text-center">
+                                {m_name}
+                            </th>
+                            <th class="text-center">
+                                {m_description}
+                            </th>
+                            <th class="text-center" width="100px">
+                                {m_action}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {event_all}
+                        <tr>
+                            <td class="text-center">
+                                {nomor_urut}
+                            </td>
+                            <td class="text-left">
+                                {event_name}
+                            </td>
+                            <td class="text-left">
+                                {event_description}
+                            </td>
+                            <td class="text-center">
+                                <button class="btn btn-warning btn-xs btn_event_edit" data-event_date_end="{event_date_end}" data-event_date_start="{event_date_start}" data-event_description="{event_description}" data-event_id="{event_id}" data-event_name="{event_name}" type="button">
+                                    <i class="fa fa-fw fa-pencil">
+                                    </i>
+                                </button>
+                                <button class="btn btn-danger btn-xs btn_event_delete" data-event_id="{event_id}" type="button">
+                                    <i class="fa fa-fw fa-trash">
+                                    </i>
+                                </button>
+                            </td>
+                        </tr>
+                        {/event_all}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-5 div_kanan" style="display: none;">
+                <legend class="h4">
+                    Add / Edit
+                </legend>
+                <form action="" class="form-horizontal" id="form_event" method="POST">
+                    <div id="form_inputs">
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <label class="control-label">
+                                    {m_name}
+                                </label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input id="event_id" type="hidden" value="event_id"/>
+                                <input id="action" type="hidden" value="action"/>
+                                <input class="form-control" data-value="{event_name}" id="event_name" name="event_name" required="required" type="text"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <label class="control-label">
+                                    {m_description}
+                                </label>
+                            </div>
+                            <div class="col-sm-8">
+                                <textarea class="form-control vertical" id="event_description" name="event_description" required="required" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <label class="control-label">
+                                    {m_start}
+                                </label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input class="form-control" data-value="{event_date_start}" id="event_date_start" name="event_date_start" required="required" type=""/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <label class="control-label">
+                                    {m_end}
+                                </label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input class="form-control" data-value="{event_date_end}" id="event_date_end" name="event_date_end" required="required" type=""/>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="form_buttons">
+                        <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-4">
+                                <button class="btn btn-primary" type="submit">
+                                    Submit
+                                </button>
+                                <button class="btn btn-danger btn_cancel" type="button">
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- -->
+<div class="modal fade" id="modal_action">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+                    ×
+                </button>
+                <h4 class="modal-title">
+                    Modal title
+                </h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal" type="button">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- -->
+<style type="text/css">
+    .div_kiri, .div_kanan { 
+        -webkit-transition: width 0.3s ease, margin 0.3s ease;
+        -moz-transition: width 0.3s ease, margin 0.3s ease;
+        -o-transition: width 0.3s ease, margin 0.3s ease;
+        transition: width 0.3s ease, margin 0.3s ease;
+    }
+</style>
+<!-- -->
+<link href="{base}/files/bower_components/AdminLTE/plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css"/>
+<!-- <link rel="stylesheet" type="text/css" href="{base}/files/bower_components/AdminLTE/plugins/timepicker/bootstrap-timepicker.css"/> -->
+<!-- -->
+<script src="{base}/files/bower_components/AdminLTE/plugins/daterangepicker/moment.min.js"></script>
+<script src="{base}/files/bower_components/AdminLTE/plugins/datepicker/bootstrap-datepicker.js">
+</script>
+<!-- <script src="{base}/files/bower_components/AdminLTE/plugins/timepicker/bootstrap-timepicker.js"></script> -->
+<!-- -->
+<script type="text/javascript">
+    ////////////////////////
+    // var d = new Date('11/19/2017');
+    // console.log(d);
+    // console.log(moment('2017-11-16 12:00:00').format('MM/DD/YYYY'));
+
+    ////////////////////////
+    var form_inputs_before = $('#form_inputs').html();
+    date_start_end();
+    ////////////////////////
+    function date_start_end() { 
+        $('#event_date_start').datepicker({ 
+            autoclose:true,
+            startDate:'0d',
+            todayHighlight:true
+        });
+        $('#event_date_start').on('change', function(event) {
+            event.preventDefault(); 
+            var newdate = new Date($('#event_date_start').val());
+            // console.log(newdate);
+            $('#event_date_end').datepicker({  
+                autoclose:true,
+                startDate: newdate
+            });
+        });
+    }
+    ////////////////////////
+    ////////////////////////
+    $('.btn_event_add, .btn_event_edit').on('click', function(event) {
+        event.preventDefault();
+        $('.div_kiri').removeClass('col-sm-12').addClass('col-sm-7');
+        setTimeout(function (){
+            $('.div_kanan').fadeIn() ;
+        }, 300);
+    });
+    ////////////////////////
+    $('.btn_event_add').on('click', function(event) {
+        event.preventDefault();
+        $('#form_inputs').html(form_inputs_before);
+        date_start_end()
+    });
+    ////////////////////////
+    $('.btn_cancel').on('click', function(event) {
+        event.preventDefault();
+        $('.div_kanan').fadeOut(300);
+        setTimeout(function (){
+            $('.div_kiri').removeClass('col-sm-7').addClass('col-sm-12');
+            $('#form_inputs').html(form_inputs_before);
+            date_start_end();
+        }, 300);
+    });
+    ////////////////////////
+    ////////////////////////
+    $('.btn_event_edit').on('click', function(event) {
+        event.preventDefault();
+        var event_id = $(this).data('event_id');
+        var event_name = $(this).data('event_name');
+        var event_description = $(this).data('event_description');
+        var event_date_start = moment($(this).data('event_date_start')).format('MM/DD/YYYY') ;
+        var event_date_end = moment($(this).data('event_date_end')).format('MM/DD/YYYY') ;
+        $('#event_id').val(event_id).attr('name', 'event_id');;
+        $('#event_name').val(event_name);
+        $('#event_description').val(event_description);
+        $('#event_date_start').val(event_date_start);
+        $('#event_date_end').val(event_date_end);
+        $('#action').val('edit');
+        // console.log(event_id);
+    });
+    ////////////////////////
+    $('.btn_event_delete').on('click', function(event) {
+        event.preventDefault();
+        var event_id = $(this).data('event_id');
+        // console.log(event_id);
+                
+        if (confirm('Are you sure?\n\nWarning: This action cannot be undone.')) {
+            $.ajax({
+                url: '{base}/{controller}/action_ajax',
+                type: 'POST', 
+                data: {
+                    action: 'delete',
+                    entity_table: 'event',
+                    entity_ref: 'event_id',
+                    entity_id: event_id
+                },
+            })
+            .done(function(res) {
+                res = $.parseJSON(res);
+                console.log(res.message);
+                $('#modal_action').on('show.bs.modal', function (event) {
+                    $('#modal_action').find('.modal-title').html('Delete');
+                    $('#modal_action').find('.modal-body').html('<h4>'+res.message+'</h4>');
+                });
+                $('#modal_action').modal('show');
+                $('#modal_action').on('hide.bs.modal', function (event) {
+                    location.reload();
+                });
+                
+            })
+            .fail(function(error) {
+                console.log(error.responseText);
+            });
+        }
+
+        
+    });
+</script>
+<!-- -->

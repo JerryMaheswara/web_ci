@@ -1,0 +1,179 @@
+<style type="text/css">
+    td{
+		/*vertical-align: middle !important;*/
+	}
+</style>
+<div class="box box-{skin_box} skin_box">
+    <div class="box-body">
+        <legend>
+            Shopping Order
+        </legend>
+    </div>
+    <div class="box-body">
+        <table class="table table-condensed table-hover table-bordered">
+            <thead>
+                <tr class="bg-{skin} tr_skin">
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        Invoice
+                    </th>
+                    <th>
+                        Item
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        Qty
+                    </th>
+                    <th>
+                        Pembeli
+                    </th>
+                    <th width="200px">
+                        Address
+                    </th>
+                    <th>
+                        Total
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="tbody">
+                {shopping_all}
+                <tr>
+                    <td>
+                        {nomor_urut}
+                    </td>
+                    <td>
+                        {invoice}
+                    </td>
+                    <td>
+                        {item_name}
+                    </td>
+                    <td class="text-right">
+                        Rp.
+                        {item_price_format}
+                    </td>
+                    <td>
+                        {item_qty}
+                    </td>
+                    <td>
+                        {member_name_first} {member_name_last}
+                    </td>
+                    <td>
+                        {billing_info}
+                    </td>
+                    <td class="text-right">
+                        Rp.
+                        {shopping_subtotal_format}
+                    </td>
+                    <td class="bg-{status_color} text-center">
+                        <span class="text-{status_color}">
+                            <i class="fa fa-fw fa-{status_icon} fa-lg">
+                            </i>
+                            <div>
+                                {status_name}
+                            </div>
+                        </span>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" data-shopping_id="{shopping_id}" data-shopping_status="{shopping_status}" data-toggle="modal" href="#update_status">
+                            Update
+                        </a>
+                    </td>
+                </tr>
+                {/shopping_all}
+            </tbody>
+        </table>
+        <div class="col-sm-12">
+            <h3>
+                Total : Rp. {shopping_total_format}
+            </h3>
+        </div>
+    </div>
+</div>
+<!-- -->
+<div class="modal fade" id="update_status">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{base}/{controller}/status_update" class="form-horizontal" id="form_update_status" method="POST">
+                <div class="modal-header">
+                    <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+                        ×
+                    </button>
+                    <h4 class="modal-title">
+                        Update Status
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <input id="shopping_id" name="shopping_id" type="hidden"/>
+                    <div class="radio">
+                        <label>
+                            <input id="input" name="shopping_status" type="radio" value="2"/>
+                            <i class="fa fa-fw fa-hourglass-half">
+                            </i>
+                            In Progress
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input id="input" name="shopping_status" type="radio" value="3"/>
+                            <i class="fa fa-fw fa-truck">
+                            </i>
+                            Shipped
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input id="input" name="shopping_status" type="radio" value="4"/>
+                            <i class="fa fa-fw fa-gift">
+                            </i>
+                            Delivered
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input id="input" name="shopping_status" type="radio" value="5"/>
+                            <i class="fa fa-fw fa-check">
+                            </i>
+                            Completed
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="submit">
+                        Update
+                    </button>
+                    <button class="btn btn-default" data-dismiss="modal" type="button">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    ///////////////////////////////
+	///////////////////////////////
+	$('#update_status').on('show.bs.modal', function (event) {
+		var button = $(event.relatedTarget);
+		var shopping_id = button.data('shopping_id');
+		var shopping_status = button.data('shopping_status');
+		// console.log(shopping_id);
+		var modal = $(this);
+		modal.find('.modal-body input#shopping_id').val(shopping_id);
+		modal.find('.modal-body input[name="shopping_status"][value="'+shopping_status+'"]').prop("checked", true); 
+	})
+	///////////////////////////////
+	$('#update_status').on('hidden.bs.modal', function(event) {
+		event.preventDefault();
+		$('#form_update_status')[0].reset();
+	});
+</script>

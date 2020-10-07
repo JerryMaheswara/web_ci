@@ -1,0 +1,208 @@
+<style type="text/css">
+  #status{
+    font-style: italic;
+    font-size: 8pt;
+    bottom: 50px;
+    left:10px;
+    z-index: 600;
+    position: fixed;    
+  }
+ 
+</style>
+<!-- <link href="{base}/files/bower_components/Framework7/dist/css/framework7.ios.css" rel="stylesheet" type="text/css"/> -->
+<!-- <link rel="stylesheet" type="text/css" href="{base}/files/css/chat_jerry.css"> -->
+
+ 
+
+<!-| =======  ======= |->
+<!-| =======  ======= |->
+<div class="views">
+  <div class="view view-main" data-page="messages">
+    <div class="navbar">
+      <div class="navbar-inner navbar-on-center">
+        <div class="left sliding" style="transform: translate3d(0px, 0px, 0px);">
+          <a class="back link" href="{base}/chat/private">
+            <i class="icon icon-back" style="transform: translate3d(0px, 0px, 0px);">
+            </i>
+            <span>
+              Back
+            </span>
+          </a>
+        </div>
+        <div class="center sliding" style="left: -7px; transform: translate3d(0px, 0px, 0px);">
+          {mukhothob_info}{user_name_first} ({user_id}){/mukhothob_info}
+        </div>
+        <div class="right">
+          <a class="link open-panel icon-only" href="#">
+            <i class="icon icon-bars">
+            </i>
+          </a>
+        </div>
+      </div>
+    </div> 
+    <div id="status"></div>
+ 
+    <div class="pages navbar-through toolbar-through" >
+
+      <div class="page no-toolbar- toolbar-fixed page-on-center" data-page="messages" >
+        <div class="toolbar messagebar toolbar-hidden-" id="kotak_form" >
+
+        <form id="send_message">
+          
+          <div class="toolbar-inner" >
+            <a class="link icon-only" href="#">
+              <i class="icon icon-camera">
+              </i>
+            </a>
+            <textarea placeholder="Type your message here..." id="message_text" autofocus="yes"></textarea>
+            <a class="link send-message " id="btn_send_message" href="#">
+              Send
+            </a>
+          </div>
+        </form>
+        </div>
+        <div class="page-content messages-content" id="messages_content" style="padding-top:100px;padding-bottom: 70px ">
+          <div><a href="#">LOAD PREVIOUS MESSAGE</a></div>
+          <div class="messages messages-auto-layout" id="messages">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-| =======  ======= |->
+<!-| =======  ======= |->
+
+
+<!-| =======  ======= |->
+<!-| =======  ======= |->
+<!-| =======  ======= |->
+<script type="text/javascript" src="//{domain}:8082/socket.io/socket.io.js">
+</script>
+<script type="text/javascript">
+  var socket = io('{domain}:8082');
+  var mutakalim_id = '{mutakalim_id}';
+  var mukhothob_id = '{mukhothob_id}';
+  var user_detail = {
+    'mutakalim_id' : '{mutakalim_info}{user_id}{/mutakalim_info}',
+    'user_name' : '{mutakalim_info}{user_name_first}{/mutakalim_info}',
+    'user_email' : '{mutakalim_info}{user_email}{/mutakalim_info}',
+    'user_avatar' : '{mutakalim_info}{user_avatar}{/mutakalim_info}'
+  };
+  var payload ={};
+
+  /************************************************************************************************/
+  /************************************************************************************************/
+  socket.on('connect', function() {
+    socket.emit('calling', user_detail, mukhothob_id);
+  });
+  /************************************************************************************************/
+  /************************************************************************************************/
+  socket.on('old_message', function(data){
+    console.log(data);
+    $('#messages').html('');
+    // data.sender_detail = [data.mutakalim];
+    $("#status").html('');
+    $.post('{base}/chat/render_message', {data: data}, function(new_data, textStatus, xhr) {
+      $('#messages').prepend(new_data);
+    });
+    // $("#messages_content").animate({ scrollTop: $(".messages-content")[0].scrollHeight}, 1000);
+  });
+  
+  /************************************************************************************************/
+  /************************************************************************************************/
+  socket.on('new_message', function(data){
+    if (data.mutakalim_id != mutakalim_id && data.mutakalim_id == mukhothob_id && data.mukhothob_id == mutakalim_id) {
+      $("#status").html('');
+      $.post('{base}/chat/to_mukhothob', {data: data}, function(new_data, textStatus, xhr) {
+        $('#messages').append(new_data);
+        read_data = {
+          mutakalim_id : data.mukhothob_id,
+          mukhothob_id : data.mutakalim_id,
+        };
+        socket.emit('chat_read', read_data);
+        $("#messages_content").animate({ scrollTop: $(".messages-content")[0].scrollHeight}, 1000);
+      });
+    }
+  });
+  /************************************************************************************************/
+  /************************************************************************************************/
+  socket.on("sender", function (data) {
+    if (data.mutakalim_id != mutakalim_id  && data.mutakalim_id == mukhothob_id && data.mukhothob_id == mutakalim_id) {
+      $("#status").html(data.sender_detail.user_name + " is typing...");
+      setTimeout(function () {
+        $("#status").html('');
+      }, 3000);
+    }
+  });
+  /************************************************************************************************/
+  /************************************************************************************************/
+  $('form#send_message').on('submit',function(event) {
+    event.preventDefault();
+    if ($('#message_text').val() !== '') {
+      payload.risalah = $('#message_text').val();
+      payload.mutakalim_id = mutakalim_id;
+      payload.mukhothob_id = mukhothob_id;
+      socket.emit('pm', payload); 
+      if (payload.mukhothob_id != mutakalim_id){
+        payload.created = new Date();
+        $.post('{base}/chat/to_mutakalim', {data: payload}, function(new_data, textStatus, xhr) {
+          $('#messages').append(new_data);
+        });
+      }
+      $("#status").html('');
+      $('#message_text').val('').focus();
+      $("#message_text").css('height', '');
+      $(".messages-content").animate({ scrollTop: $(".messages-content")[0].scrollHeight}, 1000);
+
+    }
+  });
+  /************************************************************************************************/
+  /************************************************************************************************/
+  $('#btn_send_message').click(function(event) {
+    if ($('#message_text').val() !== '') {
+      $('form#send_message').submit();
+
+      $('#kotak_form').css('height', '') ;
+      $('#message_text').css('height', '') ;
+    }
+  });
+  /************************************************************************************************/
+  $('#message_text').keydown(function(event) {
+    if (event.keyCode == 13) {
+      $('form#send_message').submit();
+      return false;
+     }
+  });
+  /************************************************************************************************/ 
+  /************************************************************************************************/ 
+  $("#messages_content").animate({ scrollTop: $(".messages-content")[0].scrollHeight}, 1000);
+  /************************************************************************************************/
+  /************************************************************************************************/
+  function adjustHeight(el){
+    el.style.height = (el.scrollHeight > el.clientHeight) ? (el.scrollHeight)+"px" : "";
+  }
+  /************************************************************************************************/
+  var clientHeight = $("#message_text").prop('clientHeight');
+  var scrollHeight = $("#message_text").prop('scrollHeight');
+  var kotak_scrollHeight = $('#kotak_form').prop('scrollHeight');
+  var kotak_clientHeight = $('#kotak_form').prop('clientHeight');
+  $("#message_text").on("keyup",function(event){
+    if (event.keyCode !== 13) {
+      user_detail.mukhothob_id = mukhothob_id;
+      socket.emit("sender", user_detail);
+    }
+    var heihei = kotak_scrollHeight + $(this).prop('scrollHeight') - scrollHeight;
+    if ($(this).prop('scrollHeight') > clientHeight) {
+      $(this).css('height', 'auto').css('height', $(this).prop('scrollHeight')-1 );
+      $('#kotak_form').css('height', heihei) ;
+      $('#status').css('bottom', heihei+6);
+    }else{
+      $(this).css('height', 'auto').css('height', clientHeight);
+      $('#status').css('bottom', '');
+      $('#kotak_form').css('height', 'auto').css('height', kotak_clientHeight) ;
+    }
+  });
+  /************************************************************************************************/
+
+</script>

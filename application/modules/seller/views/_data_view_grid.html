@@ -1,0 +1,67 @@
+<div class=" ">
+    {user_all}
+    <div class="col-lg-6 col-sm-12 col-md-6 col-xs-12" style="margin-bottom: 20px;">
+        <div class="panel panel-{skin_box} skin_box ">
+            <div class="panel-body ">
+                <span class="pull-right">
+                    <div class="text-center">
+                        <img height="80px" src="{base}/files/images/{user_avatar}.png" style="border: 1px solid #eee;" width="80px"/>
+                        <br>
+                            Since
+                            <br>
+                                {user_created}
+                            </br>
+                        </br>
+                    </div>
+                </span>
+                <div style="min-height: 130px; max-height: 130px; overflow: hidden; ">
+                    <div style=" 
+
+                  white-space: nowrap;
+                  overflow: hidden;
+                  display: inline-block;
+                  text-overflow: ellipsis;
+                  ">
+                        <b>
+                            Nama :
+                        </b>
+                        <a href="{base}/user/profile/{user_id}">
+                            {user_name_first}
+                            {user_name_last}
+                        </a>
+                    </div>
+                    <div>
+                        <b>
+                            Email :
+                        </b>
+                        {user_email}
+                    </div>
+                    <div>
+                        <b>
+                            Address :
+                        </b>
+                        {user_address}
+                    </div>
+                </div>
+                <div>
+                    . . .
+                    <a class=" " href="{base}/user/profile/{user_id}">
+                        More info
+                    </a>
+                    <div class="pull-right {_is_allowed}">
+                        <a class="btn btn-sm btn-success {_is_allowed}" href="{base}/user/profile/{user_id}">
+                            {m_detail}
+                        </a>
+                        <a class="btn btn-sm btn-warning {_is_allowed}" href="{base}/user/edit/{user_id}">
+                            {m_edit}
+                        </a>
+                        <a class="btn btn-sm btn-danger {_is_allowed} " href="{base}/user/delete/{user_id}" onclick="return confirm('Are you sure...?')">
+                            {m_delete}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {/user_all}
+</div>

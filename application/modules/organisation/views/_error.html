@@ -1,0 +1,54 @@
+<div class="modal modal-danger fade" id="modal_error">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+                    ×
+                </button>
+                <h4 class="modal-title">
+                    Error
+                </h4>
+            </div>
+            <div class="modal-body">
+                {error}
+                <table class="table table">
+                    <tr>
+                        <th>
+                            Message&nbsp;:
+                        </th>
+                        <td>
+                            {message}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Type&nbsp;Allowed&nbsp;:
+                        </th>
+                        <td>
+                            *.{allowed_types}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Max&nbsp;dimension&nbsp;:
+                        </th>
+                        <td>
+                            {max_width} x {max_height}
+                        </td>
+                    </tr>
+                </table>
+                {/error}
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal" onclick="javascript:history.back()" type="button">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#modal_error').modal('show');
+    });
+</script>

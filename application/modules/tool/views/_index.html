@@ -1,0 +1,60 @@
+<div class="box box-{skin_box} skin_box">
+    <div class="box-body">
+        <legend>
+            Tools
+        </legend>
+        <input class="form-control" id="plain" placeholder="plain text" type=""/>
+    </div>
+    <div class="box-footer">
+        <legend class="h4">
+            Result
+        </legend>
+        <div>
+            <label>
+                md5:
+            </label>
+            <input class="form-control" id="md5" type=""/>
+        </div>
+        <div>
+            <label>
+                sha1:
+            </label>
+            <input class="form-control" id="sha1" type=""/>
+        </div>
+        <div>
+            <label>
+                passwordHasher:
+            </label>
+            <input class="form-control" id="passwordHasher" type=""/>
+        </div>
+        <div>
+            <label>
+                base64:
+            </label>
+            <input class="form-control" id="base64" type=""/>
+        </div>
+    </div>
+</div>
+<!-- -->
+<script type="text/javascript">
+    $('#plain').on('change keyup', function(event) {
+        event.preventDefault();
+        var plain = $(this).val();
+        $.ajax({
+            url: '{base}/{controller}/tool_ajax', 
+            dataType: 'json',
+            data: {plain: plain},
+        })
+        .done(function(res) {
+            // console.log(res.md5);
+            $('#md5').val(res.md5);
+            $('#sha1').val(res.sha1);
+            $('#passwordHasher').val(res.passwordHasher);
+            $('#base64').val(res.base64);
+        })
+        .fail(function(error) {
+            console.log(error.responseText);
+        });
+        
+    });
+</script>

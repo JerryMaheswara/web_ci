@@ -1,0 +1,281 @@
+<div class="offcanvas-wrapper">
+    <!-- Page Title-->
+    <div class="page-title">
+        <div class="container">
+            <div class="column">
+                <h1>
+                    {alamat_ku}
+                </h1>
+            </div>
+            <div class="column">
+                <ul class="breadcrumbs">
+                    <li>
+                        <a href="{base}">
+                            Home
+                        </a>
+                    </li>
+                    <li class="separator">
+                    </li>
+                    <li>
+                        <a href="{base}/account/profile">
+                            Account
+                        </a>
+                    </li>
+                    <li class="separator">
+                    </li>
+                    <li>
+                        {alamat_ku}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Page Content-->
+    <div class="container padding-bottom-3x mb-1">
+        <div class="row">
+            <div class="col-lg-4">
+                {account_info}
+            </div>
+            <div class="col-lg-8">
+                <div class="padding-top-2x mt-2 hidden-lg-up">
+                </div>
+                <h4>
+                    {alamat_ku}
+                </h4>
+                <hr class="padding-bottom-1x"/>
+                <form class="row" method="POST">
+                    {account_address}
+                    <!-- -->
+                    <!-- -->
+                    <div class="col-sm-12 {is_seller}">
+                        <div class="form-group">
+                            <label>
+                                Nama Toko
+                            </label>
+                            <input class="form-control" id="alamat" name="billing_name_first" placeholder="Jalan ... RT .. / RW ... No ..." required="required" type="text" value="{billing_name_first}"/>
+                        </div>
+                    </div>
+                    <!-- -->
+                    <!-- -->
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>
+                                Alamat
+                            </label>
+                            <input class="form-control" id="alamat" name="billing_address" placeholder="Jalan ... RT .. / RW ... No ..." required="required" type="text" value="{billing_address}"/>
+                        </div>
+                    </div>
+                    <!-- -->
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>
+                                Cari Kelurahan
+                            </label>
+                            <div class="form-control" style="padding-top: 7px;">
+                                <input id="kodepos_id_before" type="hidden" value="{kodepos_id}"/>
+                                <select class="form-control" id="kodepos_id" name="kodepos_id">
+                                </select>
+                            </div>
+                            <!-- <input class="form-control" name="billing_subdistrict" type="text" placeholder="Kelurahan"/> -->
+                        </div>
+                    </div>
+                    <!-- -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>
+                                Kelurahan
+                            </label>
+                            <input class="form-control" id="kelurahan" name="billing_subdistrict" placeholder="Kelurahan" readonly="readonly" type="text" value="{billing_subdistrict}"/>
+                        </div>
+                    </div>
+                    <!-- -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>
+                                Kecamatan
+                            </label>
+                            <input class="form-control" id="kecamatan" name="billing_district" placeholder="Kecamatan" readonly="readonly" type="text" value="{billing_district}"/>
+                        </div>
+                    </div>
+                    <!-- -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>
+                                Kabupaten
+                            </label>
+                            <input class="form-control" id="kabupaten" name="billing_city" placeholder="Kabupaten" readonly="readonly" type="text" value="{billing_city}"/>
+                        </div>
+                    </div>
+                    <!-- -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>
+                                Propinsi
+                            </label>
+                            <input class="form-control" id="propinsi" name="billing_province" placeholder="Propinsi" readonly="readonly" type="text" value="{billing_province}"/>
+                        </div>
+                    </div>
+                    <!-- -->
+                    <!-- -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>
+                                Kode Pos
+                            </label>
+                            <input class="form-control" id="kodepos" name="billing_postal_code" placeholder="Kode Pos" readonly="readonly" type="text" value="{billing_postal_code}"/>
+                        </div>
+                    </div>
+                    <!-- if seller -->
+                    <div class="col-sm-12 {is_seller}">
+                        <div class="form-group">
+                            <label>
+                                Coverage
+                            </label>
+                            <div class="checkbox ">
+                                <input class="form-control" id="coverage_before" type="hidden" value="{billing_coverage}"/>
+                                {coverage}
+                                <label><b> Kec. {kecamatan} </b> :</label>
+                                {kelurahan}
+                                <label class="col-sm-12" style="margin-left: 20px">
+                                    <input class="input-group-item billing_coverage" name="billing_coverage[]" type="checkbox" value="{kel_kelurahan}"/>
+                                    Kel. {kel_kelurahan}, Kec. {kel_kecamatan}, {kel_jenis_kabupaten} {kel_kabupaten} {kel_kodepos}
+                                </label>
+                                {/kelurahan}
+                                {/coverage}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- -->
+                    <!-- -->
+                    <div class="col-12 padding-top-1x">
+                        <div class="text-right">
+                            <button class="btn btn-primary margin-bottom-none" type="submit">
+                                <!-- <button class="btn btn-primary margin-bottom-none" data-toast="" data-toast-icon="icon-circle-check" data-toast-message="Your address updated successfuly." data-toast-position="topRight" data-toast-title="Success!" data-toast-type="success" type="submit"> -->
+                                Update Address
+                            </button>
+                        </div>
+                    </div>
+                    {/account_address}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- -->
+<!-- -->
+<link href="{base}/files/bower_components/AdminLTE/plugins/select2/select2.min.css" rel="stylesheet" type="text/css"/>
+<script src="{base}/files/bower_components/AdminLTE/plugins/select2/select2.min.js">
+</script>
+<!-- -->
+<script type="text/javascript">
+    ////////////////////   
+    //////////////////// 
+    ////////////////////   
+    var coverage_before = $('#coverage_before').val().split('|');;
+    // coverage_before = $.parseJSON(coverage_before);
+    // console.log(coverage_before);
+    $.each(coverage_before, function(index, val) {
+        $('.billing_coverage').each(function(index, el) {
+            if ($(this).val()==val) {
+                $(this).prop('checked', true);
+            }
+        });
+    });
+    //////////////////// 
+    // kodepos_id_before = $('#kodepos_id_before').val();
+    // $('#kodepos_id').select2().val(kodepos_id_before).trigger('change');
+    //////////////////// 
+    ////////////////////   
+    // $('#kodepos_id').select2( { 
+    // }).one('select2-focus', select2Focus).on("select2-blur", function () {
+    //     $(this).one('select2-focus', select2Focus)
+    // })
+
+    // function select2Focus() {
+    //     var select2 = $(this).data('select2');
+    //     console.log(select2);
+    //     setTimeout(function() {
+    //         if (!select2.opened()) {
+    //             select2.open();
+    //         }
+    //     }, 0);  
+    // }
+    ////////////////////   
+    ////////////////////   
+    $('#kodepos_id').select2({  
+        placeholder: 'Kelurahan / Desa',
+        allowClear: true,
+        width: "100%", 
+        minimumInputLength: 2,
+        ajax: {
+            url: '{base}/country/kelurahan_ajax',
+            dataType: 'json',
+            delay: 250,
+            type: "GET",
+            data: function (params) {
+                // console.log(params);
+                var queryParameters = {
+                    search: params.term
+                }
+                return queryParameters;
+            },
+            processResults: function (data) {
+                // console.log(data);
+                return {
+                    results: data
+                };
+            },
+            cache: true
+        }
+    });//.val(kodepos_id_before).trigger('change');
+    ////////////////////
+    $('#alamat').on('blur',function(event) {
+        // console.log(event);
+        $('#kodepos_id').select2('open');
+    });
+    $('#kodepos_id').on('blur', function(event) {
+        event.preventDefault();
+        /* Act on the event */
+    });
+
+    ////////////////////
+    $('#kodepos_id').on('change', function(event) {
+        event.preventDefault();
+        id = $(this).val();
+
+        if (id != null) {
+            // console.log(id);
+            $.ajax({
+                url: '{base}/country/kelurahan_ajax', 
+                data: {id: id},
+            })
+            .done(function(data) {
+                // console.log(data);
+                $.each(data, function(index, val) {
+                    $('#kelurahan_kecamatan').val('Kel. ' + val.kelurahan + ' - Kec. ' + val.kecamatan);
+                    $('#kabupaten_kodepos').val(val.jenis_kabupaten + ' ' + val.kabupaten + ' - '+val.kodepos);
+                    $('#kelurahan').val(val.kelurahan).prop('readonly', true);
+                    $('#kecamatan').val(val.kecamatan).prop('readonly', true);
+                    $('#jenis_kabupaten').val(val.jenis_kabupaten);
+                    $('#kabupaten').val(val.jenis_kabupaten +' '+ val.kabupaten).prop('readonly', true);
+                    $('#propinsi').val(val.propinsi).prop('readonly', true);
+                    $('#kodepos').val(val.kodepos).prop('readonly', true);
+                });
+                $('#ktp').focus();
+                
+            })
+            .fail(function(error) {
+                console.log(error.responseText);
+            });
+        }else{
+            $('#kelurahan').val('');
+            $('#kecamatan').val('');
+            $('#kabupaten').val('');
+            $('#propinsi').val('');
+            $('#kodepos').val('');
+        }
+        
+
+    });
+    ////////////////////
+</script>

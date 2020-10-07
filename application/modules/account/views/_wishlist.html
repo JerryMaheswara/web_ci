@@ -1,0 +1,172 @@
+<div class="offcanvas-wrapper">
+    <!-- Page Title-->
+    <div class="page-title">
+        <div class="container">
+            <div class="column">
+                <h1>
+                    My Wishlist
+                </h1>
+            </div>
+            <div class="column">
+                <ul class="breadcrumbs">
+                    <li>
+                        <a href="{base}">
+                            Home
+                        </a>
+                    </li>
+                    <li class="separator">
+                    </li>
+                    <li>
+                        <a href="{base}/account/profile">
+                            Account
+                        </a>
+                    </li>
+                    <li class="separator">
+                    </li>
+                    <li>
+                        My Wishlist
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Page Content-->
+    <div class="container padding-bottom-3x mb-2">
+        <div class="row">
+            <div class="col-lg-4">
+                {account_info}
+            </div>
+            <div class="col-lg-8">
+                <div class="padding-top-2x mt-2 hidden-lg-up">
+                </div>
+                <!-- Wishlist Table-->
+                <div style="display: {wishlist_empty}" class="wishlist_empty">
+                    <h2>Wishlist is empty</h2>
+                </div>
+                <div class="table-responsive wishlist-table margin-bottom-none wishlist_full" style="display: {wishlist_full}">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Product Name
+                                </th>
+                                <th class="text-center">
+                                    <a class="btn_wishlist_clear btn btn-sm btn-outline-danger" href="#">
+                                        Clear Wishlist
+                                    </a>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="wishlist_all">
+                            {wishlist_all}
+                            <tr>
+                                <td>
+                                    <div class="product-item">
+                                        <a class="product-thumb" href="{base}/item/detail/{item_id}">
+                                            <img alt="Product" src="{base}/files/images/{item_image_main}"/>
+                                        </a>
+                                        <div class="product-info">
+                                            <h4 class="product-title">
+                                                <a href="{base}/item/detail/1.html">
+                                                    {item_name}
+                                                </a>
+                                            </h4>
+                                            <div class="text-lg text-medium text-muted">
+                                                Rp. {item_price}
+                                            </div>
+                                            <div style="display: none">
+                                                Availability:
+                                                <div class="d-inline text-success">
+                                                    {availability}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <a class="remove-from-cart btn_wishlist_remove" data-item_id="{item_id}" data-toggle="tooltip" href="#" title="Remove item">
+                                        <i class="icon-cross">
+                                        </i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {/wishlist_all}
+                        </tbody>
+                    </table>
+                </div>
+                <hr class="mb-4"/>
+                <label class="custom-control custom-checkbox d-block">
+                    <input checked="" class="custom-control-input" type="checkbox"/>
+                    <span class="custom-control-indicator">
+                    </span>
+                    <span class="custom-control-description">
+                        Inform me when item from my wishlist is available
+                    </span>
+                </label>
+            </div>
+        </div>
+    </div>
+    <!-- Site Footer-->
+</div>
+<!--  -->
+<!--  -->
+<!--  -->
+<script type="text/javascript">
+    // /////////////////
+    $('.btn_wishlist_remove').each(function(index, el) {
+        var item_id = $(this).data('item_id');
+        var btn_wishlist_remove = $(this);
+        $(this).on('click', function(event) {
+            event.preventDefault();
+
+            if (confirm('Are you sure?') ) {
+                $.ajax({
+                    url: '{base}/account/wishlist_remove',
+                    type: 'POST',
+                    data: {item_id: item_id},
+                })
+                .done(function(res) {
+                    // console.log(res); 
+                    $('.wishlist_badge').html(res.wishlist_badge);
+                    btn_wishlist_remove.parent().parent().remove();
+                    // $('.wishlist_all').remove();
+
+                    length = $('.wishlist_all').find('tr').length;
+                    // console.log(length);
+                    if (length == 0) {
+                        $('.wishlist_empty').fadeIn();
+                        $('.wishlist_full').hide();
+                    }
+                })
+                .fail(function(error) {
+                    console.log(error.responseText);
+                });
+            }
+        });
+    });
+    // /////////////////
+    // /////////////////
+    $('.btn_wishlist_clear').on('click', function(event) {
+        event.preventDefault();
+        if (confirm('Are you sure?') ) {
+            $.ajax({
+                url: '{base}/account/wishlist_clear',
+                type: 'POST',
+                data: {param1: 'value1'},
+            })
+            .done(function(res) {
+                // console.log(res);
+                $('.wishlist_all').html('');
+                $('.wishlist_empty').fadeIn();
+                $('.wishlist_full').hide();
+                $('.wishlist_badge').html('0');
+                
+            })
+            .fail(function(error) {
+                console.log(error.responseText);
+            });
+        }
+        
+
+    });
+</script>

@@ -1,0 +1,62 @@
+<div class="offcanvas-wrapper">
+    <div class="page-title">
+        <div class="container">
+            <div class="column">
+                <h1>
+                    Shop Categories
+                </h1>
+            </div>
+            <div class="column">
+                <ul class="breadcrumbs">
+                    <li>
+                        <a href="index.html">
+                            Home
+                        </a>
+                    </li>
+                    <li class="separator">
+                    </li>
+                    <li>
+                        Shop Categories
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container- padding-bottom-2x mb-2">
+        <div class="row">
+                {category_all}
+                <div class="col-md-2 col-sm-4 col-xs-6">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card mb-30">
+                                <a class="card-img-tiles " href="{base}/item/?category_id={category_id}">
+                                    <div class="inner">
+                                        <div class="main-img- text-center" style="padding: 10px 0; ">
+                                            <img alt="Category" src="{base}/files/images/{category_image}" style="width: 90px"/>
+                                        </div>
+                                        <div class="thumblist hidden destroy">
+                                            {category_image_additional}
+                                            <img alt="Category" src="{base}/files/images/{category_thumbnail_image}"/>
+                                            {/category_image_additional}
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="card-body text-center">
+                                    <h4 class="card-title">
+                                        {category_name}
+                                    </h4>
+                                    <p class="text-muted">
+                                    </p>
+                                    <a class="btn btn-outline-primary btn-sm" href="{base}/item/?category_id={category_id}">
+                                        Products
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {/category_all}
+            
+        </div>
+    </div>
+</div>

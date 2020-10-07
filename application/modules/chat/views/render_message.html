@@ -1,0 +1,17 @@
+{data_message}
+<div class="messages-date">
+  {tarikh} / {_id}
+</div>
+<div class="message message-{received_or_sent} {message_with_avatar} message-last message-first message-with-tail">
+  <div class="message-name {show_or_hide}">
+    {sender_detail}
+    {user_name}
+    {/sender_detail}
+  </div>
+  <div class="message-text">
+    {risalah}
+  </div>
+  <div class="message-avatar {show_or_hide}" style="background-image:url('{sender_detail}{user_avatar}{/sender_detail}')">
+  </div>
+</div>
+{/data_message}

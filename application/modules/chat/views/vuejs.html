@@ -1,0 +1,88 @@
+<div id="chat"> 
+    <div class="message" v-for="message in messages">
+      <div v-if="!isPoster(message[1])">
+        <!-- <img width="30px" src="{{ message[3] }}"> {{ message[2] }} : {{ message[4] }} -->
+      </div>
+      
+      <div v-if="isPoster(message[1])">
+        {{ message[2] }} : {{ message[4] }} 
+        <span v-if="!isExist(message[3])">
+        {{message[3]}}
+        </span>
+        <span v-if="isExist(message[3])">
+          
+          <img width="30px" src="{{message[3]}}"> 
+          
+        </span>
+      </div>
+
+    </div>
+  <form v-on:submit="send">
+    <input id="message" v-model="message" >
+    <button>Send</button>
+  </form>
+</div>
+
+<!-| =======  ======= |->
+<!-- <script type="text/javascript" src="{base}/files/js/socket.io-1.4.5.js"></script> -->
+<script type="text/javascript" src="http://0.0.0.0:8082/socket.io/socket.io.js"></script>
+<!-| =======  ======= |->
+<script type="text/javascript">
+  var channel ='SOME_CHANNEL';
+  var userId  = '{user_info}{user_id}{/user_info}';
+  var userName  = '{user_info}{user_name}{/user_info}';
+  var userAvatar  = '{user_info}{user_avatar}{/user_info}';
+</script>
+<!-| =======  ======= |->
+<script>
+  
+  var socket = io('0.0.0.0:8082');
+
+  new Vue({
+    el: '#chat',
+    data:{
+      messages:[],
+      message:null,
+    },
+    ready: function() { 
+      socket.on('connect', function() {
+        // console.log('Connected to server');
+        socket.emit('join', [channel , userId, userName, userAvatar]);
+      });
+      socket.on('chat.' + channel, function(payload) {
+        console.log(payload);
+        this.messages.push(payload);
+      }.bind(this));
+    },
+    methods:{ 
+
+      send: function(e) {
+        e.preventDefault();
+        var payload = [channel, userId, userName, userAvatar, this.message ];
+        if (this.message ==  '' || this.message == ' ') {
+          this.message = null;
+        }
+        
+        if (this.message !== null) {
+          socket.emit('chat', payload);
+        }
+        this.message = null;
+
+      },
+      isPoster: function(id) {
+        if (userId === id) {
+          return true;
+        }
+        return false;
+      },
+      isExist: function(src) {
+        if (src !== null) {
+        // console.log(src);
+          return true;
+        }
+        return false;
+      }
+
+    }
+  });
+</script>

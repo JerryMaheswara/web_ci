@@ -1,0 +1,141 @@
+<form action="" class="form-horizontal text-center" method="POST" role="form">
+    <legend>
+        Pilih Lokasi Toko
+    </legend>
+    <div class="row">
+        <div class="col-sm-12">
+            <select id="kecamatan" class="text-center" style="width: 290px;">
+                <option>
+                    - Pilih Kecamatan -
+                </option>
+                {kecamatan}
+                <option value="{kecamatan}">
+                    {kecamatan}
+                </option>
+                {/kecamatan}
+            </select>
+        </div>
+        <div class="col-sm-12">
+            <select id="lokasi" class="pilih_lokasi text-center" style="width: 290px; display: none;">
+                <option>
+                    - Pilih Lokasi -
+                </option> 
+            </select>
+        </div>
+    </div>
+    <div class="row hidden">
+        {kecamatan}
+        <span class="col-sm-4" style="height: 60px;padding-top: 20px; ">
+            Kec. {kecamatan}
+            <div>
+                <select class="pilih_lokasi text-center" style="width: 234px;">
+                    <option>
+                        - Pilih Lokasi -
+                    </option>
+                    {lokasi}
+                    <option value="{billing_subdistrict}">
+                        Kel. {billing_subdistrict}
+                    </option>
+                    {/lokasi}
+                </select>
+            </div>
+        </span>
+        {/kecamatan}
+    </div>
+    <!--
+-->
+    <div class="form-group" style="border-top: 0px solid #eee; margin-top: 30px; padding-top: 30px;">
+        <div class="row text-center" id="pilih_toko">
+        </div>
+    </div>
+    <!-- -->
+</form>
+<!-- -->
+<script type="text/javascript">
+    /////////////////////////
+	$('#kecamatan').on('change', function(event) {
+		event.preventDefault();
+		var	billing_district = $(this).val();
+		$.ajax({
+			url: '{base}/toko/kecamatan_ajax',
+			type: 'POST',
+			data: {billing_district: billing_district},
+		})
+		.done(function(res) {
+			// console.log(res);
+			var html_a = '<option> - Pilih Lokasi - (Kec. '+billing_district+')</option> ';
+			$('#lokasi').html(html_a);
+			$.each(res, function(index, val) {
+				var html_b = '<option value="'+val.billing_subdistrict+'">\
+	                        Kel. '+val.billing_subdistrict+'\
+	                    </option>';
+	            $('#lokasi').append(html_b);
+			});
+			$('#kecamatan').hide();
+			$('#lokasi').show();
+			
+		})
+		.fail(function(error) {
+			console.log(error.responseText);
+		});
+		
+	});
+	/////////////////////////
+	/////////////////////////
+	/////////////////////////
+    $('.pilih_lokasi').each(function(index, el) {
+		$(this).on('change', function(event) {
+			event.preventDefault();
+			/* Act on the event */
+			var billing_coverage = $(this).val();
+			// console.log(billing_coverage);
+			$.ajax({
+				url: '{base}/toko/toko_ajax',
+				type: 'GET', 
+				data: {billing_coverage: billing_coverage},
+			})
+			.done(function(res) {
+				// console.log(res.length);
+				$('#pilih_toko').html('');
+				length = res.length;
+				switch(true) {
+				    case (length == 1):
+				        colsm = "col-sm-12";
+				        break;
+				    case (length == 2):
+				        colsm = "col-sm-6";
+				        break;
+				    case (length == 3):
+				        colsm = "col-sm-4";
+				        break;
+				    case (length >= 4):
+				        colsm = "col-sm-3";
+				        break;
+				    }
+
+				$.each(res, function(index, val) {
+					nama_toko = '\
+						<div class="'+colsm+'">\
+								<div>\
+							<a href="{base}/item?seller_id='+val.user_id+'">\
+									<img width="100px" src="{base}/files/images/'+val.logo_warung+'" />\
+								<div class="h4">\
+									'+val.billing_name_first+'\
+								</div>\
+							</a>\
+								</div>\
+						</div>\
+					';
+					$('#pilih_toko').append(nama_toko);
+
+					// $('#pilih_toko').append('<option value="'+val.user_id+'">'+val.billing_name_first+'</option>');
+					 /* iterate through array or object */
+				});
+			})
+			.fail(function(error) {
+				console.log(error.responseText);
+			});
+			
+		});
+	});
+</script>

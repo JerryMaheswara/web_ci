@@ -1,0 +1,49 @@
+<div class="box box-{skin_box} skin_box">
+    <div class="box-body">
+        <legend>
+            Admin Template
+        </legend>
+        <a class="btn btn-success" href="{base}/template/add">
+            <i class="fa fa-fw fa-plus">
+            </i>
+            Add Template
+        </a>
+        <div style="margin-top: 10px;">
+            <table class="table table-bordered ">
+                <thead>
+                    <tr class="bg-{skin} tr_skin">
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {template_all}
+                    <tr>
+                        <td>
+                            {nomor_urut}
+                        </td>
+                        <td>
+                            <a href="{base}/template/detail/{template_id}">
+                                {template_name}
+                            </a>
+                        </td>
+                        <td>
+                            <a class="btn btn-warning btn-xs" href="{base}/template/edit/{template_id}">
+                                <i class="fa fa-fw fa-pencil"></i>
+                                Edit
+                            </a>
+                        </td>
+                    </tr>
+                    {/template_all}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
